@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             GenerationView(
-                depthMap: appState.currentDepthMap,
+                depthMap: $appState.currentDepthMap,
                 path: $path,
                 selectedPhoto: $selectedPhoto,
                 lidarAvailable: ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth)
@@ -36,6 +36,10 @@ struct ContentView: View {
                     })
                 case .stereogramResult(let image):
                     StereogramResultView(image: image)
+                case .depthAdjustment:
+                    if appState.currentDepthMap != nil {
+                        DepthAdjustmentView(depthMap: $appState.currentDepthMap)
+                    }
                 }
             }
             .overlay {
@@ -72,11 +76,13 @@ struct ContentView: View {
 enum NavigationDestination: Hashable {
     case lidarCapture
     case stereogramResult(UIImage)
+    case depthAdjustment
 
     func hash(into hasher: inout Hasher) {
         switch self {
         case .lidarCapture: hasher.combine(0)
         case .stereogramResult: hasher.combine(2)
+        case .depthAdjustment: hasher.combine(3)
         }
     }
 
@@ -84,6 +90,7 @@ enum NavigationDestination: Hashable {
         switch (lhs, rhs) {
         case (.lidarCapture, .lidarCapture): true
         case (.stereogramResult, .stereogramResult): true
+        case (.depthAdjustment, .depthAdjustment): true
         default: false
         }
     }

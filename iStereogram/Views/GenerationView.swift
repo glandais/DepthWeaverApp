@@ -5,7 +5,7 @@ import SwiftUI
 private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "GenerationView")
 
 struct GenerationView: View {
-    let depthMap: DepthMap?
+    @Binding var depthMap: DepthMap?
     @Binding var path: NavigationPath
     @Binding var selectedPhoto: PhotosPickerItem?
     let lidarAvailable: Bool
@@ -13,6 +13,7 @@ struct GenerationView: View {
     @State private var settings = StereogramSettings()
     @State private var showHelp = false
     @StateObject private var stereogramVM = StereogramViewModel()
+    @StateObject private var patternPreviewVM = PatternPreviewViewModel()
 
     var body: some View {
         ScrollView {
@@ -21,12 +22,13 @@ struct GenerationView: View {
                 depthSourceSection
 
                 // Pattern picker
-                GroupBox("Pattern") {
+                GroupBox(String(localized: "Textures", comment: "Section header")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(StereogramPattern.allCases) { pattern in
+                                let source = PatternSource.asset(pattern)
                                 Button {
-                                    settings.pattern = pattern
+                                    settings.patternSource = source
                                 } label: {
                                     VStack(spacing: 4) {
                                         Image(uiImage: pattern.loadImage())
@@ -36,8 +38,8 @@ struct GenerationView: View {
                                             .clipShape(RoundedRectangle(cornerRadius: 8))
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 8)
-                                                    .stroke(settings.pattern == pattern ? Color.blue : Color.clear, lineWidth: 3)
-                                                    .animation(.snappy(duration: 0.2), value: settings.pattern)
+                                                    .stroke(settings.patternSource == source ? Color.blue : Color.clear, lineWidth: 3)
+                                                    .animation(.snappy(duration: 0.2), value: settings.patternSource)
                                             )
 
                                         Text(pattern.displayName)
@@ -47,10 +49,70 @@ struct GenerationView: View {
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityLabel(pattern.displayName)
-                                .accessibilityAddTraits(settings.pattern == pattern ? .isSelected : [])
+                                .accessibilityAddTraits(settings.patternSource == source ? .isSelected : [])
                             }
                         }
                         .padding(.vertical, 4)
+                    }
+                }
+
+                // Generated patterns
+                GroupBox(String(localized: "Generated", comment: "Section header")) {
+                    VStack(spacing: 12) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(ProceduralPatternType.allCases) { type in
+                                    let isSelected = isProceduralSelected(type)
+                                    Button {
+                                        selectProceduralType(type)
+                                    } label: {
+                                        VStack(spacing: 4) {
+                                            ZStack {
+                                                if let preview = patternPreviewVM.previewImage,
+                                                   isSelected {
+                                                    Image(uiImage: preview)
+                                                        .resizable()
+                                                        .interpolation(.none)
+                                                } else {
+                                                    Image(systemName: type.iconSystemName)
+                                                        .font(.title2)
+                                                        .foregroundStyle(.secondary)
+                                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                                        .background(.quaternary)
+                                                }
+                                            }
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 3)
+                                                    .animation(.snappy(duration: 0.2), value: settings.patternSource)
+                                            )
+
+                                            Text(type.displayName)
+                                                .font(.caption2)
+                                                .lineLimit(1)
+                                        }
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityLabel(type.displayName)
+                                    .accessibilityAddTraits(isSelected ? .isSelected : [])
+                                }
+                            }
+                            .padding(.vertical, 4)
+                        }
+
+                        if case .procedural(let type, let config) = settings.patternSource {
+                            ProceduralParamsView(
+                                type: type,
+                                config: Binding(
+                                    get: { config },
+                                    set: { settings.patternSource = .procedural(type, $0) }
+                                ),
+                                previewImage: patternPreviewVM.previewImage,
+                                isGenerating: patternPreviewVM.isGenerating
+                            )
+                        }
                     }
                 }
 
@@ -116,17 +178,12 @@ struct GenerationView: View {
         .onChange(of: depthMap?.id) { _, _ in
             triggerGeneration()
         }
-        .onChange(of: settings.stripWidth) { _, _ in
+        .onChange(of: depthMap?.adjustment) { _, _ in
             triggerGeneration()
         }
-        .onChange(of: settings.depthAmplitude) { _, _ in
+        .onChange(of: settings) { _, _ in
             triggerGeneration()
-        }
-        .onChange(of: settings.invert) { _, _ in
-            triggerGeneration()
-        }
-        .onChange(of: settings.pattern) { _, _ in
-            triggerGeneration()
+            updatePatternPreview()
         }
     }
 
@@ -136,6 +193,29 @@ struct GenerationView: View {
             return
         }
         stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
+    }
+
+    private func updatePatternPreview() {
+        if case .procedural = settings.patternSource {
+            patternPreviewVM.updatePreview(source: settings.patternSource)
+        }
+    }
+
+    private func isProceduralSelected(_ type: ProceduralPatternType) -> Bool {
+        if case .procedural(let selectedType, _) = settings.patternSource {
+            return selectedType == type
+        }
+        return false
+    }
+
+    private func selectProceduralType(_ type: ProceduralPatternType) {
+        if case .procedural(let currentType, let config) = settings.patternSource,
+           currentType == type {
+            // Already selected, keep current config
+            settings.patternSource = .procedural(type, config)
+        } else {
+            settings.patternSource = .procedural(type, type.defaultConfig())
+        }
     }
 
     // MARK: - Depth Source
@@ -152,6 +232,10 @@ struct GenerationView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 120)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .onTapGesture {
+                                    path.append(NavigationDestination.depthAdjustment)
+                                }
+                                .accessibilityHint("Tap to adjust depth")
                         }
 
                         Spacer()
@@ -167,6 +251,15 @@ struct GenerationView: View {
                             Text("\(depthMap.width) × \(depthMap.height)")
                                 .font(.caption)
                                 .foregroundStyle(.tertiary)
+
+                            Button {
+                                path.append(NavigationDestination.depthAdjustment)
+                            } label: {
+                                Label("Adjust Depth", systemImage: "slider.horizontal.below.square.and.square.filled")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.mini)
                         }
                     }
 
@@ -272,13 +365,16 @@ struct HowToUseSheet: View {
                     step(1, icon: "camera.metering.matrix",
                          text: "Acquire a depth map using LiDAR Scan (Pro devices) or From Photo (any image)")
 
-                    step(2, icon: "square.grid.3x3",
+                    step(2, icon: "slider.horizontal.below.square.and.square.filled",
+                         text: "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast")
+
+                    step(3, icon: "square.grid.3x3",
                          text: "Choose a pattern — it determines the texture of your stereogram")
 
-                    step(3, icon: "slider.horizontal.3",
+                    step(4, icon: "slider.horizontal.3",
                          text: "Adjust Strip Width (pattern repetition size) and Depth Amplitude (3D intensity)")
 
-                    step(4, icon: "eye",
+                    step(5, icon: "eye",
                          text: "Tap the stereogram preview to view it full screen, then share or save it")
 
                     Divider()

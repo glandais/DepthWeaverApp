@@ -13,10 +13,10 @@ final class StereogramGenerator {
         let stripWidth = settings.stripWidth
         let amplitude = settings.depthAmplitude
 
-        let depths = depthMap.normalizedDepthValues(width: width, height: height)
+        let depths = depthMap.adjustedDepthValues(width: width, height: height)
 
         // Prepare pattern data (shared read-only across rows)
-        let patternData = preparePattern(settings.pattern, stripWidth: stripWidth)
+        let patternData = preparePattern(settings.patternSource, stripWidth: stripWidth)
         let patternWidth = patternData.width
         let patternHeight = patternData.height
         let patternPixels = patternData.pixels
@@ -30,6 +30,7 @@ final class StereogramGenerator {
             for x in 0..<width {
                 var depth = depths[row * width + x]
                 if settings.invert { depth = 1.0 - depth }
+
 
                 let separation = Int((Float(stripWidth) * (1.0 - amplitude * depth)).rounded())
                 let left = x - separation / 2
@@ -82,10 +83,10 @@ final class StereogramGenerator {
         let height: Int
     }
 
-    private func preparePattern(_ pattern: StereogramPattern, stripWidth: Int) -> PatternData {
-        let sourceImage = pattern.loadImage()
+    private func preparePattern(_ source: PatternSource, stripWidth: Int) -> PatternData {
+        let sourceImage = source.generateImage(size: CGSize(width: stripWidth, height: stripWidth))
         guard let cgImage = sourceImage.cgImage else {
-            fatalError("Cannot get CGImage from pattern: \(pattern.displayName)")
+            fatalError("Cannot get CGImage from pattern: \(source.displayName)")
         }
 
         let sourceHeight = cgImage.height
