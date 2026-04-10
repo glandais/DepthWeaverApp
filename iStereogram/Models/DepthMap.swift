@@ -13,9 +13,13 @@ struct DepthMap {
 
     let pixelBuffer: CVPixelBuffer
     let source: Source
+    /// Original image dimensions (after orientation), used to restore aspect ratio.
+    /// If nil, uses the pixel buffer dimensions directly.
+    let originalWidth: Int?
+    let originalHeight: Int?
 
-    var width: Int { CVPixelBufferGetWidth(pixelBuffer) }
-    var height: Int { CVPixelBufferGetHeight(pixelBuffer) }
+    var width: Int { originalWidth ?? CVPixelBufferGetWidth(pixelBuffer) }
+    var height: Int { originalHeight ?? CVPixelBufferGetHeight(pixelBuffer) }
 
     /// Returns a normalized grayscale UIImage for preview display.
     func previewImage() -> UIImage? {
@@ -79,13 +83,10 @@ struct DepthMap {
             }
         } else if bytesPerPixel == 2 {
             // Float16 depth
-            let float16Buffer = baseAddress.assumingMemoryBound(to: UInt16.self)
-            let rowHalfs = bytesPerRow / MemoryLayout<UInt16>.size
+            let float16Buffer = baseAddress.assumingMemoryBound(to: Float16.self)
+            let rowHalfs = bytesPerRow / MemoryLayout<Float16>.size
             srcFloats = (0..<srcHeight).flatMap { y in
-                (0..<srcWidth).map { x in
-                    let bits = float16Buffer[y * rowHalfs + x]
-                    return float16ToFloat32(bits)
-                }
+                (0..<srcWidth).map { x in Float(float16Buffer[y * rowHalfs + x]) }
             }
         } else {
             // Fallback: interpret as 8-bit grayscale
@@ -143,24 +144,4 @@ struct DepthMap {
         return result
     }
 
-    /// Converts a float16 bit pattern to Float32.
-    private func float16ToFloat32(_ h: UInt16) -> Float {
-        let sign = UInt32(h >> 15) & 1
-        let exp = UInt32(h >> 10) & 0x1F
-        let frac = UInt32(h) & 0x3FF
-
-        if exp == 0 {
-            if frac == 0 { return sign == 0 ? 0.0 : -0.0 }
-            // Subnormal
-            var f = Float(frac) / 1024.0
-            f *= pow(2.0, -14.0)
-            return sign == 0 ? f : -f
-        } else if exp == 31 {
-            return frac == 0 ? (sign == 0 ? .infinity : -.infinity) : .nan
-        }
-
-        let f32Exp = exp - 15 + 127
-        let f32Bits = (sign << 31) | (f32Exp << 23) | (frac << 13)
-        return Float(bitPattern: f32Bits)
-    }
 }

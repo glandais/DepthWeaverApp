@@ -104,15 +104,15 @@ final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
         // If portrait, rotate the depth buffer 90° CW
         if interfaceOrientation == .portrait || interfaceOrientation == .unknown {
             if let rotated = rotateDepthBuffer90CW(dst, width: width, height: height, pixelFormat: pixelFormat) {
-                return DepthMap(pixelBuffer: rotated, source: .lidar)
+                return DepthMap(pixelBuffer: rotated, source: .lidar, originalWidth: nil, originalHeight: nil)
             }
         } else if interfaceOrientation == .portraitUpsideDown {
             if let rotated = rotateDepthBuffer90CCW(dst, width: width, height: height, pixelFormat: pixelFormat) {
-                return DepthMap(pixelBuffer: rotated, source: .lidar)
+                return DepthMap(pixelBuffer: rotated, source: .lidar, originalWidth: nil, originalHeight: nil)
             }
         }
 
-        return DepthMap(pixelBuffer: dst, source: .lidar)
+        return DepthMap(pixelBuffer: dst, source: .lidar, originalWidth: nil, originalHeight: nil)
     }
 
     /// Rotates a Float32 depth buffer 90° clockwise (landscape → portrait)
