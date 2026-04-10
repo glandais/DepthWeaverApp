@@ -37,11 +37,11 @@ struct DepthMap: Identifiable {
         self.originalWidth = originalWidth
         self.originalHeight = originalHeight
         self.originalDepth = Self.extractRawDepth(from: pixelBuffer, width: self.sourceWidth, height: self.sourceHeight)
-        self.adjustment = Self.initialAdjustment(source: source, rawDepth: self.originalDepth)
+        self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
     }
 
     /// Computes initial adjustment values based on the source type and raw depth range.
-    static func initialAdjustment(source: Source, rawDepth: [Float]) -> DepthAdjustment {
+    static func initialAdjustment(rawDepth: [Float]) -> DepthAdjustment {
         var minVal: Float = .greatestFiniteMagnitude
         var maxVal: Float = -.greatestFiniteMagnitude
         for v in rawDepth where v.isFinite {
@@ -54,15 +54,7 @@ struct DepthMap: Identifiable {
         }
         logger.info("Raw depth range: \(minVal)...\(maxVal)")
 
-        switch source {
-        case .lidar:
-            // LiDAR values are in meters (closer = smaller).
-            // Invert: map [min..max] → [1..0] so closer objects are brighter.
-            return DepthAdjustment(min: minVal, max: maxVal, start: 1, end: 0)
-        case .depthAnything:
-            // AI depth is already normalized, identity mapping.
-            return DepthAdjustment(min: minVal, max: maxVal, start: 0, end: 1)
-        }
+        return DepthAdjustment(min: minVal, max: maxVal, start: 0, end: 1)
     }
 
     /// The absolute min/max of raw depth values, for slider bounds.
@@ -77,25 +69,46 @@ struct DepthMap: Identifiable {
         return minVal...maxVal
     }
 
-    /// Returns a normalized grayscale UIImage for preview display.
-    func previewImage() -> UIImage? {
+    /// Returns a hue-mapped UIImage for preview display.
+    /// - Parameter highlightClamped: When true, clamped pixels (0 or 1) are drawn in red.
+    func previewImage(highlightClamped: Bool = false) -> UIImage? {
         let w = width
         let h = height
         let adjusted = adjustedDepthValues(width: w, height: h)
 
-        var pixels = [UInt8](repeating: 0, count: w * h)
+        // RGBA pixels: map depth to hue wheel, clamped pixels optionally highlighted
+        var pixels = [UInt8](repeating: 0, count: w * h * 4)
         for i in 0..<(w * h) {
-            pixels[i] = UInt8(adjusted[i] * 255)
+            let v = adjusted[i]
+            let oi = i * 4
+
+            if highlightClamped && (v <= 0 || v >= 1) {
+                // Clamped: bright red
+                pixels[oi]     = 255
+                pixels[oi + 1] = 40
+                pixels[oi + 2] = 40
+            } else {
+                // Map depth [0..1] to hue [0.66..0.49] wrapping through 0 (blue → red → yellow-green).
+                // Offset avoids red at extremes so the red clamp blink stays visible.
+                let hue = (0.83 - CGFloat(v) * 0.66).truncatingRemainder(dividingBy: 1.0)
+                let color = UIColor(hue: hue, saturation: 0.85, brightness: 0.95, alpha: 1)
+                var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
+                color.getRed(&r, green: &g, blue: &b, alpha: nil)
+                pixels[oi]     = UInt8(r * 255)
+                pixels[oi + 1] = UInt8(g * 255)
+                pixels[oi + 2] = UInt8(b * 255)
+            }
+            pixels[oi + 3] = 255
         }
 
-        let colorSpace = CGColorSpaceCreateDeviceGray()
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let provider = CGDataProvider(data: Data(pixels) as CFData),
               let cgImage = CGImage(
                   width: w, height: h,
-                  bitsPerComponent: 8, bitsPerPixel: 8,
-                  bytesPerRow: w,
+                  bitsPerComponent: 8, bitsPerPixel: 32,
+                  bytesPerRow: w * 4,
                   space: colorSpace,
-                  bitmapInfo: CGBitmapInfo(rawValue: 0),
+                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
                   provider: provider,
                   decode: nil,
                   shouldInterpolate: false,
@@ -112,8 +125,8 @@ struct DepthMap: Identifiable {
     func adjustedDepthValues(width targetWidth: Int, height targetHeight: Int) -> [Float] {
         let adjMin = adjustment.min
         let adjMax = adjustment.max
-        let adjStart = adjustment.start
-        let adjEnd = adjustment.end
+        let adjStart = 1.0 - adjustment.start
+        let adjEnd = 1.0 - adjustment.end
         let adjRange = adjMax - adjMin
         let safeRange = adjRange > 0 ? adjRange : 1.0
 

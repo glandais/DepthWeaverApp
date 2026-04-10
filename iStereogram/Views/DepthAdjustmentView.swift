@@ -5,20 +5,30 @@ struct DepthAdjustmentView: View {
 
     @State private var adjustment: DepthAdjustment = DepthAdjustment()
     @State private var previewImage: UIImage?
+    @State private var previewImageHighlighted: UIImage?
     @State private var rawRange: ClosedRange<Float> = 0...1
-    @State private var isInverted = false
+    @State private var showHighlight = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Live preview
-                if let image = previewImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .interpolation(.none)
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                // Live preview with blinking clamped pixels
+                ZStack {
+                    if let image = previewImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .interpolation(.none)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    if let highlighted = previewImageHighlighted {
+                        Image(uiImage: highlighted)
+                            .resizable()
+                            .interpolation(.none)
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(showHighlight ? 1 : 0)
+                    }
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 // Input range
                 GroupBox(String(localized: "Input Range", comment: "Depth adjustment section")) {
@@ -50,19 +60,19 @@ struct DepthAdjustmentView: View {
                 GroupBox(String(localized: "Output Range", comment: "Depth adjustment section")) {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("Start: \(isInverted ? adjustment.end : adjustment.start, specifier: "%.2f")")
+                            Text("Start: \(adjustment.start, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
-                                value: isInverted ? $adjustment.end : $adjustment.start,
+                                value: $adjustment.start,
                                 in: 0...1
                             )
                         }
 
                         VStack(alignment: .leading) {
-                            Text("End: \(isInverted ? adjustment.start : adjustment.end, specifier: "%.2f")")
+                            Text("End: \(adjustment.end, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
-                                value: isInverted ? $adjustment.start : $adjustment.end,
+                                value: $adjustment.end,
                                 in: 0...1
                             )
                         }
@@ -72,7 +82,7 @@ struct DepthAdjustmentView: View {
 
                 Button("Reset") {
                     guard let dm = depthMap else { return }
-                    adjustment = DepthMap.initialAdjustment(source: dm.source, rawDepth: dm.originalDepth)
+                    adjustment = DepthMap.initialAdjustment(rawDepth: dm.originalDepth)
                 }
                 .buttonStyle(.bordered)
             }
@@ -84,8 +94,8 @@ struct DepthAdjustmentView: View {
             guard let dm = depthMap else { return }
             adjustment = dm.adjustment
             rawRange = dm.rawDepthRange
-            isInverted = dm.source == .lidar
             updatePreview()
+            startBlinking()
         }
         .onChange(of: adjustment) { _, newValue in
             // Enforce max > min
@@ -105,5 +115,12 @@ struct DepthAdjustmentView: View {
     private func updatePreview() {
         guard let dm = depthMap else { return }
         previewImage = dm.previewImage()
+        previewImageHighlighted = dm.previewImage(highlightClamped: true)
+    }
+
+    private func startBlinking() {
+        withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+            showHighlight = true
+        }
     }
 }

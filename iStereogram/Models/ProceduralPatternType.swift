@@ -165,23 +165,23 @@ enum VoronoiColorScheme: String, CaseIterable, Identifiable, Equatable {
 // MARK: - Per-Generator Config Structs
 
 struct RandomDotConfig: Equatable {
-    var density: Float = 0.5
-    var dotSize: Int = 2
+    var density: Float = 1.0
+    var dotSize: Int = 1
     var colorMode: PatternColorMode = .color
     var seed: UInt64 = 0
 }
 
 struct PerlinConfig: Equatable {
     var frequency: Float = 0.01
-    var octaves: Int = 4
+    var octaves: Int = 2
     var persistence: Float = 0.5
-    var colorMode: PerlinColorMode = .grayscale
+    var colorMode: PerlinColorMode = .rgb
     var hue: Float = 0.6
     var seed: UInt64 = 0
 }
 
 struct WorleyConfig: Equatable {
-    var cellSize: Float = 60
+    var cellSize: Float = 30
     var distanceFunction: DistanceFunction = .euclidean
     var combineMode: WorleyCombineMode = .f1
     var invertLuminance: Bool = false
@@ -189,7 +189,7 @@ struct WorleyConfig: Equatable {
 }
 
 struct VoronoiConfig: Equatable {
-    var cellCount: Int = 16
+    var cellCount: Int = 32
     var jitter: Float = 1.0
     var edgeWidth: Float = 2.0
     var colorScheme: VoronoiColorScheme = .vivid

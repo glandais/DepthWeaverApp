@@ -81,8 +81,31 @@ final class DepthAnythingService {
         for row in 0..<depthHeight {
             memcpy(dstData + row * dstBytesPerRow, srcData + row * srcBytesPerRow, min(srcBytesPerRow, dstBytesPerRow))
         }
-        CVPixelBufferUnlockBaseAddress(dst, [])
         CVPixelBufferUnlockBaseAddress(depthBuffer, .readOnly)
+
+        // Invert depth so closer objects have smaller values (matching LiDAR convention)
+        let bytesPerPixel = dstBytesPerRow / depthWidth
+        if bytesPerPixel == 2 {
+            let float16Ptr = dstData.assumingMemoryBound(to: Float16.self)
+            let rowHalfs = dstBytesPerRow / MemoryLayout<Float16>.size
+            for y in 0..<depthHeight {
+                for x in 0..<depthWidth {
+                    let idx = y * rowHalfs + x
+                    float16Ptr[idx] = 1.0 - float16Ptr[idx]
+                }
+            }
+        } else if bytesPerPixel >= 4 {
+            let floatPtr = dstData.assumingMemoryBound(to: Float.self)
+            let rowFloats = dstBytesPerRow / MemoryLayout<Float>.size
+            for y in 0..<depthHeight {
+                for x in 0..<depthWidth {
+                    let idx = y * rowFloats + x
+                    floatPtr[idx] = 1.0 - floatPtr[idx]
+                }
+            }
+        }
+
+        CVPixelBufferUnlockBaseAddress(dst, [])
 
         // Compute output dimensions preserving original aspect ratio at model-output scale
         let aspectRatio = originalWidth / originalHeight
