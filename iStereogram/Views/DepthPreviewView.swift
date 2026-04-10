@@ -66,7 +66,7 @@ struct DepthPreviewView: View {
                                     get: { Double(settings.stripWidth) },
                                     set: { settings.stripWidth = Int($0) }
                                 ),
-                                in: 80...200,
+                                in: 80...300,
                                 step: 10
                             )
                             .accessibilityLabel("Strip width")
@@ -101,15 +101,6 @@ struct DepthPreviewView: View {
         }
         .navigationTitle("Depth Map")
         .navigationBarTitleDisplayMode(.inline)
-        .allowsHitTesting(!stereogramVM.isGenerating)
-        .overlay {
-            if stereogramVM.isGenerating {
-                ProgressView()
-                    .scaleEffect(1.5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.ultraThinMaterial)
-            }
-        }
         .onAppear {
             stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
         }
@@ -146,8 +137,19 @@ struct DepthPreviewView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay {
+                    if stereogramVM.isGenerating {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(.ultraThinMaterial.opacity(0.8))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                }
                 .onTapGesture {
-                    path.append(NavigationDestination.stereogramResult(image))
+                    if !stereogramVM.isGenerating {
+                        path.append(NavigationDestination.stereogramResult(image))
+                    }
                 }
                 .accessibilityLabel("Stereogram preview")
                 .accessibilityHint("Tap to view full screen")
