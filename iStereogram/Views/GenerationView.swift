@@ -310,7 +310,7 @@ struct HowToUseSheet: View {
         }
     }
 
-    private func step(_ number: Int, icon: String, text: String) -> some View {
+    private func step(_ number: Int, icon: String, text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .font(.body)

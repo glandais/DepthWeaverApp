@@ -143,7 +143,7 @@ struct HowToViewSheet: View {
         }
     }
 
-    private func instructionStep(number: Int, text: String) -> some View {
+    private func instructionStep(number: Int, text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Text("\(number)")
                 .font(.headline)

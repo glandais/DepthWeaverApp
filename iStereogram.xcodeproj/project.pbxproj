@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		052C96CA39527219B2EF7CAD /* pattern-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 5860A915C905663D43983644 /* pattern-noise.png */; };
+		0CFE9EE049DF1644B4CA7598 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E9D9359F2B4D4AE5B46E5AEF /* Localizable.xcstrings */; };
 		1DA7AEEC81DDAFEA3BB1FD77 /* pattern-hexagons.png in Resources */ = {isa = PBXBuildFile; fileRef = C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */; };
 		25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */; };
 		27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */; };
@@ -17,6 +18,7 @@
 		4647E256703CA91393CDC3B0 /* GenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0A010461B4A3C7C05965B /* GenerationView.swift */; };
 		54BEB214A1C89D758866C60D /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */; };
 		5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */; };
+		657F05D84DF43E0E1F3A719A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 0A2D59D7B7FF12A2177DF2A3 /* InfoPlist.xcstrings */; };
 		69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */ = {isa = PBXBuildFile; fileRef = 0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */; };
 		6CBB8EA760AE52B10CA96C52 /* pattern-stars.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9467888FC9202D5E5D6A3F /* pattern-stars.png */; };
 		7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */; };
@@ -39,6 +41,7 @@
 /* Begin PBXFileReference section */
 		013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureViewModel.swift; sourceTree = "<group>"; };
 		02B0A010461B4A3C7C05965B /* GenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationView.swift; sourceTree = "<group>"; };
+		0A2D59D7B7FF12A2177DF2A3 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-triangles.png"; sourceTree = "<group>"; };
 		0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = generate_patterns.py; sourceTree = "<group>"; };
 		1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-hexagons.png"; sourceTree = "<group>"; };
 		E26970B250CBE411F3298AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */ = {isa = PBXFileReference; path = DepthAnythingV2SmallF16.mlpackage; sourceTree = "<group>"; };
+		E9D9359F2B4D4AE5B46E5AEF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramViewModel.swift; sourceTree = "<group>"; };
 		ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepthViewModel.swift; sourceTree = "<group>"; };
 		EF4FA5B0E241FEEB4D8A18CE /* pattern-circles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-circles.png"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */,
+				0A2D59D7B7FF12A2177DF2A3 /* InfoPlist.xcstrings */,
+				E9D9359F2B4D4AE5B46E5AEF /* Localizable.xcstrings */,
 				6A112B48487DF23927A7F125 /* Patterns */,
 			);
 			path = Resources;
@@ -215,6 +221,7 @@
 			knownRegions = (
 				Base,
 				en,
+				fr,
 			);
 			mainGroup = 3A1E05C5E7FB3AD1868C0ABA;
 			minimizedProjectReferenceProxies = 1;
@@ -233,6 +240,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				657F05D84DF43E0E1F3A719A /* InfoPlist.xcstrings in Resources */,
+				0CFE9EE049DF1644B4CA7598 /* Localizable.xcstrings in Resources */,
 				69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */,
 				80BE61CF710A4540FF7C9151 /* pattern-checkerboard.png in Resources */,
 				CE647632036A2F5525C4ACAA /* pattern-circles.png in Resources */,

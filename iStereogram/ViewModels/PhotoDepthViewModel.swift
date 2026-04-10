@@ -18,7 +18,7 @@ final class PhotoDepthViewModel: ObservableObject {
                   let uiImage = UIImage(data: data),
                   let cgImage = uiImage.cgImage
             else {
-                showError(message: "Could not load selected photo")
+                showError(message: String(localized: "Could not load selected photo"))
                 return
             }
 

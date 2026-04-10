@@ -16,16 +16,16 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .noise: "Noise"
-        case .dots: "Dots"
-        case .checkerboard: "Checkerboard"
-        case .stripes: "Stripes"
-        case .circles: "Circles"
-        case .triangles: "Triangles"
-        case .waves: "Waves"
-        case .mosaic: "Mosaic"
-        case .stars: "Stars"
-        case .hexagons: "Hexagons"
+        case .noise: String(localized: "Noise", comment: "Pattern name")
+        case .dots: String(localized: "Dots", comment: "Pattern name")
+        case .checkerboard: String(localized: "Checkerboard", comment: "Pattern name")
+        case .stripes: String(localized: "Stripes", comment: "Pattern name")
+        case .circles: String(localized: "Circles", comment: "Pattern name")
+        case .triangles: String(localized: "Triangles", comment: "Pattern name")
+        case .waves: String(localized: "Waves", comment: "Pattern name")
+        case .mosaic: String(localized: "Mosaic", comment: "Pattern name")
+        case .stars: String(localized: "Stars", comment: "Pattern name")
+        case .hexagons: String(localized: "Hexagons", comment: "Pattern name")
         }
     }
 
