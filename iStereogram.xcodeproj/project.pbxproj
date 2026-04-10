@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */; };
+		27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */; };
+		32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */; };
+		3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */; };
+		4F74F052959D44E4685B0033 /* DepthPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EACEC8456179F15887F3854 /* DepthPreviewView.swift */; };
+		54BEB214A1C89D758866C60D /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */; };
+		5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */; };
+		7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */; };
+		7EE91F189DCAAC74A243588E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26970B250CBE411F3298AF3 /* ContentView.swift */; };
+		93627278EB6C0E56FD54B0BF /* LiDARCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */; };
+		A4E6558608AF28FC89A17234 /* DepthAnythingV2SmallF16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */; };
+		B2B651CA7279FC0C0674E83D /* StereogramSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BECEC272905DC0D346B82 /* StereogramSettings.swift */; };
+		BEDF57E165DE849B412B44F5 /* iStereogramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FE7256AEF8965E972F739 /* iStereogramApp.swift */; };
+		DEA7D75A1C4E193409776442 /* LiDARCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */; };
+		FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCBD8104D13562504FF9A /* StereogramResultView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureViewModel.swift; sourceTree = "<group>"; };
+		1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
+		259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthAnythingService.swift; sourceTree = "<group>"; };
+		381FE7256AEF8965E972F739 /* iStereogramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStereogramApp.swift; sourceTree = "<group>"; };
+		3BADCBD8104D13562504FF9A /* StereogramResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramResultView.swift; sourceTree = "<group>"; };
+		409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARDepthService.swift; sourceTree = "<group>"; };
+		541FD121A672926422CBC979 /* iStereogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStereogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureView.swift; sourceTree = "<group>"; };
+		7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
+		720BECEC272905DC0D346B82 /* StereogramSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramSettings.swift; sourceTree = "<group>"; };
+		8EACEC8456179F15887F3854 /* DepthPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPreviewView.swift; sourceTree = "<group>"; };
+		9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
+		E26970B250CBE411F3298AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = DepthAnythingV2SmallF16.mlpackage; sourceTree = "<group>"; };
+		EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramViewModel.swift; sourceTree = "<group>"; };
+		ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepthViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		18E29C865BF2B43703B9C4E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */,
+				720BECEC272905DC0D346B82 /* StereogramSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1C3200F275F2E76421C3EE0F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */,
+				409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */,
+				7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1E7F66270C8169C8B6350F2C /* iStereogram */ = {
+			isa = PBXGroup;
+			children = (
+				E26970B250CBE411F3298AF3 /* ContentView.swift */,
+				381FE7256AEF8965E972F739 /* iStereogramApp.swift */,
+				391BEC24BD0EC24557B79A65 /* Extensions */,
+				18E29C865BF2B43703B9C4E6 /* Models */,
+				AC5197818EB7D9EDD7B043E6 /* Resources */,
+				1C3200F275F2E76421C3EE0F /* Services */,
+				C06B229039C30A86FDC4AD0C /* ViewModels */,
+				F89BB33B07C52FB8CD526C70 /* Views */,
+			);
+			path = iStereogram;
+			sourceTree = "<group>";
+		};
+		391BEC24BD0EC24557B79A65 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3A1E05C5E7FB3AD1868C0ABA = {
+			isa = PBXGroup;
+			children = (
+				1E7F66270C8169C8B6350F2C /* iStereogram */,
+				A12453792A32DC34BA0BD446 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A12453792A32DC34BA0BD446 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				541FD121A672926422CBC979 /* iStereogram.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC5197818EB7D9EDD7B043E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C06B229039C30A86FDC4AD0C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */,
+				ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */,
+				EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F89BB33B07C52FB8CD526C70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8EACEC8456179F15887F3854 /* DepthPreviewView.swift */,
+				6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */,
+				3BADCBD8104D13562504FF9A /* StereogramResultView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB37C7B05AD27E7653A43CA8 /* iStereogram */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 985EE3EA5069318F62A4371D /* Build configuration list for PBXNativeTarget "iStereogram" */;
+			buildPhases = (
+				00DCBF7BEC312CA253A100EA /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iStereogram;
+			packageProductDependencies = (
+			);
+			productName = iStereogram;
+			productReference = 541FD121A672926422CBC979 /* iStereogram.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10864499944C2DDC24F459F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 90EE91B68CEFB6CF6E4C92D5 /* Build configuration list for PBXProject "iStereogram" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3A1E05C5E7FB3AD1868C0ABA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A12453792A32DC34BA0BD446 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB37C7B05AD27E7653A43CA8 /* iStereogram */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00DCBF7BEC312CA253A100EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54BEB214A1C89D758866C60D /* CIImage+Extensions.swift in Sources */,
+				7EE91F189DCAAC74A243588E /* ContentView.swift in Sources */,
+				27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */,
+				A4E6558608AF28FC89A17234 /* DepthAnythingV2SmallF16.mlpackage in Sources */,
+				25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */,
+				4F74F052959D44E4685B0033 /* DepthPreviewView.swift in Sources */,
+				93627278EB6C0E56FD54B0BF /* LiDARCaptureView.swift in Sources */,
+				DEA7D75A1C4E193409776442 /* LiDARCaptureViewModel.swift in Sources */,
+				7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */,
+				32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */,
+				5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */,
+				FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */,
+				B2B651CA7279FC0C0674E83D /* StereogramSettings.swift in Sources */,
+				3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */,
+				BEDF57E165DE849B412B44F5 /* iStereogramApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0CC92D536855EA9B22393E7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5208F99E3ED2A2EE83308F50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Q49262697;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "iStereogram uses the camera with LiDAR to capture 3D depth";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "iStereogram saves generated stereograms to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "iStereogram needs access to your photos to generate depth maps";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glandais.iStereogram;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5BBB5F5D743329D95D6376C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7EBED276C2B84A5386BB8361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Q49262697;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "iStereogram uses the camera with LiDAR to capture 3D depth";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "iStereogram saves generated stereograms to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "iStereogram needs access to your photos to generate depth maps";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glandais.iStereogram;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		90EE91B68CEFB6CF6E4C92D5 /* Build configuration list for PBXProject "iStereogram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BBB5F5D743329D95D6376C3 /* Debug */,
+				0CC92D536855EA9B22393E7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		985EE3EA5069318F62A4371D /* Build configuration list for PBXNativeTarget "iStereogram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5208F99E3ED2A2EE83308F50 /* Debug */,
+				7EBED276C2B84A5386BB8361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10864499944C2DDC24F459F3 /* Project object */;
+}
