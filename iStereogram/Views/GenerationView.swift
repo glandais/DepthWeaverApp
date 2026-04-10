@@ -11,6 +11,7 @@ struct GenerationView: View {
     let lidarAvailable: Bool
 
     @State private var settings = StereogramSettings()
+    @State private var showHelp = false
     @StateObject private var stereogramVM = StereogramViewModel()
 
     var body: some View {
@@ -98,6 +99,19 @@ struct GenerationView: View {
         }
         .navigationTitle("iStereogram")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showHelp = true
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                }
+                .accessibilityLabel("How to use")
+            }
+        }
+        .sheet(isPresented: $showHelp) {
+            HowToUseSheet()
+        }
         .onChange(of: depthMap?.id) { _, _ in
             triggerGeneration()
         }
@@ -237,6 +251,75 @@ struct GenerationView: View {
                 .overlay {
                     ProgressView("Generating...")
                 }
+        }
+    }
+}
+
+struct HowToUseSheet: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("How to Use iStereogram")
+                        .font(.title2)
+                        .fontWeight(.bold)
+
+                    step(1, icon: "camera.metering.matrix",
+                         text: "Acquire a depth map using LiDAR Scan (Pro devices) or From Photo (any image)")
+
+                    step(2, icon: "square.grid.3x3",
+                         text: "Choose a pattern — it determines the texture of your stereogram")
+
+                    step(3, icon: "slider.horizontal.3",
+                         text: "Adjust Strip Width (pattern repetition size) and Depth Amplitude (3D intensity)")
+
+                    step(4, icon: "eye",
+                         text: "Tap the stereogram preview to view it full screen, then share or save it")
+
+                    Divider()
+
+                    Text("Viewing the 3D Image")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+
+                    step(1, icon: "hand.raised",
+                         text: "Hold your device at arm's length")
+
+                    step(2, icon: "eye.slash",
+                         text: "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it")
+
+                    step(3, icon: "cube.transparent",
+                         text: "The repeating pattern will overlap. Keep your gaze relaxed until a 3D shape emerges")
+
+                    Text("Tip: Start with the device close to your face, then slowly move it away while keeping your eyes relaxed.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .padding()
+                        .background(.secondary.opacity(0.1), in: RoundedRectangle(cornerRadius: 12))
+                }
+                .padding()
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private func step(_ number: Int, icon: String, text: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: icon)
+                .font(.body)
+                .foregroundStyle(.white)
+                .frame(width: 32, height: 32)
+                .background(.blue, in: Circle())
+
+            Text(text)
+                .font(.body)
         }
     }
 }
