@@ -22,6 +22,39 @@ struct DepthPreviewView: View {
                 depthMapPreview
                     .accessibilityLabel("Depth map preview")
 
+                // Pattern picker
+                GroupBox("Pattern") {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(StereogramPattern.allCases) { pattern in
+                                Button {
+                                    settings.pattern = pattern
+                                } label: {
+                                    VStack(spacing: 4) {
+                                        Image(uiImage: pattern.loadImage())
+                                            .resizable()
+                                            .interpolation(.none)
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .stroke(settings.pattern == pattern ? Color.blue : Color.clear, lineWidth: 3)
+                                            )
+
+                                        Text(pattern.displayName)
+                                            .font(.caption2)
+                                            .lineLimit(1)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(pattern.displayName)
+                                .accessibilityAddTraits(settings.pattern == pattern ? .isSelected : [])
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+
                 // Settings
                 GroupBox("Settings") {
                     VStack(spacing: 16) {
@@ -33,26 +66,26 @@ struct DepthPreviewView: View {
                                     get: { Double(settings.stripWidth) },
                                     set: { settings.stripWidth = Int($0) }
                                 ),
-                                in: 60...300,
-                                step: 1
+                                in: 80...200,
+                                step: 10
                             )
                             .accessibilityLabel("Strip width")
                             .accessibilityValue("\(settings.stripWidth) pixels")
                         }
 
                         VStack(alignment: .leading) {
-                            Text("Eye Separation: \(settings.eyeSeparation)")
+                            Text("Depth Amplitude: \(settings.depthAmplitude, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
-                                    get: { Double(settings.eyeSeparation) },
-                                    set: { settings.eyeSeparation = Int($0) }
+                                    get: { Double(settings.depthAmplitude) },
+                                    set: { settings.depthAmplitude = Float($0) }
                                 ),
-                                in: 40...120,
-                                step: 1
+                                in: 0.05...0.6,
+                                step: 0.01
                             )
-                            .accessibilityLabel("Eye separation")
-                            .accessibilityValue("\(settings.eyeSeparation) pixels")
+                            .accessibilityLabel("Depth amplitude")
+                            .accessibilityValue("\(settings.depthAmplitude, specifier: "%.2f")")
                         }
 
                         Toggle("Invert Depth", isOn: $settings.invert)
@@ -61,36 +94,36 @@ struct DepthPreviewView: View {
                     .padding(.vertical, 4)
                 }
 
-                // Generate button
-                Button {
-                    Task {
-                        await stereogramVM.generate(depthMap: depthMap, settings: settings)
-                        if let image = stereogramVM.resultImage {
-                            path.append(NavigationDestination.stereogramResult(image))
-                        }
-                    }
-                } label: {
-                    Label("Generate Stereogram", systemImage: "eye")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(stereogramVM.isGenerating)
-                .accessibilityHint("Creates an autostereogram from the depth map")
+                // Stereogram preview
+                stereogramPreview
             }
             .padding()
         }
         .navigationTitle("Depth Map")
         .navigationBarTitleDisplayMode(.inline)
+        .allowsHitTesting(!stereogramVM.isGenerating)
         .overlay {
             if stereogramVM.isGenerating {
-                ZStack {
-                    Color.black.opacity(0.3).ignoresSafeArea()
-                    ProgressView("Generating stereogram...")
-                        .padding(24)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
-                }
+                ProgressView()
+                    .scaleEffect(1.5)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.ultraThinMaterial)
             }
+        }
+        .onAppear {
+            stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
+        }
+        .onChange(of: settings.stripWidth) { _, _ in
+            stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
+        }
+        .onChange(of: settings.depthAmplitude) { _, _ in
+            stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
+        }
+        .onChange(of: settings.invert) { _, _ in
+            stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
+        }
+        .onChange(of: settings.pattern) { _, _ in
+            stereogramVM.generateDebounced(depthMap: depthMap, settings: settings)
         }
     }
 
@@ -103,6 +136,33 @@ struct DepthPreviewView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         } else {
             ContentUnavailableView("Could not render depth map", systemImage: "exclamationmark.triangle")
+        }
+    }
+
+    @ViewBuilder
+    private var stereogramPreview: some View {
+        if let image = stereogramVM.resultImage {
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .onTapGesture {
+                    path.append(NavigationDestination.stereogramResult(image))
+                }
+                .accessibilityLabel("Stereogram preview")
+                .accessibilityHint("Tap to view full screen")
+        } else {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.quaternary)
+                .aspectRatio(CGFloat(depthMap.width) / CGFloat(depthMap.height), contentMode: .fit)
+                .overlay {
+                    if stereogramVM.isGenerating {
+                        ProgressView("Generating...")
+                    } else {
+                        Text("Stereogram")
+                            .foregroundStyle(.secondary)
+                    }
+                }
         }
     }
 }

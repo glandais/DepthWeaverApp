@@ -10,6 +10,7 @@ final class DepthAnythingService {
     private let targetSize = CGSize(width: 518, height: 392)
     private let context = CIContext()
     private var model: DepthAnythingV2SmallF16?
+    private let modelLock = NSLock()
     private let inputPixelBuffer: CVPixelBuffer
 
     private init() {
@@ -29,10 +30,14 @@ final class DepthAnythingService {
     }
 
     func loadModel() throws {
+        modelLock.lock()
+        defer { modelLock.unlock() }
         guard model == nil else { return }
         logger.info("Loading Depth Anything V2 model...")
+        let start = CFAbsoluteTimeGetCurrent()
         model = try DepthAnythingV2SmallF16()
-        logger.info("Model loaded")
+        let elapsed = CFAbsoluteTimeGetCurrent() - start
+        logger.info("Model loaded in \(String(format: "%.2f", elapsed))s")
     }
 
     func estimateDepth(from image: CIImage) throws -> DepthMap {
@@ -49,7 +54,10 @@ final class DepthAnythingService {
         let resized = image.resized(to: targetSize)
         context.render(resized, to: inputPixelBuffer)
 
+        let start = CFAbsoluteTimeGetCurrent()
         let result = try model.prediction(image: inputPixelBuffer)
+        let elapsed = CFAbsoluteTimeGetCurrent() - start
+        logger.info("Depth estimation completed in \(String(format: "%.2f", elapsed))s")
         let depthBuffer = result.depth
 
         let depthWidth = CVPixelBufferGetWidth(depthBuffer)

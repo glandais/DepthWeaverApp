@@ -24,4 +24,4 @@ targets:
         MARKETING_VERSION: 1.0
         SWIFT_VERSION: "5.9"
         PRODUCT_BUNDLE_IDENTIFIER: com.glandais.iStereogram
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "7Q49262697"

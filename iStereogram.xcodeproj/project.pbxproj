@@ -7,40 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052C96CA39527219B2EF7CAD /* pattern-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 5860A915C905663D43983644 /* pattern-noise.png */; };
+		1DA7AEEC81DDAFEA3BB1FD77 /* pattern-hexagons.png in Resources */ = {isa = PBXBuildFile; fileRef = C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */; };
 		25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */; };
 		27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */; };
+		2FB26502EF95FC3F3F85C6A7 /* pattern-stripes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF07AF737202563DDC8FB63 /* pattern-stripes.png */; };
 		32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */; };
 		3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */; };
 		4F74F052959D44E4685B0033 /* DepthPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EACEC8456179F15887F3854 /* DepthPreviewView.swift */; };
 		54BEB214A1C89D758866C60D /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */; };
 		5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */; };
+		69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */ = {isa = PBXBuildFile; fileRef = 0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */; };
+		6CBB8EA760AE52B10CA96C52 /* pattern-stars.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9467888FC9202D5E5D6A3F /* pattern-stars.png */; };
 		7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */; };
 		7EE91F189DCAAC74A243588E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26970B250CBE411F3298AF3 /* ContentView.swift */; };
+		80BE61CF710A4540FF7C9151 /* pattern-checkerboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */; };
 		93627278EB6C0E56FD54B0BF /* LiDARCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */; };
+		9516C55F24C86A37297039B6 /* pattern-triangles.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */; };
+		A0C96EF54DF4967BF8296F7B /* pattern-mosaic.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A5118BE9B66ADFAB66188AA /* pattern-mosaic.png */; };
 		A4E6558608AF28FC89A17234 /* DepthAnythingV2SmallF16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */; };
 		B2B651CA7279FC0C0674E83D /* StereogramSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BECEC272905DC0D346B82 /* StereogramSettings.swift */; };
 		BEDF57E165DE849B412B44F5 /* iStereogramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FE7256AEF8965E972F739 /* iStereogramApp.swift */; };
+		C5D7C1A33AA11A46773F4C02 /* StereogramPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B7C50B68349B86175A90FA /* StereogramPattern.swift */; };
+		CE647632036A2F5525C4ACAA /* pattern-circles.png in Resources */ = {isa = PBXBuildFile; fileRef = EF4FA5B0E241FEEB4D8A18CE /* pattern-circles.png */; };
 		DEA7D75A1C4E193409776442 /* LiDARCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */; };
+		E8A3692C28EAF737E93A1055 /* pattern-dots.png in Resources */ = {isa = PBXBuildFile; fileRef = B801064645BCA6711FAF3622 /* pattern-dots.png */; };
 		FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCBD8104D13562504FF9A /* StereogramResultView.swift */; };
+		FEE10F0975E655A359793D4E /* pattern-waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureViewModel.swift; sourceTree = "<group>"; };
+		0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-triangles.png"; sourceTree = "<group>"; };
+		0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = generate_patterns.py; sourceTree = "<group>"; };
 		1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
+		1FF07AF737202563DDC8FB63 /* pattern-stripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stripes.png"; sourceTree = "<group>"; };
 		259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthAnythingService.swift; sourceTree = "<group>"; };
+		25B7C50B68349B86175A90FA /* StereogramPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramPattern.swift; sourceTree = "<group>"; };
+		2A5118BE9B66ADFAB66188AA /* pattern-mosaic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-mosaic.png"; sourceTree = "<group>"; };
 		381FE7256AEF8965E972F739 /* iStereogramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStereogramApp.swift; sourceTree = "<group>"; };
+		3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-waves.png"; sourceTree = "<group>"; };
 		3BADCBD8104D13562504FF9A /* StereogramResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramResultView.swift; sourceTree = "<group>"; };
 		409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARDepthService.swift; sourceTree = "<group>"; };
-		541FD121A672926422CBC979 /* iStereogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStereogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		541FD121A672926422CBC979 /* iStereogram.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iStereogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5860A915C905663D43983644 /* pattern-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-noise.png"; sourceTree = "<group>"; };
+		60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-checkerboard.png"; sourceTree = "<group>"; };
 		6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureView.swift; sourceTree = "<group>"; };
 		7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
 		720BECEC272905DC0D346B82 /* StereogramSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramSettings.swift; sourceTree = "<group>"; };
 		8EACEC8456179F15887F3854 /* DepthPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPreviewView.swift; sourceTree = "<group>"; };
+		9E9467888FC9202D5E5D6A3F /* pattern-stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stars.png"; sourceTree = "<group>"; };
 		9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
+		B801064645BCA6711FAF3622 /* pattern-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-dots.png"; sourceTree = "<group>"; };
+		C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-hexagons.png"; sourceTree = "<group>"; };
 		E26970B250CBE411F3298AF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = DepthAnythingV2SmallF16.mlpackage; sourceTree = "<group>"; };
+		E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */ = {isa = PBXFileReference; path = DepthAnythingV2SmallF16.mlpackage; sourceTree = "<group>"; };
 		EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramViewModel.swift; sourceTree = "<group>"; };
 		ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepthViewModel.swift; sourceTree = "<group>"; };
+		EF4FA5B0E241FEEB4D8A18CE /* pattern-circles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-circles.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -48,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */,
+				25B7C50B68349B86175A90FA /* StereogramPattern.swift */,
 				720BECEC272905DC0D346B82 /* StereogramSettings.swift */,
 			);
 			path = Models;
@@ -94,6 +119,24 @@
 			);
 			sourceTree = "<group>";
 		};
+		6A112B48487DF23927A7F125 /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */,
+				60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */,
+				EF4FA5B0E241FEEB4D8A18CE /* pattern-circles.png */,
+				B801064645BCA6711FAF3622 /* pattern-dots.png */,
+				C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */,
+				2A5118BE9B66ADFAB66188AA /* pattern-mosaic.png */,
+				5860A915C905663D43983644 /* pattern-noise.png */,
+				9E9467888FC9202D5E5D6A3F /* pattern-stars.png */,
+				1FF07AF737202563DDC8FB63 /* pattern-stripes.png */,
+				0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */,
+				3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */,
+			);
+			path = Patterns;
+			sourceTree = "<group>";
+		};
 		A12453792A32DC34BA0BD446 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				E66A5EACF10BA3CBBC9B6038 /* DepthAnythingV2SmallF16.mlpackage */,
+				6A112B48487DF23927A7F125 /* Patterns */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -138,6 +182,7 @@
 			buildConfigurationList = 985EE3EA5069318F62A4371D /* Build configuration list for PBXNativeTarget "iStereogram" */;
 			buildPhases = (
 				00DCBF7BEC312CA253A100EA /* Sources */,
+				499479C78C43B8D3940F0A87 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -158,6 +203,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					DB37C7B05AD27E7653A43CA8 = {
+						DevelopmentTeam = 7Q49262697;
+					};
+				};
 			};
 			buildConfigurationList = 90EE91B68CEFB6CF6E4C92D5 /* Build configuration list for PBXProject "iStereogram" */;
 			developmentRegion = en;
@@ -178,6 +228,27 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		499479C78C43B8D3940F0A87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */,
+				80BE61CF710A4540FF7C9151 /* pattern-checkerboard.png in Resources */,
+				CE647632036A2F5525C4ACAA /* pattern-circles.png in Resources */,
+				E8A3692C28EAF737E93A1055 /* pattern-dots.png in Resources */,
+				1DA7AEEC81DDAFEA3BB1FD77 /* pattern-hexagons.png in Resources */,
+				A0C96EF54DF4967BF8296F7B /* pattern-mosaic.png in Resources */,
+				052C96CA39527219B2EF7CAD /* pattern-noise.png in Resources */,
+				6CBB8EA760AE52B10CA96C52 /* pattern-stars.png in Resources */,
+				2FB26502EF95FC3F3F85C6A7 /* pattern-stripes.png in Resources */,
+				9516C55F24C86A37297039B6 /* pattern-triangles.png in Resources */,
+				FEE10F0975E655A359793D4E /* pattern-waves.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		00DCBF7BEC312CA253A100EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -194,6 +265,7 @@
 				7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */,
 				32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */,
 				5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */,
+				C5D7C1A33AA11A46773F4C02 /* StereogramPattern.swift in Sources */,
 				FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */,
 				B2B651CA7279FC0C0674E83D /* StereogramSettings.swift in Sources */,
 				3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */,

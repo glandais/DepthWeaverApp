@@ -1,7 +1,8 @@
 import UIKit
 
 final class StereogramGenerator {
-    /// Generates an autostereogram from a depth map using the Thimbleby-Inglis-Witten algorithm.
+    /// Generates an autostereogram from a depth map using the Thimbleby algorithm
+    /// with center-outward processing and union-find constraint propagation.
     func generate(depthMap: DepthMap, settings: StereogramSettings) -> UIImage {
         let minDimTarget = 960
         let rawWidth = depthMap.width > 0 ? depthMap.width : 1024
@@ -11,65 +12,147 @@ final class StereogramGenerator {
         let width = rawWidth * scale
         let height = rawHeight * scale
         let stripWidth = settings.stripWidth
-        let eyeSep = settings.eyeSeparation
+        let amplitude = settings.depthAmplitude
 
         let depths = depthMap.normalizedDepthValues(width: width, height: height)
+
+        // Prepare pattern data (shared read-only across rows)
+        let patternData = preparePattern(settings.pattern, stripWidth: stripWidth)
+        let patternWidth = patternData.width
+        let patternHeight = patternData.height
+        let patternPixels = patternData.pixels
+
         var pixels = [UInt8](repeating: 0, count: width * height * 4)
 
         DispatchQueue.concurrentPerform(iterations: height) { row in
-            // Seeded RNG per row for reproducibility
-            var rng = SplitMix64(seed: UInt64(row) &* 0x9E3779B97F4A7C15)
+            // Build union-find constraint array
+            var same = [Int](0..<width)
+            let mid = width / 2
 
-            // Generate random noise strip for this row
-            var strip = [UInt8](repeating: 0, count: stripWidth * 4)
-            for i in stride(from: 0, to: strip.count, by: 4) {
-                strip[i]     = UInt8(rng.next() & 0xFF) // R
-                strip[i + 1] = UInt8(rng.next() & 0xFF) // G
-                strip[i + 2] = UInt8(rng.next() & 0xFF) // B
-                strip[i + 3] = 255                       // A
+            // Process from center to right
+            for x in mid..<width {
+                processPixel(x: x, y: row, width: width, depths: depths,
+                             invert: settings.invert, stripWidth: stripWidth,
+                             amplitude: amplitude, same: &same)
+            }
+            // Process from center to left
+            for x in stride(from: mid - 1, through: 0, by: -1) {
+                processPixel(x: x, y: row, width: width, depths: depths,
+                             invert: settings.invert, stripWidth: stripWidth,
+                             amplitude: amplitude, same: &same)
             }
 
-            // Build link buffer
-            var links = Array(0..<width)
-            for x in 0..<width {
-                var depth = depths[row * width + x]
-                if settings.invert { depth = 1.0 - depth }
-
-                let separation = stripWidth - Int(depth * Float(eyeSep))
-                let left = x - separation / 2
-                let right = left + separation
-
-                if left >= 0 && right >= 0 && right < width {
-                    // Follow existing link chain from left
-                    var target = left
-                    while links[target] != target && links[target] >= 0 {
-                        target = links[target]
-                    }
-                    if target != right {
-                        links[right] = target
-                    }
-                }
-            }
-
-            // Resolve pixel colors by following links to the strip
+            // Assign colors from center outward
             let rowOffset = row * width * 4
-            for x in 0..<width {
-                var resolvedX = x
-                var maxIterations = width
-                while links[resolvedX] != resolvedX && maxIterations > 0 {
-                    resolvedX = links[resolvedX]
-                    maxIterations -= 1
-                }
-                let stripX = resolvedX % stripWidth
-                pixels[rowOffset + x * 4]     = strip[stripX * 4]
-                pixels[rowOffset + x * 4 + 1] = strip[stripX * 4 + 1]
-                pixels[rowOffset + x * 4 + 2] = strip[stripX * 4 + 2]
-                pixels[rowOffset + x * 4 + 3] = 255
+            let py = row % patternHeight
+
+            for x in mid..<width {
+                assignPixelColor(x: x, row: row, rowOffset: rowOffset, width: width,
+                                 patternWidth: patternWidth, py: py,
+                                 same: &same, patternPixels: patternPixels, pixels: &pixels)
+            }
+            for x in stride(from: mid - 1, through: 0, by: -1) {
+                assignPixelColor(x: x, row: row, rowOffset: rowOffset, width: width,
+                                 patternWidth: patternWidth, py: py,
+                                 same: &same, patternPixels: patternPixels, pixels: &pixels)
             }
         }
 
         return createImage(from: pixels, width: width, height: height)
     }
+
+    // MARK: - Pixel Processing
+
+    private func processPixel(x: Int, y: Int, width: Int, depths: [Float],
+                               invert: Bool, stripWidth: Int, amplitude: Float,
+                               same: inout [Int]) {
+        var depth = depths[y * width + x]
+        if invert { depth = 1.0 - depth }
+
+        let separation = Int((Float(stripWidth) * (1.0 - amplitude * depth)).rounded())
+        let left = x - separation / 2
+        let right = left + separation
+
+        guard left >= 0 && right < width else { return }
+
+        // Union-find: follow chains to roots
+        var l = left
+        while same[l] != l { l = same[l] }
+        var r = right
+        while same[r] != r { r = same[r] }
+
+        if l != r {
+            if l < r { same[r] = l }
+            else { same[l] = r }
+        }
+    }
+
+    private func assignPixelColor(x: Int, row: Int, rowOffset: Int, width: Int,
+                                   patternWidth: Int, py: Int,
+                                   same: inout [Int], patternPixels: [UInt8],
+                                   pixels: inout [UInt8]) {
+        // Path compression to find root
+        var root = x
+        while same[root] != root { root = same[root] }
+        var curr = x
+        while same[curr] != root {
+            let next = same[curr]
+            same[curr] = root
+            curr = next
+        }
+
+        let px = ((root % patternWidth) + patternWidth) % patternWidth
+        let pi = (py * patternWidth + px) * 4
+        let oi = rowOffset + x * 4
+        pixels[oi]     = patternPixels[pi]
+        pixels[oi + 1] = patternPixels[pi + 1]
+        pixels[oi + 2] = patternPixels[pi + 2]
+        pixels[oi + 3] = 255
+    }
+
+    // MARK: - Pattern Preparation
+
+    private struct PatternData {
+        let pixels: [UInt8]
+        let width: Int
+        let height: Int
+    }
+
+    private func preparePattern(_ pattern: StereogramPattern, stripWidth: Int) -> PatternData {
+        let sourceImage = pattern.loadImage()
+        guard let cgImage = sourceImage.cgImage else {
+            fatalError("Cannot get CGImage from pattern: \(pattern.displayName)")
+        }
+
+        let sourceHeight = cgImage.height
+        let sourceWidth = cgImage.width
+        let targetWidth = stripWidth
+        let targetHeight = sourceHeight * targetWidth / sourceWidth
+
+        // Render pattern scaled to stripWidth
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bytesPerRow = targetWidth * 4
+        var rawPixels = [UInt8](repeating: 0, count: targetWidth * targetHeight * 4)
+
+        guard let context = CGContext(
+            data: &rawPixels,
+            width: targetWidth,
+            height: targetHeight,
+            bitsPerComponent: 8,
+            bytesPerRow: bytesPerRow,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            fatalError("Cannot create CGContext for pattern")
+        }
+
+        context.interpolationQuality = .high
+        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight))
+
+        return PatternData(pixels: rawPixels, width: targetWidth, height: targetHeight)
+    }
+
+    // MARK: - Image Creation
 
     private func createImage(from pixels: [UInt8], width: Int, height: Int) -> UIImage {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -94,22 +177,5 @@ final class StereogramGenerator {
             return UIImage()
         }
         return UIImage(cgImage: cgImage)
-    }
-}
-
-/// Simple fast PRNG for reproducible noise.
-struct SplitMix64 {
-    var state: UInt64
-
-    init(seed: UInt64) {
-        state = seed
-    }
-
-    mutating func next() -> UInt64 {
-        state &+= 0x9E3779B97F4A7C15
-        var z = state
-        z = (z ^ (z >> 30)) &* 0xBF58476D1CE4E5B9
-        z = (z ^ (z >> 27)) &* 0x94D049BB133111EB
-        return z ^ (z >> 31)
     }
 }
