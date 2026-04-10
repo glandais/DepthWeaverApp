@@ -5,7 +5,9 @@ import UIKit
 
 private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "DepthMap")
 
-struct DepthMap {
+struct DepthMap: Identifiable {
+    let id = UUID()
+
     enum Source {
         case lidar
         case depthAnything

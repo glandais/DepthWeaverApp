@@ -14,7 +14,7 @@
 		2FB26502EF95FC3F3F85C6A7 /* pattern-stripes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF07AF737202563DDC8FB63 /* pattern-stripes.png */; };
 		32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */; };
 		3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */; };
-		4F74F052959D44E4685B0033 /* DepthPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EACEC8456179F15887F3854 /* DepthPreviewView.swift */; };
+		4647E256703CA91393CDC3B0 /* GenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0A010461B4A3C7C05965B /* GenerationView.swift */; };
 		54BEB214A1C89D758866C60D /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */; };
 		5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */; };
 		69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */ = {isa = PBXBuildFile; fileRef = 0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */; };
@@ -38,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		013510988B3391BB461FDB1D /* LiDARCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureViewModel.swift; sourceTree = "<group>"; };
+		02B0A010461B4A3C7C05965B /* GenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationView.swift; sourceTree = "<group>"; };
 		0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-triangles.png"; sourceTree = "<group>"; };
 		0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = generate_patterns.py; sourceTree = "<group>"; };
 		1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureView.swift; sourceTree = "<group>"; };
 		7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
 		720BECEC272905DC0D346B82 /* StereogramSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramSettings.swift; sourceTree = "<group>"; };
-		8EACEC8456179F15887F3854 /* DepthPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPreviewView.swift; sourceTree = "<group>"; };
 		9E9467888FC9202D5E5D6A3F /* pattern-stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stars.png"; sourceTree = "<group>"; };
 		9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
 		B801064645BCA6711FAF3622 /* pattern-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-dots.png"; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 		F89BB33B07C52FB8CD526C70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8EACEC8456179F15887F3854 /* DepthPreviewView.swift */,
+				02B0A010461B4A3C7C05965B /* GenerationView.swift */,
 				6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */,
 				3BADCBD8104D13562504FF9A /* StereogramResultView.swift */,
 			);
@@ -259,7 +259,7 @@
 				27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */,
 				A4E6558608AF28FC89A17234 /* DepthAnythingV2SmallF16.mlpackage in Sources */,
 				25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */,
-				4F74F052959D44E4685B0033 /* DepthPreviewView.swift in Sources */,
+				4647E256703CA91393CDC3B0 /* GenerationView.swift in Sources */,
 				93627278EB6C0E56FD54B0BF /* LiDARCaptureView.swift in Sources */,
 				DEA7D75A1C4E193409776442 /* LiDARCaptureViewModel.swift in Sources */,
 				7132B282967BCC9F14ADC973 /* LiDARDepthService.swift in Sources */,
