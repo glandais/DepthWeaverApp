@@ -36,10 +36,16 @@ final class StereogramGenerator {
                 let right = left + separation
 
                 if left >= 0 && right < width {
-                    var target = left
-                    while links[target] != target { target = links[target] }
-                    if target != right {
-                        links[right] = target
+                    var rootL = left
+                    while links[rootL] != rootL { rootL = links[rootL] }
+                    var rootR = right
+                    while links[rootR] != rootR { rootR = links[rootR] }
+                    if rootL != rootR {
+                        if rootL < rootR {
+                            links[rootR] = rootL
+                        } else {
+                            links[rootL] = rootR
+                        }
                     }
                 }
             }
