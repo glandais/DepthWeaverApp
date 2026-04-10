@@ -37,6 +37,7 @@ struct GenerationView: View {
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 8)
                                                     .stroke(settings.pattern == pattern ? Color.blue : Color.clear, lineWidth: 3)
+                                                    .animation(.snappy(duration: 0.2), value: settings.pattern)
                                             )
 
                                         Text(pattern.displayName)
@@ -235,8 +236,10 @@ struct GenerationView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(.ultraThinMaterial.opacity(0.8))
                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .transition(.opacity)
                     }
                 }
+                .animation(.smooth(duration: 0.25), value: stereogramVM.isGenerating)
                 .onTapGesture {
                     if !stereogramVM.isGenerating {
                         path.append(NavigationDestination.stereogramResult(image))

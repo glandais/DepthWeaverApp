@@ -46,8 +46,10 @@ struct ContentView: View {
                             .padding(24)
                             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
                     }
+                    .transition(.opacity)
                 }
             }
+            .animation(.smooth(duration: 0.3), value: photoDepthVM.isProcessing)
             .onChange(of: selectedPhoto) { _, newValue in
                 guard let item = newValue else { return }
                 Task {

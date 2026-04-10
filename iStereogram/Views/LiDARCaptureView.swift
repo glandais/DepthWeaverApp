@@ -97,6 +97,7 @@ struct LiDARCaptureView: View {
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
                             .background(.regularMaterial, in: Capsule())
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     Spacer()
@@ -116,12 +117,15 @@ struct LiDARCaptureView: View {
                             .shadow(radius: 4)
                     }
                     .disabled(!depthService.hasDepthData)
-                    .opacity(depthService.hasDepthData ? 1.0 : 0.5)
+                    .animation(.smooth) { content in
+                        content.opacity(depthService.hasDepthData ? 1.0 : 0.5)
+                    }
                     .accessibilityLabel("Capture depth")
                     .accessibilityHint("Takes a depth snapshot of the current scene")
                     .padding(.bottom, 16)
                 }
                 .frame(width: geo.size.width, height: geo.size.height)
+                .animation(.smooth(duration: 0.4), value: depthService.hasDepthData)
             }
         }
         .ignoresSafeArea()

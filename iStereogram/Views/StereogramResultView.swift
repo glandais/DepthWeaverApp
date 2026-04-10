@@ -26,7 +26,7 @@ struct StereogramResultView: View {
                         .onEnded { value in
                             lastZoom = zoom
                             if zoom <= 1.0 {
-                                withAnimation(.easeOut(duration: 0.2)) {
+                                withAnimation(.smooth(duration: 0.3)) {
                                     zoom = 1.0
                                     lastZoom = 1.0
                                     offset = .zero
@@ -49,7 +49,7 @@ struct StereogramResultView: View {
                         )
                 )
                 .onTapGesture(count: 2) {
-                    withAnimation(.easeOut(duration: 0.2)) {
+                    withAnimation(.smooth(duration: 0.3)) {
                         if zoom > 1.0 {
                             zoom = 1.0
                             lastZoom = 1.0
@@ -85,9 +85,12 @@ struct StereogramResultView: View {
 
                 Button {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    savedToPhotos = true
+                    withAnimation(.snappy) {
+                        savedToPhotos = true
+                    }
                 } label: {
                     Image(systemName: savedToPhotos ? "checkmark.circle.fill" : "arrow.down.circle")
+                        .contentTransition(.symbolEffect(.replace))
                 }
                 .accessibilityLabel(savedToPhotos ? "Saved to photos" : "Save to photos")
             }
