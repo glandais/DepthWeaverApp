@@ -155,34 +155,41 @@ struct GenerationView: View {
                 GroupBox("Settings") {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("Strip Width: \(settings.stripWidth)")
+                            Text("Stripes: \(settings.stripesCount) (\(stripeWidthDescription))")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
-                                    get: { Double(settings.stripWidth) },
-                                    set: { settings.stripWidth = Int($0) }
+                                    get: { Double(settings.stripesCount) },
+                                    set: { settings.stripesCount = Int($0) }
                                 ),
-                                in: 80...300,
-                                step: 10
+                                in: 8...24,
+                                step: 1
                             )
-                            .accessibilityLabel("Strip width")
-                            .accessibilityValue("\(settings.stripWidth) pixels")
+                            .accessibilityLabel("Stripes count")
+                            .accessibilityValue("\(settings.stripesCount)")
                         }
 
                         VStack(alignment: .leading) {
-                            Text("Depth Amplitude: \(settings.depthAmplitude, specifier: "%.2f")")
+                            Text("Depth: \(settings.depthFactor, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
-                                    get: { Double(settings.depthAmplitude) },
-                                    set: { settings.depthAmplitude = Float($0) }
+                                    get: { Double(settings.depthFactor) },
+                                    set: { settings.depthFactor = Float($0) }
                                 ),
-                                in: 0.05...0.6,
-                                step: 0.01
+                                in: 0...1,
+                                step: 0.05
                             )
-                            .accessibilityLabel("Depth amplitude")
-                            .accessibilityValue("\(settings.depthAmplitude, specifier: "%.2f")")
+                            .accessibilityLabel("Depth factor")
+                            .accessibilityValue("\(settings.depthFactor, specifier: "%.2f")")
                         }
+
+                        Picker("Main Stripe", selection: $settings.mainStripePosition) {
+                            Text("Left").tag(MainStripePosition.left)
+                            Text("Middle").tag(MainStripePosition.middle)
+                        }
+                        .pickerStyle(.segmented)
+                        .font(.subheadline)
 
                         Toggle("Invert Depth", isOn: $settings.invert)
                             .font(.subheadline)
@@ -248,6 +255,15 @@ struct GenerationView: View {
                 selectedDepthMapPhoto = nil
             }
         }
+    }
+
+    private var stripeWidthDescription: String {
+        if let depthMap {
+            let w = depthMap.width > 0 ? depthMap.width : 1024
+            let px = w / (settings.stripesCount + 1)
+            return "\(px)px"
+        }
+        return ""
     }
 
     private func triggerGeneration() {
@@ -454,7 +470,7 @@ struct HowToUseSheet: View {
                          text: "Choose a pattern — it determines the texture of your stereogram")
 
                     step(4, icon: "slider.horizontal.3",
-                         text: "Adjust Strip Width (pattern repetition size) and Depth Amplitude (3D intensity)")
+                         text: "Adjust Stripes (number of pattern repetitions), Depth (3D intensity), and Main Stripe position")
 
                     step(5, icon: "eye",
                          text: "Tap the stereogram preview to view it full screen, then share or save it")
