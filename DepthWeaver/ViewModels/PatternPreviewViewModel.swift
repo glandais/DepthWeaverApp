@@ -1,7 +1,7 @@
 import os
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "PatternPreviewViewModel")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "PatternPreviewViewModel")
 
 @MainActor
 final class PatternPreviewViewModel: ObservableObject {

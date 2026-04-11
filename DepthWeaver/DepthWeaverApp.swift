@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct iStereogramApp: App {
+struct DepthWeaverApp: App {
     init() {
         Task.detached(priority: .utility) {
             try? DepthAnythingService.shared.loadModel()

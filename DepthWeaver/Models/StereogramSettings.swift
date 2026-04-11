@@ -8,7 +8,7 @@ enum MainStripePosition: String, CaseIterable, Identifiable, Equatable {
 }
 
 struct StereogramSettings: Equatable {
-    var stripesCount: Int = 12
+    var stripesCount: Int = 8
     var depthFactor: Float = 0.8
     var mainStripePosition: MainStripePosition = .middle
     var invert: Bool = false

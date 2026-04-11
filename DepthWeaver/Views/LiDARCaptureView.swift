@@ -2,7 +2,7 @@ import ARKit
 import os
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "LiDARCaptureView")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "LiDARCaptureView")
 
 struct LiDARCaptureView: View {
     @ObservedObject var depthService: LiDARDepthService
@@ -40,7 +40,7 @@ struct LiDARCaptureView: View {
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("iStereogram uses your camera and LiDAR sensor to capture 3D depth information of your surroundings.")
+            Text("DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings.")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

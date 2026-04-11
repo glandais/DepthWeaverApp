@@ -1,6 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DepthWeaver"
+          }
+        }
+      }
+    },
     "CFBundleName" : {
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
@@ -8,7 +20,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "iStereogram"
+            "value" : "DepthWeaver"
           }
         }
       }
@@ -19,13 +31,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram uses the camera with LiDAR to capture 3D depth"
+            "value" : "DepthWeaver uses the camera with LiDAR to capture 3D depth"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram utilise la caméra avec le LiDAR pour capturer la profondeur 3D"
+            "value" : "DepthWeaver utilise la caméra avec le LiDAR pour capturer la profondeur 3D"
           }
         }
       }
@@ -36,13 +48,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram saves generated stereograms to your photo library"
+            "value" : "DepthWeaver saves generated stereograms to your photo library"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram enregistre les stéréogrammes générés dans votre photothèque"
+            "value" : "DepthWeaver enregistre les stéréogrammes générés dans votre photothèque"
           }
         }
       }
@@ -53,13 +65,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram needs access to your photos to generate depth maps"
+            "value" : "DepthWeaver needs access to your photos to generate depth maps"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iStereogram a besoin d'accéder à vos photos pour générer des cartes de profondeur"
+            "value" : "DepthWeaver a besoin d'accéder à vos photos pour générer des cartes de profondeur"
           }
         }
       }

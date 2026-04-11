@@ -1,4 +1,4 @@
-# iStereogram
+# DepthWeaver
 
 An iOS app that generates autostereograms (Magic Eye images) from depth maps.
 
@@ -19,17 +19,9 @@ An iOS app that generates autostereograms (Magic Eye images) from depth maps.
 ## Getting Started
 
 1. Clone the repository
-2. Install [XcodeGen](https://github.com/yonaskolb/XcodeGen) if you don't have it:
-   ```bash
-   brew install xcodegen
-   ```
-3. Generate the Xcode project:
-   ```bash
-   xcodegen generate
-   ```
-4. Open `iStereogram.xcodeproj` in Xcode
-5. Set your Development Team in Signing & Capabilities
-6. Build and run
+2. Open `DepthWeaver.xcodeproj` in Xcode
+3. Set your Development Team in Signing & Capabilities
+4. Build and run from Xcode
 
 The Depth Anything V2 CoreML model (~48MB) is included in the repository.
 

@@ -1,4 +1,4 @@
-# iStereogram
+# DepthWeaver
 
 ## Project overview
 
@@ -23,15 +23,7 @@ HomeView (ContentView)
 
 ## Build
 
-```bash
-# Generate Xcode project (requires xcodegen)
-xcodegen generate
-
-# Build
-xcodebuild -project iStereogram.xcodeproj -scheme iStereogram -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
-```
-
-Set your Development Team in Xcode Signing & Capabilities before running on device.
+Open `DepthWeaver.xcodeproj` in Xcode, set your Development Team in Signing & Capabilities, then build and run.
 
 ## Known constraints
 

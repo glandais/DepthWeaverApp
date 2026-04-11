@@ -3,7 +3,7 @@ import os
 import PhotosUI
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "ContentView")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "ContentView")
 
 /// Shared state that persists across navigation destinations.
 @MainActor

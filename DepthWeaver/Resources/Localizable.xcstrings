@@ -67,13 +67,13 @@
         }
       }
     },
-    "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = far, black = close)" : {
+    "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)" : {
       "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = loin, noir = proche)"
+            "value" : "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = proche, noir = loin)"
           }
         }
       }
@@ -405,6 +405,27 @@
     "Depth: %.2f" : {
 
     },
+    "DepthWeaver" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DepthWeaver"
+          }
+        }
+      }
+    },
+    "DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DepthWeaver utilise votre caméra et le capteur LiDAR pour capturer les informations de profondeur 3D de votre environnement."
+          }
+        }
+      }
+    },
     "Distance" : {
       "comment" : "Parameter",
       "extractionState" : "stale",
@@ -727,12 +748,12 @@
         }
       }
     },
-    "How to Use iStereogram" : {
+    "How to Use DepthWeaver" : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment utiliser iStereogram"
+            "value" : "Comment utiliser DepthWeaver"
           }
         }
       }
@@ -849,27 +870,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Île"
-          }
-        }
-      }
-    },
-    "iStereogram" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iStereogram"
-          }
-        }
-      }
-    },
-    "iStereogram uses your camera and LiDAR sensor to capture 3D depth information of your surroundings." : {
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iStereogram utilise votre caméra et le capteur LiDAR pour capturer les informations de profondeur 3D de votre environnement."
           }
         }
       }

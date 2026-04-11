@@ -2,7 +2,7 @@ import os
 import PhotosUI
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "GenerationView")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "GenerationView")
 
 struct GenerationView: View {
     @Binding var depthMap: DepthMap?
@@ -202,7 +202,7 @@ struct GenerationView: View {
             }
             .padding()
         }
-        .navigationTitle("iStereogram")
+        .navigationTitle("DepthWeaver")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -456,12 +456,12 @@ struct HowToUseSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("How to Use iStereogram")
+                    Text("How to Use DepthWeaver")
                         .font(.title2)
                         .fontWeight(.bold)
 
                     step(1, icon: "camera.metering.matrix",
-                         text: "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = far, black = close)")
+                         text: "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)")
 
                     step(2, icon: "slider.horizontal.below.square.and.square.filled",
                          text: "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast")

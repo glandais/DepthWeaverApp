@@ -3,7 +3,7 @@ import CoreVideo
 import os
 import UIKit
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "DepthMap")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "DepthMap")
 
 struct DepthMap: Identifiable {
     let id = UUID()

@@ -2,7 +2,7 @@ import CoreImage
 import CoreML
 import os
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "DepthAnythingService")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "DepthAnythingService")
 
 final class DepthAnythingService {
     static let shared = DepthAnythingService()

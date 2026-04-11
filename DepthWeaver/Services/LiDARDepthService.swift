@@ -3,7 +3,7 @@ import CoreImage
 import os
 import UIKit
 
-private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "LiDARDepthService")
+private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "LiDARDepthService")
 
 final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
     let session = ARSession()
