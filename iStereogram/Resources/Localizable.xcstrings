@@ -112,6 +112,18 @@
         }
       }
     },
+    "Atomium" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atomium"
+          }
+        }
+      }
+    },
     "B&W" : {
       "comment" : "Color mode",
       "extractionState" : "stale",
@@ -163,6 +175,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Capturer la profondeur"
+          }
+        }
+      }
+    },
+    "Car" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voiture"
           }
         }
       }
@@ -222,6 +246,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cercles"
+          }
+        }
+      }
+    },
+    "Clouds" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuages"
           }
         }
       }
@@ -353,6 +389,18 @@
         }
       }
     },
+    "Depth Map Presets" : {
+      "comment" : "Sheet title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartes de profondeur"
+          }
+        }
+      }
+    },
     "Distance" : {
       "comment" : "Parameter",
       "extractionState" : "stale",
@@ -361,6 +409,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Distance"
+          }
+        }
+      }
+    },
+    "Dog" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chien"
+          }
+        }
+      }
+    },
+    "Dolphin" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dauphin"
           }
         }
       }
@@ -490,6 +562,18 @@
         }
       }
     },
+    "Foliage" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feuillage"
+          }
+        }
+      }
+    },
     "Frequency" : {
       "comment" : "Parameter",
       "extractionState" : "stale",
@@ -547,6 +631,18 @@
         }
       }
     },
+    "Giraffe" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Girafe"
+          }
+        }
+      }
+    },
     "Grayscale" : {
       "comment" : "Color mode",
       "extractionState" : "stale",
@@ -555,6 +651,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niveaux de gris"
+          }
+        }
+      }
+    },
+    "Hand" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main"
+          }
+        }
+      }
+    },
+    "Head" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tête"
           }
         }
       }
@@ -717,6 +837,18 @@
         }
       }
     },
+    "Island" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Île"
+          }
+        }
+      }
+    },
     "iStereogram" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -770,6 +902,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Taux de destruction (k)"
+          }
+        }
+      }
+    },
+    "Leaves" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feuilles"
           }
         }
       }
@@ -970,12 +1114,35 @@
         }
       }
     },
+    "Planet" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planète"
+          }
+        }
+      }
+    },
     "Please enable camera access in Settings to use LiDAR scanning." : {
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veuillez activer l'accès à la caméra dans Réglages pour utiliser le scan LiDAR."
+          }
+        }
+      }
+    },
+    "Presets" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préréglages"
           }
         }
       }
@@ -1106,6 +1273,18 @@
         }
       }
     },
+    "Ship" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navire"
+          }
+        }
+      }
+    },
     "Single Hue" : {
       "comment" : "Color mode",
       "extractionState" : "stale",
@@ -1114,6 +1293,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teinte unique"
+          }
+        }
+      }
+    },
+    "Space" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espace"
+          }
+        }
+      }
+    },
+    "Sphinx" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sphinx"
           }
         }
       }
@@ -1181,6 +1384,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aperçu du stéréogramme"
+          }
+        }
+      }
+    },
+    "Stones" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pierres"
           }
         }
       }
@@ -1308,6 +1523,18 @@
         }
       }
     },
+    "Thumbs Up" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pouce levé"
+          }
+        }
+      }
+    },
     "Tip: It helps to start with the device close to your face, then slowly move it away while keeping your eyes relaxed." : {
       "localizations" : {
         "fr" : {
@@ -1324,6 +1551,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
+          }
+        }
+      }
+    },
+    "Tree" : {
+      "comment" : "Depth map preset",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arbre"
           }
         }
       }
@@ -1380,6 +1619,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En attente des données de profondeur…"
+          }
+        }
+      }
+    },
+    "Wallpaper" : {
+      "comment" : "Pattern name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Papier peint"
           }
         }
       }

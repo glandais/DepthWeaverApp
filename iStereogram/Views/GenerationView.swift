@@ -12,6 +12,7 @@ struct GenerationView: View {
 
     @State private var settings = StereogramSettings()
     @State private var showHelp = false
+    @State private var showDepthMapPresets = false
     @State private var selectedPatternPhoto: PhotosPickerItem?
     @State private var selectedDepthMapPhoto: PhotosPickerItem?
     @StateObject private var stereogramVM = StereogramViewModel()
@@ -209,6 +210,15 @@ struct GenerationView: View {
         .sheet(isPresented: $showHelp) {
             HowToUseSheet()
         }
+        .sheet(isPresented: $showDepthMapPresets) {
+            DepthMapPresetSheet { preset in
+                depthMap = preset.toDepthMap()
+                showDepthMapPresets = false
+            }
+        }
+        .onAppear {
+            triggerGeneration()
+        }
         .onChange(of: depthMap?.id) { _, _ in
             triggerGeneration()
         }
@@ -278,43 +288,42 @@ struct GenerationView: View {
         if let depthMap {
             GroupBox {
                 VStack(spacing: 12) {
+                    if let uiImage = depthMap.previewImage() {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .onTapGesture {
+                                path.append(NavigationDestination.depthAdjustment)
+                            }
+                            .accessibilityHint("Tap to adjust depth")
+                    }
+
                     HStack {
-                        if let uiImage = depthMap.previewImage() {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 120)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .onTapGesture {
-                                    path.append(NavigationDestination.depthAdjustment)
-                                }
-                                .accessibilityHint("Tap to adjust depth")
-                        }
+                        Label(
+                            depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "Imported", comment: "Depth map source label") : "AI",
+                            systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : depthMap.source == .imported ? "square.and.arrow.down" : "photo.on.rectangle"
+                        )
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
 
                         Spacer()
 
-                        VStack(alignment: .trailing, spacing: 4) {
-                            Label(
-                                depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "Imported", comment: "Depth map source label") : "AI",
-                                systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : depthMap.source == .imported ? "square.and.arrow.down" : "photo.on.rectangle"
-                            )
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                        Text("\(depthMap.width) × \(depthMap.height)")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
 
-                            Text("\(depthMap.width) × \(depthMap.height)")
+                        Button {
+                            path.append(NavigationDestination.depthAdjustment)
+                        } label: {
+                            Label("Adjust Depth", systemImage: "slider.horizontal.below.square.and.square.filled")
                                 .font(.caption)
-                                .foregroundStyle(.tertiary)
-
-                            Button {
-                                path.append(NavigationDestination.depthAdjustment)
-                            } label: {
-                                Label("Adjust Depth", systemImage: "slider.horizontal.below.square.and.square.filled")
-                                    .font(.caption)
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.mini)
                         }
+                        .buttonStyle(.bordered)
+                        .controlSize(.mini)
                     }
+
+                    Spacer().frame(height: 4)
 
                     depthAcquisitionButtons
                 }
@@ -345,8 +354,8 @@ struct GenerationView: View {
 
     @ViewBuilder
     private var depthAcquisitionButtons: some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 12) {
+        Grid(horizontalSpacing: 12, verticalSpacing: 8) {
+            GridRow {
                 if lidarAvailable {
                     Button {
                         path.append(NavigationDestination.lidarCapture)
@@ -366,12 +375,23 @@ struct GenerationView: View {
                 .controlSize(.small)
             }
 
-            PhotosPicker(selection: $selectedDepthMapPhoto, matching: .images) {
-                Label("Import Depth Map", systemImage: "square.and.arrow.down")
-                    .frame(maxWidth: .infinity)
+            GridRow {
+                Button {
+                    showDepthMapPresets = true
+                } label: {
+                    Label("Presets", systemImage: "square.grid.2x2")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+
+                PhotosPicker(selection: $selectedDepthMapPhoto, matching: .images) {
+                    Label("Import Depth", systemImage: "square.and.arrow.down")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
             }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
         }
     }
 
@@ -481,6 +501,49 @@ struct HowToUseSheet: View {
 
             Text(text)
                 .font(.body)
+        }
+    }
+}
+
+struct DepthMapPresetSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let onSelect: (DepthMapPreset) -> Void
+
+    private let columns = [
+        GridItem(.adaptive(minimum: 100), spacing: 12)
+    ]
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(DepthMapPreset.allCases) { preset in
+                        Button {
+                            onSelect(preset)
+                        } label: {
+                            VStack(spacing: 4) {
+                                Image(uiImage: preset.loadImage())
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+
+                                Text(preset.displayName)
+                                    .font(.caption)
+                                    .lineLimit(1)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle(String(localized: "Depth Map Presets", comment: "Sheet title"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
         }
     }
 }

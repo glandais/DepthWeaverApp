@@ -8,6 +8,13 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
     case mosaic
     case stars
     case hexagons
+    case space
+    case wallpaper
+    case clouds
+    case stones
+    case foliage
+    case giraffe
+    case leaves
 
     var id: String { rawValue }
 
@@ -20,6 +27,13 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
         case .mosaic: String(localized: "Mosaic", comment: "Pattern name")
         case .stars: String(localized: "Stars", comment: "Pattern name")
         case .hexagons: String(localized: "Hexagons", comment: "Pattern name")
+        case .space: String(localized: "Space", comment: "Pattern name")
+        case .wallpaper: String(localized: "Wallpaper", comment: "Pattern name")
+        case .clouds: String(localized: "Clouds", comment: "Pattern name")
+        case .stones: String(localized: "Stones", comment: "Pattern name")
+        case .foliage: String(localized: "Foliage", comment: "Pattern name")
+        case .giraffe: String(localized: "Giraffe", comment: "Pattern name")
+        case .leaves: String(localized: "Leaves", comment: "Pattern name")
         }
     }
 

@@ -8,7 +8,7 @@ private let logger = Logger(subsystem: "com.glandais.iStereogram", category: "Co
 /// Shared state that persists across navigation destinations.
 @MainActor
 final class AppState: ObservableObject {
-    @Published var currentDepthMap: DepthMap?
+    @Published var currentDepthMap: DepthMap? = DepthMapPreset.dog.toDepthMap()
     let lidarService = LiDARDepthService()
 }
 
