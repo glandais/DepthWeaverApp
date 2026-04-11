@@ -12,6 +12,8 @@ struct GenerationView: View {
 
     @State private var settings = StereogramSettings()
     @State private var showHelp = false
+    @State private var selectedPatternPhoto: PhotosPickerItem?
+    @State private var selectedDepthMapPhoto: PhotosPickerItem?
     @StateObject private var stereogramVM = StereogramViewModel()
     @StateObject private var patternPreviewVM = PatternPreviewViewModel()
 
@@ -51,6 +53,38 @@ struct GenerationView: View {
                                 .accessibilityLabel(pattern.displayName)
                                 .accessibilityAddTraits(settings.patternSource == source ? .isSelected : [])
                             }
+
+                            // Import pattern from photo
+                            PhotosPicker(selection: $selectedPatternPhoto, matching: .images) {
+                                VStack(spacing: 4) {
+                                    ZStack {
+                                        if case .imported(let image) = settings.patternSource {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .scaledToFill()
+                                        } else {
+                                            Image(systemName: "photo.badge.plus")
+                                                .font(.title2)
+                                                .foregroundStyle(.secondary)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                                .background(.quaternary)
+                                        }
+                                    }
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(settings.patternSource.id == "imported" ? Color.blue : Color.clear, lineWidth: 3)
+                                            .animation(.snappy(duration: 0.2), value: settings.patternSource)
+                                    )
+
+                                    Text("Import", comment: "Pattern name")
+                                        .font(.caption2)
+                                        .lineLimit(1)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(String(localized: "Import pattern", comment: "Accessibility label"))
                         }
                         .padding(.vertical, 4)
                     }
@@ -185,6 +219,25 @@ struct GenerationView: View {
             triggerGeneration()
             updatePatternPreview()
         }
+        .onChange(of: selectedPatternPhoto) { _, newValue in
+            guard let newValue else { return }
+            Task {
+                if let data = try? await newValue.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data) {
+                    settings.patternSource = .imported(image)
+                }
+            }
+        }
+        .onChange(of: selectedDepthMapPhoto) { _, newValue in
+            guard let newValue else { return }
+            Task {
+                if let data = try? await newValue.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data) {
+                    depthMap = DepthMap(image: image)
+                }
+                selectedDepthMapPhoto = nil
+            }
+        }
     }
 
     private func triggerGeneration() {
@@ -242,8 +295,8 @@ struct GenerationView: View {
 
                         VStack(alignment: .trailing, spacing: 4) {
                             Label(
-                                depthMap.source == .lidar ? "LiDAR" : "AI",
-                                systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : "photo.on.rectangle"
+                                depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "Imported", comment: "Depth map source label") : "AI",
+                                systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : depthMap.source == .imported ? "square.and.arrow.down" : "photo.on.rectangle"
                             )
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -292,20 +345,29 @@ struct GenerationView: View {
 
     @ViewBuilder
     private var depthAcquisitionButtons: some View {
-        HStack(spacing: 12) {
-            if lidarAvailable {
-                Button {
-                    path.append(NavigationDestination.lidarCapture)
-                } label: {
-                    Label("LiDAR Scan", systemImage: "camera.metering.matrix")
+        VStack(spacing: 8) {
+            HStack(spacing: 12) {
+                if lidarAvailable {
+                    Button {
+                        path.append(NavigationDestination.lidarCapture)
+                    } label: {
+                        Label("LiDAR Scan", systemImage: "camera.metering.matrix")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+
+                PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                    Label("From Photo", systemImage: "photo.on.rectangle")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
             }
 
-            PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                Label("From Photo", systemImage: "photo.on.rectangle")
+            PhotosPicker(selection: $selectedDepthMapPhoto, matching: .images) {
+                Label("Import Depth Map", systemImage: "square.and.arrow.down")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -363,7 +425,7 @@ struct HowToUseSheet: View {
                         .fontWeight(.bold)
 
                     step(1, icon: "camera.metering.matrix",
-                         text: "Acquire a depth map using LiDAR Scan (Pro devices) or From Photo (any image)")
+                         text: "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = far, black = close)")
 
                     step(2, icon: "slider.horizontal.below.square.and.square.filled",
                          text: "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast")

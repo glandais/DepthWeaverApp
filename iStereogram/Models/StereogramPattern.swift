@@ -3,11 +3,8 @@ import UIKit
 enum StereogramPattern: String, CaseIterable, Identifiable {
     case noise
     case dots
-    case checkerboard
-    case stripes
     case circles
     case triangles
-    case waves
     case mosaic
     case stars
     case hexagons
@@ -18,11 +15,8 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
         switch self {
         case .noise: String(localized: "Noise", comment: "Pattern name")
         case .dots: String(localized: "Dots", comment: "Pattern name")
-        case .checkerboard: String(localized: "Checkerboard", comment: "Pattern name")
-        case .stripes: String(localized: "Stripes", comment: "Pattern name")
         case .circles: String(localized: "Circles", comment: "Pattern name")
         case .triangles: String(localized: "Triangles", comment: "Pattern name")
-        case .waves: String(localized: "Waves", comment: "Pattern name")
         case .mosaic: String(localized: "Mosaic", comment: "Pattern name")
         case .stars: String(localized: "Stars", comment: "Pattern name")
         case .hexagons: String(localized: "Hexagons", comment: "Pattern name")

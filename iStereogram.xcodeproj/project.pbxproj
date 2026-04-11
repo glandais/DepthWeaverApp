@@ -15,7 +15,7 @@
 		1DA7AEEC81DDAFEA3BB1FD77 /* pattern-hexagons.png in Resources */ = {isa = PBXBuildFile; fileRef = C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */; };
 		25FE9CF045508C5B82154594 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */; };
 		27D6991B52BC429BD8470D44 /* DepthAnythingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */; };
-		2FB26502EF95FC3F3F85C6A7 /* pattern-stripes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF07AF737202563DDC8FB63 /* pattern-stripes.png */; };
+		327C5C2A45E2152EEC1BBFC5 /* StarsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4724D5CF30AE3C6275CBA4B /* StarsGenerator.swift */; };
 		32ED114B81A35836FEDA810D /* PhotoDepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4C4948B6CEDE48A03A352 /* PhotoDepthViewModel.swift */; };
 		3761FAD662526B2361E821F2 /* StereogramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB912ADE051BD5D7778D2B38 /* StereogramViewModel.swift */; };
 		3FEB1195B5D50AA805285B65 /* VoronoiGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE9CF4D5B0B8ED6D38ADAA /* VoronoiGenerator.swift */; };
@@ -30,7 +30,6 @@
 		7D53B9325EEC9BB78DFCE9A5 /* ReactionDiffusionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B5D3F6B9B821F8595B7BC0 /* ReactionDiffusionGenerator.swift */; };
 		7EE91F189DCAAC74A243588E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26970B250CBE411F3298AF3 /* ContentView.swift */; };
 		7F9416A3A6148C31FE2EBA61 /* WorleyNoiseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3810492DDF1ED6DCA8A760AF /* WorleyNoiseGenerator.swift */; };
-		80BE61CF710A4540FF7C9151 /* pattern-checkerboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */; };
 		93627278EB6C0E56FD54B0BF /* LiDARCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */; };
 		94F288D52694448D96CE08AF /* PatternGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806FB2B14AF9D87104E2C38 /* PatternGenerator.swift */; };
 		9516C55F24C86A37297039B6 /* pattern-triangles.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */; };
@@ -47,7 +46,6 @@
 		E8A3692C28EAF737E93A1055 /* pattern-dots.png in Resources */ = {isa = PBXBuildFile; fileRef = B801064645BCA6711FAF3622 /* pattern-dots.png */; };
 		F52F1B02C9F26A8F0A4DADD5 /* PatternSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3873C2F31D4489AC73D6C8A5 /* PatternSource.swift */; };
 		FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADCBD8104D13562504FF9A /* StereogramResultView.swift */; };
-		FEE10F0975E655A359793D4E /* pattern-waves.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +55,6 @@
 		0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-triangles.png"; sourceTree = "<group>"; };
 		0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = generate_patterns.py; sourceTree = "<group>"; };
 		1B3FE2C13C4AFFC4418C8D7F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
-		1FF07AF737202563DDC8FB63 /* pattern-stripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stripes.png"; sourceTree = "<group>"; };
 		259875E00EEEEF75933ABB7F /* DepthAnythingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthAnythingService.swift; sourceTree = "<group>"; };
 		25B7C50B68349B86175A90FA /* StereogramPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramPattern.swift; sourceTree = "<group>"; };
 		2A5118BE9B66ADFAB66188AA /* pattern-mosaic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-mosaic.png"; sourceTree = "<group>"; };
@@ -65,14 +62,12 @@
 		3810492DDF1ED6DCA8A760AF /* WorleyNoiseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorleyNoiseGenerator.swift; sourceTree = "<group>"; };
 		381FE7256AEF8965E972F739 /* iStereogramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStereogramApp.swift; sourceTree = "<group>"; };
 		3873C2F31D4489AC73D6C8A5 /* PatternSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternSource.swift; sourceTree = "<group>"; };
-		3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-waves.png"; sourceTree = "<group>"; };
 		3BADCBD8104D13562504FF9A /* StereogramResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramResultView.swift; sourceTree = "<group>"; };
 		3CD16F141CE87C35359E6D0A /* ProceduralPatternType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralPatternType.swift; sourceTree = "<group>"; };
 		409EDD9C34C549AE3D4D8BA0 /* LiDARDepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARDepthService.swift; sourceTree = "<group>"; };
 		541FD121A672926422CBC979 /* iStereogram.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iStereogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56FC09ADA9F714E9816FE5E1 /* DepthAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthAdjustment.swift; sourceTree = "<group>"; };
 		5860A915C905663D43983644 /* pattern-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-noise.png"; sourceTree = "<group>"; };
-		60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-checkerboard.png"; sourceTree = "<group>"; };
 		6110C67923BE49D4657063A4 /* ProceduralParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralParamsView.swift; sourceTree = "<group>"; };
 		6B4DFA588CE1A5D720B2A426 /* LiDARCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureView.swift; sourceTree = "<group>"; };
 		7162A6384BEF2DF72F46A40F /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
@@ -81,6 +76,7 @@
 		88B5D3F6B9B821F8595B7BC0 /* ReactionDiffusionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionDiffusionGenerator.swift; sourceTree = "<group>"; };
 		9E9467888FC9202D5E5D6A3F /* pattern-stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stars.png"; sourceTree = "<group>"; };
 		9EF5EE8B14691C2DCAC659F6 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
+		A4724D5CF30AE3C6275CBA4B /* StarsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsGenerator.swift; sourceTree = "<group>"; };
 		B801064645BCA6711FAF3622 /* pattern-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-dots.png"; sourceTree = "<group>"; };
 		C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-hexagons.png"; sourceTree = "<group>"; };
 		CDBA3CD6EDFEEB2AEEABB752 /* PerlinNoiseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerlinNoiseGenerator.swift; sourceTree = "<group>"; };
@@ -155,16 +151,13 @@
 			isa = PBXGroup;
 			children = (
 				0D09CCAE9B3C3A0A0FC243C5 /* generate_patterns.py */,
-				60709BA2B2702103DC1E4BCC /* pattern-checkerboard.png */,
 				EF4FA5B0E241FEEB4D8A18CE /* pattern-circles.png */,
 				B801064645BCA6711FAF3622 /* pattern-dots.png */,
 				C8310892F1CB0BB52B38BC94 /* pattern-hexagons.png */,
 				2A5118BE9B66ADFAB66188AA /* pattern-mosaic.png */,
 				5860A915C905663D43983644 /* pattern-noise.png */,
 				9E9467888FC9202D5E5D6A3F /* pattern-stars.png */,
-				1FF07AF737202563DDC8FB63 /* pattern-stripes.png */,
 				0B43B1557AA96D92C3FCD5EB /* pattern-triangles.png */,
-				3BA15EDD6C10AFD3EC9E5361 /* pattern-waves.png */,
 			);
 			path = Patterns;
 			sourceTree = "<group>";
@@ -218,6 +211,7 @@
 				CDBA3CD6EDFEEB2AEEABB752 /* PerlinNoiseGenerator.swift */,
 				E23FEBDC872DC2D2FEB029D3 /* RandomDotGenerator.swift */,
 				88B5D3F6B9B821F8595B7BC0 /* ReactionDiffusionGenerator.swift */,
+				A4724D5CF30AE3C6275CBA4B /* StarsGenerator.swift */,
 				D2FE9CF4D5B0B8ED6D38ADAA /* VoronoiGenerator.swift */,
 				3810492DDF1ED6DCA8A760AF /* WorleyNoiseGenerator.swift */,
 			);
@@ -287,16 +281,13 @@
 				657F05D84DF43E0E1F3A719A /* InfoPlist.xcstrings in Resources */,
 				0CFE9EE049DF1644B4CA7598 /* Localizable.xcstrings in Resources */,
 				69D70324D04905A06BB95C6D /* generate_patterns.py in Resources */,
-				80BE61CF710A4540FF7C9151 /* pattern-checkerboard.png in Resources */,
 				CE647632036A2F5525C4ACAA /* pattern-circles.png in Resources */,
 				E8A3692C28EAF737E93A1055 /* pattern-dots.png in Resources */,
 				1DA7AEEC81DDAFEA3BB1FD77 /* pattern-hexagons.png in Resources */,
 				A0C96EF54DF4967BF8296F7B /* pattern-mosaic.png in Resources */,
 				052C96CA39527219B2EF7CAD /* pattern-noise.png in Resources */,
 				6CBB8EA760AE52B10CA96C52 /* pattern-stars.png in Resources */,
-				2FB26502EF95FC3F3F85C6A7 /* pattern-stripes.png in Resources */,
 				9516C55F24C86A37297039B6 /* pattern-triangles.png in Resources */,
-				FEE10F0975E655A359793D4E /* pattern-waves.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +318,7 @@
 				C080C41F86CA194D02A48051 /* ProceduralPatternType.swift in Sources */,
 				16D9A774ADD36ABECC24FB8F /* RandomDotGenerator.swift in Sources */,
 				7D53B9325EEC9BB78DFCE9A5 /* ReactionDiffusionGenerator.swift in Sources */,
+				327C5C2A45E2152EEC1BBFC5 /* StarsGenerator.swift in Sources */,
 				5EA4292368131EDBCA9D16EA /* StereogramGenerator.swift in Sources */,
 				C5D7C1A33AA11A46773F4C02 /* StereogramPattern.swift in Sources */,
 				FDE816ACF457C05D4BB9AC5E /* StereogramResultView.swift in Sources */,

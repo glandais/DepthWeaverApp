@@ -49,6 +49,8 @@ struct ProceduralParamsView: View {
         switch config {
         case .randomDot(var c):
             randomDotParams(config: c) { c = $0; config = .randomDot(c) }
+        case .stars(var c):
+            starsParams(config: c) { c = $0; config = .stars(c) }
         case .perlin(var c):
             perlinParams(config: c) { c = $0; config = .perlin(c) }
         case .worley(var c):
@@ -84,6 +86,39 @@ struct ProceduralParamsView: View {
                 selection: config.colorMode,
                 displayName: \.displayName
             ) { var c = config; c.colorMode = $0; update(c) }
+        }
+    }
+
+    // MARK: - Stars
+
+    private func starsParams(config: StarsConfig, update: @escaping (StarsConfig) -> Void) -> some View {
+        VStack(spacing: 8) {
+            paramSlider(
+                label: String(localized: "Star Count", comment: "Parameter"),
+                value: Float(config.starCount),
+                range: 50...500,
+                step: 10,
+                format: "%.0f"
+            ) { var c = config; c.starCount = Int($0); update(c) }
+
+            paramSlider(
+                label: String(localized: "Max Radius", comment: "Parameter"),
+                value: Float(config.maxRadius),
+                range: 0...5,
+                step: 1,
+                format: "%.0f px"
+            ) { var c = config; c.maxRadius = Int($0); update(c) }
+
+            HStack {
+                Text(String(localized: "Background", comment: "Parameter"))
+                    .font(.subheadline)
+                Spacer()
+                ColorPicker("", selection: Binding(
+                    get: { config.backgroundColor.color },
+                    set: { var c = config; c.backgroundColor = CodableColor(color: $0); update(c) }
+                ))
+                .labelsHidden()
+            }
         }
     }
 
@@ -256,6 +291,13 @@ struct ProceduralParamsView: View {
             c.dotSize = Int.random(in: 1...5)
             c.colorMode = PatternColorMode.allCases.randomElement()!
             config = .randomDot(c)
+        case .stars(var c):
+            c.seed = newSeed
+            c.starCount = Int.random(in: 50...500)
+            c.maxRadius = Int.random(in: 0...5)
+            let v = Float.random(in: 0...0.2)
+            c.backgroundColor = CodableColor(red: v, green: v, blue: v + Float.random(in: 0...0.15))
+            config = .stars(c)
         case .perlin(var c):
             c.seed = newSeed
             c.frequency = Float.random(in: 0.001...0.05)

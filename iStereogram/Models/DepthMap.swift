@@ -11,6 +11,7 @@ struct DepthMap: Identifiable {
     enum Source {
         case lidar
         case depthAnything
+        case imported
     }
 
     let source: Source
@@ -160,6 +161,53 @@ struct DepthMap: Identifiable {
             }
         }
         return result
+    }
+
+    /// Creates a DepthMap from a UIImage, interpreting brightness as depth.
+    init(image: UIImage) {
+        let cgImage: CGImage
+        if let cg = image.cgImage {
+            cgImage = cg
+        } else if let ciImage = image.ciImage {
+            let context = CIContext()
+            cgImage = context.createCGImage(ciImage, from: ciImage.extent)!
+        } else {
+            fatalError("UIImage has no cgImage or ciImage")
+        }
+
+        let maxSide = 1024
+        let origW = cgImage.width
+        let origH = cgImage.height
+        let scale = Swift.min(1.0, Double(maxSide) / Double(Swift.max(origW, origH)))
+        let w = Int(Double(origW) * scale)
+        let h = Int(Double(origH) * scale)
+
+        self.source = .imported
+        self.sourceWidth = w
+        self.sourceHeight = h
+        self.originalWidth = nil
+        self.originalHeight = nil
+
+        // Render to grayscale 8-bit buffer
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        var pixels = [UInt8](repeating: 0, count: w * h)
+        guard let ctx = CGContext(
+            data: &pixels,
+            width: w,
+            height: h,
+            bitsPerComponent: 8,
+            bytesPerRow: w,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.none.rawValue
+        ) else {
+            self.originalDepth = [Float](repeating: 0, count: w * h)
+            self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
+            return
+        }
+        ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: w, height: h))
+
+        self.originalDepth = pixels.map { Float($0) / 255.0 }
+        self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
     }
 
     // MARK: - Raw Depth Extraction

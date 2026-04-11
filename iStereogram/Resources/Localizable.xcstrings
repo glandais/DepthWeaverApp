@@ -67,6 +67,17 @@
         }
       }
     },
+    "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = far, black = close)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = loin, noir = proche)"
+          }
+        }
+      }
+    },
     "Adjust Depth" : {
       "comment" : "Navigation title",
       "extractionState" : "stale",
@@ -109,6 +120,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "N&B"
+          }
+        }
+      }
+    },
+    "Background" : {
+      "comment" : "Parameter",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrière-plan"
           }
         }
       }
@@ -176,18 +199,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tchebychev"
-          }
-        }
-      }
-    },
-    "Checkerboard" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Damier"
           }
         }
       }
@@ -625,6 +636,52 @@
         }
       }
     },
+    "Import" : {
+      "comment" : "Pattern name",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer"
+          }
+        }
+      }
+    },
+    "Import Depth Map" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer carte de profondeur"
+          }
+        }
+      }
+    },
+    "Import pattern" : {
+      "comment" : "Accessibility label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer un motif"
+          }
+        }
+      }
+    },
+    "Imported" : {
+      "comment" : "Depth map source label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importée"
+          }
+        }
+      }
+    },
     "Input Range" : {
       "comment" : "Depth adjustment section",
       "extractionState" : "stale",
@@ -736,6 +793,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manhattan"
+          }
+        }
+      }
+    },
+    "Max Radius" : {
+      "comment" : "Parameter",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rayon max"
           }
         }
       }
@@ -1049,6 +1118,18 @@
         }
       }
     },
+    "Star Count" : {
+      "comment" : "Parameter",
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre d'étoiles"
+          }
+        }
+      }
+    },
     "Stars" : {
       "comment" : "Pattern name",
       "extractionState" : "stale",
@@ -1134,18 +1215,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largeur de bande : %lld"
-          }
-        }
-      }
-    },
-    "Stripes" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rayures"
           }
         }
       }
@@ -1311,18 +1380,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En attente des données de profondeur…"
-          }
-        }
-      }
-    },
-    "Waves" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vagues"
           }
         }
       }

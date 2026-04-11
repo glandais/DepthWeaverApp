@@ -4,6 +4,7 @@ import SwiftUI
 
 enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
     case randomDot
+    case stars
     case perlinNoise
     case worleyNoise
     case voronoi
@@ -14,6 +15,7 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
     var displayName: String {
         switch self {
         case .randomDot: String(localized: "Random Dot", comment: "Pattern name")
+        case .stars: String(localized: "Stars", comment: "Pattern name")
         case .perlinNoise: String(localized: "Perlin Noise", comment: "Pattern name")
         case .worleyNoise: String(localized: "Worley Noise", comment: "Pattern name")
         case .voronoi: String(localized: "Voronoi", comment: "Pattern name")
@@ -24,6 +26,7 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
     var iconSystemName: String {
         switch self {
         case .randomDot: "circle.dotted"
+        case .stars: "star"
         case .perlinNoise: "smoke"
         case .worleyNoise: "circle.hexagongrid"
         case .voronoi: "pentagon"
@@ -34,6 +37,7 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
     func defaultConfig() -> ProceduralConfig {
         switch self {
         case .randomDot: .randomDot(RandomDotConfig())
+        case .stars: .stars(StarsConfig())
         case .perlinNoise: .perlin(PerlinConfig())
         case .worleyNoise: .worley(WorleyConfig())
         case .voronoi: .voronoi(VoronoiConfig())
@@ -45,6 +49,8 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
         switch (self, config) {
         case (.randomDot, .randomDot(let c)):
             RandomDotGenerator(config: c)
+        case (.stars, .stars(let c)):
+            StarsGenerator(config: c)
         case (.perlinNoise, .perlin(let c)):
             PerlinNoiseGenerator(config: c)
         case (.worleyNoise, .worley(let c)):
@@ -64,6 +70,7 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
 
 enum ProceduralConfig: Equatable {
     case randomDot(RandomDotConfig)
+    case stars(StarsConfig)
     case perlin(PerlinConfig)
     case worley(WorleyConfig)
     case voronoi(VoronoiConfig)
@@ -168,6 +175,13 @@ struct RandomDotConfig: Equatable {
     var density: Float = 1.0
     var dotSize: Int = 1
     var colorMode: PatternColorMode = .color
+    var seed: UInt64 = 0
+}
+
+struct StarsConfig: Equatable {
+    var starCount: Int = 200
+    var maxRadius: Int = 2
+    var backgroundColor: CodableColor = CodableColor(red: 0.06, green: 0.06, blue: 0.16)
     var seed: UInt64 = 0
 }
 
