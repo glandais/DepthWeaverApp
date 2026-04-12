@@ -64,6 +64,7 @@
 		ED04ADD9C01C7054E0139839 /* LiDARCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C30FDB39F507C7360BE2D /* LiDARCaptureViewModel.swift */; };
 		F414258614472E37ED2E3143 /* pattern-triangles.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ACF127D10A2AF7522AF5D1A /* pattern-triangles.png */; };
 		F792C9764104A9F743123FC5 /* GenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */; };
+		AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122334455667788AABBCCDD /* DepthPointCloudView.swift */; };
 		F80A2EF8BD814F17C3F23CA8 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 650FDFF65F6D228757CBF213 /* InfoPlist.xcstrings */; };
 		FDA26BD0C461F1953BA27B55 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF1E9467D8586682A245D3D /* tree.png */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		D790B138C97CF59825E5578A /* ProceduralPatternType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralPatternType.swift; sourceTree = "<group>"; };
 		DDA8A41F033EB0A35B892BD2 /* pattern-stones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stones.png"; sourceTree = "<group>"; };
 		E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationView.swift; sourceTree = "<group>"; };
+		1122334455667788AABBCCDD /* DepthPointCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPointCloudView.swift; sourceTree = "<group>"; };
 		E3F1A2F6465330BCCBE73A38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E8B569D42D7D1DC2CA0FFC61 /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
 		EC0E66D06C5F38F312E2610B /* VoronoiGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoronoiGenerator.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				EC3F1EDE4783A8B55793B936 /* DepthAdjustmentView.swift */,
+				1122334455667788AABBCCDD /* DepthPointCloudView.swift */,
 				E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */,
 				4F7971B9A4F6354DD9BEDDA5 /* LiDARCaptureView.swift */,
 				958555080B93885E58B07D46 /* ProceduralParamsView.swift */,
@@ -389,6 +392,7 @@
 				875085DBDFAE4557B942A6A6 /* ContentView.swift in Sources */,
 				4E1E348EFE07BD1F6E667FEF /* DepthAdjustment.swift in Sources */,
 				A0FA441C56D710B61B7F0848 /* DepthAdjustmentView.swift in Sources */,
+				AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */,
 				D73DE9D8853473303CEC3CBC /* DepthAnythingService.swift in Sources */,
 				4B3168DAA98000F24296E6CC /* DepthAnythingV2SmallF16.mlpackage in Sources */,
 				075B149DE71910946460F250 /* DepthMap.swift in Sources */,

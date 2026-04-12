@@ -178,7 +178,6 @@
       }
     },
     "depth_adjustment.end_value %.2f" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -280,7 +279,6 @@
       }
     },
     "depth_adjustment.start_value %.2f" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

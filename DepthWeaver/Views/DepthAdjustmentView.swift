@@ -4,31 +4,16 @@ struct DepthAdjustmentView: View {
     @Binding var depthMap: DepthMap?
 
     @State private var adjustment: DepthAdjustment = DepthAdjustment()
-    @State private var previewImage: UIImage?
-    @State private var previewImageHighlighted: UIImage?
     @State private var rawRange: ClosedRange<Float> = 0...1
-    @State private var showHighlight = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Live preview with blinking clamped pixels
-                ZStack {
-                    if let image = previewImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .interpolation(.none)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    if let highlighted = previewImageHighlighted {
-                        Image(uiImage: highlighted)
-                            .resizable()
-                            .interpolation(.none)
-                            .aspectRatio(contentMode: .fit)
-                            .opacity(showHighlight ? 1 : 0)
-                    }
+                if let dm = depthMap {
+                    DepthPointCloudView(depthMap: dm, adjustment: adjustment)
+                        .aspectRatio(CGFloat(dm.width) / CGFloat(dm.height), contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 // Input range
                 GroupBox(String(localized: "depth_adjustment.input_range", comment: "Depth adjustment section")) {
@@ -94,8 +79,6 @@ struct DepthAdjustmentView: View {
             guard let dm = depthMap else { return }
             adjustment = dm.adjustment
             rawRange = dm.rawDepthRange
-            updatePreview()
-            startBlinking()
         }
         .onChange(of: adjustment) { _, newValue in
             // Enforce max > min
@@ -108,19 +91,6 @@ struct DepthAdjustmentView: View {
                 return
             }
             depthMap?.adjustment = adj
-            updatePreview()
-        }
-    }
-
-    private func updatePreview() {
-        guard let dm = depthMap else { return }
-        previewImage = dm.previewImage()
-        previewImageHighlighted = dm.previewImage(highlightClamped: true)
-    }
-
-    private func startBlinking() {
-        withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
-            showHighlight = true
         }
     }
 }

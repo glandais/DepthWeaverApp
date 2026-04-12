@@ -83,22 +83,10 @@ struct DepthMap: Identifiable {
             let v = adjusted[i]
             let oi = i * 4
 
-            if highlightClamped && (v <= 0 || v >= 1) {
-                // Clamped: bright red
-                pixels[oi]     = 255
-                pixels[oi + 1] = 40
-                pixels[oi + 2] = 40
-            } else {
-                // Map depth [0..1] to hue [0.66..0.49] wrapping through 0 (blue → red → yellow-green).
-                // Offset avoids red at extremes so the red clamp blink stays visible.
-                let hue = (0.83 - CGFloat(v) * 0.66).truncatingRemainder(dividingBy: 1.0)
-                let color = UIColor(hue: hue, saturation: 0.85, brightness: 0.95, alpha: 1)
-                var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
-                color.getRed(&r, green: &g, blue: &b, alpha: nil)
-                pixels[oi]     = UInt8(r * 255)
-                pixels[oi + 1] = UInt8(g * 255)
-                pixels[oi + 2] = UInt8(b * 255)
-            }
+            let (r, g, b) = Self.hueColor(forNormalized: v, highlightClamped: highlightClamped)
+            pixels[oi]     = UInt8(r * 255)
+            pixels[oi + 1] = UInt8(g * 255)
+            pixels[oi + 2] = UInt8(b * 255)
             pixels[oi + 3] = 255
         }
 
@@ -119,6 +107,19 @@ struct DepthMap: Identifiable {
             return nil
         }
         return UIImage(cgImage: cgImage)
+    }
+
+    /// Shared hue-ramp palette for depth visualization.
+    /// Returns (r, g, b) in [0..1]. Clamped values (v<=0 or v>=1) become bright red when `highlightClamped` is true.
+    static func hueColor(forNormalized v: Float, highlightClamped: Bool = false) -> (CGFloat, CGFloat, CGFloat) {
+        if highlightClamped && (v <= 0 || v >= 1) {
+            return (1.0, 40.0/255.0, 40.0/255.0)
+        }
+        let hue = (0.83 - CGFloat(v) * 0.66).truncatingRemainder(dividingBy: 1.0)
+        let color = UIColor(hue: hue, saturation: 0.85, brightness: 0.95, alpha: 1)
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
+        color.getRed(&r, green: &g, blue: &b, alpha: nil)
+        return (r, g, b)
     }
 
     /// Returns adjusted [0..1] depth values resized to the given dimensions.

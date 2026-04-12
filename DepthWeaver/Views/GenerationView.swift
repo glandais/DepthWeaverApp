@@ -304,16 +304,13 @@ struct GenerationView: View {
         if let depthMap {
             GroupBox {
                 VStack(spacing: 12) {
-                    if let uiImage = depthMap.previewImage() {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .onTapGesture {
-                                path.append(NavigationDestination.depthAdjustment)
-                            }
-                            .accessibilityHint("depth.tap_to_adjust")
-                    }
+                    DepthPointCloudView(depthMap: depthMap, adjustment: depthMap.adjustment)
+                        .aspectRatio(CGFloat(depthMap.width) / CGFloat(depthMap.height), contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .onTapGesture {
+                            path.append(NavigationDestination.depthAdjustment)
+                        }
+                        .accessibilityHint("depth.tap_to_adjust")
 
                     HStack {
                         Label(
