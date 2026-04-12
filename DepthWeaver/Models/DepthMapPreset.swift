@@ -18,18 +18,18 @@ enum DepthMapPreset: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .dog: String(localized: "Dog", comment: "Depth map preset")
-        case .planet: String(localized: "Planet", comment: "Depth map preset")
-        case .ship: String(localized: "Ship", comment: "Depth map preset")
-        case .dolphin: String(localized: "Dolphin", comment: "Depth map preset")
-        case .island: String(localized: "Island", comment: "Depth map preset")
-        case .atomium: String(localized: "Atomium", comment: "Depth map preset")
-        case .hand: String(localized: "Hand", comment: "Depth map preset")
-        case .sphinx: String(localized: "Sphinx", comment: "Depth map preset")
-        case .head: String(localized: "Head", comment: "Depth map preset")
-        case .tree: String(localized: "Tree", comment: "Depth map preset")
-        case .car: String(localized: "Car", comment: "Depth map preset")
-        case .thumbsUp: String(localized: "Thumbs Up", comment: "Depth map preset")
+        case .dog: String(localized: "preset.dog", comment: "Depth map preset")
+        case .planet: String(localized: "preset.planet", comment: "Depth map preset")
+        case .ship: String(localized: "preset.ship", comment: "Depth map preset")
+        case .dolphin: String(localized: "preset.dolphin", comment: "Depth map preset")
+        case .island: String(localized: "preset.island", comment: "Depth map preset")
+        case .atomium: String(localized: "preset.atomium", comment: "Depth map preset")
+        case .hand: String(localized: "preset.hand", comment: "Depth map preset")
+        case .sphinx: String(localized: "preset.sphinx", comment: "Depth map preset")
+        case .head: String(localized: "preset.head", comment: "Depth map preset")
+        case .tree: String(localized: "preset.tree", comment: "Depth map preset")
+        case .car: String(localized: "preset.car", comment: "Depth map preset")
+        case .thumbsUp: String(localized: "preset.thumbs_up", comment: "Depth map preset")
         }
     }
 

@@ -23,7 +23,7 @@ enum PatternSource: Identifiable, Equatable {
         case .procedural(let type, _):
             type.displayName
         case .imported:
-            String(localized: "Imported", comment: "Pattern name")
+            String(localized: "depth.source_imported", comment: "Pattern name")
         }
     }
 

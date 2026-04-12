@@ -136,8 +136,8 @@ final class DepthAnythingService {
 
         var errorDescription: String? {
             switch self {
-            case .modelNotLoaded: String(localized: "Failed to load depth estimation model")
-            case .bufferCopyFailed: String(localized: "Failed to copy depth buffer")
+            case .modelNotLoaded: String(localized: "error.model_not_loaded")
+            case .bufferCopyFailed: String(localized: "error.buffer_copy_failed")
             }
         }
     }

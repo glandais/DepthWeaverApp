@@ -46,7 +46,7 @@ struct ContentView: View {
                 if photoDepthVM.isProcessing {
                     ZStack {
                         Color.black.opacity(0.3).ignoresSafeArea()
-                        ProgressView("Estimating depth...")
+                        ProgressView("depth.estimating")
                             .padding(24)
                             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
                     }
@@ -64,8 +64,8 @@ struct ContentView: View {
                     }
                 }
             }
-            .alert("Error", isPresented: $photoDepthVM.showError) {
-                Button("OK") {}
+            .alert("general.error", isPresented: $photoDepthVM.showError) {
+                Button("general.ok") {}
             } message: {
                 Text(photoDepthVM.errorMessage)
             }

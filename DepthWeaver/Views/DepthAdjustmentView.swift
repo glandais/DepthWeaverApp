@@ -31,10 +31,10 @@ struct DepthAdjustmentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 // Input range
-                GroupBox(String(localized: "Input Range", comment: "Depth adjustment section")) {
+                GroupBox(String(localized: "depth_adjustment.input_range", comment: "Depth adjustment section")) {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("Min: \(adjustment.min, specifier: "%.3f")")
+                            Text("depth_adjustment.min_value \(adjustment.min, specifier: "%.3f")")
                                 .font(.subheadline)
                             Slider(
                                 value: $adjustment.min,
@@ -43,7 +43,7 @@ struct DepthAdjustmentView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            Text("Max: \(adjustment.max, specifier: "%.3f")")
+                            Text("depth_adjustment.max_value \(adjustment.max, specifier: "%.3f")")
                                 .font(.subheadline)
                             Slider(
                                 value: $adjustment.max,
@@ -57,10 +57,10 @@ struct DepthAdjustmentView: View {
                 // Output range
                 // For LiDAR, start/end are inverted internally (start=1, end=0).
                 // Display "Start" editing `end` and "End" editing `start` so labels match user expectation.
-                GroupBox(String(localized: "Output Range", comment: "Depth adjustment section")) {
+                GroupBox(String(localized: "depth_adjustment.output_range", comment: "Depth adjustment section")) {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("Start: \(adjustment.start, specifier: "%.2f")")
+                            Text("depth_adjustment.start_value \(adjustment.start, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: $adjustment.start,
@@ -69,7 +69,7 @@ struct DepthAdjustmentView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            Text("End: \(adjustment.end, specifier: "%.2f")")
+                            Text("depth_adjustment.end_value \(adjustment.end, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: $adjustment.end,
@@ -80,7 +80,7 @@ struct DepthAdjustmentView: View {
                     .padding(.vertical, 4)
                 }
 
-                Button("Reset") {
+                Button("depth_adjustment.reset") {
                     guard let dm = depthMap else { return }
                     adjustment = DepthMap.initialAdjustment(rawDepth: dm.originalDepth)
                 }
@@ -88,7 +88,7 @@ struct DepthAdjustmentView: View {
             }
             .padding()
         }
-        .navigationTitle(String(localized: "Adjust Depth", comment: "Navigation title"))
+        .navigationTitle(String(localized: "depth.adjust_depth", comment: "Navigation title"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             guard let dm = depthMap else { return }

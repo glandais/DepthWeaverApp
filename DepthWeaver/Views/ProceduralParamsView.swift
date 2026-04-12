@@ -36,7 +36,7 @@ struct ProceduralParamsView: View {
             Button {
                 randomize()
             } label: {
-                Label(String(localized: "Randomize", comment: "Button"), systemImage: "dice")
+                Label(String(localized: "param.randomize", comment: "Button"), systemImage: "dice")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -67,14 +67,14 @@ struct ProceduralParamsView: View {
     private func randomDotParams(config: RandomDotConfig, update: @escaping (RandomDotConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Density", comment: "Parameter"),
+                label: String(localized: "param.density", comment: "Parameter"),
                 value: config.density,
                 range: 0.1...1.0,
                 format: "%.2f"
             ) { var c = config; c.density = Float($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Dot Size", comment: "Parameter"),
+                label: String(localized: "param.dot_size", comment: "Parameter"),
                 value: Float(config.dotSize),
                 range: 1...5,
                 step: 1,
@@ -82,7 +82,7 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.dotSize = Int($0); update(c) }
 
             enumPicker(
-                label: String(localized: "Colors", comment: "Parameter"),
+                label: String(localized: "param.colors", comment: "Parameter"),
                 selection: config.colorMode,
                 displayName: \.displayName
             ) { var c = config; c.colorMode = $0; update(c) }
@@ -94,7 +94,7 @@ struct ProceduralParamsView: View {
     private func starsParams(config: StarsConfig, update: @escaping (StarsConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Star Count", comment: "Parameter"),
+                label: String(localized: "param.star_count", comment: "Parameter"),
                 value: Float(config.starCount),
                 range: 50...500,
                 step: 10,
@@ -102,7 +102,7 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.starCount = Int($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Max Radius", comment: "Parameter"),
+                label: String(localized: "param.max_radius", comment: "Parameter"),
                 value: Float(config.maxRadius),
                 range: 0...5,
                 step: 1,
@@ -110,7 +110,7 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.maxRadius = Int($0); update(c) }
 
             HStack {
-                Text(String(localized: "Background", comment: "Parameter"))
+                Text(String(localized: "param.background", comment: "Parameter"))
                     .font(.subheadline)
                 Spacer()
                 ColorPicker("", selection: Binding(
@@ -127,14 +127,14 @@ struct ProceduralParamsView: View {
     private func perlinParams(config: PerlinConfig, update: @escaping (PerlinConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Frequency", comment: "Parameter"),
+                label: String(localized: "param.frequency", comment: "Parameter"),
                 value: config.frequency,
                 range: 0.001...0.05,
                 format: "%.3f"
             ) { var c = config; c.frequency = Float($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Octaves", comment: "Parameter"),
+                label: String(localized: "param.octaves", comment: "Parameter"),
                 value: Float(config.octaves),
                 range: 1...8,
                 step: 1,
@@ -142,21 +142,21 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.octaves = Int($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Persistence", comment: "Parameter"),
+                label: String(localized: "param.persistence", comment: "Parameter"),
                 value: config.persistence,
                 range: 0.1...1.0,
                 format: "%.2f"
             ) { var c = config; c.persistence = Float($0); update(c) }
 
             enumPicker(
-                label: String(localized: "Colors", comment: "Parameter"),
+                label: String(localized: "param.colors", comment: "Parameter"),
                 selection: config.colorMode,
                 displayName: \.displayName
             ) { var c = config; c.colorMode = $0; update(c) }
 
             if config.colorMode == .hue {
                 paramSlider(
-                    label: String(localized: "Hue", comment: "Parameter"),
+                    label: String(localized: "param.hue", comment: "Parameter"),
                     value: config.hue,
                     range: 0...1,
                     format: "%.2f"
@@ -170,25 +170,25 @@ struct ProceduralParamsView: View {
     private func worleyParams(config: WorleyConfig, update: @escaping (WorleyConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Cell Size", comment: "Parameter"),
+                label: String(localized: "param.cell_size", comment: "Parameter"),
                 value: config.cellSize,
                 range: 20...150,
                 format: "%.0f px"
             ) { var c = config; c.cellSize = Float($0); update(c) }
 
             enumPicker(
-                label: String(localized: "Distance", comment: "Parameter"),
+                label: String(localized: "param.distance", comment: "Parameter"),
                 selection: config.distanceFunction,
                 displayName: \.displayName
             ) { var c = config; c.distanceFunction = $0; update(c) }
 
             enumPicker(
-                label: String(localized: "Mode", comment: "Parameter"),
+                label: String(localized: "param.mode", comment: "Parameter"),
                 selection: config.combineMode,
                 displayName: \.displayName
             ) { var c = config; c.combineMode = $0; update(c) }
 
-            Toggle(String(localized: "Invert", comment: "Parameter"), isOn: Binding(
+            Toggle(String(localized: "param.invert", comment: "Parameter"), isOn: Binding(
                 get: { config.invertLuminance },
                 set: { var c = config; c.invertLuminance = $0; update(c) }
             ))
@@ -201,7 +201,7 @@ struct ProceduralParamsView: View {
     private func voronoiParams(config: VoronoiConfig, update: @escaping (VoronoiConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Cell Count", comment: "Parameter"),
+                label: String(localized: "param.cell_count", comment: "Parameter"),
                 value: Float(config.cellCount),
                 range: 4...40,
                 step: 1,
@@ -209,21 +209,21 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.cellCount = Int($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Jitter", comment: "Parameter"),
+                label: String(localized: "param.jitter", comment: "Parameter"),
                 value: config.jitter,
                 range: 0...1,
                 format: "%.2f"
             ) { var c = config; c.jitter = Float($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Edge Width", comment: "Parameter"),
+                label: String(localized: "param.edge_width", comment: "Parameter"),
                 value: config.edgeWidth,
                 range: 0...5,
                 format: "%.1f px"
             ) { var c = config; c.edgeWidth = Float($0); update(c) }
 
             enumPicker(
-                label: String(localized: "Color Scheme", comment: "Parameter"),
+                label: String(localized: "param.color_scheme", comment: "Parameter"),
                 selection: config.colorScheme,
                 displayName: \.displayName
             ) { var c = config; c.colorScheme = $0; update(c) }
@@ -235,21 +235,21 @@ struct ProceduralParamsView: View {
     private func reactionDiffusionParams(config: ReactionDiffusionConfig, update: @escaping (ReactionDiffusionConfig) -> Void) -> some View {
         VStack(spacing: 8) {
             paramSlider(
-                label: String(localized: "Feed Rate (F)", comment: "Parameter"),
+                label: String(localized: "param.feed_rate", comment: "Parameter"),
                 value: config.feedRate,
                 range: 0.01...0.1,
                 format: "%.3f"
             ) { var c = config; c.feedRate = Float($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Kill Rate (k)", comment: "Parameter"),
+                label: String(localized: "param.kill_rate", comment: "Parameter"),
                 value: config.killRate,
                 range: 0.04...0.07,
                 format: "%.3f"
             ) { var c = config; c.killRate = Float($0); update(c) }
 
             paramSlider(
-                label: String(localized: "Iterations", comment: "Parameter"),
+                label: String(localized: "param.iterations", comment: "Parameter"),
                 value: Float(config.iterations),
                 range: 500...5000,
                 step: 100,
@@ -257,7 +257,7 @@ struct ProceduralParamsView: View {
             ) { var c = config; c.iterations = Int($0); update(c) }
 
             HStack {
-                Text(String(localized: "Color A", comment: "Parameter"))
+                Text(String(localized: "param.color_a", comment: "Parameter"))
                     .font(.subheadline)
                 Spacer()
                 ColorPicker("", selection: Binding(
@@ -268,7 +268,7 @@ struct ProceduralParamsView: View {
             }
 
             HStack {
-                Text(String(localized: "Color B", comment: "Parameter"))
+                Text(String(localized: "param.color_b", comment: "Parameter"))
                     .font(.subheadline)
                 Spacer()
                 ColorPicker("", selection: Binding(

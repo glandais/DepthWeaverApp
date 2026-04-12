@@ -61,10 +61,10 @@ struct StereogramResultView: View {
                         }
                     }
                 }
-                .accessibilityLabel("Generated autostereogram image")
+                .accessibilityLabel("result.accessibility_label")
         }
         .clipShape(Rectangle())
-        .navigationTitle("Stereogram")
+        .navigationTitle("result.title")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -73,15 +73,15 @@ struct StereogramResultView: View {
                 } label: {
                     Image(systemName: "questionmark.circle")
                 }
-                .accessibilityLabel("How to view")
+                .accessibilityLabel("help.how_to_view_button")
 
                 ShareLink(
                     item: Image(uiImage: image),
-                    preview: SharePreview("Stereogram", image: Image(uiImage: image))
+                    preview: SharePreview(String(localized: "result.title"), image: Image(uiImage: image))
                 ) {
                     Image(systemName: "square.and.arrow.up")
                 }
-                .accessibilityLabel("Share stereogram")
+                .accessibilityLabel("result.share")
 
                 Button {
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -92,7 +92,7 @@ struct StereogramResultView: View {
                     Image(systemName: savedToPhotos ? "checkmark.circle.fill" : "arrow.down.circle")
                         .contentTransition(.symbolEffect(.replace))
                 }
-                .accessibilityLabel(savedToPhotos ? "Saved to photos" : "Save to photos")
+                .accessibilityLabel(savedToPhotos ? "result.saved_to_photos" : "result.save_to_photos")
             }
         }
         .sheet(isPresented: $showHowToView) {
@@ -108,28 +108,28 @@ struct HowToViewSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("How to See the 3D Image")
+                    Text("help.how_to_see_3d")
                         .font(.title2)
                         .fontWeight(.bold)
 
                     instructionStep(
                         number: 1,
-                        text: "Hold your device at arm's length"
+                        text: "help.view_step_hold"
                     )
                     instructionStep(
                         number: 2,
-                        text: "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it"
+                        text: "help.view_step_relax"
                     )
                     instructionStep(
                         number: 3,
-                        text: "The repeating pattern will start to overlap. Keep your gaze relaxed until a 3D shape emerges"
+                        text: "help.view_step_overlap_alt"
                     )
                     instructionStep(
                         number: 4,
-                        text: "Once you see the 3D image, you can slowly adjust your distance to sharpen it"
+                        text: "help.view_step_adjust"
                     )
 
-                    Text("Tip: It helps to start with the device close to your face, then slowly move it away while keeping your eyes relaxed.")
+                    Text("help.tip_device_close")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .padding()
@@ -140,7 +140,7 @@ struct HowToViewSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button("general.done") { dismiss() }
                 }
             }
         }

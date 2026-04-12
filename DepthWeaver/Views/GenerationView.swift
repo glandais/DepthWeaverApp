@@ -25,7 +25,7 @@ struct GenerationView: View {
                 depthSourceSection
 
                 // Pattern picker
-                GroupBox(String(localized: "Textures", comment: "Section header")) {
+                GroupBox(String(localized: "pattern.textures_section", comment: "Section header")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(StereogramPattern.allCases) { pattern in
@@ -79,20 +79,20 @@ struct GenerationView: View {
                                             .animation(.snappy(duration: 0.2), value: settings.patternSource)
                                     )
 
-                                    Text("Import", comment: "Pattern name")
+                                    Text("pattern.import", comment: "Pattern name")
                                         .font(.caption2)
                                         .lineLimit(1)
                                 }
                             }
                             .buttonStyle(.plain)
-                            .accessibilityLabel(String(localized: "Import pattern", comment: "Accessibility label"))
+                            .accessibilityLabel(String(localized: "pattern.import_accessibility", comment: "Accessibility label"))
                         }
                         .padding(.vertical, 4)
                     }
                 }
 
                 // Generated patterns
-                GroupBox(String(localized: "Generated", comment: "Section header")) {
+                GroupBox(String(localized: "pattern.generated_section", comment: "Section header")) {
                     VStack(spacing: 12) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
@@ -152,10 +152,10 @@ struct GenerationView: View {
                 }
 
                 // Settings
-                GroupBox("Settings") {
+                GroupBox(String(localized: "generation.settings")) {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("Stripes: \(settings.stripesCount) (\(stripeWidthDescription))")
+                            Text("generation.stripes_label \(settings.stripesCount) \(stripeWidthDescription)")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
@@ -165,12 +165,12 @@ struct GenerationView: View {
                                 in: 8...24,
                                 step: 1
                             )
-                            .accessibilityLabel("Stripes count")
+                            .accessibilityLabel("generation.stripes_count_label")
                             .accessibilityValue("\(settings.stripesCount)")
                         }
 
                         VStack(alignment: .leading) {
-                            Text("Depth: \(settings.depthFactor, specifier: "%.2f")")
+                            Text("generation.depth_label \(settings.depthFactor, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
@@ -180,18 +180,18 @@ struct GenerationView: View {
                                 in: 0...1,
                                 step: 0.05
                             )
-                            .accessibilityLabel("Depth factor")
+                            .accessibilityLabel("generation.depth_factor_label")
                             .accessibilityValue("\(settings.depthFactor, specifier: "%.2f")")
                         }
 
-                        Picker("Main Stripe", selection: $settings.mainStripePosition) {
-                            Text("Left").tag(MainStripePosition.left)
-                            Text("Middle").tag(MainStripePosition.middle)
+                        Picker("generation.main_stripe", selection: $settings.mainStripePosition) {
+                            Text("generation.stripe_left").tag(MainStripePosition.left)
+                            Text("generation.stripe_middle").tag(MainStripePosition.middle)
                         }
                         .pickerStyle(.segmented)
                         .font(.subheadline)
 
-                        Toggle("Invert Depth", isOn: $settings.invert)
+                        Toggle("generation.invert_depth", isOn: $settings.invert)
                             .font(.subheadline)
                     }
                     .padding(.vertical, 4)
@@ -211,7 +211,7 @@ struct GenerationView: View {
                 } label: {
                     Image(systemName: "questionmark.circle")
                 }
-                .accessibilityLabel("How to use")
+                .accessibilityLabel("help.how_to_use_button")
             }
         }
         .sheet(isPresented: $showHelp) {
@@ -312,12 +312,12 @@ struct GenerationView: View {
                             .onTapGesture {
                                 path.append(NavigationDestination.depthAdjustment)
                             }
-                            .accessibilityHint("Tap to adjust depth")
+                            .accessibilityHint("depth.tap_to_adjust")
                     }
 
                     HStack {
                         Label(
-                            depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "Imported", comment: "Depth map source label") : "AI",
+                            depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "depth.source_imported", comment: "Depth map source label") : String(localized: "depth.source_ai"),
                             systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : depthMap.source == .imported ? "square.and.arrow.down" : "photo.on.rectangle"
                         )
                         .font(.subheadline)
@@ -325,14 +325,14 @@ struct GenerationView: View {
 
                         Spacer()
 
-                        Text("\(depthMap.width) × \(depthMap.height)")
+                        Text(verbatim: "\(depthMap.width) × \(depthMap.height)")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
 
                         Button {
                             path.append(NavigationDestination.depthAdjustment)
                         } label: {
-                            Label("Adjust Depth", systemImage: "slider.horizontal.below.square.and.square.filled")
+                            Label("depth.adjust_depth", systemImage: "slider.horizontal.below.square.and.square.filled")
                                 .font(.caption)
                         }
                         .buttonStyle(.bordered)
@@ -344,7 +344,7 @@ struct GenerationView: View {
                     depthAcquisitionButtons
                 }
             } label: {
-                Text("Depth Map")
+                Text("depth.section_title")
             }
         } else {
             GroupBox {
@@ -353,7 +353,7 @@ struct GenerationView: View {
                         .font(.system(size: 40))
                         .foregroundStyle(.secondary)
 
-                    Text("Acquire a depth map to generate stereograms")
+                    Text("depth.acquire_prompt")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -363,7 +363,7 @@ struct GenerationView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
             } label: {
-                Text("Depth Map")
+                Text("depth.section_title")
             }
         }
     }
@@ -376,7 +376,7 @@ struct GenerationView: View {
                     Button {
                         path.append(NavigationDestination.lidarCapture)
                     } label: {
-                        Label("LiDAR Scan", systemImage: "camera.metering.matrix")
+                        Label("depth.lidar_scan", systemImage: "camera.metering.matrix")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
@@ -384,7 +384,7 @@ struct GenerationView: View {
                 }
 
                 PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                    Label("From Photo", systemImage: "photo.on.rectangle")
+                    Label("depth.from_photo", systemImage: "photo.on.rectangle")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
@@ -395,14 +395,14 @@ struct GenerationView: View {
                 Button {
                     showDepthMapPresets = true
                 } label: {
-                    Label("Presets", systemImage: "square.grid.2x2")
+                    Label("depth.presets", systemImage: "square.grid.2x2")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
 
                 PhotosPicker(selection: $selectedDepthMapPhoto, matching: .images) {
-                    Label("Import Depth", systemImage: "square.and.arrow.down")
+                    Label("depth.import_depth_map", systemImage: "square.and.arrow.down")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
@@ -436,14 +436,14 @@ struct GenerationView: View {
                         path.append(NavigationDestination.stereogramResult(image))
                     }
                 }
-                .accessibilityLabel("Stereogram preview")
-                .accessibilityHint("Tap to view full screen")
+                .accessibilityLabel("result.preview")
+                .accessibilityHint("result.tap_fullscreen")
         } else if depthMap != nil {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.quaternary)
                 .aspectRatio(CGFloat(depthMap!.width) / CGFloat(depthMap!.height), contentMode: .fit)
                 .overlay {
-                    ProgressView("Generating...")
+                    ProgressView("generation.generating")
                 }
         }
     }
@@ -456,41 +456,41 @@ struct HowToUseSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("How to Use DepthWeaver")
+                    Text("help.how_to_use_title")
                         .font(.title2)
                         .fontWeight(.bold)
 
                     step(1, icon: "camera.metering.matrix",
-                         text: "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)")
+                         text: "help.step_acquire_full")
 
                     step(2, icon: "slider.horizontal.below.square.and.square.filled",
-                         text: "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast")
+                         text: "help.step_adjust_depth")
 
                     step(3, icon: "square.grid.3x3",
-                         text: "Choose a pattern — it determines the texture of your stereogram")
+                         text: "help.step_choose_pattern")
 
                     step(4, icon: "slider.horizontal.3",
-                         text: "Adjust Stripes (number of pattern repetitions), Depth (3D intensity), and Main Stripe position")
+                         text: "help.step_adjust_settings")
 
                     step(5, icon: "eye",
-                         text: "Tap the stereogram preview to view it full screen, then share or save it")
+                         text: "help.step_share")
 
                     Divider()
 
-                    Text("Viewing the 3D Image")
+                    Text("help.viewing_3d")
                         .font(.title3)
                         .fontWeight(.semibold)
 
                     step(1, icon: "hand.raised",
-                         text: "Hold your device at arm's length")
+                         text: "help.view_step_hold")
 
                     step(2, icon: "eye.slash",
-                         text: "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it")
+                         text: "help.view_step_relax")
 
                     step(3, icon: "cube.transparent",
-                         text: "The repeating pattern will overlap. Keep your gaze relaxed until a 3D shape emerges")
+                         text: "help.view_step_overlap")
 
-                    Text("Tip: Start with the device close to your face, then slowly move it away while keeping your eyes relaxed.")
+                    Text("help.tip_device_close_alt")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .padding()
@@ -501,7 +501,7 @@ struct HowToUseSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button("general.done") { dismiss() }
                 }
             }
         }
@@ -553,11 +553,11 @@ struct DepthMapPresetSheet: View {
                 }
                 .padding()
             }
-            .navigationTitle(String(localized: "Depth Map Presets", comment: "Sheet title"))
+            .navigationTitle(String(localized: "depth.presets_title", comment: "Sheet title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
+                    Button("general.done") { dismiss() }
                 }
             }
         }

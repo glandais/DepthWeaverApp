@@ -20,20 +20,20 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .noise: String(localized: "Noise", comment: "Pattern name")
-        case .dots: String(localized: "Dots", comment: "Pattern name")
-        case .circles: String(localized: "Circles", comment: "Pattern name")
-        case .triangles: String(localized: "Triangles", comment: "Pattern name")
-        case .mosaic: String(localized: "Mosaic", comment: "Pattern name")
-        case .stars: String(localized: "Stars", comment: "Pattern name")
-        case .hexagons: String(localized: "Hexagons", comment: "Pattern name")
-        case .space: String(localized: "Space", comment: "Pattern name")
-        case .wallpaper: String(localized: "Wallpaper", comment: "Pattern name")
-        case .clouds: String(localized: "Clouds", comment: "Pattern name")
-        case .stones: String(localized: "Stones", comment: "Pattern name")
-        case .foliage: String(localized: "Foliage", comment: "Pattern name")
-        case .giraffe: String(localized: "Giraffe", comment: "Pattern name")
-        case .leaves: String(localized: "Leaves", comment: "Pattern name")
+        case .noise: String(localized: "pattern.noise", comment: "Pattern name")
+        case .dots: String(localized: "pattern.dots", comment: "Pattern name")
+        case .circles: String(localized: "pattern.circles", comment: "Pattern name")
+        case .triangles: String(localized: "pattern.triangles", comment: "Pattern name")
+        case .mosaic: String(localized: "pattern.mosaic", comment: "Pattern name")
+        case .stars: String(localized: "pattern.stars", comment: "Pattern name")
+        case .hexagons: String(localized: "pattern.hexagons", comment: "Pattern name")
+        case .space: String(localized: "pattern.space", comment: "Pattern name")
+        case .wallpaper: String(localized: "pattern.wallpaper", comment: "Pattern name")
+        case .clouds: String(localized: "pattern.clouds", comment: "Pattern name")
+        case .stones: String(localized: "pattern.stones", comment: "Pattern name")
+        case .foliage: String(localized: "pattern.foliage", comment: "Pattern name")
+        case .giraffe: String(localized: "pattern.giraffe", comment: "Pattern name")
+        case .leaves: String(localized: "pattern.leaves", comment: "Pattern name")
         }
     }
 

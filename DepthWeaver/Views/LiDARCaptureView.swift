@@ -20,7 +20,7 @@ struct LiDARCaptureView: View {
                 captureView
             }
         }
-        .navigationTitle("LiDAR Scan")
+        .navigationTitle("depth.lidar_scan")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.checkPermission()
@@ -36,16 +36,16 @@ struct LiDARCaptureView: View {
                 .font(.system(size: 60))
                 .foregroundStyle(.blue)
 
-            Text("Camera Access Required")
+            Text("lidar.camera_required")
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings.")
+            Text("lidar.camera_description")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
-            Button("Start Scanning") {
+            Button("lidar.start_scanning") {
                 Task {
                     await viewModel.requestPermission()
                     if viewModel.cameraPermission == .authorized {
@@ -65,16 +65,16 @@ struct LiDARCaptureView: View {
                 .font(.system(size: 60))
                 .foregroundStyle(.secondary)
 
-            Text("Camera Access Denied")
+            Text("lidar.camera_denied")
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("Please enable camera access in Settings to use LiDAR scanning.")
+            Text("lidar.enable_camera")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
-            Button("Open Settings") {
+            Button("lidar.open_settings") {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
@@ -92,7 +92,7 @@ struct LiDARCaptureView: View {
 
                 VStack {
                     if !depthService.hasDepthData {
-                        Text("Waiting for depth data...")
+                        Text("lidar.waiting_for_depth")
                             .font(.subheadline)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -120,8 +120,8 @@ struct LiDARCaptureView: View {
                     .animation(.smooth) { content in
                         content.opacity(depthService.hasDepthData ? 1.0 : 0.5)
                     }
-                    .accessibilityLabel("Capture depth")
-                    .accessibilityHint("Takes a depth snapshot of the current scene")
+                    .accessibilityLabel("lidar.capture_depth")
+                    .accessibilityHint("lidar.capture_hint")
                     .padding(.bottom, 16)
                 }
                 .frame(width: geo.size.width, height: geo.size.height)

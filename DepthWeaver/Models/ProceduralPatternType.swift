@@ -14,12 +14,12 @@ enum ProceduralPatternType: String, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .randomDot: String(localized: "Random Dot", comment: "Pattern name")
-        case .stars: String(localized: "Stars", comment: "Pattern name")
-        case .perlinNoise: String(localized: "Perlin Noise", comment: "Pattern name")
-        case .worleyNoise: String(localized: "Worley Noise", comment: "Pattern name")
-        case .voronoi: String(localized: "Voronoi", comment: "Pattern name")
-        case .reactionDiffusion: String(localized: "Reaction-Diffusion", comment: "Pattern name")
+        case .randomDot: String(localized: "pattern.random_dot", comment: "Pattern name")
+        case .stars: String(localized: "pattern.stars", comment: "Pattern name")
+        case .perlinNoise: String(localized: "pattern.perlin_noise", comment: "Pattern name")
+        case .worleyNoise: String(localized: "pattern.worley_noise", comment: "Pattern name")
+        case .voronoi: String(localized: "pattern.voronoi", comment: "Pattern name")
+        case .reactionDiffusion: String(localized: "pattern.reaction_diffusion", comment: "Pattern name")
         }
     }
 
@@ -88,9 +88,9 @@ enum PatternColorMode: String, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .blackAndWhite: String(localized: "B&W", comment: "Color mode")
-        case .grayscale: String(localized: "Grayscale", comment: "Color mode")
-        case .color: String(localized: "Color", comment: "Color mode")
+        case .blackAndWhite: String(localized: "color_mode.bw", comment: "Color mode")
+        case .grayscale: String(localized: "color_mode.grayscale", comment: "Color mode")
+        case .color: String(localized: "color_mode.color", comment: "Color mode")
         }
     }
 }
@@ -106,9 +106,9 @@ enum PerlinColorMode: String, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .grayscale: String(localized: "Grayscale", comment: "Color mode")
-        case .hue: String(localized: "Single Hue", comment: "Color mode")
-        case .rgb: String(localized: "RGB", comment: "Color mode")
+        case .grayscale: String(localized: "color_mode.grayscale", comment: "Color mode")
+        case .hue: String(localized: "color_mode.single_hue", comment: "Color mode")
+        case .rgb: String(localized: "color_mode.rgb", comment: "Color mode")
         }
     }
 }
@@ -124,9 +124,9 @@ enum DistanceFunction: String, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .euclidean: String(localized: "Euclidean", comment: "Distance function")
-        case .manhattan: String(localized: "Manhattan", comment: "Distance function")
-        case .chebyshev: String(localized: "Chebyshev", comment: "Distance function")
+        case .euclidean: String(localized: "distance.euclidean", comment: "Distance function")
+        case .manhattan: String(localized: "distance.manhattan", comment: "Distance function")
+        case .chebyshev: String(localized: "distance.chebyshev", comment: "Distance function")
         }
     }
 }
@@ -161,10 +161,10 @@ enum VoronoiColorScheme: String, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .pastel: String(localized: "Pastel", comment: "Color scheme")
-        case .vivid: String(localized: "Vivid", comment: "Color scheme")
-        case .monochrome: String(localized: "Monochrome", comment: "Color scheme")
-        case .random: String(localized: "Random", comment: "Color scheme")
+        case .pastel: String(localized: "color_scheme.pastel", comment: "Color scheme")
+        case .vivid: String(localized: "color_scheme.vivid", comment: "Color scheme")
+        case .monochrome: String(localized: "color_scheme.monochrome", comment: "Color scheme")
+        case .random: String(localized: "color_scheme.random", comment: "Color scheme")
         }
     }
 }
