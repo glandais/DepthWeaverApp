@@ -1,16 +1,10 @@
 import Foundation
 
-enum MainStripePosition: String, CaseIterable, Identifiable, Equatable {
-    case left
-    case middle
-
-    var id: String { rawValue }
-}
-
 struct StereogramSettings: Equatable {
-    var stripesCount: Int = 8
-    var depthFactor: Float = 0.8
-    var mainStripePosition: MainStripePosition = .middle
+    var dpi: Int = 96
+    var depthStrength: Float = 1.0
+    var sepFactor: Float = 0.55
+    var oversampling: Int = 4
     var invert: Bool = false
     var patternSource: PatternSource = .asset(.giraffe)
 }

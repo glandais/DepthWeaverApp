@@ -155,41 +155,64 @@ struct GenerationView: View {
                 GroupBox(String(localized: "generation.settings")) {
                     VStack(spacing: 16) {
                         VStack(alignment: .leading) {
-                            Text("generation.stripes_label \(settings.stripesCount) \(stripeWidthDescription)")
+                            Text("generation.dpi_label \(settings.dpi)")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
-                                    get: { Double(settings.stripesCount) },
-                                    set: { settings.stripesCount = Int($0) }
+                                    get: { Double(settings.dpi) },
+                                    set: { settings.dpi = Int($0) }
                                 ),
-                                in: 8...24,
+                                in: 60...150,
                                 step: 1
                             )
-                            .accessibilityLabel("generation.stripes_count_label")
-                            .accessibilityValue("\(settings.stripesCount)")
+                            .accessibilityLabel("generation.dpi_accessibility")
+                            .accessibilityValue("\(settings.dpi)")
                         }
 
                         VStack(alignment: .leading) {
-                            Text("generation.depth_label \(settings.depthFactor, specifier: "%.2f")")
+                            Text("generation.depth_strength_label \(settings.depthStrength, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
                                 value: Binding(
-                                    get: { Double(settings.depthFactor) },
-                                    set: { settings.depthFactor = Float($0) }
+                                    get: { Double(settings.depthStrength) },
+                                    set: { settings.depthStrength = Float($0) }
                                 ),
-                                in: 0...1,
+                                in: 0.5...2.0,
                                 step: 0.05
                             )
-                            .accessibilityLabel("generation.depth_factor_label")
-                            .accessibilityValue("\(settings.depthFactor, specifier: "%.2f")")
+                            .accessibilityLabel("generation.depth_strength_accessibility")
+                            .accessibilityValue("\(settings.depthStrength, specifier: "%.2f")")
                         }
 
-                        Picker("generation.main_stripe", selection: $settings.mainStripePosition) {
-                            Text("generation.stripe_left").tag(MainStripePosition.left)
-                            Text("generation.stripe_middle").tag(MainStripePosition.middle)
+                        VStack(alignment: .leading) {
+                            Text("generation.depth_range_label \(settings.sepFactor, specifier: "%.2f")")
+                                .font(.subheadline)
+                            Slider(
+                                value: Binding(
+                                    get: { Double(settings.sepFactor) },
+                                    set: { settings.sepFactor = Float($0) }
+                                ),
+                                in: 0.40...0.70,
+                                step: 0.01
+                            )
+                            .accessibilityLabel("generation.depth_range_accessibility")
+                            .accessibilityValue("\(settings.sepFactor, specifier: "%.2f")")
                         }
-                        .pickerStyle(.segmented)
-                        .font(.subheadline)
+
+                        VStack(alignment: .leading) {
+                            Text("generation.smoothness_label \(settings.oversampling)")
+                                .font(.subheadline)
+                            Slider(
+                                value: Binding(
+                                    get: { Double(settings.oversampling) },
+                                    set: { settings.oversampling = Int($0) }
+                                ),
+                                in: 1...6,
+                                step: 1
+                            )
+                            .accessibilityLabel("generation.smoothness_accessibility")
+                            .accessibilityValue("\(settings.oversampling)")
+                        }
 
                         Toggle("generation.invert_depth", isOn: $settings.invert)
                             .font(.subheadline)
@@ -255,15 +278,6 @@ struct GenerationView: View {
                 selectedDepthMapPhoto = nil
             }
         }
-    }
-
-    private var stripeWidthDescription: String {
-        if let depthMap {
-            let w = depthMap.width > 0 ? depthMap.width : 1024
-            let px = w / (settings.stripesCount + 1)
-            return "\(px)px"
-        }
-        return ""
     }
 
     private func triggerGeneration() {

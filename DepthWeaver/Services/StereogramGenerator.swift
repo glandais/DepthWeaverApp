@@ -1,9 +1,12 @@
 import UIKit
 
 final class StereogramGenerator {
-    /// Generates an autostereogram using stripe-based displacement.
-    /// Ported from stereogram-webgl (computeTileUv / sampleHeightmap shaders).
+    /// Generates an autostereogram from a depth map.
+    /// Implements the algorithm of W.A. Steer (techmind.org), an extension of the
+    /// Thimbleby–Inglis–Witten random-dot algorithm with link-based hidden-surface
+    /// removal, bitmapped patterns, oversampling, and centre-outwards application.
     func generate(depthMap: DepthMap, settings: StereogramSettings) -> UIImage {
+        // Output size: keep input aspect, ensure min dimension >= 960.
         let minDimTarget = 960
         let rawWidth = depthMap.width > 0 ? depthMap.width : 1024
         let rawHeight = depthMap.height > 0 ? depthMap.height : 768
@@ -12,144 +15,176 @@ final class StereogramGenerator {
         let width = rawWidth * scale
         let height = rawHeight * scale
 
-        let stripesCount = settings.stripesCount
-        let depthFactor = settings.depthFactor
-        let invertDepth = settings.invert
-        let mainStripeIdx = settings.mainStripePosition == .left ? 0 : stripesCount / 2
-        let loopSize = 2 * stripesCount
+        // Geometry constants (PDF). All in pixels.
+        let xdpi = max(30, settings.dpi)
+        let ydpi = xdpi
+        let oversam = max(1, settings.oversampling)
+        let obsDist = xdpi * 12
+        let eyeSep = (xdpi * 5) / 2          // 2.5 inches
+        let veyeSep = eyeSep * oversam
 
-        let depths = depthMap.adjustedDepthValues(width: width, height: height)
+        let depthStrength = max(0.1, settings.depthStrength)
+        let sepFactor = min(0.95, max(0.05, settings.sepFactor))
 
-        let stripeWidthPx = max(1, width / (stripesCount + 1))
-        let patternData = preparePattern(settings.patternSource, stripWidth: stripeWidthPx)
-        let patternW = patternData.width
-        let patternH = patternData.height
-        let patternPx = patternData.pixels
+        let maxdepth = max(1, Int((Float(obsDist) * depthStrength).rounded()))
+        let mindepthF = (sepFactor * Float(maxdepth) * Float(obsDist)) /
+                       ((1.0 - sepFactor) * Float(maxdepth) + Float(obsDist))
+        let mindepth = max(0, Int(mindepthF.rounded()))
 
-        // Tile height in normalized output coords (preserves pattern aspect ratio)
-        let tileWidthPx = Float(width) / Float(stripesCount + 1)
-        let tileHeightPx = tileWidthPx * Float(patternH) / Float(patternW)
-        let tileHeight = tileHeightPx / Float(height)
+        let maxsep = max(1, (eyeSep * maxdepth) / (maxdepth + obsDist))
+        let vmaxsep = oversam * maxsep
+        let yShift = ydpi / 16
+        let vwidth = width * oversam
 
-        // Heightmap scaling: aspect-fit depth map into the "useful" portion of the canvas.
-        // The useful portion is stripesCount/(stripesCount+1) of the total width.
-        let usefulProportion = Float(stripesCount) / Float(stripesCount + 1)
-        let canvasAR = Float(width) / Float(height) * usefulProportion
-        let heightmapAR = Float(width) / Float(height)
-        let hmScaleX: Float
-        let hmScaleY: Float
-        if canvasAR > heightmapAR {
-            hmScaleX = canvasAR / heightmapAR
-            hmScaleY = 1.0
-        } else {
-            hmScaleX = 1.0
-            hmScaleY = heightmapAR / canvasAR
+        // Defensive bounds. With reasonable settings vmaxsep is well below vwidth.
+        guard vmaxsep > 0, vmaxsep < vwidth else {
+            return UIImage()
         }
 
-        let mainStripe = Float(mainStripeIdx)
-        let stripesCountF = Float(stripesCount)
-        let stripesCountP1F = Float(stripesCount + 1)
-        let widthF = Float(width)
-        let heightF = Float(height)
-        let widthM1F = Float(width - 1)
-        let heightM1F = Float(height - 1)
+        let s = vwidth / 2 - vmaxsep / 2
+        let poffset = vmaxsep - (s % vmaxsep)
+
+        // Depth values, normalized to [0..1] with 1 = nearest.
+        let depths = depthMap.adjustedDepthValues(width: width, height: height)
+        let invert = settings.invert
+
+        // Pattern resized so its width equals maxsep (real pixels).
+        let pat = preparePattern(settings.patternSource, targetWidth: maxsep)
+        let patWidth = pat.width
+        let patHeight = pat.height
+        let patPixels = pat.pixels
 
         var pixels = [UInt8](repeating: 0, count: width * height * 4)
 
-        DispatchQueue.concurrentPerform(iterations: height) { row in
-            let rowOffset = row * width * 4
-            let posY = (Float(row) + 0.5) / heightF
+        let depthRange = Float(maxdepth - mindepth)
+        let maxdepthF = Float(maxdepth)
+        let obsDistF = Float(obsDist)
+        let veyeSepF = Float(veyeSep)
 
-            // Bilinear depth sampling with heightmap scaling, inversion, and depth factor.
-            // Equivalent to sampleHeightmap() in _heightmap.frag.
-            @inline(__always)
-            func sampleHM(_ nx: Float, _ ny: Float) -> Float {
-                let sx = 0.5 + (nx - 0.5) * hmScaleX
-                let sy = 0.5 + (ny - 0.5) * hmScaleY
-                guard sx >= 0, sx <= 1, sy >= 0, sy <= 1 else { return 0 }
+        DispatchQueue.concurrentPerform(iterations: height) { y in
+            var lookL = [Int](repeating: 0, count: vwidth)
+            var lookR = [Int](repeating: 0, count: vwidth)
+            var colour = [UInt8](repeating: 0, count: vwidth * 4)
 
-                let fx = sx * widthM1F
-                let fy = sy * heightM1F
-                let x0 = min(Int(fx), width - 1)
-                let y0 = min(Int(fy), height - 1)
-                let x1 = min(x0 + 1, width - 1)
-                let y1 = min(y0 + 1, height - 1)
-                let dx = fx - Float(x0)
-                let dy = fy - Float(y0)
-
-                let v = depths[y0 * width + x0] * (1 - dx) * (1 - dy)
-                    + depths[y0 * width + x1] * dx * (1 - dy)
-                    + depths[y1 * width + x0] * (1 - dx) * dy
-                    + depths[y1 * width + x1] * dx * dy
-
-                let value = invertDepth ? 1.0 - v : v
-                return depthFactor * value
+            for x in 0..<vwidth {
+                lookL[x] = x
+                lookR[x] = x
             }
 
-            // Main stripe bounds for this row (constant per row).
-            // The main stripe width varies with the depth at its center.
-            let mainSampleX = (mainStripe + 0.5) / stripesCountP1F
-            let mainDepth = sampleHM(mainSampleX, posY)
-            let mainStripeW = 1.0 - mainDepth * 0.45
-            let mainLeft = mainStripe + 0.5 * (1.0 - mainStripeW)
-            let mainRight = mainStripe + 1.0 - 0.5 * (1.0 - mainStripeW)
-
-            for col in 0..<width {
-                // Map pixel to stripe-space [0, stripesCount+1]
-                var posX = (Float(col) + 0.5) / widthF * stripesCountP1F
-
-                // Iteratively displace towards the main stripe.
-                // Each step shifts by one stripe width adjusted by depth.
-                for _ in 0..<loopSize {
-                    if posX < mainLeft {
-                        let prevX = (posX - 0.25) / stripesCountF
-                        posX += 1.0 - sampleHM(prevX, posY) * 0.45
-                    } else if posX >= mainRight {
-                        let prevX = (posX - 1.0) / stripesCountF
-                        posX -= 1.0 - sampleHM(prevX, posY) * 0.45
+            // --- 1. Linking pass (TIW + Steer hidden-surface removal) ---
+            let depthRowOffset = y * width
+            var sep = 0
+            for x in 0..<vwidth {
+                if x % oversam == 0 {
+                    var h = depths[depthRowOffset + x / oversam]
+                    if invert { h = 1.0 - h }
+                    if h < 0 { h = 0 } else if h > 1 { h = 1 }
+                    let featureZ = maxdepthF - h * depthRange
+                    sep = Int((veyeSepF * featureZ / (featureZ + obsDistF)).rounded())
+                }
+                let left = x - sep / 2
+                let right = left + sep
+                if left < 0 || right >= vwidth { continue }
+                var vis = true
+                if lookL[right] != right {
+                    if lookL[right] < left {
+                        let oldLeft = lookL[right]
+                        lookR[oldLeft] = oldLeft
+                        lookL[right] = right
                     } else {
-                        break
+                        vis = false
                     }
                 }
+                if lookR[left] != left {
+                    if lookR[left] > right {
+                        let oldRight = lookR[left]
+                        lookL[oldRight] = oldRight
+                        lookR[left] = left
+                    } else {
+                        vis = false
+                    }
+                }
+                if vis {
+                    lookL[right] = left
+                    lookR[left] = right
+                }
+            }
 
-                // Map converged position to tile UV
-                let tileU = (posX - mainLeft) / mainStripeW
-                var tileV = posY / tileHeight
-                tileV = tileV - floor(tileV) // fract
+            // --- 2. Pattern application: centre to right ---
+            var lastlinked = -10
+            for x in s..<vwidth {
+                let dst = x * 4
+                if lookL[x] == x || lookL[x] < s {
+                    if lastlinked == x - 1 {
+                        let src = (x - 1) * 4
+                        colour[dst]     = colour[src]
+                        colour[dst + 1] = colour[src + 1]
+                        colour[dst + 2] = colour[src + 2]
+                    } else {
+                        let px = (((x + poffset) % vmaxsep) / oversam) % patWidth
+                        let row = (y + ((x - s) / vmaxsep) * yShift) % patHeight
+                        let pp = (row * patWidth + px) * 4
+                        colour[dst]     = patPixels[pp]
+                        colour[dst + 1] = patPixels[pp + 1]
+                        colour[dst + 2] = patPixels[pp + 2]
+                    }
+                } else {
+                    let src = lookL[x] * 4
+                    colour[dst]     = colour[src]
+                    colour[dst + 1] = colour[src + 1]
+                    colour[dst + 2] = colour[src + 2]
+                    lastlinked = x
+                }
+                colour[dst + 3] = 255
+            }
 
-                // Bilinear pattern sampling with wrapping (matches GL_LINEAR + GL_REPEAT).
-                // Texel centers sit at (i + 0.5) / size, so subtract 0.5 to get continuous index.
-                let fx = tileU * Float(patternW) - 0.5
-                let fy = tileV * Float(patternH) - 0.5
-                let x0Raw = Int(floor(fx))
-                let y0Raw = Int(floor(fy))
-                let dx = fx - Float(x0Raw)
-                let dy = fy - Float(y0Raw)
-                let x0 = ((x0Raw % patternW) + patternW) % patternW
-                let y0 = ((y0Raw % patternH) + patternH) % patternH
-                let x1 = (x0 + 1) % patternW
-                let y1 = (y0 + 1) % patternH
+            // --- 3. Pattern application: centre to left ---
+            lastlinked = -10
+            if s > 0 {
+                var x = s - 1
+                while x >= 0 {
+                    let dst = x * 4
+                    if lookR[x] == x {
+                        if lastlinked == x + 1 {
+                            let src = (x + 1) * 4
+                            colour[dst]     = colour[src]
+                            colour[dst + 1] = colour[src + 1]
+                            colour[dst + 2] = colour[src + 2]
+                        } else {
+                            let px = (((x + poffset) % vmaxsep) / oversam) % patWidth
+                            let row = (y + ((s - x) / vmaxsep + 1) * yShift) % patHeight
+                            let pp = (row * patWidth + px) * 4
+                            colour[dst]     = patPixels[pp]
+                            colour[dst + 1] = patPixels[pp + 1]
+                            colour[dst + 2] = patPixels[pp + 2]
+                        }
+                    } else {
+                        let src = lookR[x] * 4
+                        colour[dst]     = colour[src]
+                        colour[dst + 1] = colour[src + 1]
+                        colour[dst + 2] = colour[src + 2]
+                        lastlinked = x
+                    }
+                    colour[dst + 3] = 255
+                    x -= 1
+                }
+            }
 
-                let p00 = (y0 * patternW + x0) * 4
-                let p10 = (y0 * patternW + x1) * 4
-                let p01 = (y1 * patternW + x0) * 4
-                let p11 = (y1 * patternW + x1) * 4
-
-                let w00 = (1 - dx) * (1 - dy)
-                let w10 = dx * (1 - dy)
-                let w01 = (1 - dx) * dy
-                let w11 = dx * dy
-
-                let oi = rowOffset + col * 4
-                let r = Float(patternPx[p00])     * w00 + Float(patternPx[p10])     * w10
-                      + Float(patternPx[p01])     * w01 + Float(patternPx[p11])     * w11
-                let g = Float(patternPx[p00 + 1]) * w00 + Float(patternPx[p10 + 1]) * w10
-                      + Float(patternPx[p01 + 1]) * w01 + Float(patternPx[p11 + 1]) * w11
-                let b = Float(patternPx[p00 + 2]) * w00 + Float(patternPx[p10 + 2]) * w10
-                      + Float(patternPx[p01 + 2]) * w01 + Float(patternPx[p11 + 2]) * w11
-                pixels[oi]     = UInt8(min(255, max(0, Int(r.rounded()))))
-                pixels[oi + 1] = UInt8(min(255, max(0, Int(g.rounded()))))
-                pixels[oi + 2] = UInt8(min(255, max(0, Int(b.rounded()))))
+            // --- 4. Downsample virtual pixels into real output pixels ---
+            let rowOffset = y * width * 4
+            for xr in 0..<width {
+                var r = 0, g = 0, b = 0
+                let baseV = xr * oversam
+                for i in 0..<oversam {
+                    let p = (baseV + i) * 4
+                    r += Int(colour[p])
+                    g += Int(colour[p + 1])
+                    b += Int(colour[p + 2])
+                }
+                let oi = rowOffset + xr * 4
+                pixels[oi]     = UInt8(min(255, r / oversam))
+                pixels[oi + 1] = UInt8(min(255, g / oversam))
+                pixels[oi + 2] = UInt8(min(255, b / oversam))
                 pixels[oi + 3] = 255
             }
         }
@@ -165,26 +200,26 @@ final class StereogramGenerator {
         let height: Int
     }
 
-    private func preparePattern(_ source: PatternSource, stripWidth: Int) -> PatternData {
-        let sourceImage = source.generateImage(size: CGSize(width: stripWidth, height: stripWidth))
+    private func preparePattern(_ source: PatternSource, targetWidth: Int) -> PatternData {
+        let safeWidth = max(1, targetWidth)
+        let sourceImage = source.generateImage(size: CGSize(width: safeWidth, height: safeWidth))
         guard let cgImage = sourceImage.cgImage else {
             fatalError("Cannot get CGImage from pattern: \(source.displayName)")
         }
 
-        let sourceHeight = cgImage.height
         let sourceWidth = cgImage.width
-        let targetWidth = stripWidth
-        let targetHeight = sourceHeight * targetWidth / sourceWidth
+        let sourceHeight = cgImage.height
+        let outWidth = safeWidth
+        let outHeight = max(1, sourceHeight * outWidth / max(1, sourceWidth))
 
-        // Render pattern scaled to stripWidth
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bytesPerRow = targetWidth * 4
-        var rawPixels = [UInt8](repeating: 0, count: targetWidth * targetHeight * 4)
+        let bytesPerRow = outWidth * 4
+        var rawPixels = [UInt8](repeating: 0, count: outWidth * outHeight * 4)
 
         guard let context = CGContext(
             data: &rawPixels,
-            width: targetWidth,
-            height: targetHeight,
+            width: outWidth,
+            height: outHeight,
             bitsPerComponent: 8,
             bytesPerRow: bytesPerRow,
             space: colorSpace,
@@ -194,9 +229,9 @@ final class StereogramGenerator {
         }
 
         context.interpolationQuality = .high
-        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight))
+        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: outWidth, height: outHeight))
 
-        return PatternData(pixels: rawPixels, width: targetWidth, height: targetHeight)
+        return PatternData(pixels: rawPixels, width: outWidth, height: outHeight)
     }
 
     // MARK: - Image Creation
