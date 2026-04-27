@@ -12,6 +12,12 @@
 		08398DBD0FF47E84B1880342 /* pattern-giraffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AF8C56DE8E7253760ED4F9 /* pattern-giraffe.png */; };
 		0BF4C4A54AD928235034FBF2 /* pattern-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 414DD9BF6E3502640E6E087F /* pattern-noise.png */; };
 		0E514E57FAB6D08B6BABC72B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FDD46A613A9E670F3E272D91 /* Localizable.xcstrings */; };
+		6A09F71402310ABC4945DBC2 /* Chameleon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 2D8759BECD4285140A7241D1 /* Chameleon.usdz */; };
+		C90B42574E1CC704276DD6D9 /* Slide.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0D1CA01A1214F45CD486 /* Slide.usdz */; };
+		F652436F5180B007C54BAB61 /* SportsCar.usdz in Resources */ = {isa = PBXBuildFile; fileRef = EE9EFA1589578903E99EE261 /* SportsCar.usdz */; };
+		038FF0D68E49E3A49CD983C1 /* Toilet.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 198131F8FBD0C2141186411F /* Toilet.usdz */; };
+		CA75A3F2EF65181EBF02B46F /* ToyBiplace.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0691D2C2F3AC3F55AC10860A /* ToyBiplace.usdz */; };
+		95536D4B8C173096B982FA6B /* ToyCar.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1D6924AD86DA5C16628A3CEE /* ToyCar.usdz */; };
 		1BDC9EFB7BC8E27FC89D33CA /* planet.png in Resources */ = {isa = PBXBuildFile; fileRef = D24646BE511AA16BC01A8D12 /* planet.png */; };
 		2A4F00AE5F82F3F19D12E011 /* pattern-space.png in Resources */ = {isa = PBXBuildFile; fileRef = 1408C6E371E060CBA4D10695 /* pattern-space.png */; };
 		2BEDAF8287EE8289A9FE7904 /* StereogramResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723C49A475CFE536CC329EFF /* StereogramResultView.swift */; };
@@ -36,6 +42,11 @@
 		6DD088ECCD33695018ADC8E0 /* PatternPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0BD72E6379456B99D701E /* PatternPreviewViewModel.swift */; };
 		6F86633BFC2C01E7D2F45CAA /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 88AD0604DC6384DBBE907098 /* dog.png */; };
 		71E04375676EDAC0B7C9237E /* LiDARDepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB63A790621C79B3BD1F82B /* LiDARDepthService.swift */; };
+		5FCAC5AFC57654B1AD89298A /* Model3DPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8147331644D902CEC7C53F14 /* Model3DPreset.swift */; };
+		673ACD09DFF3335B9F00E7AE /* Model3DLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */; };
+		894A44CA96D1368AD62794C3 /* Model3DDepthRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488C2567AE57C46B8C0CCBAA /* Model3DDepthRenderer.swift */; };
+		78D1742F874A4B8E2462B848 /* Model3DCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322AA5DB0C9DF9BD6DF0FC28 /* Model3DCaptureViewModel.swift */; };
+		A8A4D0BF0695ADABD82CA468 /* Model3DCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB68ECB9015EE612A6580A6B /* Model3DCaptureView.swift */; };
 		72B3ACE73B6EF398E97D997C /* pattern-dots.png in Resources */ = {isa = PBXBuildFile; fileRef = CD4487180301295040A16E47 /* pattern-dots.png */; };
 		79E492EC97347AE8160DECAB /* pattern-stars.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A6DB1F474AD6438DB0DE58 /* pattern-stars.png */; };
 		875085DBDFAE4557B942A6A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1A2F6465330BCCBE73A38 /* ContentView.swift */; };
@@ -46,6 +57,7 @@
 		A0FA441C56D710B61B7F0848 /* DepthAdjustmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3F1EDE4783A8B55793B936 /* DepthAdjustmentView.swift */; };
 		A37CDEFE576607FC22F29374 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = 9263B4FC5C5B49CF8725BD9E /* island.png */; };
 		A900928079C178B41476FEB4 /* StarsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB97C2A1318FC85D083BC96 /* StarsGenerator.swift */; };
+		AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122334455667788AABBCCDD /* DepthPointCloudView.swift */; };
 		AEBAFC795CF8F030D81E5A2C /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A1D85C6A9DA8B9F27F52D4 /* ship.png */; };
 		B2AA6F7193CE877671C35BEA /* StereogramPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E652343D35A88CBD7D3A71 /* StereogramPattern.swift */; };
 		B8E2806C35F141EA0F869442 /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 97ED3EFC75F0D38C6EF750F1 /* head.png */; };
@@ -64,12 +76,12 @@
 		ED04ADD9C01C7054E0139839 /* LiDARCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C30FDB39F507C7360BE2D /* LiDARCaptureViewModel.swift */; };
 		F414258614472E37ED2E3143 /* pattern-triangles.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ACF127D10A2AF7522AF5D1A /* pattern-triangles.png */; };
 		F792C9764104A9F743123FC5 /* GenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */; };
-		AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122334455667788AABBCCDD /* DepthPointCloudView.swift */; };
 		F80A2EF8BD814F17C3F23CA8 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 650FDFF65F6D228757CBF213 /* InfoPlist.xcstrings */; };
 		FDA26BD0C461F1953BA27B55 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF1E9467D8586682A245D3D /* tree.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1122334455667788AABBCCDD /* DepthPointCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPointCloudView.swift; sourceTree = "<group>"; };
 		12A6DB1F474AD6438DB0DE58 /* pattern-stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stars.png"; sourceTree = "<group>"; };
 		1408C6E371E060CBA4D10695 /* pattern-space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-space.png"; sourceTree = "<group>"; };
 		1700D06643974C2574354D6D /* pattern-foliage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-foliage.png"; sourceTree = "<group>"; };
@@ -87,6 +99,11 @@
 		416C30FDB39F507C7360BE2D /* LiDARCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureViewModel.swift; sourceTree = "<group>"; };
 		453EBEAF23405B7B7BDDDC0C /* PatternSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternSource.swift; sourceTree = "<group>"; };
 		4AB63A790621C79B3BD1F82B /* LiDARDepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARDepthService.swift; sourceTree = "<group>"; };
+		8147331644D902CEC7C53F14 /* Model3DPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DPreset.swift; sourceTree = "<group>"; };
+		433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DLoader.swift; sourceTree = "<group>"; };
+		488C2567AE57C46B8C0CCBAA /* Model3DDepthRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DDepthRenderer.swift; sourceTree = "<group>"; };
+		322AA5DB0C9DF9BD6DF0FC28 /* Model3DCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DCaptureViewModel.swift; sourceTree = "<group>"; };
+		DB68ECB9015EE612A6580A6B /* Model3DCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DCaptureView.swift; sourceTree = "<group>"; };
 		4EE8194155949D810C41F7A0 /* RandomDotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDotGenerator.swift; sourceTree = "<group>"; };
 		4F7971B9A4F6354DD9BEDDA5 /* LiDARCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARCaptureView.swift; sourceTree = "<group>"; };
 		52397B838840B3784FB9BCE0 /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -120,7 +137,6 @@
 		D790B138C97CF59825E5578A /* ProceduralPatternType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralPatternType.swift; sourceTree = "<group>"; };
 		DDA8A41F033EB0A35B892BD2 /* pattern-stones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-stones.png"; sourceTree = "<group>"; };
 		E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationView.swift; sourceTree = "<group>"; };
-		1122334455667788AABBCCDD /* DepthPointCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthPointCloudView.swift; sourceTree = "<group>"; };
 		E3F1A2F6465330BCCBE73A38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E8B569D42D7D1DC2CA0FFC61 /* StereogramGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramGenerator.swift; sourceTree = "<group>"; };
 		EC0E66D06C5F38F312E2610B /* VoronoiGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoronoiGenerator.swift; sourceTree = "<group>"; };
@@ -130,6 +146,12 @@
 		FB18E5489B15635A44FDC031 /* atomium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atomium.png; sourceTree = "<group>"; };
 		FD30B46C7130E15C1C2578BA /* pattern-clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-clouds.png"; sourceTree = "<group>"; };
 		FDD46A613A9E670F3E272D91 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2D8759BECD4285140A7241D1 /* Chameleon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Chameleon.usdz; sourceTree = "<group>"; };
+		34ED0D1CA01A1214F45CD486 /* Slide.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Slide.usdz; sourceTree = "<group>"; };
+		EE9EFA1589578903E99EE261 /* SportsCar.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = SportsCar.usdz; sourceTree = "<group>"; };
+		198131F8FBD0C2141186411F /* Toilet.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Toilet.usdz; sourceTree = "<group>"; };
+		0691D2C2F3AC3F55AC10860A /* ToyBiplace.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = ToyBiplace.usdz; sourceTree = "<group>"; };
+		1D6924AD86DA5C16628A3CEE /* ToyCar.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = ToyCar.usdz; sourceTree = "<group>"; };
 		FE0A4CF7299EAABDE56E7A55 /* PatternGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,11 +175,26 @@
 			path = HeightMaps;
 			sourceTree = "<group>";
 		};
+		9A9F92E55646ADD1ADF72E3B /* Models3D */ = {
+			isa = PBXGroup;
+			children = (
+				2D8759BECD4285140A7241D1 /* Chameleon.usdz */,
+				34ED0D1CA01A1214F45CD486 /* Slide.usdz */,
+				EE9EFA1589578903E99EE261 /* SportsCar.usdz */,
+				198131F8FBD0C2141186411F /* Toilet.usdz */,
+				0691D2C2F3AC3F55AC10860A /* ToyBiplace.usdz */,
+				1D6924AD86DA5C16628A3CEE /* ToyCar.usdz */,
+			);
+			path = Models3D;
+			sourceTree = "<group>";
+		};
 		1BC9D8733F26C289653586DE /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				BB485F2284A900947122EF73 /* DepthAnythingService.swift */,
 				4AB63A790621C79B3BD1F82B /* LiDARDepthService.swift */,
+				433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */,
+				488C2567AE57C46B8C0CCBAA /* Model3DDepthRenderer.swift */,
 				E8B569D42D7D1DC2CA0FFC61 /* StereogramGenerator.swift */,
 				630041FF966306E94E84AF0B /* Generators */,
 			);
@@ -179,6 +216,7 @@
 				650FDFF65F6D228757CBF213 /* InfoPlist.xcstrings */,
 				FDD46A613A9E670F3E272D91 /* Localizable.xcstrings */,
 				0581E1EA924E7B31785D944B /* HeightMaps */,
+				9A9F92E55646ADD1ADF72E3B /* Models3D */,
 				8C491BF38FCC5614F6571E8F /* Patterns */,
 			);
 			path = Resources;
@@ -191,6 +229,7 @@
 				1122334455667788AABBCCDD /* DepthPointCloudView.swift */,
 				E1C904A0AA6EED0E7FF9E2C3 /* GenerationView.swift */,
 				4F7971B9A4F6354DD9BEDDA5 /* LiDARCaptureView.swift */,
+				DB68ECB9015EE612A6580A6B /* Model3DCaptureView.swift */,
 				958555080B93885E58B07D46 /* ProceduralParamsView.swift */,
 				723C49A475CFE536CC329EFF /* StereogramResultView.swift */,
 			);
@@ -201,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				416C30FDB39F507C7360BE2D /* LiDARCaptureViewModel.swift */,
+				322AA5DB0C9DF9BD6DF0FC28 /* Model3DCaptureViewModel.swift */,
 				60C0BD72E6379456B99D701E /* PatternPreviewViewModel.swift */,
 				277A2A1DF7D580A94C29AAA6 /* PhotoDepthViewModel.swift */,
 				179B87B4D79F5A8F9C7202E6 /* StereogramViewModel.swift */,
@@ -281,6 +321,7 @@
 				C617E7FB146F4305FC0F5D94 /* DepthAdjustment.swift */,
 				211C3036F80743386EEC264C /* DepthMap.swift */,
 				7146F3F1A17C29C0CF399D77 /* DepthMapPreset.swift */,
+				8147331644D902CEC7C53F14 /* Model3DPreset.swift */,
 				453EBEAF23405B7B7BDDDC0C /* PatternSource.swift */,
 				D790B138C97CF59825E5578A /* ProceduralPatternType.swift */,
 				90E652343D35A88CBD7D3A71 /* StereogramPattern.swift */,
@@ -351,6 +392,12 @@
 			files = (
 				F80A2EF8BD814F17C3F23CA8 /* InfoPlist.xcstrings in Resources */,
 				0E514E57FAB6D08B6BABC72B /* Localizable.xcstrings in Resources */,
+				6A09F71402310ABC4945DBC2 /* Chameleon.usdz in Resources */,
+				C90B42574E1CC704276DD6D9 /* Slide.usdz in Resources */,
+				F652436F5180B007C54BAB61 /* SportsCar.usdz in Resources */,
+				038FF0D68E49E3A49CD983C1 /* Toilet.usdz in Resources */,
+				CA75A3F2EF65181EBF02B46F /* ToyBiplace.usdz in Resources */,
+				95536D4B8C173096B982FA6B /* ToyCar.usdz in Resources */,
 				5A0AF3B47FF94D79792CAFDD /* atomium.png in Resources */,
 				5139AD1169699829B15E1432 /* car.png in Resources */,
 				6F86633BFC2C01E7D2F45CAA /* dog.png in Resources */,
@@ -397,6 +444,11 @@
 				4B3168DAA98000F24296E6CC /* DepthAnythingV2SmallF16.mlpackage in Sources */,
 				075B149DE71910946460F250 /* DepthMap.swift in Sources */,
 				9FD861F147B7A0948989E279 /* DepthMapPreset.swift in Sources */,
+				5FCAC5AFC57654B1AD89298A /* Model3DPreset.swift in Sources */,
+				673ACD09DFF3335B9F00E7AE /* Model3DLoader.swift in Sources */,
+				894A44CA96D1368AD62794C3 /* Model3DDepthRenderer.swift in Sources */,
+				78D1742F874A4B8E2462B848 /* Model3DCaptureViewModel.swift in Sources */,
+				A8A4D0BF0695ADABD82CA468 /* Model3DCaptureView.swift in Sources */,
 				CC4B01BB7ED743D719FA3B3D /* DepthWeaverApp.swift in Sources */,
 				F792C9764104A9F743123FC5 /* GenerationView.swift in Sources */,
 				D59544A6ACACEB30E2CBDC5C /* LiDARCaptureView.swift in Sources */,
@@ -433,6 +485,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DepthWeaver;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DepthWeaver uses the camera with LiDAR to capture 3D depth";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "DepthWeaver saves generated stereograms to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "DepthWeaver needs access to your photos to generate depth maps";
@@ -591,6 +644,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DepthWeaver;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DepthWeaver uses the camera with LiDAR to capture 3D depth";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "DepthWeaver saves generated stereograms to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "DepthWeaver needs access to your photos to generate depth maps";

@@ -34,6 +34,12 @@ struct ContentView: View {
                         appState.currentDepthMap = depthMap
                         path.removeLast()
                     })
+                case .model3DCapture:
+                    Model3DCaptureView(onCapture: { depthMap in
+                        logger.info("onCapture (3D) called, depthMap \(depthMap.width)x\(depthMap.height)")
+                        appState.currentDepthMap = depthMap
+                        path.removeLast()
+                    })
                 case .stereogramResult(let image):
                     StereogramResultView(image: image)
                 case .depthAdjustment:
@@ -75,12 +81,14 @@ struct ContentView: View {
 
 enum NavigationDestination: Hashable {
     case lidarCapture
+    case model3DCapture
     case stereogramResult(UIImage)
     case depthAdjustment
 
     func hash(into hasher: inout Hasher) {
         switch self {
         case .lidarCapture: hasher.combine(0)
+        case .model3DCapture: hasher.combine(1)
         case .stereogramResult: hasher.combine(2)
         case .depthAdjustment: hasher.combine(3)
         }
@@ -89,6 +97,7 @@ enum NavigationDestination: Hashable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
         case (.lidarCapture, .lidarCapture): true
+        case (.model3DCapture, .model3DCapture): true
         case (.stereogramResult, .stereogramResult): true
         case (.depthAdjustment, .depthAdjustment): true
         default: false

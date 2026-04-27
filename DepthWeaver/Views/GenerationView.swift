@@ -405,6 +405,18 @@ struct GenerationView: View {
                 .buttonStyle(.bordered)
                 .controlSize(.small)
             }
+
+            GridRow {
+                Button {
+                    path.append(NavigationDestination.model3DCapture)
+                } label: {
+                    Label("depth.from_3d_model", systemImage: "cube")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .gridCellColumns(2)
+            }
         }
     }
 

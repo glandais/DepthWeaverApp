@@ -1,2457 +1,2712 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "%@" : {
-      "comment" : "A circle with a number inside. The argument is the step number."
+  "sourceLanguage": "en",
+  "strings": {
+    "%@": {
+      "comment": "A circle with a number inside. The argument is the step number."
     },
-    "%@: %@" : {
-      "comment" : "A label and slider pair. The label shows the parameter name and its current value. The slider allows the user to adjust the parameter value. The argument is the string “Density”, the string “Dot Size”, the string “Frequency”, the string “Octaves”, the string “Persistence”, the string “Hue”, the string “Cell Size”, the string “Cell Count”, the string “Jitter”, the string “Edge Width”, the string “Feed Rate (F)”, the string “Kill Rate (k)” or the string “Iterations”.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@: %2$@"
+    "%@: %@": {
+      "comment": "A label and slider pair. The label shows the parameter name and its current value. The slider allows the user to adjust the parameter value. The argument is the string “Density”, the string “Dot Size”, the string “Frequency”, the string “Octaves”, the string “Persistence”, the string “Hue”, the string “Cell Size”, the string “Cell Count”, the string “Jitter”, the string “Edge Width”, the string “Feed Rate (F)”, the string “Kill Rate (k)” or the string “Iterations”.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@: %2$@"
           }
         }
       }
     },
-    "color_mode.bw" : {
-      "comment" : "Color mode",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "B&W"
+    "color_mode.bw": {
+      "comment": "Color mode",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "B&W"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "N&B"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N&B"
           }
         }
       }
     },
-    "color_mode.color" : {
-      "comment" : "Color mode",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Color"
+    "color_mode.color": {
+      "comment": "Color mode",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couleur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur"
           }
         }
       }
     },
-    "color_mode.grayscale" : {
-      "comment" : "Color mode",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grayscale"
+    "color_mode.grayscale": {
+      "comment": "Color mode",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayscale"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niveaux de gris"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niveaux de gris"
           }
         }
       }
     },
-    "color_mode.rgb" : {
-      "comment" : "Color mode",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RGB"
+    "color_mode.rgb": {
+      "comment": "Color mode",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RGB"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RVB"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RVB"
           }
         }
       }
     },
-    "color_mode.single_hue" : {
-      "comment" : "Color mode",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Single Hue"
+    "color_mode.single_hue": {
+      "comment": "Color mode",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Single Hue"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Teinte unique"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teinte unique"
           }
         }
       }
     },
-    "color_scheme.monochrome" : {
-      "comment" : "Color scheme",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monochrome"
+    "color_scheme.monochrome": {
+      "comment": "Color scheme",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monochrome"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monochrome"
           }
         }
       }
     },
-    "color_scheme.pastel" : {
-      "comment" : "Color scheme",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pastel"
+    "color_scheme.pastel": {
+      "comment": "Color scheme",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pastel"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel"
           }
         }
       }
     },
-    "color_scheme.random" : {
-      "comment" : "Color scheme",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Random"
+    "color_scheme.random": {
+      "comment": "Color scheme",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aléatoire"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aléatoire"
           }
         }
       }
     },
-    "color_scheme.vivid" : {
-      "comment" : "Color scheme",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vivid"
+    "color_scheme.vivid": {
+      "comment": "Color scheme",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivid"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vif"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vif"
           }
         }
       }
     },
-    "depth_adjustment.end_value %.2f" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "End: %.2f"
+    "depth_adjustment.end_value %.2f": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End: %.2f"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fin : %.2f"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin : %.2f"
           }
         }
       }
     },
-    "depth_adjustment.input_range" : {
-      "comment" : "Depth adjustment section",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Range"
+    "depth_adjustment.input_range": {
+      "comment": "Depth adjustment section",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input Range"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plage d'entrée"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plage d'entrée"
           }
         }
       }
     },
-    "depth_adjustment.max_value %.3f" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Max: %.3f"
+    "depth_adjustment.max_value %.3f": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max: %.3f"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Max : %.3f"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max : %.3f"
           }
         }
       }
     },
-    "depth_adjustment.min_value %.3f" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Min: %.3f"
+    "depth_adjustment.min_value %.3f": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Min: %.3f"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Min : %.3f"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Min : %.3f"
           }
         }
       }
     },
-    "depth_adjustment.output_range" : {
-      "comment" : "Depth adjustment section",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Output Range"
+    "depth_adjustment.output_range": {
+      "comment": "Depth adjustment section",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Output Range"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plage de sortie"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plage de sortie"
           }
         }
       }
     },
-    "depth_adjustment.reset" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset"
+    "depth_adjustment.reset": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réinitialiser"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser"
           }
         }
       }
     },
-    "depth_adjustment.start_value %.2f" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start: %.2f"
+    "depth_adjustment.start_value %.2f": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start: %.2f"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Début : %.2f"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Début : %.2f"
           }
         }
       }
     },
-    "depth.acquire_prompt" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acquire a depth map to generate stereograms"
+    "depth.acquire_prompt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquire a depth map to generate stereograms"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acquérir une carte de profondeur pour générer des stéréogrammes"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquérir une carte de profondeur pour générer des stéréogrammes"
           }
         }
       }
     },
-    "depth.adjust_depth" : {
-      "comment" : "Navigation title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust Depth"
+    "depth.adjust_depth": {
+      "comment": "Navigation title",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust Depth"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajuster la profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuster la profondeur"
           }
         }
       }
     },
-    "depth.estimating" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estimating depth..."
+    "depth.estimating": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimating depth..."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estimation de la profondeur…"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimation de la profondeur…"
           }
         }
       }
     },
-    "depth.from_photo" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From Photo"
+    "depth.from_photo": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From Photo"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depuis une photo"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis une photo"
           }
         }
       }
     },
-    "depth.import_depth_map" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Import Depth"
+    "depth.import_depth_map": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import Depth"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importer profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer profondeur"
           }
         }
       }
     },
-    "depth.lidar_scan" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LiDAR Scan"
+    "depth.lidar_scan": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LiDAR Scan"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scan LiDAR"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan LiDAR"
           }
         }
       }
     },
-    "depth.presets" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Presets"
+    "depth.presets": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presets"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Préréglages"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préréglages"
           }
         }
       }
     },
-    "depth.presets_title" : {
-      "comment" : "Sheet title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depth Map Presets"
+    "depth.presets_title": {
+      "comment": "Sheet title",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth Map Presets"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cartes de profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes de profondeur"
           }
         }
       }
     },
-    "depth.section_title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depth Map"
+    "depth.section_title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth Map"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carte de profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte de profondeur"
           }
         }
       }
     },
-    "depth.source_ai" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI"
+    "depth.source_ai": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
           }
         }
       }
     },
-    "depth.source_imported" : {
-      "comment" : "Depth map source label",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imported"
+    "depth.source_imported": {
+      "comment": "Depth map source label",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imported"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importée"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importée"
           }
         }
       }
     },
-    "depth.tap_to_adjust" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to adjust depth"
+    "depth.tap_to_adjust": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to adjust depth"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touchez pour ajuster la profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour ajuster la profondeur"
           }
         }
       }
     },
-    "distance.chebyshev" : {
-      "comment" : "Distance function",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chebyshev"
+    "distance.chebyshev": {
+      "comment": "Distance function",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chebyshev"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tchebychev"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tchebychev"
           }
         }
       }
     },
-    "distance.euclidean" : {
-      "comment" : "Distance function",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Euclidean"
+    "distance.euclidean": {
+      "comment": "Distance function",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Euclidean"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Euclidienne"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Euclidienne"
           }
         }
       }
     },
-    "distance.manhattan" : {
-      "comment" : "Distance function",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manhattan"
+    "distance.manhattan": {
+      "comment": "Distance function",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manhattan"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manhattan"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manhattan"
           }
         }
       }
     },
-    "error.buffer_copy_failed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to copy depth buffer"
+    "error.buffer_copy_failed": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to copy depth buffer"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de la copie du tampon de profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de la copie du tampon de profondeur"
           }
         }
       }
     },
-    "error.model_not_loaded" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load depth estimation model"
+    "error.model_not_loaded": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to load depth estimation model"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec du chargement du modèle d'estimation de profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec du chargement du modèle d'estimation de profondeur"
           }
         }
       }
     },
-    "error.photo_load_failed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not load selected photo"
+    "error.photo_load_failed": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not load selected photo"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de charger la photo sélectionnée"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de charger la photo sélectionnée"
           }
         }
       }
     },
-    "general.done" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
+    "general.done": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terminé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
           }
         }
       }
     },
-    "general.error" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error"
+    "general.error": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erreur"
           }
         }
       }
     },
-    "general.ok" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+    "general.ok": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         }
       }
     },
-    "generation.depth_factor_label" : {
-      "comment" : "Accessibility label for depth slider",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depth factor"
+    "generation.depth_factor_label": {
+      "comment": "Accessibility label for depth slider",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth factor"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Facteur de profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facteur de profondeur"
           }
         }
       }
     },
-    "generation.depth_label %.2f" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depth: %.2f"
+    "generation.depth_label %.2f": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth: %.2f"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profondeur : %.2f"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profondeur : %.2f"
           }
         }
       }
     },
-    "generation.generating" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generating..."
+    "generation.generating": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generating..."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Génération…"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Génération…"
           }
         }
       }
     },
-    "generation.invert_depth" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invert Depth"
+    "generation.invert_depth": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invert Depth"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inverser la profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inverser la profondeur"
           }
         }
       }
     },
-    "generation.main_stripe" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Main Stripe"
+    "generation.main_stripe": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main Stripe"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bande principale"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bande principale"
           }
         }
       }
     },
-    "generation.settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
+    "generation.settings": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réglages"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
           }
         }
       }
     },
-    "generation.stripe_left" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left"
+    "generation.stripe_left": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Left"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gauche"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gauche"
           }
         }
       }
     },
-    "generation.stripe_middle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Middle"
+    "generation.stripe_middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Middle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Milieu"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Milieu"
           }
         }
       }
     },
-    "generation.stripes_count_label" : {
-      "comment" : "Accessibility label for stripes slider",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stripes count"
+    "generation.stripes_count_label": {
+      "comment": "Accessibility label for stripes slider",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripes count"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre de bandes"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre de bandes"
           }
         }
       }
     },
-    "generation.stripes_label %@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stripes: %1$@ (%2$@)"
+    "generation.stripes_label %@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripes: %1$@ (%2$@)"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bandes : %1$@ (%2$@)"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bandes : %1$@ (%2$@)"
           }
         }
       }
     },
-    "generation.stripes_label %lld %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stripes: %1$lld (%2$@)"
+    "generation.stripes_label %lld %@": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripes: %1$lld (%2$@)"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bandes : %1$lld (%2$@)"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bandes : %1$lld (%2$@)"
           }
         }
       }
     },
-    "help.how_to_see_3d" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How to See the 3D Image"
+    "help.how_to_see_3d": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to See the 3D Image"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comment voir l'image 3D"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment voir l'image 3D"
           }
         }
       }
     },
-    "help.how_to_use_button" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How to use"
+    "help.how_to_use_button": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to use"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode d'emploi"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode d'emploi"
           }
         }
       }
     },
-    "help.how_to_use_title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How to Use DepthWeaver"
+    "help.how_to_use_title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to Use DepthWeaver"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comment utiliser DepthWeaver"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment utiliser DepthWeaver"
           }
         }
       }
     },
-    "help.how_to_view_button" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How to view"
+    "help.how_to_view_button": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to view"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comment voir"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment voir"
           }
         }
       }
     },
-    "help.step_acquire_full" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)"
+    "help.step_acquire_full": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = proche, noir = loin)"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = proche, noir = loin)"
           }
         }
       }
     },
-    "help.step_adjust_depth" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast"
+    "help.step_adjust_depth": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touchez l'aperçu de profondeur ou « Ajuster la profondeur » pour cibler une plage de profondeur — recadrez l'entrée et remappez la sortie pour un meilleur contraste"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez l'aperçu de profondeur ou « Ajuster la profondeur » pour cibler une plage de profondeur — recadrez l'entrée et remappez la sortie pour un meilleur contraste"
           }
         }
       }
     },
-    "help.step_adjust_settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust Stripes (number of pattern repetitions), Depth (3D intensity), and Main Stripe position"
+    "help.step_adjust_settings": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjust Stripes (number of pattern repetitions), Depth (3D intensity), and Main Stripe position"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustez les bandes (nombre de répétitions du motif), la profondeur (intensité 3D) et la position de la bande principale"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustez les bandes (nombre de répétitions du motif), la profondeur (intensité 3D) et la position de la bande principale"
           }
         }
       }
     },
-    "help.step_choose_pattern" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose a pattern — it determines the texture of your stereogram"
+    "help.step_choose_pattern": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a pattern — it determines the texture of your stereogram"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez un motif — il détermine la texture de votre stéréogramme"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un motif — il détermine la texture de votre stéréogramme"
           }
         }
       }
     },
-    "help.step_share" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap the stereogram preview to view it full screen, then share or save it"
+    "help.step_share": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the stereogram preview to view it full screen, then share or save it"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touchez l'aperçu du stéréogramme pour le voir en plein écran, puis partagez-le ou enregistrez-le"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez l'aperçu du stéréogramme pour le voir en plein écran, puis partagez-le ou enregistrez-le"
           }
         }
       }
     },
-    "help.tip_device_close" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tip: It helps to start with the device close to your face, then slowly move it away while keeping your eyes relaxed."
+    "help.tip_device_close": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tip: It helps to start with the device close to your face, then slowly move it away while keeping your eyes relaxed."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
           }
         }
       }
     },
-    "help.tip_device_close_alt" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tip: Start with the device close to your face, then slowly move it away while keeping your eyes relaxed."
+    "help.tip_device_close_alt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tip: Start with the device close to your face, then slowly move it away while keeping your eyes relaxed."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
           }
         }
       }
     },
-    "help.view_step_adjust" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Once you see the 3D image, you can slowly adjust your distance to sharpen it"
+    "help.view_step_adjust": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once you see the 3D image, you can slowly adjust your distance to sharpen it"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une fois l'image 3D visible, vous pouvez ajuster lentement la distance pour la rendre plus nette"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois l'image 3D visible, vous pouvez ajuster lentement la distance pour la rendre plus nette"
           }
         }
       }
     },
-    "help.view_step_hold" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hold your device at arm's length"
+    "help.view_step_hold": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold your device at arm's length"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tenez votre appareil à bout de bras"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenez votre appareil à bout de bras"
           }
         }
       }
     },
-    "help.view_step_overlap" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The repeating pattern will overlap. Keep your gaze relaxed until a 3D shape emerges"
+    "help.view_step_overlap": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The repeating pattern will overlap. Keep your gaze relaxed until a 3D shape emerges"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le motif répété va se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le motif répété va se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
           }
         }
       }
     },
-    "help.view_step_overlap_alt" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The repeating pattern will start to overlap. Keep your gaze relaxed until a 3D shape emerges"
+    "help.view_step_overlap_alt": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The repeating pattern will start to overlap. Keep your gaze relaxed until a 3D shape emerges"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le motif répété va commencer à se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le motif répété va commencer à se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
           }
         }
       }
     },
-    "help.view_step_relax" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it"
+    "help.view_step_relax": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Détendez vos yeux et regardez « à travers » l'écran, comme si vous fixiez quelque chose loin derrière"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détendez vos yeux et regardez « à travers » l'écran, comme si vous fixiez quelque chose loin derrière"
           }
         }
       }
     },
-    "help.viewing_3d" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Viewing the 3D Image"
+    "help.viewing_3d": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viewing the 3D Image"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voir l'image 3D"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir l'image 3D"
           }
         }
       }
     },
-    "lidar.camera_denied" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera Access Denied"
+    "lidar.camera_denied": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera Access Denied"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accès à la caméra refusé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès à la caméra refusé"
           }
         }
       }
     },
-    "lidar.camera_description" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings."
+    "lidar.camera_description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DepthWeaver utilise votre caméra et le capteur LiDAR pour capturer les informations de profondeur 3D de votre environnement."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DepthWeaver utilise votre caméra et le capteur LiDAR pour capturer les informations de profondeur 3D de votre environnement."
           }
         }
       }
     },
-    "lidar.camera_required" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera Access Required"
+    "lidar.camera_required": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera Access Required"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accès à la caméra requis"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès à la caméra requis"
           }
         }
       }
     },
-    "lidar.capture_depth" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture depth"
+    "lidar.capture_depth": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capture depth"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capturer la profondeur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capturer la profondeur"
           }
         }
       }
     },
-    "lidar.capture_hint" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Takes a depth snapshot of the current scene"
+    "lidar.capture_hint": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takes a depth snapshot of the current scene"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prend un instantané de profondeur de la scène actuelle"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prend un instantané de profondeur de la scène actuelle"
           }
         }
       }
     },
-    "lidar.enable_camera" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enable camera access in Settings to use LiDAR scanning."
+    "lidar.enable_camera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please enable camera access in Settings to use LiDAR scanning."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veuillez activer l'accès à la caméra dans Réglages pour utiliser le scan LiDAR."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veuillez activer l'accès à la caméra dans Réglages pour utiliser le scan LiDAR."
           }
         }
       }
     },
-    "lidar.open_settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Settings"
+    "lidar.open_settings": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir les Réglages"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les Réglages"
           }
         }
       }
     },
-    "lidar.start_scanning" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Scanning"
+    "lidar.start_scanning": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Scanning"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commencer le scan"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer le scan"
           }
         }
       }
     },
-    "lidar.waiting_for_depth" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waiting for depth data..."
+    "lidar.waiting_for_depth": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for depth data..."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En attente des données de profondeur…"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente des données de profondeur…"
           }
         }
       }
     },
-    "param.background" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Background"
+    "param.background": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrière-plan"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrière-plan"
           }
         }
       }
     },
-    "param.cell_count" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cell Count"
+    "param.cell_count": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cell Count"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre de cellules"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre de cellules"
           }
         }
       }
     },
-    "param.cell_size" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cell Size"
+    "param.cell_size": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cell Size"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taille des cellules"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille des cellules"
           }
         }
       }
     },
-    "param.color_a" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Color A"
+    "param.color_a": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color A"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couleur A"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur A"
           }
         }
       }
     },
-    "param.color_b" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Color B"
+    "param.color_b": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color B"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couleur B"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur B"
           }
         }
       }
     },
-    "param.color_scheme" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Color Scheme"
+    "param.color_scheme": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color Scheme"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Palette de couleurs"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palette de couleurs"
           }
         }
       }
     },
-    "param.colors" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Colors"
+    "param.colors": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colors"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couleurs"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleurs"
           }
         }
       }
     },
-    "param.density" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Density"
+    "param.density": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Density"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Densité"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Densité"
           }
         }
       }
     },
-    "param.distance" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Distance"
+    "param.distance": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Distance"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance"
           }
         }
       }
     },
-    "param.dot_size" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dot Size"
+    "param.dot_size": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dot Size"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taille des points"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taille des points"
           }
         }
       }
     },
-    "param.edge_width" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edge Width"
+    "param.edge_width": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edge Width"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Épaisseur des bords"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Épaisseur des bords"
           }
         }
       }
     },
-    "param.feed_rate" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feed Rate (F)"
+    "param.feed_rate": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feed Rate (F)"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taux d'alimentation (F)"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taux d'alimentation (F)"
           }
         }
       }
     },
-    "param.frequency" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frequency"
+    "param.frequency": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frequency"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fréquence"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fréquence"
           }
         }
       }
     },
-    "param.hue" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hue"
+    "param.hue": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hue"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Teinte"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teinte"
           }
         }
       }
     },
-    "param.invert" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invert"
+    "param.invert": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invert"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inverser"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inverser"
           }
         }
       }
     },
-    "param.iterations" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iterations"
+    "param.iterations": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iterations"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Itérations"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Itérations"
           }
         }
       }
     },
-    "param.jitter" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jitter"
+    "param.jitter": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jitter"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Variation"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variation"
           }
         }
       }
     },
-    "param.kill_rate" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kill Rate (k)"
+    "param.kill_rate": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kill Rate (k)"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taux de destruction (k)"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taux de destruction (k)"
           }
         }
       }
     },
-    "param.max_radius" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Max Radius"
+    "param.max_radius": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max Radius"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rayon max"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rayon max"
           }
         }
       }
     },
-    "param.mode" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode"
+    "param.mode": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
           }
         }
       }
     },
-    "param.octaves" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Octaves"
+    "param.octaves": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Octaves"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Octaves"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Octaves"
           }
         }
       }
     },
-    "param.persistence" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Persistence"
+    "param.persistence": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Persistence"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Persistance"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Persistance"
           }
         }
       }
     },
-    "param.randomize" : {
-      "comment" : "Button",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Randomize"
+    "param.randomize": {
+      "comment": "Button",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Randomize"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aléatoire"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aléatoire"
           }
         }
       }
     },
-    "param.star_count" : {
-      "comment" : "Parameter",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Star Count"
+    "param.star_count": {
+      "comment": "Parameter",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Star Count"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre d'étoiles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre d'étoiles"
           }
         }
       }
     },
-    "pattern.circles" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Circles"
+    "pattern.circles": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Circles"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cercles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cercles"
           }
         }
       }
     },
-    "pattern.clouds" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clouds"
+    "pattern.clouds": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clouds"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nuages"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuages"
           }
         }
       }
     },
-    "pattern.dots" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dots"
+    "pattern.dots": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dots"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Points"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points"
           }
         }
       }
     },
-    "pattern.foliage" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foliage"
+    "pattern.foliage": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foliage"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feuillage"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feuillage"
           }
         }
       }
     },
-    "pattern.generated_section" : {
-      "comment" : "Section header",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generated"
+    "pattern.generated_section": {
+      "comment": "Section header",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generated"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Générés"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Générés"
           }
         }
       }
     },
-    "pattern.giraffe" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Giraffe"
+    "pattern.giraffe": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giraffe"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Girafe"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Girafe"
           }
         }
       }
     },
-    "pattern.hexagons" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hexagons"
+    "pattern.hexagons": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hexagons"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hexagones"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hexagones"
           }
         }
       }
     },
-    "pattern.import" : {
-      "comment" : "Pattern name",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Import"
+    "pattern.import": {
+      "comment": "Pattern name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importer"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer"
           }
         }
       }
     },
-    "pattern.import_accessibility" : {
-      "comment" : "Accessibility label",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Import pattern"
+    "pattern.import_accessibility": {
+      "comment": "Accessibility label",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import pattern"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importer un motif"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer un motif"
           }
         }
       }
     },
-    "pattern.leaves" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Leaves"
+    "pattern.leaves": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leaves"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feuilles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feuilles"
           }
         }
       }
     },
-    "pattern.mosaic" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mosaic"
+    "pattern.mosaic": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mosaic"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mosaïque"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mosaïque"
           }
         }
       }
     },
-    "pattern.noise" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noise"
+    "pattern.noise": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noise"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bruit"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bruit"
           }
         }
       }
     },
-    "pattern.perlin_noise" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perlin Noise"
+    "pattern.perlin_noise": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlin Noise"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bruit de Perlin"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bruit de Perlin"
           }
         }
       }
     },
-    "pattern.random_dot" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Random Dot"
+    "pattern.random_dot": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random Dot"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Points aléatoires"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points aléatoires"
           }
         }
       }
     },
-    "pattern.reaction_diffusion" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reaction-Diffusion"
+    "pattern.reaction_diffusion": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reaction-Diffusion"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réaction-Diffusion"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réaction-Diffusion"
           }
         }
       }
     },
-    "pattern.space" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Space"
+    "pattern.space": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Espace"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espace"
           }
         }
       }
     },
-    "pattern.stars" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stars"
+    "pattern.stars": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stars"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Étoiles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étoiles"
           }
         }
       }
     },
-    "pattern.stones" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stones"
+    "pattern.stones": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stones"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pierres"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierres"
           }
         }
       }
     },
-    "pattern.textures_section" : {
-      "comment" : "Section header",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Textures"
+    "pattern.textures_section": {
+      "comment": "Section header",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textures"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Textures"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textures"
           }
         }
       }
     },
-    "pattern.triangles" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Triangles"
+    "pattern.triangles": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Triangles"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Triangles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Triangles"
           }
         }
       }
     },
-    "pattern.voronoi" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voronoi"
+    "pattern.voronoi": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voronoi"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voronoï"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voronoï"
           }
         }
       }
     },
-    "pattern.wallpaper" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wallpaper"
+    "pattern.wallpaper": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallpaper"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Papier peint"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papier peint"
           }
         }
       }
     },
-    "pattern.worley_noise" : {
-      "comment" : "Pattern name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Worley Noise"
+    "pattern.worley_noise": {
+      "comment": "Pattern name",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worley Noise"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bruit de Worley"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bruit de Worley"
           }
         }
       }
     },
-    "preset.atomium" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atomium"
+    "preset.atomium": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atomium"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atomium"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atomium"
           }
         }
       }
     },
-    "preset.car" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Car"
+    "preset.car": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Car"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voiture"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voiture"
           }
         }
       }
     },
-    "preset.dog" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dog"
+    "preset.dog": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dog"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chien"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chien"
           }
         }
       }
     },
-    "preset.dolphin" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dolphin"
+    "preset.dolphin": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dolphin"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dauphin"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dauphin"
           }
         }
       }
     },
-    "preset.hand" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hand"
+    "preset.hand": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hand"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Main"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main"
           }
         }
       }
     },
-    "preset.head" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Head"
+    "preset.head": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Head"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tête"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tête"
           }
         }
       }
     },
-    "preset.island" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Island"
+    "preset.island": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Island"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Île"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Île"
           }
         }
       }
     },
-    "preset.planet" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Planet"
+    "preset.planet": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planet"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Planète"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planète"
           }
         }
       }
     },
-    "preset.ship" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ship"
+    "preset.ship": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ship"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navire"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Navire"
           }
         }
       }
     },
-    "preset.sphinx" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sphinx"
+    "preset.sphinx": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sphinx"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sphinx"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sphinx"
           }
         }
       }
     },
-    "preset.thumbs_up" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Thumbs Up"
+    "preset.thumbs_up": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thumbs Up"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pouce levé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pouce levé"
           }
         }
       }
     },
-    "preset.tree" : {
-      "comment" : "Depth map preset",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tree"
+    "preset.tree": {
+      "comment": "Depth map preset",
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tree"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arbre"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arbre"
           }
         }
       }
     },
-    "result.accessibility_label" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Generated autostereogram image"
+    "result.accessibility_label": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generated autostereogram image"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Image d'autostéréogramme générée"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image d'autostéréogramme générée"
           }
         }
       }
     },
-    "result.preview" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stereogram preview"
+    "result.preview": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stereogram preview"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aperçu du stéréogramme"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperçu du stéréogramme"
           }
         }
       }
     },
-    "result.save_to_photos" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save to photos"
+    "result.save_to_photos": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save to photos"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrer dans les photos"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer dans les photos"
           }
         }
       }
     },
-    "result.saved_to_photos" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saved to photos"
+    "result.saved_to_photos": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to photos"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistré dans les photos"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistré dans les photos"
           }
         }
       }
     },
-    "result.share" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Share stereogram"
+    "result.share": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share stereogram"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Partager le stéréogramme"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partager le stéréogramme"
           }
         }
       }
     },
-    "result.tap_fullscreen" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to view full screen"
+    "result.tap_fullscreen": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to view full screen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touchez pour voir en plein écran"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour voir en plein écran"
           }
         }
       }
     },
-    "result.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stereogram"
+    "result.title": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stereogram"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stéréogramme"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stéréogramme"
+          }
+        }
+      }
+    },
+    "depth.from_3d_model": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From 3D Model"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis un modèle 3D"
+          }
+        }
+      }
+    },
+    "model3d.capture_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D Model"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle 3D"
+          }
+        }
+      }
+    },
+    "model3d.open_file": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open File…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir un fichier…"
+          }
+        }
+      }
+    },
+    "model3d.presets": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préréglages"
+          }
+        }
+      }
+    },
+    "model3d.presets_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D Presets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préréglages 3D"
+          }
+        }
+      }
+    },
+    "model3d.capture_depth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capture Depth"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capturer la profondeur"
+          }
+        }
+      }
+    },
+    "model3d.empty_state_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a 3D model to start"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un modèle 3D pour commencer"
+          }
+        }
+      }
+    },
+    "model3d.empty_state_message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a USDZ, USD, OBJ, or SCN file or choose a preset, then orbit the camera and capture."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez un fichier USDZ, USD, OBJ ou SCN ou choisissez un préréglage, puis orbitez la caméra et capturez."
+          }
+        }
+      }
+    },
+    "model3d.load_failed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't load the 3D file."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de charger le fichier 3D."
+          }
+        }
+      }
+    },
+    "model3d.preset.chameleon": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chameleon"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caméléon"
+          }
+        }
+      }
+    },
+    "model3d.preset.slide": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slide"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toboggan"
+          }
+        }
+      }
+    },
+    "model3d.preset.sports_car": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sports Car"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voiture de sport"
+          }
+        }
+      }
+    },
+    "model3d.preset.toilet": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toilet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toilettes"
+          }
+        }
+      }
+    },
+    "model3d.preset.toy_biplace": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toy Biplane"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avion jouet"
+          }
+        }
+      }
+    },
+    "model3d.preset.toy_car": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toy Car"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voiture jouet"
           }
         }
       }
     }
   },
-  "version" : "1.1"
+  "version": "1.1"
 }
