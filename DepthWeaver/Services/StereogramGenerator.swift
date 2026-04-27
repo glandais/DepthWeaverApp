@@ -117,17 +117,39 @@ final class StereogramGenerator {
                 var tileV = posY / tileHeight
                 tileV = tileV - floor(tileV) // fract
 
-                // Sample pattern with wrapping
-                var pxI = Int(tileU * Float(patternW))
-                pxI = ((pxI % patternW) + patternW) % patternW
-                var pyI = Int(tileV * Float(patternH))
-                pyI = ((pyI % patternH) + patternH) % patternH
+                // Bilinear pattern sampling with wrapping (matches GL_LINEAR + GL_REPEAT).
+                // Texel centers sit at (i + 0.5) / size, so subtract 0.5 to get continuous index.
+                let fx = tileU * Float(patternW) - 0.5
+                let fy = tileV * Float(patternH) - 0.5
+                let x0Raw = Int(floor(fx))
+                let y0Raw = Int(floor(fy))
+                let dx = fx - Float(x0Raw)
+                let dy = fy - Float(y0Raw)
+                let x0 = ((x0Raw % patternW) + patternW) % patternW
+                let y0 = ((y0Raw % patternH) + patternH) % patternH
+                let x1 = (x0 + 1) % patternW
+                let y1 = (y0 + 1) % patternH
 
-                let pi = (pyI * patternW + pxI) * 4
+                let p00 = (y0 * patternW + x0) * 4
+                let p10 = (y0 * patternW + x1) * 4
+                let p01 = (y1 * patternW + x0) * 4
+                let p11 = (y1 * patternW + x1) * 4
+
+                let w00 = (1 - dx) * (1 - dy)
+                let w10 = dx * (1 - dy)
+                let w01 = (1 - dx) * dy
+                let w11 = dx * dy
+
                 let oi = rowOffset + col * 4
-                pixels[oi]     = patternPx[pi]
-                pixels[oi + 1] = patternPx[pi + 1]
-                pixels[oi + 2] = patternPx[pi + 2]
+                let r = Float(patternPx[p00])     * w00 + Float(patternPx[p10])     * w10
+                      + Float(patternPx[p01])     * w01 + Float(patternPx[p11])     * w11
+                let g = Float(patternPx[p00 + 1]) * w00 + Float(patternPx[p10 + 1]) * w10
+                      + Float(patternPx[p01 + 1]) * w01 + Float(patternPx[p11 + 1]) * w11
+                let b = Float(patternPx[p00 + 2]) * w00 + Float(patternPx[p10 + 2]) * w10
+                      + Float(patternPx[p01 + 2]) * w01 + Float(patternPx[p11 + 2]) * w11
+                pixels[oi]     = UInt8(min(255, max(0, Int(r.rounded()))))
+                pixels[oi + 1] = UInt8(min(255, max(0, Int(g.rounded()))))
+                pixels[oi + 2] = UInt8(min(255, max(0, Int(b.rounded()))))
                 pixels[oi + 3] = 255
             }
         }
