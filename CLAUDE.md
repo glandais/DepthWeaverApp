@@ -58,6 +58,10 @@ ContentView (NavigationStack + AppState)
 
 Open `DepthWeaver.xcodeproj` in Xcode, set your Development Team in Signing & Capabilities, then build and run.
 
+## App Store metadata
+
+Use the `asc` CLI to sync app metadata (descriptions, keywords, what's new, screenshots, localizations) with App Store Connect. Canonical metadata lives under `./metadata/`. App Store Connect app ID: `6764146054` (bundle `io.github.glandais.depthweaver`).
+
 ## Known constraints
 
 - LiDAR depth is 256×192 (always landscape from ARKit), rotated for portrait
