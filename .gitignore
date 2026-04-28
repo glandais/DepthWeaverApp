@@ -10,3 +10,4 @@ xcuserdata/
 
 # HuggingFace
 .huggingface/
+.claude

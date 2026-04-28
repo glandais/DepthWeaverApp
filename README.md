@@ -4,11 +4,18 @@ An iOS app that generates autostereograms (Magic Eye images) from depth maps.
 
 ## Features
 
-- **LiDAR Depth Capture** -- Use your device's LiDAR sensor to capture 3D depth of real-world scenes (iPhone Pro / iPad Pro)
-- **AI Depth Estimation** -- Generate depth maps from any photo using [Depth Anything V2](https://huggingface.co/apple/coreml-depth-anything-v2-small) (works on all devices)
-- **Autostereogram Generation** -- Transform depth maps into random-dot stereograms using the Thimbleby-Inglis-Witten algorithm
-- **Adjustable Parameters** -- Tune strip width and eye separation for optimal viewing
-- **Share & Save** -- Export generated stereograms to Photos or share via any app
+- **Multiple depth sources**
+  - **LiDAR Scan** — capture real-world 3D depth (iPhone Pro / iPad Pro)
+  - **Photo (AI)** — estimate depth from any image with [Depth Anything V2](https://huggingface.co/apple/coreml-depth-anything-v2-small)
+  - **3D Model** — load USDZ / USD / OBJ / SCN files (or built-in samples), orbit the camera, capture depth from the framed view
+  - **Depth Map Presets** — bundled height maps (dog, dolphin, atomium, …)
+  - **Import Depth Map** — bring your own grayscale image (white = close, black = far)
+- **Depth refinement** — interactive 3D point-cloud preview, input/output range remapping, and Core Image-based denoising for noisy 8-bit imports
+- **Patterns** — built-in textures, photo import, or procedural generators: random dot, stars, Perlin noise, Worley noise, Voronoi, reaction-diffusion
+- **Stereogram engine** — W.A. Steer's extension of the Thimbleby–Inglis–Witten algorithm with link-based hidden-surface removal, bitmapped patterns, oversampling, and centre-outwards application; parallelized per row
+- **Tunable rendering** — DPI, depth strength, depth range, smoothness (oversampling), and depth inversion
+- **Localization** — English and French (String Catalogs)
+- **Share & Save** — export to Photos or share via any app
 
 ## Requirements
 
@@ -23,21 +30,22 @@ An iOS app that generates autostereograms (Magic Eye images) from depth maps.
 3. Set your Development Team in Signing & Capabilities
 4. Build and run from Xcode
 
-The Depth Anything V2 CoreML model (~48MB) is included in the repository.
+The Depth Anything V2 CoreML model (~48 MB) and the bundled depth-map / 3D-model samples are included in the repository.
 
 ## How to View Stereograms
 
 1. Hold the image at arm's length
 2. Relax your eyes and look "through" the screen
-3. The repeating pattern will start to overlap -- keep your gaze relaxed until a 3D shape emerges
+3. The repeating pattern will start to overlap — keep your gaze relaxed until a 3D shape emerges
 4. Slowly adjust distance to sharpen the image
 
 ## Tech Stack
 
-- **SwiftUI** -- UI framework
-- **ARKit** -- LiDAR depth capture
-- **CoreML** -- Depth Anything V2 inference
-- **Core Image** -- Image processing and format conversion
+- **SwiftUI** — UI framework
+- **ARKit** — LiDAR depth capture
+- **CoreML** — Depth Anything V2 inference
+- **SceneKit + Metal** — 3D model loading and depth-buffer capture
+- **Core Image** — depth denoising, image processing, and format conversion
 
 ## License
 
