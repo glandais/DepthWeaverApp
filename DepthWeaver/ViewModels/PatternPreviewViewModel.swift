@@ -1,7 +1,7 @@
 import os
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "PatternPreviewViewModel")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "PatternPreviewViewModel")
 
 @MainActor
 final class PatternPreviewViewModel: ObservableObject {

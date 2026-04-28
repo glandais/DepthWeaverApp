@@ -3,7 +3,7 @@ import Metal
 import os
 import SceneKit
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "Model3DDepthRenderer")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DDepthRenderer")
 
 enum Model3DDepthRenderer {
     /// Renders the scene currently displayed in `scnView` from the user's framed

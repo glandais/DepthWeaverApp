@@ -2,7 +2,7 @@ import os
 import PhotosUI
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "GenerationView")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "GenerationView")
 
 struct GenerationView: View {
     @Binding var depthMap: DepthMap?

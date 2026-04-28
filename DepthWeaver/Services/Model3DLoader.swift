@@ -4,7 +4,7 @@ import SceneKit
 import SceneKit.ModelIO
 import UIKit
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "Model3DLoader")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DLoader")
 
 enum Model3DLoaderError: Error {
     case unsupportedExtension(String)

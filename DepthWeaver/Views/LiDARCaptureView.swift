@@ -2,7 +2,7 @@ import ARKit
 import os
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "LiDARCaptureView")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "LiDARCaptureView")
 
 struct LiDARCaptureView: View {
     @ObservedObject var depthService: LiDARDepthService

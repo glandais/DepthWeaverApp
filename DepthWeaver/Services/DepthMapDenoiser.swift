@@ -3,7 +3,7 @@ import CoreImage.CIFilterBuiltins
 import CoreGraphics
 import os
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "DepthMapDenoiser")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "DepthMapDenoiser")
 
 /// Core Image-based denoising for 8-bit imported depth maps.
 ///

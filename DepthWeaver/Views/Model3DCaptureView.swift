@@ -3,7 +3,7 @@ import SceneKit
 import SwiftUI
 import UniformTypeIdentifiers
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "Model3DCaptureView")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DCaptureView")
 
 struct Model3DCaptureView: View {
     let onCapture: (DepthMap) -> Void

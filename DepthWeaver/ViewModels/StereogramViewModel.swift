@@ -1,7 +1,7 @@
 import os
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "StereogramViewModel")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "StereogramViewModel")
 
 @MainActor
 final class StereogramViewModel: ObservableObject {

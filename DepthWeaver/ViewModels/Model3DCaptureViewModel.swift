@@ -2,7 +2,7 @@ import os
 import SceneKit
 import SwiftUI
 
-private let logger = Logger(subsystem: "com.glandais.DepthWeaver", category: "Model3DCaptureViewModel")
+private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DCaptureViewModel")
 
 @MainActor
 final class Model3DCaptureViewModel: ObservableObject {
