@@ -9,6 +9,8 @@ struct StereogramResultView: View {
     @State private var lastZoom: CGFloat = 1.0
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
+    @State private var barVisible = true
+    @State private var hideBarTask: Task<Void, Never>?
 
     var body: some View {
         GeometryReader { geo in
@@ -61,11 +63,25 @@ struct StereogramResultView: View {
                         }
                     }
                 }
+                .onTapGesture {
+                    withAnimation(.smooth(duration: 0.25)) {
+                        barVisible.toggle()
+                    }
+                    if barVisible {
+                        scheduleAutoHide()
+                    } else {
+                        hideBarTask?.cancel()
+                    }
+                }
                 .accessibilityLabel("result.accessibility_label")
         }
         .clipShape(Rectangle())
+        .statusBarHidden(!barVisible)
+        .toolbar(barVisible ? .visible : .hidden, for: .navigationBar)
         .navigationTitle("result.title")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { scheduleAutoHide() }
+        .onDisappear { hideBarTask?.cancel() }
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
@@ -97,6 +113,17 @@ struct StereogramResultView: View {
         }
         .sheet(isPresented: $showHowToView) {
             HowToViewSheet()
+        }
+    }
+
+    private func scheduleAutoHide() {
+        hideBarTask?.cancel()
+        hideBarTask = Task {
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled else { return }
+            withAnimation(.smooth(duration: 0.25)) {
+                barVisible = false
+            }
         }
     }
 }
