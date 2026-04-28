@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		054002F35BB7588A385C02DD /* PatternGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0A4CF7299EAABDE56E7A55 /* PatternGenerator.swift */; };
 		075B149DE71910946460F250 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211C3036F80743386EEC264C /* DepthMap.swift */; };
+		B394D032488248DCA5AF9660 /* DepthDenoising.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51659E487843EEA3E89C75 /* DepthDenoising.swift */; };
+		7569A5DA8D8D4B79A7AADD38 /* DepthMapDenoiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04390DE6584400B9F04015A /* DepthMapDenoiser.swift */; };
 		08398DBD0FF47E84B1880342 /* pattern-giraffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AF8C56DE8E7253760ED4F9 /* pattern-giraffe.png */; };
 		0BF4C4A54AD928235034FBF2 /* pattern-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 414DD9BF6E3502640E6E087F /* pattern-noise.png */; };
 		0E514E57FAB6D08B6BABC72B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FDD46A613A9E670F3E272D91 /* Localizable.xcstrings */; };
@@ -89,6 +91,8 @@
 		1BB672EFAE1CC86586F759FA /* DepthWeaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DepthWeaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF1E9467D8586682A245D3D /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		211C3036F80743386EEC264C /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
+		FE51659E487843EEA3E89C75 /* DepthDenoising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthDenoising.swift; sourceTree = "<group>"; };
+		A04390DE6584400B9F04015A /* DepthMapDenoiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMapDenoiser.swift; sourceTree = "<group>"; };
 		21787D60F94E5ED2DF277B92 /* pattern-hexagons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-hexagons.png"; sourceTree = "<group>"; };
 		258F06A305BFA8FE527C87DB /* hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand.png; sourceTree = "<group>"; };
 		277A2A1DF7D580A94C29AAA6 /* PhotoDepthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepthViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				BB485F2284A900947122EF73 /* DepthAnythingService.swift */,
+				A04390DE6584400B9F04015A /* DepthMapDenoiser.swift */,
 				4AB63A790621C79B3BD1F82B /* LiDARDepthService.swift */,
 				433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */,
 				488C2567AE57C46B8C0CCBAA /* Model3DDepthRenderer.swift */,
@@ -319,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				C617E7FB146F4305FC0F5D94 /* DepthAdjustment.swift */,
+				FE51659E487843EEA3E89C75 /* DepthDenoising.swift */,
 				211C3036F80743386EEC264C /* DepthMap.swift */,
 				7146F3F1A17C29C0CF399D77 /* DepthMapPreset.swift */,
 				8147331644D902CEC7C53F14 /* Model3DPreset.swift */,
@@ -442,7 +448,9 @@
 				AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */,
 				D73DE9D8853473303CEC3CBC /* DepthAnythingService.swift in Sources */,
 				4B3168DAA98000F24296E6CC /* DepthAnythingV2SmallF16.mlpackage in Sources */,
+				B394D032488248DCA5AF9660 /* DepthDenoising.swift in Sources */,
 				075B149DE71910946460F250 /* DepthMap.swift in Sources */,
+				7569A5DA8D8D4B79A7AADD38 /* DepthMapDenoiser.swift in Sources */,
 				9FD861F147B7A0948989E279 /* DepthMapPreset.swift in Sources */,
 				5FCAC5AFC57654B1AD89298A /* Model3DPreset.swift in Sources */,
 				673ACD09DFF3335B9F00E7AE /* Model3DLoader.swift in Sources */,

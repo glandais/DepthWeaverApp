@@ -5,6 +5,9 @@ struct DepthAdjustmentView: View {
 
     @State private var adjustment: DepthAdjustment = DepthAdjustment()
     @State private var rawRange: ClosedRange<Float> = 0...1
+    @State private var denoising: DepthDenoising = DepthDenoising()
+    @State private var denoiseTask: Task<Void, Never>?
+    @State private var isDenoising: Bool = false
 
     var body: some View {
         ScrollView {
@@ -13,6 +16,40 @@ struct DepthAdjustmentView: View {
                     DepthPointCloudView(depthMap: dm, adjustment: adjustment)
                         .aspectRatio(CGFloat(dm.width) / CGFloat(dm.height), contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+
+                if depthMap?.source == .imported {
+                    GroupBox(String(localized: "depth_adjustment.denoising", comment: "Depth adjustment section")) {
+                        VStack(spacing: 16) {
+                            HStack {
+                                Toggle(String(localized: "depth_adjustment.denoising.enable", comment: "Denoising toggle"), isOn: $denoising.enabled)
+                                if isDenoising {
+                                    ProgressView().controlSize(.small)
+                                }
+                            }
+
+                            if denoising.enabled {
+                                VStack(alignment: .leading) {
+                                    Text("depth_adjustment.denoising.bilateral \(denoising.bilateralIntensity, specifier: "%.2f")")
+                                        .font(.subheadline)
+                                    Slider(value: $denoising.bilateralIntensity, in: 0...1)
+                                }
+
+                                VStack(alignment: .leading) {
+                                    Text("depth_adjustment.denoising.morphology \(denoising.morphologyRadius, specifier: "%.0f")")
+                                        .font(.subheadline)
+                                    Slider(value: $denoising.morphologyRadius, in: 0...8, step: 1)
+                                }
+
+                                VStack(alignment: .leading) {
+                                    Text("depth_adjustment.denoising.background \(denoising.backgroundThreshold, specifier: "%.3f")")
+                                        .font(.subheadline)
+                                    Slider(value: $denoising.backgroundThreshold, in: 0...0.5)
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
                 }
 
                 // Input range
@@ -79,6 +116,7 @@ struct DepthAdjustmentView: View {
             guard let dm = depthMap else { return }
             adjustment = dm.adjustment
             rawRange = dm.rawDepthRange
+            denoising = dm.denoising
         }
         .onChange(of: adjustment) { _, newValue in
             // Enforce max > min
@@ -91,6 +129,57 @@ struct DepthAdjustmentView: View {
                 return
             }
             depthMap?.adjustment = adj
+        }
+        .onChange(of: denoising) { _, newValue in
+            scheduleDenoising(newValue)
+        }
+        .onDisappear {
+            denoiseTask?.cancel()
+        }
+    }
+
+    private func scheduleDenoising(_ params: DepthDenoising) {
+        guard let dm = depthMap, dm.source == .imported else { return }
+
+        let prev = dm.denoising
+        let onlyToggleChanged = prev.bilateralIntensity == params.bilateralIntensity
+            && prev.morphologyRadius == params.morphologyRadius
+            && prev.backgroundThreshold == params.backgroundThreshold
+
+        if onlyToggleChanged {
+            // Pure on/off: cached buffer (if any) stays valid for these params — flip instantly.
+            denoiseTask?.cancel()
+            isDenoising = false
+            var current = dm
+            current.setDenoising(params, denoisedDepth: current.denoisedDepth)
+            depthMap = current
+            rawRange = current.rawDepthRange
+            return
+        }
+
+        // A slider moved — sliders are only visible when enabled, so params.enabled is true here.
+        denoiseTask?.cancel()
+        let originalDepth = dm.originalDepth
+        let sw = dm.sourceWidth
+        let sh = dm.sourceHeight
+        isDenoising = true
+        denoiseTask = Task.detached(priority: .userInitiated) {
+            try? await Task.sleep(for: .milliseconds(250))
+            if Task.isCancelled { return }
+            let buffer = DepthMapDenoiser.shared.denoise(
+                pixels: originalDepth, width: sw, height: sh, parameters: params
+            )
+            if Task.isCancelled { return }
+            await MainActor.run {
+                guard var current = depthMap, current.source == .imported else {
+                    isDenoising = false
+                    return
+                }
+                current.setDenoising(params, denoisedDepth: buffer)
+                depthMap = current
+                rawRange = current.rawDepthRange
+                isDenoising = false
+            }
         }
     }
 }

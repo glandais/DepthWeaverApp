@@ -27,9 +27,40 @@ struct DepthMap: Identifiable {
     let originalDepth: [Float]
 
     var adjustment: DepthAdjustment
+    var denoising: DepthDenoising
+    /// Cached denoised version of `originalDepth` at sourceWidth × sourceHeight.
+    /// Populated only when `denoising.enabled && source == .imported`.
+    private(set) var denoisedDepth: [Float]?
 
     var width: Int { originalWidth ?? sourceWidth }
     var height: Int { originalHeight ?? sourceHeight }
+
+    /// The depth array consumed by `adjustedDepthValues` and `rawDepthRange`.
+    var workingDepth: [Float] {
+        denoising.enabled ? (denoisedDepth ?? originalDepth) : originalDepth
+    }
+
+    /// Recomputes `denoisedDepth` from `originalDepth` using current `denoising` parameters.
+    /// Heavy CI work — call from a background queue.
+    mutating func applyDenoising() {
+        guard denoising.enabled, source == .imported else {
+            denoisedDepth = nil
+            return
+        }
+        denoisedDepth = DepthMapDenoiser.shared.denoise(
+            pixels: originalDepth,
+            width: sourceWidth,
+            height: sourceHeight,
+            parameters: denoising
+        )
+    }
+
+    /// Updates the denoising state and precomputed buffer atomically.
+    /// Use this when the buffer was already computed on a background queue.
+    mutating func setDenoising(_ params: DepthDenoising, denoisedDepth: [Float]?) {
+        self.denoising = params
+        self.denoisedDepth = denoisedDepth
+    }
 
     /// Creates a DepthMap from a CVPixelBuffer, extracting and storing the raw depth values.
     init(pixelBuffer: CVPixelBuffer, source: Source, originalWidth: Int?, originalHeight: Int?) {
@@ -40,6 +71,8 @@ struct DepthMap: Identifiable {
         self.originalHeight = originalHeight
         self.originalDepth = Self.extractRawDepth(from: pixelBuffer, width: self.sourceWidth, height: self.sourceHeight)
         self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
+        self.denoising = DepthDenoising()
+        self.denoisedDepth = nil
     }
 
     /// Computes initial adjustment values based on the source type and raw depth range.
@@ -63,7 +96,7 @@ struct DepthMap: Identifiable {
     var rawDepthRange: ClosedRange<Float> {
         var minVal: Float = .greatestFiniteMagnitude
         var maxVal: Float = -.greatestFiniteMagnitude
-        for v in originalDepth where v.isFinite {
+        for v in workingDepth where v.isFinite {
             minVal = Swift.min(minVal, v)
             maxVal = Swift.max(maxVal, v)
         }
@@ -132,6 +165,7 @@ struct DepthMap: Identifiable {
         let adjEnd = 1.0 - adjustment.end
         let adjRange = adjMax - adjMin
         let safeRange = adjRange > 0 ? adjRange : 1.0
+        let depthSource = workingDepth
 
         var result = [Float](repeating: 0, count: targetWidth * targetHeight)
         for y in 0..<targetHeight {
@@ -142,7 +176,7 @@ struct DepthMap: Identifiable {
                 let srcX = Float(x) * Float(sourceWidth - 1) / Float(Swift.max(1, targetWidth - 1))
                 let x0 = Int(srcX)
 
-                let v00 = originalDepth[y0 * sourceWidth + x0]
+                let v00 = depthSource[y0 * sourceWidth + x0]
 
                 // Clamp to [min, max], normalize to [0..1], remap to [start, end]
                 let clamped = Swift.min(1, Swift.max(0, (v00 - adjMin) / safeRange))
@@ -192,13 +226,23 @@ struct DepthMap: Identifiable {
         ) else {
             self.originalDepth = [Float](repeating: 0, count: w * h)
             self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
+            self.denoising = DepthDenoising()
+            self.denoisedDepth = nil
             return
         }
         ctx.interpolationQuality = .none
         ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: w, height: h))
 
-        self.originalDepth = pixels.map { Float($0) / 255.0 }
-        self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
+        let raw = pixels.map { Float($0) / 255.0 }
+        self.originalDepth = raw
+        self.denoising = DepthDenoising.defaultsForImported
+        self.denoisedDepth = DepthMapDenoiser.shared.denoise(
+            pixels: raw,
+            width: w,
+            height: h,
+            parameters: self.denoising
+        )
+        self.adjustment = Self.initialAdjustment(rawDepth: self.denoisedDepth ?? raw)
     }
 
     // MARK: - Raw Depth Extraction

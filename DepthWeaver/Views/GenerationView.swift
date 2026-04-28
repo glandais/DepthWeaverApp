@@ -255,6 +255,9 @@ struct GenerationView: View {
         .onChange(of: depthMap?.adjustment) { _, _ in
             triggerGeneration()
         }
+        .onChange(of: depthMap?.denoising) { _, _ in
+            triggerGeneration()
+        }
         .onChange(of: settings) { _, _ in
             triggerGeneration()
             updatePatternPreview()
@@ -271,10 +274,17 @@ struct GenerationView: View {
         .onChange(of: selectedDepthMapPhoto) { _, newValue in
             guard let newValue else { return }
             Task {
-                if let data = try? await newValue.loadTransferable(type: Data.self),
-                   let image = UIImage(data: data) {
-                    depthMap = DepthMap(image: image)
+                guard let data = try? await newValue.loadTransferable(type: Data.self),
+                      let image = UIImage(data: data) else {
+                    selectedDepthMapPhoto = nil
+                    return
                 }
+                // DepthMap(image:) runs the denoising pipeline synchronously (~100-150ms);
+                // shift it off the main actor so the UI stays responsive.
+                let dm = await Task.detached(priority: .userInitiated) {
+                    DepthMap(image: image)
+                }.value
+                depthMap = dm
                 selectedDepthMapPhoto = nil
             }
         }

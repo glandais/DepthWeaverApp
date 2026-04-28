@@ -41,7 +41,8 @@ struct DepthPointCloudView: UIViewRepresentable {
         private var lastKey: String = ""
 
         func rebuild(node: SCNNode, depthMap: DepthMap, adjustment: DepthAdjustment) {
-            let key = "\(depthMap.id.uuidString)|\(adjustment.min)|\(adjustment.max)|\(adjustment.start)|\(adjustment.end)"
+            let d = depthMap.denoising
+            let key = "\(depthMap.id.uuidString)|\(adjustment.min)|\(adjustment.max)|\(adjustment.start)|\(adjustment.end)|\(d.enabled)|\(d.bilateralIntensity)|\(d.morphologyRadius)|\(d.backgroundThreshold)"
             if key == lastKey { return }
             lastKey = key
 

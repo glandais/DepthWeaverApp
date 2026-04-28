@@ -177,6 +177,90 @@
         }
       }
     },
+    "depth_adjustment.denoising" : {
+      "comment" : "Depth adjustment section",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denoising"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Débruitage"
+          }
+        }
+      }
+    },
+    "depth_adjustment.denoising.background %.3f" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Background threshold: %.3f"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuil d'arrière-plan : %.3f"
+          }
+        }
+      }
+    },
+    "depth_adjustment.denoising.bilateral %.2f" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilateral intensity: %.2f"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensité bilatérale : %.2f"
+          }
+        }
+      }
+    },
+    "depth_adjustment.denoising.enable" : {
+      "comment" : "Denoising toggle",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable denoising"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer le débruitage"
+          }
+        }
+      }
+    },
+    "depth_adjustment.denoising.morphology %.0f" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morphology radius: %.0f"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rayon morphologique : %.0f"
+          }
+        }
+      }
+    },
     "depth_adjustment.end_value %.2f" : {
       "localizations" : {
         "en" : {
