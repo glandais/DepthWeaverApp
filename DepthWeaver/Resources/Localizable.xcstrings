@@ -509,7 +509,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Préréglages"
+            "value" : "Exemples"
           }
         }
       }
@@ -1179,13 +1179,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Acquire a depth map using LiDAR Scan (Pro devices), From Photo (AI depth estimation), or Import Depth Map (grayscale image where white = close, black = far)"
+            "value" : "Pick a depth source: LiDAR Scan (Pro devices), From Photo (AI estimation), 3D Model, Depth Map Presets, or Import a grayscale depth map (white = close, black = far)."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Acquérir une carte de profondeur avec Scan LiDAR (appareils Pro), Depuis une photo (estimation IA de la profondeur), ou Importer carte de profondeur (image en niveaux de gris où blanc = proche, noir = loin)"
+            "value" : "Choisissez une source de profondeur : Scan LiDAR (appareils Pro), Depuis une photo (estimation IA), Modèle 3D, Exemples, ou Importer une carte en niveaux de gris (blanc = proche, noir = loin)."
           }
         }
       }
@@ -1196,13 +1196,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap the depth preview or \"Adjust Depth\" to focus on a depth range — crop the input and remap the output for better contrast"
+            "value" : "Tap the 3D preview to refine the depth: crop the input range, remap the output, or enable Denoising to clean up noisy depth maps."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Touchez l'aperçu de profondeur ou « Ajuster la profondeur » pour cibler une plage de profondeur — recadrez l'entrée et remappez la sortie pour un meilleur contraste"
+            "value" : "Touchez l'aperçu 3D pour affiner la profondeur : recadrez la plage d'entrée, remappez la sortie, ou activez le débruitage pour nettoyer les cartes bruitées."
           }
         }
       }
@@ -1213,13 +1213,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Adjust Stripes (number of pattern repetitions), Depth (3D intensity), and Main Stripe position"
+            "value" : "Tune DPI (resolution), Depth strength (3D intensity), Depth range (separation), and Smoothness (sampling quality). Toggle Invert if needed."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajustez les bandes (nombre de répétitions du motif), la profondeur (intensité 3D) et la position de la bande principale"
+            "value" : "Réglez le DPI (résolution), l'intensité de profondeur (intensité 3D), la plage de profondeur (séparation) et le lissage (qualité d'échantillonnage). Activez l'inversion si nécessaire."
           }
         }
       }
@@ -1230,13 +1230,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose a pattern — it determines the texture of your stereogram"
+            "value" : "Pick a built-in texture, import your own photo, or generate a procedural pattern (stars, etc.) with adjustable parameters."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choisissez un motif — il détermine la texture de votre stéréogramme"
+            "value" : "Choisissez une texture intégrée, importez votre propre photo, ou générez un motif procédural (étoiles, etc.) avec des paramètres ajustables."
           }
         }
       }
@@ -1247,13 +1247,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap the stereogram preview to view it full screen, then share or save it"
+            "value" : "Tap the stereogram preview to view it full screen, then share or save it."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Touchez l'aperçu du stéréogramme pour le voir en plein écran, puis partagez-le ou enregistrez-le"
+            "value" : "Touchez l'aperçu du stéréogramme pour le voir en plein écran, puis partagez-le ou enregistrez-le."
           }
         }
       }
@@ -1585,7 +1585,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrez un fichier USDZ, USD, OBJ ou SCN ou choisissez un préréglage, puis orbitez la caméra et capturez."
+            "value" : "Ouvrez un fichier USDZ, USD, OBJ ou SCN ou choisissez un exemple, puis orbitez la caméra et capturez."
           }
         }
       }
@@ -1755,7 +1755,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Préréglages"
+            "value" : "Exemples"
           }
         }
       }
@@ -1772,7 +1772,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Préréglages 3D"
+            "value" : "Exemples 3D"
           }
         }
       }

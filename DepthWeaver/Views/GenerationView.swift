@@ -498,7 +498,7 @@ struct HowToUseSheet: View {
                         .font(.title2)
                         .fontWeight(.bold)
 
-                    step(1, icon: "camera.metering.matrix",
+                    step(1, icon: "cube.transparent",
                          text: "help.step_acquire_full")
 
                     step(2, icon: "slider.horizontal.below.square.and.square.filled",
@@ -510,7 +510,7 @@ struct HowToUseSheet: View {
                     step(4, icon: "slider.horizontal.3",
                          text: "help.step_adjust_settings")
 
-                    step(5, icon: "eye",
+                    step(5, icon: "square.and.arrow.up",
                          text: "help.step_share")
 
                     Divider()
