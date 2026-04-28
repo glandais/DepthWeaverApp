@@ -87,7 +87,7 @@ struct LiDARCaptureView: View {
     private var captureView: some View {
         GeometryReader { geo in
             ZStack {
-                ARCameraPreview(cameraImage: depthService.cameraImage)
+                ARDepthPreview(depthImage: depthService.depthPreviewImage)
                     .frame(width: geo.size.width, height: geo.size.height)
 
                 VStack {
@@ -132,13 +132,13 @@ struct LiDARCaptureView: View {
     }
 }
 
-/// Simple camera preview driven by a published UIImage from the depth service.
-struct ARCameraPreview: View {
-    let cameraImage: UIImage?
+/// Live hue-mapped depth visualization driven by a published UIImage from the depth service.
+struct ARDepthPreview: View {
+    let depthImage: UIImage?
 
     var body: some View {
-        if let cameraImage {
-            Image(uiImage: cameraImage)
+        if let depthImage {
+            Image(uiImage: depthImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } else {

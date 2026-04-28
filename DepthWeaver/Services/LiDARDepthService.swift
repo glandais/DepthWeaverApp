@@ -9,7 +9,7 @@ final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
     let session = ARSession()
     @Published var isRunning = false
     @Published var hasDepthData = false
-    @Published var cameraImage: UIImage?
+    @Published var depthPreviewImage: UIImage?
     private var frameCount = 0
     private var depthDetected = false
     private let ciContext = CIContext()
@@ -187,28 +187,29 @@ final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
             logger.info("Depth data became available at frame #\(self.frameCount)")
         }
 
-        // Use device orientation to determine correct image rotation
-        let ciImage = CIImage(cvPixelBuffer: frame.capturedImage)
-        let oriented: CIImage
-        let deviceOrientation = UIDevice.current.orientation
-        switch deviceOrientation {
-        case .landscapeLeft:
-            oriented = ciImage.oriented(.up)
-        case .landscapeRight:
-            oriented = ciImage.oriented(.down)
-        case .portraitUpsideDown:
-            oriented = ciImage.oriented(.left)
-        default: // portrait or unknown
-            oriented = ciImage.oriented(.right)
-        }
+        // Render depth preview (throttle to ~30fps — every other frame)
+        if frameCount % 2 == 0,
+           let depthBuffer = (frame.smoothedSceneDepth ?? frame.sceneDepth)?.depthMap,
+           let depthImage = renderDepthPreviewCIImage(from: depthBuffer) {
 
-        // Render camera preview (throttle to ~30fps — every other frame)
-        if frameCount % 2 == 0 {
+            let oriented: CIImage
+            let deviceOrientation = UIDevice.current.orientation
+            switch deviceOrientation {
+            case .landscapeLeft:
+                oriented = depthImage.oriented(.up)
+            case .landscapeRight:
+                oriented = depthImage.oriented(.down)
+            case .portraitUpsideDown:
+                oriented = depthImage.oriented(.left)
+            default: // portrait or unknown
+                oriented = depthImage.oriented(.right)
+            }
+
             if let cgImage = ciContext.createCGImage(oriented, from: oriented.extent) {
                 let uiImage = UIImage(cgImage: cgImage)
                 let detected = depthDetected
                 DispatchQueue.main.async {
-                    self.cameraImage = uiImage
+                    self.depthPreviewImage = uiImage
                     self.hasDepthData = detected
                 }
             }
@@ -220,6 +221,68 @@ final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
                 }
             }
         }
+    }
+
+    /// Builds a hue-mapped CIImage from a Float32 LiDAR depth buffer.
+    /// Close pixels render warm (yellow), far render cool (purple); no-signal pixels render black.
+    private func renderDepthPreviewCIImage(from buffer: CVPixelBuffer) -> CIImage? {
+        let width = CVPixelBufferGetWidth(buffer)
+        let height = CVPixelBufferGetHeight(buffer)
+
+        CVPixelBufferLockBaseAddress(buffer, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(buffer, .readOnly) }
+
+        guard let base = CVPixelBufferGetBaseAddress(buffer) else { return nil }
+        let rowFloats = CVPixelBufferGetBytesPerRow(buffer) / MemoryLayout<Float>.size
+        let floatBuffer = base.assumingMemoryBound(to: Float.self)
+
+        var minVal: Float = .greatestFiniteMagnitude
+        var maxVal: Float = -.greatestFiniteMagnitude
+        for y in 0..<height {
+            for x in 0..<width {
+                let v = floatBuffer[y * rowFloats + x]
+                if v.isFinite && v > 0 {
+                    if v < minVal { minVal = v }
+                    if v > maxVal { maxVal = v }
+                }
+            }
+        }
+        let hasSignal = maxVal > minVal
+        let range = hasSignal ? (maxVal - minVal) : 1.0
+
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
+        for y in 0..<height {
+            for x in 0..<width {
+                let v = floatBuffer[y * rowFloats + x]
+                let oi = (y * width + x) * 4
+                if hasSignal && v.isFinite && v > 0 {
+                    let normalized = 1.0 - (v - minVal) / range
+                    let (r, g, b) = DepthMap.hueColor(forNormalized: Float(normalized))
+                    pixels[oi]     = UInt8(r * 255)
+                    pixels[oi + 1] = UInt8(g * 255)
+                    pixels[oi + 2] = UInt8(b * 255)
+                    pixels[oi + 3] = 255
+                } else {
+                    pixels[oi + 3] = 255
+                }
+            }
+        }
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let provider = CGDataProvider(data: Data(pixels) as CFData),
+              let cgImage = CGImage(
+                  width: width, height: height,
+                  bitsPerComponent: 8, bitsPerPixel: 32,
+                  bytesPerRow: width * 4,
+                  space: colorSpace,
+                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+                  provider: provider,
+                  decode: nil,
+                  shouldInterpolate: false,
+                  intent: .defaultIntent
+              )
+        else { return nil }
+        return CIImage(cgImage: cgImage)
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
