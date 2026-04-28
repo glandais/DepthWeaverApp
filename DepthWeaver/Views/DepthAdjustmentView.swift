@@ -85,7 +85,7 @@ struct DepthAdjustmentView: View {
                             Text("depth_adjustment.start_value \(adjustment.start, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
-                                value: $adjustment.start,
+                                value: $adjustment.end,
                                 in: 0...1
                             )
                         }
@@ -94,7 +94,7 @@ struct DepthAdjustmentView: View {
                             Text("depth_adjustment.end_value \(adjustment.end, specifier: "%.2f")")
                                 .font(.subheadline)
                             Slider(
-                                value: $adjustment.end,
+                                value: $adjustment.start,
                                 in: 0...1
                             )
                         }
