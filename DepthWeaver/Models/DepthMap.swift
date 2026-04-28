@@ -136,27 +136,15 @@ struct DepthMap: Identifiable {
         for y in 0..<targetHeight {
             let srcY = Float(y) * Float(sourceHeight - 1) / Float(Swift.max(1, targetHeight - 1))
             let y0 = Int(srcY)
-            let y1 = Swift.min(y0 + 1, sourceHeight - 1)
-            let fy = srcY - Float(y0)
 
             for x in 0..<targetWidth {
                 let srcX = Float(x) * Float(sourceWidth - 1) / Float(Swift.max(1, targetWidth - 1))
                 let x0 = Int(srcX)
-                let x1 = Swift.min(x0 + 1, sourceWidth - 1)
-                let fx = srcX - Float(x0)
 
                 let v00 = originalDepth[y0 * sourceWidth + x0]
-                let v10 = originalDepth[y0 * sourceWidth + x1]
-                let v01 = originalDepth[y1 * sourceWidth + x0]
-                let v11 = originalDepth[y1 * sourceWidth + x1]
-
-                let interpolated = v00 * (1 - fx) * (1 - fy)
-                    + v10 * fx * (1 - fy)
-                    + v01 * (1 - fx) * fy
-                    + v11 * fx * fy
 
                 // Clamp to [min, max], normalize to [0..1], remap to [start, end]
-                let clamped = Swift.min(1, Swift.max(0, (interpolated - adjMin) / safeRange))
+                let clamped = Swift.min(1, Swift.max(0, (v00 - adjMin) / safeRange))
                 let remapped = adjStart + clamped * (adjEnd - adjStart)
                 result[y * targetWidth + x] = Swift.max(0, Swift.min(1, remapped))
             }
@@ -205,6 +193,7 @@ struct DepthMap: Identifiable {
             self.adjustment = Self.initialAdjustment(rawDepth: self.originalDepth)
             return
         }
+        ctx.interpolationQuality = .none
         ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: w, height: h))
 
         self.originalDepth = pixels.map { Float($0) / 255.0 }

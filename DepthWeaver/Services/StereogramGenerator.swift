@@ -65,6 +65,7 @@ final class StereogramGenerator {
             var lookL = [Int](repeating: 0, count: vwidth)
             var lookR = [Int](repeating: 0, count: vwidth)
             var colour = [UInt8](repeating: 0, count: vwidth * 4)
+            var empty = [UInt8](repeating: 0, count: vwidth)
 
             for x in 0..<vwidth {
                 lookL[x] = x
@@ -72,43 +73,20 @@ final class StereogramGenerator {
             }
 
             // --- 1. Linking pass (TIW + Steer hidden-surface removal) ---
-            let depthRowOffset = y * width
-            var sep = 0
-            for x in 0..<vwidth {
-                if x % oversam == 0 {
-                    var h = depths[depthRowOffset + x / oversam]
-                    if invert { h = 1.0 - h }
-                    if h < 0 { h = 0 } else if h > 1 { h = 1 }
-                    let featureZ = maxdepthF - h * depthRange
-                    sep = Int((veyeSepF * featureZ / (featureZ + obsDistF)).rounded())
-                }
-                let left = x - sep / 2
-                let right = left + sep
-                if left < 0 || right >= vwidth { continue }
-                var vis = true
-                if lookL[right] != right {
-                    if lookL[right] < left {
-                        let oldLeft = lookL[right]
-                        lookR[oldLeft] = oldLeft
-                        lookL[right] = right
-                    } else {
-                        vis = false
-                    }
-                }
-                if lookR[left] != left {
-                    if lookR[left] > right {
-                        let oldRight = lookR[left]
-                        lookL[oldRight] = oldRight
-                        lookR[left] = left
-                    } else {
-                        vis = false
-                    }
-                }
-                if vis {
-                    lookL[right] = left
-                    lookR[left] = right
-                }
-            }
+            Self.linkingPass(
+                y: y,
+                width: width,
+                vwidth: vwidth,
+                oversam: oversam,
+                depths: depths,
+                invert: invert,
+                maxdepthF: maxdepthF,
+                depthRange: depthRange,
+                veyeSepF: veyeSepF,
+                obsDistF: obsDistF,
+                lookL: &lookL,
+                lookR: &lookR
+            )
 
             // --- 2. Pattern application: centre to right ---
             var lastlinked = -10
@@ -116,19 +94,18 @@ final class StereogramGenerator {
                 let dst = x * 4
                 if lookL[x] == x || lookL[x] < s {
                     if lastlinked == x - 1 {
-                        let src = (x - 1) * 4
-                        colour[dst]     = colour[src]
-                        colour[dst + 1] = colour[src + 1]
-                        colour[dst + 2] = colour[src + 2]
+                        empty[x] = 1
                     } else {
                         let px = (((x + poffset) % vmaxsep) / oversam) % patWidth
                         let row = (y + ((x - s) / vmaxsep) * yShift) % patHeight
                         let pp = (row * patWidth + px) * 4
+                        empty[x] = 0
                         colour[dst]     = patPixels[pp]
                         colour[dst + 1] = patPixels[pp + 1]
                         colour[dst + 2] = patPixels[pp + 2]
                     }
                 } else {
+                    empty[x] = empty[lookL[x]]
                     let src = lookL[x] * 4
                     colour[dst]     = colour[src]
                     colour[dst + 1] = colour[src + 1]
@@ -146,20 +123,19 @@ final class StereogramGenerator {
                     let dst = x * 4
                     if lookR[x] == x {
                         if lastlinked == x + 1 {
-                            let src = (x + 1) * 4
-                            colour[dst]     = colour[src]
-                            colour[dst + 1] = colour[src + 1]
-                            colour[dst + 2] = colour[src + 2]
+                            empty[x] = 1
                         } else {
                             let px = (((x + poffset) % vmaxsep) / oversam) % patWidth
                             let row = (y + ((s - x) / vmaxsep + 1) * yShift) % patHeight
                             let pp = (row * patWidth + px) * 4
+                            empty[x] = 0
                             colour[dst]     = patPixels[pp]
                             colour[dst + 1] = patPixels[pp + 1]
                             colour[dst + 2] = patPixels[pp + 2]
                         }
                     } else {
                         let src = lookR[x] * 4
+                        empty[x] = empty[lookR[x]]
                         colour[dst]     = colour[src]
                         colour[dst + 1] = colour[src + 1]
                         colour[dst + 2] = colour[src + 2]
@@ -170,21 +146,26 @@ final class StereogramGenerator {
                 }
             }
 
-            // --- 4. Downsample virtual pixels into real output pixels ---
+            // --- 3b. Fill contiguous empty runs with OKLab gradient between boundary colours ---
+            Self.fillEmptyRunsOKLab(colour: &colour, empty: empty, vwidth: vwidth)
+
+            // --- 4. Downsample virtual pixels into real output pixels (OKLab averaging) ---
             let rowOffset = y * width * 4
+            let invOver: Float = 1.0 / Float(oversam)
             for xr in 0..<width {
-                var r = 0, g = 0, b = 0
                 let baseV = xr * oversam
-                for i in 0..<oversam {
-                    let p = (baseV + i) * 4
-                    r += Int(colour[p])
-                    g += Int(colour[p + 1])
-                    b += Int(colour[p + 2])
-                }
                 let oi = rowOffset + xr * 4
-                pixels[oi]     = UInt8(min(255, r / oversam))
-                pixels[oi + 1] = UInt8(min(255, g / oversam))
-                pixels[oi + 2] = UInt8(min(255, b / oversam))
+                if oversam == 1 {
+                    let p = baseV * 4
+                    pixels[oi]     = colour[p]
+                    pixels[oi + 1] = colour[p + 1]
+                    pixels[oi + 2] = colour[p + 2]
+                } else {
+                    let (r, g, b) = Self.averageOKLab(colour: colour, baseV: baseV, oversam: oversam, invOver: invOver)
+                    pixels[oi]     = r
+                    pixels[oi + 1] = g
+                    pixels[oi + 2] = b
+                }
                 pixels[oi + 3] = 255
             }
         }
@@ -232,6 +213,177 @@ final class StereogramGenerator {
         context.draw(cgImage, in: CGRect(x: 0, y: 0, width: outWidth, height: outHeight))
 
         return PatternData(pixels: rawPixels, width: outWidth, height: outHeight)
+    }
+
+    // MARK: - Linking Pass
+
+    @inline(__always)
+    private static func linkingPass(
+        y: Int,
+        width: Int,
+        vwidth: Int,
+        oversam: Int,
+        depths: [Float],
+        invert: Bool,
+        maxdepthF: Float,
+        depthRange: Float,
+        veyeSepF: Float,
+        obsDistF: Float,
+        lookL: inout [Int],
+        lookR: inout [Int]
+    ) {
+        let depthRowOffset = y * width
+        var sep = 0
+        for x in 0..<vwidth {
+            if x % oversam == 0 {
+                var h = depths[depthRowOffset + x / oversam]
+                if invert { h = 1.0 - h }
+                if h < 0 { h = 0 } else if h > 1 { h = 1 }
+                let featureZ = maxdepthF - h * depthRange
+                sep = Int((veyeSepF * featureZ / (featureZ + obsDistF)).rounded())
+            }
+            let left = x - sep / 2
+            let right = left + sep
+            if left < 0 || right >= vwidth { continue }
+            var vis = true
+            if lookL[right] != right {
+                if lookL[right] < left {
+                    let oldLeft = lookL[right]
+                    lookR[oldLeft] = oldLeft
+                    lookL[right] = right
+                } else {
+                    vis = false
+                }
+            }
+            if lookR[left] != left {
+                if lookR[left] > right {
+                    let oldRight = lookR[left]
+                    lookL[oldRight] = oldRight
+                    lookR[left] = left
+                } else {
+                    vis = false
+                }
+            }
+            if vis {
+                lookL[right] = left
+                lookR[left] = right
+            }
+        }
+    }
+
+    // MARK: - Color Space (OKLab, Ottosson 2020)
+
+    private static let srgbToLinearLUT: [Float] = (0..<256).map { i in
+        let c = Double(i) / 255.0
+        let linear = c <= 0.04045 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4)
+        return Float(linear)
+    }
+
+    private static let linearToSrgbLUT: [UInt8] = (0..<4096).map { i in
+        let c = Double(i) / 4095.0
+        let s = c <= 0.0031308 ? c * 12.92 : 1.055 * pow(c, 1.0 / 2.4) - 0.055
+        return UInt8(max(0, min(255, (s * 255.0).rounded())))
+    }
+
+    @inline(__always)
+    private static func linearToSrgbByte(_ c: Float) -> UInt8 {
+        let clamped = max(0, min(1, c))
+        return linearToSrgbLUT[Int((clamped * 4095.0).rounded())]
+    }
+
+    @inline(__always)
+    private static func srgbBytesToOKLab(_ r8: UInt8, _ g8: UInt8, _ b8: UInt8) -> (Float, Float, Float) {
+        let lr = srgbToLinearLUT[Int(r8)]
+        let lg = srgbToLinearLUT[Int(g8)]
+        let lb = srgbToLinearLUT[Int(b8)]
+        let l = 0.4122214708 * lr + 0.5363325363 * lg + 0.0514459929 * lb
+        let m = 0.2119034982 * lr + 0.6806995451 * lg + 0.1073969566 * lb
+        let s = 0.0883024619 * lr + 0.2817188376 * lg + 0.6299787005 * lb
+        let lp = cbrtf(l)
+        let mp = cbrtf(m)
+        let sp = cbrtf(s)
+        return (
+            0.2104542553 * lp + 0.7936177850 * mp - 0.0040720468 * sp,
+            1.9779984951 * lp - 2.4285922050 * mp + 0.4505937099 * sp,
+            0.0259040371 * lp + 0.7827717662 * mp - 0.8086757660 * sp
+        )
+    }
+
+    @inline(__always)
+    private static func oklabToSrgbBytes(_ L: Float, _ A: Float, _ B: Float) -> (UInt8, UInt8, UInt8) {
+        let lp = L + 0.3963377774 * A + 0.2158037573 * B
+        let mp = L - 0.1055613458 * A - 0.0638541728 * B
+        let sp = L - 0.0894841775 * A - 1.2914855480 * B
+        let l = lp * lp * lp
+        let m = mp * mp * mp
+        let s = sp * sp * sp
+        let lr =  4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s
+        let lg = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s
+        let lb = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+        return (linearToSrgbByte(lr), linearToSrgbByte(lg), linearToSrgbByte(lb))
+    }
+
+    @inline(__always)
+    private static func averageOKLab(colour: [UInt8], baseV: Int, oversam: Int, invOver: Float) -> (UInt8, UInt8, UInt8) {
+        var sumL: Float = 0
+        var sumA: Float = 0
+        var sumB: Float = 0
+        for i in 0..<oversam {
+            let p = (baseV + i) * 4
+            let (l, a, b) = srgbBytesToOKLab(colour[p], colour[p + 1], colour[p + 2])
+            sumL += l
+            sumA += a
+            sumB += b
+        }
+        return oklabToSrgbBytes(sumL * invOver, sumA * invOver, sumB * invOver)
+    }
+
+    @inline(__always)
+    private static func fillEmptyRunsOKLab(colour: inout [UInt8], empty: [UInt8], vwidth: Int) {
+        var x = 0
+        while x < vwidth {
+            if empty[x] == 0 {
+                x += 1
+                continue
+            }
+            var end = x
+            while end + 1 < vwidth && empty[end + 1] == 1 {
+                end += 1
+            }
+            let runLen = end - x + 1
+            let hasLeft = x > 0
+            let hasRight = end + 1 < vwidth
+
+            if hasLeft && hasRight {
+                let lp = (x - 1) * 4
+                let rp = (end + 1) * 4
+                let (lL, lA, lB) = srgbBytesToOKLab(colour[lp], colour[lp + 1], colour[lp + 2])
+                let (rL, rA, rB) = srgbBytesToOKLab(colour[rp], colour[rp + 1], colour[rp + 2])
+                let denom = Float(runLen + 1)
+                for i in 0..<runLen {
+                    let t = Float(i + 1) / denom
+                    let (r, g, b) = oklabToSrgbBytes(
+                        lL + (rL - lL) * t,
+                        lA + (rA - lA) * t,
+                        lB + (rB - lB) * t
+                    )
+                    let p = (x + i) * 4
+                    colour[p]     = r
+                    colour[p + 1] = g
+                    colour[p + 2] = b
+                }
+            } else if hasLeft || hasRight {
+                let sp = hasLeft ? (x - 1) * 4 : (end + 1) * 4
+                let r = colour[sp], g = colour[sp + 1], b = colour[sp + 2]
+                for i in 0..<runLen {
+                    let p = (x + i) * 4
+                    colour[p]     = r
+                    colour[p + 1] = g
+                    colour[p + 2] = b
+                }
+            }
+            x = end + 1
+        }
     }
 
     // MARK: - Image Creation
