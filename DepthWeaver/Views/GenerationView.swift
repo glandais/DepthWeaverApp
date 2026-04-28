@@ -327,12 +327,17 @@ struct GenerationView: View {
                         .accessibilityHint("depth.tap_to_adjust")
 
                     HStack {
-                        Label(
-                            depthMap.source == .lidar ? "LiDAR" : depthMap.source == .imported ? String(localized: "depth.source_imported", comment: "Depth map source label") : String(localized: "depth.source_ai"),
-                            systemImage: depthMap.source == .lidar ? "camera.metering.matrix" : depthMap.source == .imported ? "square.and.arrow.down" : "photo.on.rectangle"
-                        )
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        let (sourceTitle, sourceIcon): (String, String) = {
+                            switch depthMap.source {
+                            case .lidar: ("LiDAR", "camera.metering.matrix")
+                            case .imported: (String(localized: "depth.source_imported", comment: "Depth map source label"), "square.and.arrow.down")
+                            case .model3D: (String(localized: "depth.source_3d_model", comment: "Depth map source label"), "cube")
+                            case .depthAnything: (String(localized: "depth.source_ai"), "photo.on.rectangle")
+                            }
+                        }()
+                        Label(sourceTitle, systemImage: sourceIcon)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
 
                         Spacer()
 

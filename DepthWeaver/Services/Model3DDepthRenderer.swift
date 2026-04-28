@@ -247,7 +247,7 @@ enum Model3DDepthRenderer {
         // makes closer subjects pop out — no manual start/end override needed.
         return DepthMap(
             pixelBuffer: pixelBuffer,
-            source: .imported,
+            source: .model3D,
             originalWidth: width,
             originalHeight: height
         )

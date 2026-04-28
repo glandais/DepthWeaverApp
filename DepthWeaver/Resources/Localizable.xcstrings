@@ -464,6 +464,24 @@
         }
       }
     },
+    "depth.source_3d_model" : {
+      "comment" : "Depth map source label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D Model"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle 3D"
+          }
+        }
+      }
+    },
     "depth.source_ai" : {
       "extractionState" : "stale",
       "localizations" : {

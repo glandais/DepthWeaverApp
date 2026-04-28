@@ -12,6 +12,7 @@ struct DepthMap: Identifiable {
         case lidar
         case depthAnything
         case imported
+        case model3D
     }
 
     let source: Source
