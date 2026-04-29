@@ -9,6 +9,7 @@ struct GenerationView: View {
     @Binding var path: NavigationPath
     @Binding var selectedPhoto: PhotosPickerItem?
     let lidarAvailable: Bool
+    let guidedCaptureSupported: Bool
 
     @State private var settings = StereogramSettings()
     @State private var showHelp = false
@@ -444,7 +445,18 @@ struct GenerationView: View {
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .gridCellColumns(2)
+                .gridCellColumns(guidedCaptureSupported ? 1 : 2)
+
+                if guidedCaptureSupported {
+                    Button {
+                        path.append(NavigationDestination.guidedCapture)
+                    } label: {
+                        Label("depth.guided_capture", systemImage: "camera.viewfinder")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
             }
         }
     }

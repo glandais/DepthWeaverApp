@@ -12,6 +12,7 @@ final class Model3DCaptureViewModel: ObservableObject {
     @Published var loadErrorMessage: String?
     @Published var showError = false
     @Published var selectedPresetID: String?
+    @Published var selectedCapturedID: UUID?
 
     func loadFile(url: URL) async {
         isLoading = true
@@ -31,6 +32,7 @@ final class Model3DCaptureViewModel: ObservableObject {
             scene = loaded
             sourceLabel = url.lastPathComponent
             selectedPresetID = nil
+            selectedCapturedID = nil
         } catch {
             logger.error("loadFile failed: \(error.localizedDescription)")
             present(error: error)
@@ -48,8 +50,31 @@ final class Model3DCaptureViewModel: ObservableObject {
             scene = loaded
             sourceLabel = preset.displayName
             selectedPresetID = preset.id
+            selectedCapturedID = nil
         } catch {
             logger.error("loadPreset failed: \(error.localizedDescription)")
+            present(error: error)
+        }
+    }
+
+    func loadCapturedModel(id: UUID, library: CapturedModelLibrary = .shared) async {
+        guard let url = library.url(for: id), let entry = library.entry(for: id) else {
+            present(error: NSError(domain: "CapturedModelLibrary", code: -1))
+            return
+        }
+        isLoading = true
+        defer { isLoading = false }
+
+        do {
+            let loaded = try await Task.detached(priority: .userInitiated) {
+                try Model3DLoader.loadScene(from: url)
+            }.value
+            scene = loaded
+            sourceLabel = entry.displayName
+            selectedPresetID = nil
+            selectedCapturedID = id
+        } catch {
+            logger.error("loadCapturedModel failed: \(error.localizedDescription)")
             present(error: error)
         }
     }

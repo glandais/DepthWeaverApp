@@ -14,15 +14,16 @@ ContentView (NavigationStack + AppState)
         ├── DepthAdjustmentView       ← input/output range remap + denoising
         ├── LiDARCaptureView          ← live LiDAR depth capture
         ├── Model3DCaptureView        ← USDZ/USD/OBJ/SCN loader + orbit camera + depth capture
+        ├── GuidedCaptureRootView     ← Object Capture scan of a real object → .usdz (Pro devices)
         └── StereogramResultView      ← full-screen result + share
 ```
 
-`NavigationDestination` (in `ContentView.swift`) enumerates the four pushable destinations.
+`NavigationDestination` (in `ContentView.swift`) enumerates the five pushable destinations. `GuidedCapture` is a port of Apple's WWDC `ScanningObjectsUsingObjectCapture` sample (under `Features/GuidedCapture/`), gated on `ObjectCaptureSession.isSupported && PhotogrammetrySession.isSupported`. Its `onCompleted(URL)` callback hands the finished scan to `AppState.pendingCapture`, which presents `NameCaptureSheet` and stores the model via `CapturedModelLibrary` for later use as a `.model3D` depth source.
 
 ## Key components
 
 ### Models
-- **DepthMap** (`Models/DepthMap.swift`): wraps `[Float]` depth values with source dims, original (display) dims, an `adjustment` (input/output remap) and a `denoising` config. Exposes `workingDepth` and `adjustedDepthValues(width:height:)` consumed by the generator. `Source` is `lidar | depthAnything | imported | model3D`. Denoising only runs on `.imported` depths (8-bit imports are the noisy ones).
+- **DepthMap** (`Models/DepthMap.swift`): wraps `[Float]` depth values with source dims, original (display) dims, an `adjustment` (input/output remap) and a `denoising` config. Exposes `workingDepth` and `adjustedDepthValues(width:height:)` consumed by the generator. `Source` is `lidar | depthAnything | imported | model3D` (Object Capture scans reuse `.model3D` since they're consumed via the same renderer). Denoising only runs on `.imported` depths (8-bit imports are the noisy ones).
 - **DepthAdjustment** / **DepthDenoising** (`Models/`): value types stored on `DepthMap`. Editing them re-triggers stereogram generation via `onChange` in `GenerationView`.
 - **DepthMapPreset** (`Models/DepthMapPreset.swift`): bundled height maps in `Resources/HeightMaps/`.
 - **Model3DPreset** (`Models/Model3DPreset.swift`): bundled `.usdz` files in `Resources/Models3D/`.
@@ -39,7 +40,7 @@ ContentView (NavigationStack + AppState)
 - **Generators/** (`Services/Generators/`): one `PatternGenerator` per `ProceduralPatternType` (`RandomDotGenerator`, `StarsGenerator`, `PerlinNoiseGenerator`, `WorleyNoiseGenerator`, `VoronoiGenerator`, `ReactionDiffusionGenerator`).
 
 ### ViewModels
-- **PhotoDepthViewModel**, **LiDARCaptureViewModel**, **Model3DCaptureViewModel** drive the three capture flows.
+- **PhotoDepthViewModel**, **LiDARCaptureViewModel**, **Model3DCaptureViewModel** drive three of the capture flows. The Object Capture flow is driven by `GuidedCaptureModel` (an `ObservableObject` ported from Apple's `AppDataModel`) inside `Features/GuidedCapture/`, with `CapturedModelLibrary` persisting finished scans to `Documents/CapturedModels/<uuid>.usdz`.
 - **StereogramViewModel** debounces calls to `StereogramGenerator` (`generateDebounced`) to keep the live preview responsive.
 - **PatternPreviewViewModel** generates a thumbnail for the selected procedural pattern.
 

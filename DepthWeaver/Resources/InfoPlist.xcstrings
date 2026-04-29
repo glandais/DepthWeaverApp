@@ -31,13 +31,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DepthWeaver uses the camera with LiDAR to capture 3D depth"
+            "value" : "DepthWeaver uses the camera with LiDAR to capture 3D depth and 3D objects"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DepthWeaver utilise la caméra avec le LiDAR pour capturer la profondeur 3D"
+            "value" : "DepthWeaver utilise la caméra avec le LiDAR pour capturer la profondeur 3D et des objets 3D"
           }
         }
       }
