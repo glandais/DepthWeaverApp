@@ -1,3 +1,4 @@
+#if os(iOS)
 import AVFoundation
 import SwiftUI
 
@@ -27,3 +28,5 @@ final class LiDARCaptureViewModel: ObservableObject {
         cameraPermission = granted ? .authorized : .denied
     }
 }
+
+#endif

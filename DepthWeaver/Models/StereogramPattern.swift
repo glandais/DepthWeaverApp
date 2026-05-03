@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum StereogramPattern: String, CaseIterable, Identifiable {
     case noise
@@ -41,12 +41,11 @@ enum StereogramPattern: String, CaseIterable, Identifiable {
         "pattern-\(rawValue)"
     }
 
-    func loadImage() -> UIImage {
-        if let image = UIImage(named: fileName) {
+    func loadImage() -> PlatformImage {
+        if let image = PlatformImage.loadFromAssets(named: fileName) {
             return image
         }
-        if let path = Bundle.main.path(forResource: fileName, ofType: "png"),
-           let image = UIImage(contentsOfFile: path) {
+        if let image = PlatformImage.loadFromBundle(name: fileName, ofType: "png") {
             return image
         }
         fatalError("Missing pattern asset: \(fileName).png")

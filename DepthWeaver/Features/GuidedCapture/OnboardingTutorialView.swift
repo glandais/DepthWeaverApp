@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -146,3 +147,5 @@ struct OnboardingTutorialView: View {
         onboardingStateTodetailTextMap[onboardingStateMachine.currentState] ?? ""
     }
 }
+
+#endif

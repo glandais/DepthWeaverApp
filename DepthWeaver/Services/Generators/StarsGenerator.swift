@@ -1,12 +1,12 @@
-import UIKit
+import CoreGraphics
 
 struct StarsGenerator: PatternGenerator {
     let config: StarsConfig
 
-    func generate(size: CGSize) -> UIImage {
+    func generate(size: CGSize) -> PlatformImage {
         let width = Int(size.width)
         let height = Int(size.height)
-        guard width > 0, height > 0 else { return UIImage() }
+        guard width > 0, height > 0 else { return PlatformImage() }
 
         var rng = SeededRNG(seed: config.seed)
         var pixels = [UInt8](repeating: 0, count: width * height * 4)

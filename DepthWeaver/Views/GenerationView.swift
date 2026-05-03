@@ -1,3 +1,4 @@
+#if os(iOS)
 import os
 import PhotosUI
 import SwiftUI
@@ -613,3 +614,5 @@ struct DepthMapPresetSheet: View {
         }
     }
 }
+
+#endif

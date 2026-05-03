@@ -1,10 +1,11 @@
 import Accelerate
-import UIKit
+import CoreGraphics
+import Foundation
 
 struct ReactionDiffusionGenerator: PatternGenerator {
     let config: ReactionDiffusionConfig
 
-    func generate(size: CGSize) -> UIImage {
+    func generate(size: CGSize) -> PlatformImage {
         // Always simulate at a fixed resolution for performance, then scale
         let simSize = min(128, Int(min(size.width, size.height)))
         let width = simSize
@@ -120,10 +121,24 @@ struct ReactionDiffusionGenerator: PatternGenerator {
         return simImage
     }
 
-    private func scaleImage(_ image: UIImage, to size: CGSize) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        return renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: size))
+    private func scaleImage(_ image: PlatformImage, to size: CGSize) -> PlatformImage {
+        let w = max(1, Int(size.width))
+        let h = max(1, Int(size.height))
+        guard let cg = image.cgImage else { return image }
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let ctx = CGContext(
+            data: nil,
+            width: w, height: h,
+            bitsPerComponent: 8,
+            bytesPerRow: w * 4,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            return image
         }
+        ctx.interpolationQuality = .high
+        ctx.draw(cg, in: CGRect(x: 0, y: 0, width: w, height: h))
+        guard let scaled = ctx.makeImage() else { return image }
+        return PlatformImage(cgImage: scaled)
     }
 }

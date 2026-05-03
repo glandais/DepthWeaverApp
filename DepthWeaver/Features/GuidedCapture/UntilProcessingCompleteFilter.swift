@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -47,3 +48,5 @@ struct UntilProcessingCompleteFilter<Base>: AsyncSequence,
         return nextElement
     }
 }
+
+#endif

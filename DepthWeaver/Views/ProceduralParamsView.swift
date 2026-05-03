@@ -3,7 +3,7 @@ import SwiftUI
 struct ProceduralParamsView: View {
     let type: ProceduralPatternType
     @Binding var config: ProceduralConfig
-    let previewImage: UIImage?
+    let previewImage: PlatformImage?
     let isGenerating: Bool
 
     var body: some View {
@@ -11,7 +11,7 @@ struct ProceduralParamsView: View {
             // Live preview
             ZStack {
                 if let image = previewImage {
-                    Image(uiImage: image)
+                    Image(platformImage: image)
                         .resizable()
                         .interpolation(.none)
                         .aspectRatio(1, contentMode: .fit)

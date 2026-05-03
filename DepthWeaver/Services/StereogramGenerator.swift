@@ -1,11 +1,12 @@
-import UIKit
+import CoreGraphics
+import Foundation
 
 final class StereogramGenerator {
     /// Generates an autostereogram from a depth map.
     /// Implements the algorithm of W.A. Steer (techmind.org), an extension of the
     /// Thimbleby–Inglis–Witten random-dot algorithm with link-based hidden-surface
     /// removal, bitmapped patterns, oversampling, and centre-outwards application.
-    func generate(depthMap: DepthMap, settings: StereogramSettings) -> UIImage {
+    func generate(depthMap: DepthMap, settings: StereogramSettings) -> PlatformImage {
         // Output size: keep input aspect, ensure min dimension >= 960.
         let minDimTarget = 960
         let rawWidth = depthMap.width > 0 ? depthMap.width : 1024
@@ -38,7 +39,7 @@ final class StereogramGenerator {
 
         // Defensive bounds. With reasonable settings vmaxsep is well below vwidth.
         guard vmaxsep > 0, vmaxsep < vwidth else {
-            return UIImage()
+            return PlatformImage()
         }
 
         let s = vwidth / 2 - vmaxsep / 2
@@ -388,7 +389,7 @@ final class StereogramGenerator {
 
     // MARK: - Image Creation
 
-    private func createImage(from pixels: [UInt8], width: Int, height: Int) -> UIImage {
+    private func createImage(from pixels: [UInt8], width: Int, height: Int) -> PlatformImage {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let data = Data(pixels)
@@ -408,8 +409,8 @@ final class StereogramGenerator {
                   intent: .defaultIntent
               )
         else {
-            return UIImage()
+            return PlatformImage()
         }
-        return UIImage(cgImage: cgImage)
+        return PlatformImage(cgImage: cgImage)
     }
 }

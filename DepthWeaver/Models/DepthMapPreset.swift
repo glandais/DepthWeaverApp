@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum DepthMapPreset: String, CaseIterable, Identifiable {
     case dog
@@ -33,10 +33,9 @@ enum DepthMapPreset: String, CaseIterable, Identifiable {
         }
     }
 
-    func loadImage() -> UIImage {
+    func loadImage() -> PlatformImage {
         let name = rawValue
-        if let path = Bundle.main.path(forResource: name, ofType: "png"),
-           let image = UIImage(contentsOfFile: path) {
+        if let image = PlatformImage.loadFromBundle(name: name, ofType: "png") {
             return image
         }
         fatalError("Missing heightmap asset: \(name).png")

@@ -1,13 +1,14 @@
-import UIKit
+import CoreGraphics
+import Foundation
 import simd
 
 struct PerlinNoiseGenerator: PatternGenerator {
     let config: PerlinConfig
 
-    func generate(size: CGSize) -> UIImage {
+    func generate(size: CGSize) -> PlatformImage {
         let width = Int(size.width)
         let height = Int(size.height)
-        guard width > 0, height > 0 else { return UIImage() }
+        guard width > 0, height > 0 else { return PlatformImage() }
 
         var pixels = [UInt8](repeating: 255, count: width * height * 4)
         let freq = config.frequency

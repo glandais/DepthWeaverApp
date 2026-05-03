@@ -1,9 +1,10 @@
-import UIKit
+import CoreGraphics
+import Foundation
 
 enum PatternSource: Identifiable, Equatable {
     case asset(StereogramPattern)
     case procedural(ProceduralPatternType, ProceduralConfig)
-    case imported(UIImage)
+    case imported(PlatformImage)
 
     var id: String {
         switch self {
@@ -27,7 +28,7 @@ enum PatternSource: Identifiable, Equatable {
         }
     }
 
-    func generateImage(size: CGSize) -> UIImage {
+    func generateImage(size: CGSize) -> PlatformImage {
         switch self {
         case .asset(let pattern):
             pattern.loadImage()

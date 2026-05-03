@@ -1,8 +1,8 @@
+import CoreGraphics
 import ModelIO
 import os
 import SceneKit
 import SceneKit.ModelIO
-import UIKit
 
 private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DLoader")
 
@@ -35,7 +35,7 @@ enum Model3DLoader {
             throw Model3DLoaderError.loadFailed(error.localizedDescription)
         }
 
-        scene.background.contents = UIColor.black
+        scene.background.contents = CGColor(gray: 0, alpha: 1)
         frameScene(scene)
         return scene
     }

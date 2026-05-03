@@ -1,3 +1,4 @@
+#if os(iOS)
 import ARKit
 import os
 import SwiftUI
@@ -146,3 +147,5 @@ struct ARDepthPreview: View {
         }
     }
 }
+
+#endif

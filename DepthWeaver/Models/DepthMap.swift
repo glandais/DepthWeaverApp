@@ -1,7 +1,8 @@
+import CoreGraphics
 import CoreImage
 import CoreVideo
+import Foundation
 import os
-import UIKit
 
 private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "DepthMap")
 
@@ -104,9 +105,9 @@ struct DepthMap: Identifiable {
         return minVal...maxVal
     }
 
-    /// Returns a hue-mapped UIImage for preview display.
+    /// Returns a hue-mapped image for preview display.
     /// - Parameter highlightClamped: When true, clamped pixels (0 or 1) are drawn in red.
-    func previewImage(highlightClamped: Bool = false) -> UIImage? {
+    func previewImage(highlightClamped: Bool = false) -> PlatformImage? {
         let w = width
         let h = height
         let adjusted = adjustedDepthValues(width: w, height: h)
@@ -140,7 +141,7 @@ struct DepthMap: Identifiable {
         else {
             return nil
         }
-        return UIImage(cgImage: cgImage)
+        return PlatformImage(cgImage: cgImage)
     }
 
     /// Shared hue-ramp palette for depth visualization.
@@ -150,10 +151,8 @@ struct DepthMap: Identifiable {
             return (1.0, 40.0/255.0, 40.0/255.0)
         }
         let hue = (0.83 - CGFloat(v) * 0.66).truncatingRemainder(dividingBy: 1.0)
-        let color = UIColor(hue: hue, saturation: 0.85, brightness: 0.95, alpha: 1)
-        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
-        color.getRed(&r, green: &g, blue: &b, alpha: nil)
-        return (r, g, b)
+        let normalized = (hue + 1).truncatingRemainder(dividingBy: 1)
+        return hsbToRGB(hue: normalized, saturation: 0.85, brightness: 0.95)
     }
 
     /// Returns adjusted [0..1] depth values resized to the given dimensions.
@@ -187,16 +186,10 @@ struct DepthMap: Identifiable {
         return result
     }
 
-    /// Creates a DepthMap from a UIImage, interpreting brightness as depth.
-    init(image: UIImage) {
-        let cgImage: CGImage
-        if let cg = image.cgImage {
-            cgImage = cg
-        } else if let ciImage = image.ciImage {
-            let context = CIContext()
-            cgImage = context.createCGImage(ciImage, from: ciImage.extent)!
-        } else {
-            fatalError("UIImage has no cgImage or ciImage")
+    /// Creates a DepthMap from a platform image, interpreting brightness as depth.
+    init(image: PlatformImage) {
+        guard let cgImage = image.cgImage else {
+            fatalError("Image has no cgImage backing")
         }
 
         let maxSide = 1024

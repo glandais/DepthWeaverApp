@@ -1,20 +1,11 @@
 import CoreImage
-import UIKit
+import ImageIO
 
-extension UIImage.Orientation {
-    /// Maps UIImage.Orientation to the EXIF orientation integer used by CIImage.
+extension CGImagePropertyOrientation {
+    /// Maps to the EXIF orientation integer used by CIImage's
+    /// `oriented(forExifOrientation:)`.
     var exifOrientation: Int {
-        switch self {
-        case .up:            return 1
-        case .down:          return 3
-        case .left:          return 8
-        case .right:         return 6
-        case .upMirrored:    return 2
-        case .downMirrored:  return 4
-        case .leftMirrored:  return 5
-        case .rightMirrored: return 7
-        @unknown default:    return 1
-        }
+        Int(rawValue)
     }
 }
 

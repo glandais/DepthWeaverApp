@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -58,3 +59,5 @@ final class FeedbackMessages {
         }
     }
 }
+
+#endif

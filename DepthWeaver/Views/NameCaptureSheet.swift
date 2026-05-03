@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 struct NameCaptureSheet: View {
@@ -51,3 +52,5 @@ struct NameCaptureSheet: View {
         onSave(trimmed.isEmpty ? initialName : trimmed)
     }
 }
+
+#endif

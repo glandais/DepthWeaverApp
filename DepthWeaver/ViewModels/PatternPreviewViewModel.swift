@@ -5,7 +5,7 @@ private let logger = Logger(subsystem: "io.github.glandais.depthweaver", categor
 
 @MainActor
 final class PatternPreviewViewModel: ObservableObject {
-    @Published var previewImage: UIImage?
+    @Published var previewImage: PlatformImage?
     @Published var isGenerating = false
 
     private var debounceTask: Task<Void, Never>?

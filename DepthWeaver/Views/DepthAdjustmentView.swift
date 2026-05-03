@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 struct DepthAdjustmentView: View {
@@ -183,3 +184,5 @@ struct DepthAdjustmentView: View {
         }
     }
 }
+
+#endif

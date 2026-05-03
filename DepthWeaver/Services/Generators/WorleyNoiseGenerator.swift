@@ -1,12 +1,13 @@
-import UIKit
+import CoreGraphics
+import Foundation
 
 struct WorleyNoiseGenerator: PatternGenerator {
     let config: WorleyConfig
 
-    func generate(size: CGSize) -> UIImage {
+    func generate(size: CGSize) -> PlatformImage {
         let width = Int(size.width)
         let height = Int(size.height)
-        guard width > 0, height > 0 else { return UIImage() }
+        guard width > 0, height > 0 else { return PlatformImage() }
 
         var rng = SeededRNG(seed: config.seed)
         let cellSize = max(10.0, config.cellSize)

@@ -1,7 +1,8 @@
+#if os(iOS)
 import SwiftUI
 
 struct StereogramResultView: View {
-    let image: UIImage
+    let image: PlatformImage
 
     @State private var showHowToView = false
     @State private var savedToPhotos = false
@@ -14,7 +15,7 @@ struct StereogramResultView: View {
 
     var body: some View {
         GeometryReader { geo in
-            Image(uiImage: image)
+            Image(platformImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: geo.size.width, height: geo.size.height)
@@ -92,8 +93,8 @@ struct StereogramResultView: View {
                 .accessibilityLabel("help.how_to_view_button")
 
                 ShareLink(
-                    item: Image(uiImage: image),
-                    preview: SharePreview(String(localized: "result.title"), image: Image(uiImage: image))
+                    item: Image(platformImage: image),
+                    preview: SharePreview(String(localized: "result.title"), image: Image(platformImage: image))
                 ) {
                     Image(systemName: "square.and.arrow.up")
                 }
@@ -186,3 +187,5 @@ struct HowToViewSheet: View {
         }
     }
 }
+
+#endif

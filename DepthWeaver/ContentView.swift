@@ -1,8 +1,11 @@
-import ARKit
 import os
+import SwiftUI
+
+#if os(iOS)
+import ARKit
 import PhotosUI
 import RealityKit
-import SwiftUI
+#endif
 
 private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "ContentView")
 
@@ -10,24 +13,51 @@ private let logger = Logger(subsystem: "io.github.glandais.depthweaver", categor
 @MainActor
 final class AppState: ObservableObject {
     @Published var currentDepthMap: DepthMap? = DepthMapPreset.dog.toDepthMap()
+    @Published var resultImage: PlatformImage?
+    @Published var showHelp = false
+
+    #if os(iOS)
     @Published var pendingCapture: PendingCapture?
     /// Set after a fresh scan is saved into the library; consumed by
     /// `Model3DCaptureView` on first appearance to auto-load the new model.
     @Published var pendingModel3DLoadID: UUID?
     let lidarService = LiDARDepthService()
     let capturedLibrary = CapturedModelLibrary.shared
+    #endif
+
+    func reset() {
+        currentDepthMap = DepthMapPreset.dog.toDepthMap()
+        resultImage = nil
+    }
 }
 
+#if os(iOS)
 /// A freshly produced `.usdz` waiting to be named and saved into the captured-model library.
 struct PendingCapture: Identifiable, Hashable {
     let id = UUID()
     let url: URL
 }
+#endif
 
 struct ContentView: View {
+    @StateObject private var appState = AppState()
+
+    var body: some View {
+        #if os(iOS)
+        IOSContentView(appState: appState)
+        #elseif os(macOS)
+        MacGenerationView()
+            .environmentObject(appState)
+            .frame(minWidth: 900, minHeight: 700)
+        #endif
+    }
+}
+
+#if os(iOS)
+struct IOSContentView: View {
+    @ObservedObject var appState: AppState
     @State private var path = NavigationPath()
     @State private var selectedPhoto: PhotosPickerItem?
-    @StateObject private var appState = AppState()
     @StateObject private var photoDepthVM = PhotoDepthViewModel()
 
     private var guidedCaptureSupported: Bool {
@@ -146,7 +176,7 @@ enum NavigationDestination: Hashable {
     case lidarCapture
     case model3DCapture
     case guidedCapture
-    case stereogramResult(UIImage)
+    case stereogramResult(PlatformImage)
     case depthAdjustment
 
     func hash(into hasher: inout Hasher) {
@@ -170,3 +200,4 @@ enum NavigationDestination: Hashable {
         }
     }
 }
+#endif

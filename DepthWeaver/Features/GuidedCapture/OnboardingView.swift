@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -37,3 +38,5 @@ struct OnboardingView: View {
         return session.state == .finishing || session.state == .completed
     }
 }
+
+#endif

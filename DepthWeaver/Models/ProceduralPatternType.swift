@@ -237,11 +237,9 @@ struct CodableColor: Equatable {
     }
 
     init(color: Color) {
-        let resolved = UIColor(color)
-        var r: CGFloat = 0; var g: CGFloat = 0; var b: CGFloat = 0
-        resolved.getRed(&r, green: &g, blue: &b, alpha: nil)
-        self.red = Float(r)
-        self.green = Float(g)
-        self.blue = Float(b)
+        let resolved = color.resolve(in: EnvironmentValues())
+        self.red = resolved.red
+        self.green = resolved.green
+        self.blue = resolved.blue
     }
 }

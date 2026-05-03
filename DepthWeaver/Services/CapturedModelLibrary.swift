@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import os
 
@@ -134,3 +135,5 @@ final class CapturedModelLibrary: ObservableObject {
         return String(trimmed.prefix(80))
     }
 }
+
+#endif

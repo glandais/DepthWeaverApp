@@ -1,5 +1,5 @@
-import UIKit
+import CoreGraphics
 
 protocol PatternGenerator {
-    func generate(size: CGSize) -> UIImage
+    func generate(size: CGSize) -> PlatformImage
 }

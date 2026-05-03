@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample's licensing information.
 
@@ -94,3 +95,5 @@ private struct CircularProgressView: View {
         }
     }
 }
+
+#endif

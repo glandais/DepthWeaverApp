@@ -1,3 +1,4 @@
+#if os(iOS)
 import ARKit
 import CoreImage
 import os
@@ -297,3 +298,5 @@ final class LiDARDepthService: NSObject, ObservableObject, ARSessionDelegate {
         logger.info("ARSession interruption ended")
     }
 }
+
+#endif

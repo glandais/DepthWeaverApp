@@ -60,6 +60,7 @@
 		43178DE92FA2A303006F6DCB /* GuidedCaptureRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43178DB42FA2A303006F6DCB /* GuidedCaptureRootView.swift */; };
 		43178DEB2FA2A336006F6DCB /* CapturedModelLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43178DEA2FA2A336006F6DCB /* CapturedModelLibrary.swift */; };
 		43178DED2FA2A3E4006F6DCB /* NameCaptureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43178DEC2FA2A3E4006F6DCB /* NameCaptureSheet.swift */; };
+		43178DEF2FA7F17A006F6DCB /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 43178DEE2FA7F17A006F6DCB /* AppIcon.icon */; };
 		43539DC62FA11E4B0036C10E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43539DC52FA11E4B0036C10E /* Assets.xcassets */; };
 		4488FBE6B1C2837ABAA5236C /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52397B838840B3784FB9BCE0 /* CIImage+Extensions.swift */; };
 		4B3168DAA98000F24296E6CC /* DepthAnythingV2SmallF16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 4067757B620C8CDDE603B2DF /* DepthAnythingV2SmallF16.mlpackage */; };
@@ -95,6 +96,11 @@
 		A8A4D0BF0695ADABD82CA468 /* Model3DCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB68ECB9015EE612A6580A6B /* Model3DCaptureView.swift */; };
 		A900928079C178B41476FEB4 /* StarsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB97C2A1318FC85D083BC96 /* StarsGenerator.swift */; };
 		AA11BB22CC33DD44EE55FF66 /* DepthPointCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122334455667788AABBCCDD /* DepthPointCloudView.swift */; };
+		AABB002200000000000000B1 /* PlatformImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000F1 /* PlatformImage.swift */; };
+		AABB002200000000000000B2 /* MacGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000F2 /* MacGenerationView.swift */; };
+		AABB002200000000000000B3 /* InspectorPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000F3 /* InspectorPanel.swift */; };
+		AABB002200000000000000B4 /* StereogramPNGDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000F4 /* StereogramPNGDocument.swift */; };
+		AABB002200000000000000B5 /* SceneCaptureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000F5 /* SceneCaptureSheet.swift */; };
 		AEBAFC795CF8F030D81E5A2C /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A1D85C6A9DA8B9F27F52D4 /* ship.png */; };
 		B2AA6F7193CE877671C35BEA /* StereogramPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E652343D35A88CBD7D3A71 /* StereogramPattern.swift */; };
 		B394D032488248DCA5AF9660 /* DepthDenoising.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51659E487843EEA3E89C75 /* DepthDenoising.swift */; };
@@ -182,6 +188,7 @@
 		43178DC32FA2A303006F6DCB /* UntilProcessingCompleteFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UntilProcessingCompleteFilter.swift; sourceTree = "<group>"; };
 		43178DEA2FA2A336006F6DCB /* CapturedModelLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedModelLibrary.swift; sourceTree = "<group>"; };
 		43178DEC2FA2A3E4006F6DCB /* NameCaptureSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCaptureSheet.swift; sourceTree = "<group>"; };
+		43178DEE2FA7F17A006F6DCB /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model3DLoader.swift; sourceTree = "<group>"; };
 		43539DC52FA11E4B0036C10E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		453EBEAF23405B7B7BDDDC0C /* PatternSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternSource.swift; sourceTree = "<group>"; };
@@ -212,6 +219,12 @@
 		A04390DE6584400B9F04015A /* DepthMapDenoiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMapDenoiser.swift; sourceTree = "<group>"; };
 		A0A1D85C6A9DA8B9F27F52D4 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
 		A2A3D20A06B30949D0623B83 /* ReactionDiffusionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionDiffusionGenerator.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F1 /* PlatformImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImage.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F2 /* MacGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGenerationView.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F3 /* InspectorPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorPanel.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F4 /* StereogramPNGDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereogramPNGDocument.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F5 /* SceneCaptureSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCaptureSheet.swift; sourceTree = "<group>"; };
+		AABB001100000000000000F6 /* DepthWeaver.macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DepthWeaver.macOS.entitlements; sourceTree = "<group>"; };
 		B7EEAFCAFDE8E19EE1239637 /* pattern-circles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-circles.png"; sourceTree = "<group>"; };
 		BB485F2284A900947122EF73 /* DepthAnythingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthAnythingService.swift; sourceTree = "<group>"; };
 		BEB97C2A1318FC85D083BC96 /* StarsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsGenerator.swift; sourceTree = "<group>"; };
@@ -349,6 +362,7 @@
 				0581E1EA924E7B31785D944B /* HeightMaps */,
 				9A9F92E55646ADD1ADF72E3B /* Models3D */,
 				8C491BF38FCC5614F6571E8F /* Patterns */,
+				43178DEE2FA7F17A006F6DCB /* AppIcon.icon */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -364,6 +378,7 @@
 				958555080B93885E58B07D46 /* ProceduralParamsView.swift */,
 				723C49A475CFE536CC329EFF /* StereogramResultView.swift */,
 				43178DEC2FA2A3E4006F6DCB /* NameCaptureSheet.swift */,
+				AABB001100000000000000F7 /* Mac */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -441,8 +456,20 @@
 			isa = PBXGroup;
 			children = (
 				52397B838840B3784FB9BCE0 /* CIImage+Extensions.swift */,
+				AABB001100000000000000F1 /* PlatformImage.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AABB001100000000000000F7 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				AABB001100000000000000F2 /* MacGenerationView.swift */,
+				AABB001100000000000000F3 /* InspectorPanel.swift */,
+				AABB001100000000000000F4 /* StereogramPNGDocument.swift */,
+				AABB001100000000000000F5 /* SceneCaptureSheet.swift */,
+			);
+			path = Mac;
 			sourceTree = "<group>";
 		};
 		AE1E7110E85D23BA6409F5E8 /* DepthWeaver */ = {
@@ -450,6 +477,7 @@
 			children = (
 				E3F1A2F6465330BCCBE73A38 /* ContentView.swift */,
 				F8C6FBCC776AE3380C7708F5 /* DepthWeaverApp.swift */,
+				AABB001100000000000000F6 /* DepthWeaver.macOS.entitlements */,
 				A869D295D48B0091CFAE26BE /* Extensions */,
 				F287245807223DA622408697 /* Models */,
 				5308BFA56B25D32683A8D929 /* Resources */,
@@ -539,6 +567,7 @@
 			files = (
 				F80A2EF8BD814F17C3F23CA8 /* InfoPlist.xcstrings in Resources */,
 				0E514E57FAB6D08B6BABC72B /* Localizable.xcstrings in Resources */,
+				43178DEF2FA7F17A006F6DCB /* AppIcon.icon in Resources */,
 				6A09F71402310ABC4945DBC2 /* Chameleon.usdz in Resources */,
 				C90B42574E1CC704276DD6D9 /* Slide.usdz in Resources */,
 				F652436F5180B007C54BAB61 /* SportsCar.usdz in Resources */,
@@ -594,6 +623,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4488FBE6B1C2837ABAA5236C /* CIImage+Extensions.swift in Sources */,
+				AABB002200000000000000B1 /* PlatformImage.swift in Sources */,
+				AABB002200000000000000B2 /* MacGenerationView.swift in Sources */,
+				AABB002200000000000000B3 /* InspectorPanel.swift in Sources */,
+				AABB002200000000000000B4 /* StereogramPNGDocument.swift in Sources */,
+				AABB002200000000000000B5 /* SceneCaptureSheet.swift in Sources */,
 				875085DBDFAE4557B942A6A6 /* ContentView.swift in Sources */,
 				43178DEB2FA2A336006F6DCB /* CapturedModelLibrary.swift in Sources */,
 				4E1E348EFE07BD1F6E667FEF /* DepthAdjustment.swift in Sources */,
@@ -669,27 +703,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = DepthWeaver/DepthWeaver.macOS.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DepthWeaver;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DepthWeaver uses the camera with LiDAR to capture 3D depth";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "DepthWeaver saves generated stereograms to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "DepthWeaver needs access to your photos to generate depth maps";
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIRequiresFullScreen[sdk=iphoneos*]" = NO;
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations[sdk=iphoneos*]" = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.glandais.depthweaver;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -830,27 +868,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = DepthWeaver/DepthWeaver.macOS.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DepthWeaver;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DepthWeaver uses the camera with LiDAR to capture 3D depth";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "DepthWeaver saves generated stereograms to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "DepthWeaver needs access to your photos to generate depth maps";
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIRequiresFullScreen[sdk=iphoneos*]" = NO;
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations[sdk=iphoneos*]" = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.glandais.depthweaver;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";

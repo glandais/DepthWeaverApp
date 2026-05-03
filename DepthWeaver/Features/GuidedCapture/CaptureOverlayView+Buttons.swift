@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -206,3 +207,5 @@ extension CaptureOverlayView {
         func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
     }
 }
+
+#endif

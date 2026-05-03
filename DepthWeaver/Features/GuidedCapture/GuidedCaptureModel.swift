@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -391,3 +392,5 @@ extension GuidedCaptureModel {
         )
     }
 }
+
+#endif

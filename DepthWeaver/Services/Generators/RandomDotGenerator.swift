@@ -1,12 +1,13 @@
-import UIKit
+import CoreGraphics
+import Foundation
 
 struct RandomDotGenerator: PatternGenerator {
     let config: RandomDotConfig
 
-    func generate(size: CGSize) -> UIImage {
+    func generate(size: CGSize) -> PlatformImage {
         let width = Int(size.width)
         let height = Int(size.height)
-        guard width > 0, height > 0 else { return UIImage() }
+        guard width > 0, height > 0 else { return PlatformImage() }
 
         var rng = SeededRNG(seed: config.seed)
         let dotSize = max(1, config.dotSize)
@@ -93,7 +94,7 @@ struct SeededRNG: RandomNumberGenerator {
 
 // MARK: - Shared Image Creation
 
-func createImage(from pixels: [UInt8], width: Int, height: Int) -> UIImage {
+func createImage(from pixels: [UInt8], width: Int, height: Int) -> PlatformImage {
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
     let data = Data(pixels)
@@ -113,7 +114,7 @@ func createImage(from pixels: [UInt8], width: Int, height: Int) -> UIImage {
               intent: .defaultIntent
           )
     else {
-        return UIImage()
+        return PlatformImage()
     }
-    return UIImage(cgImage: cgImage)
+    return PlatformImage(cgImage: cgImage)
 }

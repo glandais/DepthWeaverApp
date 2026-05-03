@@ -5,7 +5,7 @@ private let logger = Logger(subsystem: "io.github.glandais.depthweaver", categor
 
 @MainActor
 final class StereogramViewModel: ObservableObject {
-    @Published var resultImage: UIImage?
+    @Published var resultImage: PlatformImage?
     @Published var isGenerating = false
 
     private var debounceTask: Task<Void, Never>?

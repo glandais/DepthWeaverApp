@@ -1,13 +1,24 @@
 import SceneKit
 import SwiftUI
 
-struct DepthPointCloudView: UIViewRepresentable {
+#if os(iOS)
+typealias PlatformViewRepresentable = UIViewRepresentable
+#elseif os(macOS)
+typealias PlatformViewRepresentable = NSViewRepresentable
+#endif
+
+struct DepthPointCloudView: PlatformViewRepresentable {
     let depthMap: DepthMap
     let adjustment: DepthAdjustment
 
-    func makeUIView(context: Context) -> SCNView {
+    private func makeView(context: Context) -> SCNView {
         let view = SCNView()
+        #if os(iOS)
         view.backgroundColor = .clear
+        #elseif os(macOS)
+        view.wantsLayer = true
+        view.layer?.backgroundColor = CGColor(gray: 0, alpha: 0)
+        #endif
         view.antialiasingMode = .multisampling4X
         view.allowsCameraControl = true
         view.autoenablesDefaultLighting = false
@@ -30,10 +41,18 @@ struct DepthPointCloudView: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: SCNView, context: Context) {
-        guard let node = uiView.scene?.rootNode.childNode(withName: "points", recursively: false) else { return }
+    private func updateView(_ scnView: SCNView, context: Context) {
+        guard let node = scnView.scene?.rootNode.childNode(withName: "points", recursively: false) else { return }
         context.coordinator.rebuild(node: node, depthMap: depthMap, adjustment: adjustment)
     }
+
+    #if os(iOS)
+    func makeUIView(context: Context) -> SCNView { makeView(context: context) }
+    func updateUIView(_ uiView: SCNView, context: Context) { updateView(uiView, context: context) }
+    #elseif os(macOS)
+    func makeNSView(context: Context) -> SCNView { makeView(context: context) }
+    func updateNSView(_ nsView: SCNView, context: Context) { updateView(nsView, context: context) }
+    #endif
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
@@ -51,7 +70,6 @@ struct DepthPointCloudView: UIViewRepresentable {
         }
 
         private static func makeGeometry(depthMap: DepthMap, adjustment: DepthAdjustment) -> SCNGeometry {
-            // Target resolution: full if <= 250k points, else stride 2
             let totalFull = depthMap.width * depthMap.height
             let stride = totalFull > 250_000 ? 2 : 1
             let w = depthMap.width / stride
@@ -59,7 +77,6 @@ struct DepthPointCloudView: UIViewRepresentable {
 
             var adjustedMap = depthMap
             adjustedMap.adjustment = adjustment
-            // Sample at reduced grid by asking for full size then striding — simpler: use w,h directly
             let depthValues = adjustedMap.adjustedDepthValues(width: w, height: h)
 
             let aspect = Float(depthMap.width) / Float(depthMap.height)

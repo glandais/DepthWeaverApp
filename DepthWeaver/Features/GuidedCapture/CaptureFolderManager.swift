@@ -1,3 +1,4 @@
+#if os(iOS)
 /*
 See the LICENSE.txt file for this sample’s licensing information.
 
@@ -197,3 +198,5 @@ class CaptureFolderManager: ObservableObject {
             .appendingPathComponent("Scans/", isDirectory: true)
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(iOS)
 import os
 import SceneKit
 import SwiftUI
@@ -428,3 +429,5 @@ struct Model3DPresetSheet: View {
         }
     }
 }
+
+#endif

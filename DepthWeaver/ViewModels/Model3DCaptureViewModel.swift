@@ -57,6 +57,7 @@ final class Model3DCaptureViewModel: ObservableObject {
         }
     }
 
+    #if os(iOS)
     func loadCapturedModel(id: UUID, library: CapturedModelLibrary = .shared) async {
         guard let url = library.url(for: id), let entry = library.entry(for: id) else {
             present(error: NSError(domain: "CapturedModelLibrary", code: -1))
@@ -78,6 +79,7 @@ final class Model3DCaptureViewModel: ObservableObject {
             present(error: error)
         }
     }
+    #endif
 
     private func present(error: Error) {
         loadErrorMessage = String(localized: "model3d.load_failed", comment: "Generic load failure")
