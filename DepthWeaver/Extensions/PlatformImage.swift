@@ -13,8 +13,12 @@ extension PlatformImage {
     }
 
     static func loadFromBundle(name: String, ofType ext: String) -> PlatformImage? {
-        guard let path = Bundle.main.path(forResource: name, ofType: ext) else { return nil }
-        return UIImage(contentsOfFile: path)
+        for bundle in candidateBundles {
+            if let path = bundle.path(forResource: name, ofType: ext) {
+                return UIImage(contentsOfFile: path)
+            }
+        }
+        return nil
     }
 
     var pixelSize: CGSize {
@@ -56,8 +60,12 @@ extension PlatformImage {
     }
 
     static func loadFromBundle(name: String, ofType ext: String) -> PlatformImage? {
-        guard let path = Bundle.main.path(forResource: name, ofType: ext) else { return nil }
-        return NSImage(contentsOfFile: path)
+        for bundle in candidateBundles {
+            if let path = bundle.path(forResource: name, ofType: ext) {
+                return NSImage(contentsOfFile: path)
+            }
+        }
+        return nil
     }
 
     var pixelSize: CGSize {
@@ -75,6 +83,18 @@ extension Image {
         self.init(nsImage: platformImage)
         #endif
     }
+}
+
+/// Bundles to search for resources. `Bundle.main` first (production path),
+/// then `Bundle.allBundles` so that logic-test bundles (where `Bundle.main`
+/// is the `xctest` harness) can find resources packaged with the test target.
+private var candidateBundles: [Bundle] {
+    var seen = Set<String>()
+    var result: [Bundle] = []
+    for bundle in [Bundle.main] + Bundle.allBundles where seen.insert(bundle.bundlePath).inserted {
+        result.append(bundle)
+    }
+    return result
 }
 
 /// Converts an HSB color (hue/saturation/brightness, all in [0..1]) to RGB
