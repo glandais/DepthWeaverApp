@@ -44,6 +44,57 @@ struct StereogramGeneratorTests {
         #expect(stdDev > 30, "image has visible pattern variation (stdDev=\(stdDev))")
     }
 
+    @Test("Metal and CPU stereograms are nearly identical for the dog height map")
+    func metalAndCpuOutputsAreClose() throws {
+        try #require(MetalStereogramRenderer.shared != nil,
+                     "Metal renderer unavailable on this host — skipping comparison")
+
+        let depthMap = DepthMapPreset.dog.toDepthMap()
+        let settings = StereogramSettings()
+        let generator = StereogramGenerator()
+
+        let metalImage = generator.generate(depthMap: depthMap, settings: settings, useMetal: true)
+        let cpuImage = generator.generate(depthMap: depthMap, settings: settings, useMetal: false)
+
+        let metalCG = try #require(metalImage.cgImage, "Metal path returned an empty image")
+        let cpuCG = try #require(cpuImage.cgImage, "CPU path returned an empty image")
+
+        #expect(metalCG.width == cpuCG.width)
+        #expect(metalCG.height == cpuCG.height)
+
+        let metalPixels = try #require(samplePixels(cgImage: metalCG), "failed to read Metal pixels")
+        let cpuPixels = try #require(samplePixels(cgImage: cpuCG), "failed to read CPU pixels")
+        #expect(metalPixels.count == cpuPixels.count)
+
+        // Per-channel byte difference statistics over RGB (skip alpha).
+        var sumAbsDiff: Double = 0
+        var maxAbsDiff: Int = 0
+        var matchingChannels: Int = 0
+        var totalChannels: Int = 0
+        for i in stride(from: 0, to: metalPixels.count, by: 4) {
+            for c in 0..<3 {
+                let d = abs(Int(metalPixels[i + c]) - Int(cpuPixels[i + c]))
+                sumAbsDiff += Double(d)
+                if d > maxAbsDiff { maxAbsDiff = d }
+                if d <= 2 { matchingChannels += 1 }
+                totalChannels += 1
+            }
+        }
+        let meanAbsDiff = sumAbsDiff / Double(totalChannels)
+        let matchRatio = Double(matchingChannels) / Double(totalChannels)
+
+        print("Metal vs CPU — meanAbsDiff=\(meanAbsDiff), maxAbsDiff=\(maxAbsDiff), matchRatio(±2)=\(matchRatio)")
+
+        // Both paths use fp32 with the same OKLab math; small rounding differences are
+        // expected at gap-fill boundaries. Tight but not pixel-identical thresholds.
+        #expect(meanAbsDiff < 1.0,
+                "average per-channel byte difference too large: \(meanAbsDiff)")
+        #expect(matchRatio > 0.99,
+                "fraction of channels matching within ±2 too low: \(matchRatio)")
+        #expect(maxAbsDiff <= 16,
+                "max per-channel byte difference too large: \(maxAbsDiff)")
+    }
+
     private func samplePixels(cgImage: CGImage) -> [UInt8]? {
         let width = cgImage.width
         let height = cgImage.height
