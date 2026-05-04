@@ -13,7 +13,7 @@ final class StereogramViewModel: ObservableObject {
     func generateDebounced(depthMap: DepthMap, settings: StereogramSettings) {
         debounceTask?.cancel()
         debounceTask = Task {
-            try? await Task.sleep(for: .seconds(1))
+            try? await Task.sleep(for: .milliseconds(100))
             guard !Task.isCancelled else { return }
             await generate(depthMap: depthMap, settings: settings)
         }

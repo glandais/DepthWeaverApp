@@ -144,8 +144,12 @@
 		AABB1000000000000000A017 /* StereogramSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB28B5E8D7F42FF1C7AC8 /* StereogramSettings.swift */; };
 		AABB1000000000000000A018 /* VoronoiGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E66D06C5F38F312E2610B /* VoronoiGenerator.swift */; };
 		AABB1000000000000000A019 /* WorleyNoiseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD5454654F889708FF7B68 /* WorleyNoiseGenerator.swift */; };
+		AABB1000000000000000A020 /* MetalStereogramRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000A1 /* MetalStereogramRenderer.swift */; };
+		AABB1000000000000000A021 /* StereogramKernels.metal in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000A2 /* StereogramKernels.metal */; };
 		AABB2000000000000000B001 /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 88AD0604DC6384DBBE907098 /* dog.png */; };
 		AABB2000000000000000B002 /* pattern-giraffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AF8C56DE8E7253760ED4F9 /* pattern-giraffe.png */; };
+		AABB3000000000000000C001 /* MetalStereogramRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000A1 /* MetalStereogramRenderer.swift */; };
+		AABB3000000000000000C002 /* StereogramKernels.metal in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100000000000000A2 /* StereogramKernels.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +277,8 @@
 		FDD46A613A9E670F3E272D91 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		FE0A4CF7299EAABDE56E7A55 /* PatternGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternGenerator.swift; sourceTree = "<group>"; };
 		FE51659E487843EEA3E89C75 /* DepthDenoising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthDenoising.swift; sourceTree = "<group>"; };
+		AABB001100000000000000A1 /* MetalStereogramRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalStereogramRenderer.swift; sourceTree = "<group>"; };
+		AABB001100000000000000A2 /* StereogramKernels.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = StereogramKernels.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -321,6 +327,8 @@
 				4AB63A790621C79B3BD1F82B /* LiDARDepthService.swift */,
 				433E7A8BB2FADAC22E0A21BF /* Model3DLoader.swift */,
 				488C2567AE57C46B8C0CCBAA /* Model3DDepthRenderer.swift */,
+				AABB001100000000000000A1 /* MetalStereogramRenderer.swift */,
+				AABB001100000000000000A2 /* StereogramKernels.metal */,
 				E8B569D42D7D1DC2CA0FFC61 /* StereogramGenerator.swift */,
 				630041FF966306E94E84AF0B /* Generators */,
 				43178DEA2FA2A336006F6DCB /* CapturedModelLibrary.swift */,
@@ -723,6 +731,8 @@
 				AABB1000000000000000A017 /* StereogramSettings.swift in Sources */,
 				AABB1000000000000000A018 /* VoronoiGenerator.swift in Sources */,
 				AABB1000000000000000A019 /* WorleyNoiseGenerator.swift in Sources */,
+				AABB1000000000000000A020 /* MetalStereogramRenderer.swift in Sources */,
+				AABB1000000000000000A021 /* StereogramKernels.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +811,8 @@
 				8790347D7F0C68FE606A1BFA /* StereogramViewModel.swift in Sources */,
 				EB7B5384B99B6B9F9D803DE9 /* VoronoiGenerator.swift in Sources */,
 				CC584D29ABDD0249FCAC6A53 /* WorleyNoiseGenerator.swift in Sources */,
+				AABB3000000000000000C001 /* MetalStereogramRenderer.swift in Sources */,
+				AABB3000000000000000C002 /* StereogramKernels.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

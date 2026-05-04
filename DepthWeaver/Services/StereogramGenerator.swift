@@ -45,8 +45,6 @@ final class StereogramGenerator {
         let s = vwidth / 2 - vmaxsep / 2
         let poffset = vmaxsep - (s % vmaxsep)
 
-        // Depth values, normalized to [0..1] with 1 = nearest.
-        let depths = depthMap.adjustedDepthValues(width: width, height: height)
         let invert = settings.invert
 
         // Pattern resized so its width equals maxsep (real pixels).
@@ -55,12 +53,53 @@ final class StereogramGenerator {
         let patHeight = pat.height
         let patPixels = pat.pixels
 
-        var pixels = [UInt8](repeating: 0, count: width * height * 4)
-
         let depthRange = Float(maxdepth - mindepth)
         let maxdepthF = Float(maxdepth)
         let obsDistF = Float(obsDist)
         let veyeSepF = Float(veyeSep)
+
+        // GPU path: full algorithm runs as a Metal compute kernel.
+        if let gpu = MetalStereogramRenderer.shared {
+            let adjMin = depthMap.adjustment.min
+            let adjRange = depthMap.adjustment.max - depthMap.adjustment.min
+            let adjSafeRange = adjRange > 0 ? adjRange : 1.0
+            let adjStart = 1.0 - depthMap.adjustment.start
+            let adjEnd = 1.0 - depthMap.adjustment.end
+
+            if let outPixels = gpu.render(
+                rawDepths: depthMap.workingDepth,
+                sourceWidth: depthMap.sourceWidth,
+                sourceHeight: depthMap.sourceHeight,
+                pattern: patPixels,
+                patWidth: patWidth,
+                patHeight: patHeight,
+                adjMin: adjMin,
+                adjSafeRange: adjSafeRange,
+                adjStart: adjStart,
+                adjEnd: adjEnd,
+                params: StereogramKernelParams(
+                    width: width,
+                    height: height,
+                    vwidth: vwidth,
+                    oversam: oversam,
+                    vmaxsep: vmaxsep,
+                    s: s,
+                    poffset: poffset,
+                    yShift: yShift,
+                    maxdepthF: maxdepthF,
+                    depthRange: depthRange,
+                    veyeSepF: veyeSepF,
+                    obsDistF: obsDistF,
+                    invert: invert
+                )
+            ) {
+                return createImage(from: outPixels, width: width, height: height)
+            }
+        }
+
+        // CPU fallback path: requires resampled depth.
+        let depths = depthMap.adjustedDepthValues(width: width, height: height)
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
 
         DispatchQueue.concurrentPerform(iterations: height) { y in
             var lookL = [Int](repeating: 0, count: vwidth)
