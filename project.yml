@@ -1,0 +1,147 @@
+name: DepthWeaver
+
+options:
+  bundleIdPrefix: io.github.glandais
+  developmentLanguage: en
+  createIntermediateGroups: true
+  groupSortPosition: top
+  deploymentTarget:
+    iOS: "18.0"
+    macOS: "15.0"
+
+# Applied to every target (matches the project-level build config in the
+# hand-maintained .xcodeproj). XcodeGen's default settingPresets add the
+# standard Xcode template warnings / DEBUG flags on top of these.
+settings:
+  base:
+    DEVELOPMENT_TEAM: 7Q49262697
+    STRING_CATALOG_GENERATE_SYMBOLS: YES
+
+targets:
+
+  DepthWeaver:
+    type: application
+    supportedDestinations: [iOS, macOS]
+    deploymentTarget:
+      iOS: "18.0"
+      macOS: "15.0"
+    sources:
+      - path: DepthWeaver
+        excludes:
+          - "**/.DS_Store"
+          # Stray, unreferenced duplicate of Resources/Models3D/SportsCar.usdz.
+          # Excluded to avoid a "multiple commands produce SportsCar.usdz" collision.
+          - "SportsCar.usdz"
+    # No `info:` block on purpose: the app relies on GENERATE_INFOPLIST_FILE=YES,
+    # so there is no Info.plist on disk (same as the original project).
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.glandais.depthweaver
+        MARKETING_VERSION: "1.1.0"
+        CURRENT_PROJECT_VERSION: 6
+        VERSIONING_SYSTEM: apple-generic
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+        # App icon
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS: NO
+        # Generated Info.plist keys
+        INFOPLIST_KEY_CFBundleDisplayName: DepthWeaver
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+        INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.graphics-design"
+        INFOPLIST_KEY_NSCameraUsageDescription: "DepthWeaver uses the camera with LiDAR to capture 3D depth"
+        INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: "DepthWeaver saves generated stereograms to your photo library"
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "DepthWeaver needs access to your photos to generate depth maps"
+        # Platform-conditional settings (preserved verbatim from the .xcodeproj)
+        "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": DepthWeaver/DepthWeaver.macOS.entitlements
+        "EXCLUDED_ARCHS[sdk=macosx*]": x86_64
+        "CODE_SIGN_IDENTITY[sdk=iphoneos*]": "iPhone Developer"
+        "INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]": YES
+        "INFOPLIST_KEY_UIRequiresFullScreen[sdk=iphoneos*]": NO
+        "INFOPLIST_KEY_UISupportedInterfaceOrientations[sdk=iphoneos*]": "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown"
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+
+  DepthWeaverTests:
+    type: bundle.unit-test
+    supportedDestinations: [iOS, macOS]
+    deploymentTarget:
+      iOS: "26.4"
+      macOS: "26.4"
+    # Host-less logic test: recompiles the generation-core subset of the app
+    # sources directly (no UI/capture code) and bundles the two fixtures it
+    # loads via Bundle.allBundles. It does NOT link or host the app target.
+    sources:
+      - DepthWeaverTests
+      - DepthWeaver/Extensions/PlatformImage.swift
+      - DepthWeaver/Extensions/CIImage+Extensions.swift
+      - DepthWeaver/Models/DepthAdjustment.swift
+      - DepthWeaver/Models/DepthDenoising.swift
+      - DepthWeaver/Models/DepthMap.swift
+      - DepthWeaver/Models/DepthMapPreset.swift
+      - DepthWeaver/Models/PatternSource.swift
+      - DepthWeaver/Models/ProceduralPatternType.swift
+      - DepthWeaver/Models/StereogramPattern.swift
+      - DepthWeaver/Models/StereogramSettings.swift
+      - DepthWeaver/Services/DepthMapDenoiser.swift
+      - DepthWeaver/Services/StereogramGenerator.swift
+      - DepthWeaver/Services/MetalStereogramRenderer.swift
+      - DepthWeaver/Services/StereogramKernels.metal
+      - DepthWeaver/Services/Generators/PatternGenerator.swift
+      - DepthWeaver/Services/Generators/PerlinNoiseGenerator.swift
+      - DepthWeaver/Services/Generators/RandomDotGenerator.swift
+      - DepthWeaver/Services/Generators/ReactionDiffusionGenerator.swift
+      - DepthWeaver/Services/Generators/StarsGenerator.swift
+      - DepthWeaver/Services/Generators/VoronoiGenerator.swift
+      - DepthWeaver/Services/Generators/WorleyNoiseGenerator.swift
+      - path: DepthWeaver/Resources/HeightMaps/dog.png
+        buildPhase: resources
+      - path: DepthWeaver/Resources/Patterns/pattern-giraffe.png
+        buildPhase: resources
+    settings:
+      base:
+        SWIFT_VERSION: "5.0"
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.glandais.DepthWeaverTests
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: 1
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+        STRING_CATALOG_GENERATE_SYMBOLS: NO
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        SWIFT_EMIT_LOC_STRINGS: NO
+        CLANG_CXX_LANGUAGE_STANDARD: "gnu++20"
+        GCC_C_LANGUAGE_STANDARD: gnu17
+
+schemes:
+
+  DepthWeaver:
+    build:
+      targets:
+        DepthWeaver: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - DepthWeaverTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  DepthWeaverTests:
+    build:
+      targets:
+        DepthWeaverTests: all
+    test:
+      config: Debug
+      targets:
+        - DepthWeaverTests

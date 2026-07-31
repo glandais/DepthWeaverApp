@@ -75,6 +75,19 @@ macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, 
 
 Open `DepthWeaver.xcodeproj` in Xcode, set your Development Team in Signing & Capabilities, then build and run. The single `DepthWeaver` target ships both the iOS and the native macOS app (no Mac Catalyst); run the `DepthWeaverTests` scheme for unit tests. macOS uses its own entitlements file (`DepthWeaver/DepthWeaver.macOS.entitlements`).
 
+### Project generation (XcodeGen)
+
+`DepthWeaver.xcodeproj` is **generated** from `project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen) — treat `project.yml` as the source of truth, not the `.pbxproj`. After adding/removing/moving files or changing build settings, regenerate with:
+
+```bash
+xcodegen generate      # reads project.yml, rewrites DepthWeaver.xcodeproj
+```
+
+Notes:
+- The `DepthWeaver` app target sources the whole `DepthWeaver/` folder (files are auto-classified into Sources/Resources by extension), so **new files are picked up automatically** on regenerate — no manual project edits. `.DS_Store` and the stray root `DepthWeaver/SportsCar.usdz` duplicate are excluded.
+- `DepthWeaverTests` is a **host-less logic test**: it re-lists the generation-core subset of app sources explicitly (no UI/capture) and bundles `dog.png` + `pattern-giraffe.png`. If a test starts needing another app source file, add it to that target's `sources` list in `project.yml`.
+- Both targets are multiplatform (`supportedDestinations: [iOS, macOS]`). The app has no `Info.plist` on disk — it uses `GENERATE_INFOPLIST_FILE=YES` with `INFOPLIST_KEY_*` settings in `project.yml`. macOS is Apple-Silicon-only (`EXCLUDED_ARCHS[sdk=macosx*] = x86_64`).
+
 ## App Store metadata
 
 Use the `asc` CLI to sync app metadata (descriptions, keywords, what's new, screenshots, localizations) with App Store Connect. Canonical metadata lives under `./metadata/`. App Store Connect app ID: `6764146054` (bundle `io.github.glandais.depthweaver`).
