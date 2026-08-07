@@ -112,8 +112,8 @@ struct StereogramResultView: View {
                 .accessibilityLabel(savedToPhotos ? "result.saved_to_photos" : "result.save_to_photos")
             }
         }
-        .sheet(isPresented: $showHowToView) {
-            HowToViewSheet()
+        .fullScreenCover(isPresented: $showHowToView) {
+            LearnToSeeItView()
         }
     }
 
@@ -125,65 +125,6 @@ struct StereogramResultView: View {
             withAnimation(.smooth(duration: 0.25)) {
                 barVisible = false
             }
-        }
-    }
-}
-
-struct HowToViewSheet: View {
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("help.how_to_see_3d")
-                        .font(.title2)
-                        .fontWeight(.bold)
-
-                    instructionStep(
-                        number: 1,
-                        text: "help.view_step_hold"
-                    )
-                    instructionStep(
-                        number: 2,
-                        text: "help.view_step_relax"
-                    )
-                    instructionStep(
-                        number: 3,
-                        text: "help.view_step_overlap_alt"
-                    )
-                    instructionStep(
-                        number: 4,
-                        text: "help.view_step_adjust"
-                    )
-
-                    Text("help.tip_device_close")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                        .padding()
-                        .background(.secondary.opacity(0.1), in: RoundedRectangle(cornerRadius: 12))
-                }
-                .padding()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("general.done") { dismiss() }
-                }
-            }
-        }
-    }
-
-    private func instructionStep(number: Int, text: LocalizedStringKey) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            Text("\(number)")
-                .font(.headline)
-                .foregroundStyle(.white)
-                .frame(width: 32, height: 32)
-                .background(.blue, in: Circle())
-
-            Text(text)
-                .font(.body)
         }
     }
 }

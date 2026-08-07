@@ -17,6 +17,7 @@ struct CanvasScreen: View {
     @State private var selectedPatternPhoto: PhotosPickerItem?
     @State private var savedToPhotos = false
     @AppStorage("canvas.hintDismissed") private var hintDismissed = false
+    @AppStorage("trainer.hasSeen") private var trainerSeen = false
     @StateObject private var stereogramVM = StereogramViewModel()
     @StateObject private var patternPreviewVM = PatternPreviewViewModel()
 
@@ -45,11 +46,17 @@ struct CanvasScreen: View {
         .ignoresSafeArea(edges: .bottom)
         .toolbar(.hidden, for: .navigationBar)
         .animation(drawerAnimation, value: drawer)
-        .sheet(isPresented: $showHelp) {
-            HowToUseSheet()
+        .fullScreenCover(isPresented: $showHelp) {
+            LearnToSeeItView()
         }
         .onAppear {
             triggerGeneration()
+            // Nobody opens a help sheet before they have failed once; offer the
+            // trainer up front instead, exactly once.
+            if !trainerSeen {
+                trainerSeen = true
+                showHelp = true
+            }
         }
         .onChange(of: depthMap?.id) { _, _ in
             triggerGeneration()
@@ -152,7 +159,7 @@ struct CanvasScreen: View {
                 Image(systemName: "questionmark")
             }
             .buttonStyle(DWCircleGlassButtonStyle())
-            .accessibilityLabel("help.how_to_use_button")
+            .accessibilityLabel("trainer.header")
         }
     }
 
