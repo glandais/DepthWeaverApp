@@ -396,70 +396,17 @@ struct GenerationView: View {
         }
     }
 
-    @ViewBuilder
+    /// The six equal-weight buttons this replaced now live, re-ranked, on
+    /// `DepthSourceScreen`.
     private var depthAcquisitionButtons: some View {
-        Grid(horizontalSpacing: 12, verticalSpacing: 8) {
-            GridRow {
-                if lidarAvailable {
-                    Button {
-                        path.append(NavigationDestination.lidarCapture)
-                    } label: {
-                        Label("depth.lidar_scan", systemImage: "camera.metering.matrix")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                }
-
-                PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                    Label("depth.from_photo", systemImage: "photo.on.rectangle")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
-
-            GridRow {
-                Button {
-                    showDepthMapPresets = true
-                } label: {
-                    Label("depth.presets", systemImage: "square.grid.2x2")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-
-                PhotosPicker(selection: $selectedDepthMapPhoto, matching: .images) {
-                    Label("depth.import_depth_map", systemImage: "square.and.arrow.down")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
-
-            GridRow {
-                Button {
-                    path.append(NavigationDestination.model3DCapture)
-                } label: {
-                    Label("depth.from_3d_model", systemImage: "cube")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-                .gridCellColumns(guidedCaptureSupported ? 1 : 2)
-
-                if guidedCaptureSupported {
-                    Button {
-                        path.append(NavigationDestination.guidedCapture)
-                    } label: {
-                        Label("depth.guided_capture", systemImage: "camera.viewfinder")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                }
-            }
+        Button {
+            path.append(NavigationDestination.depthSource)
+        } label: {
+            Label("canvas.change_depth_source", systemImage: "square.3.layers.3d")
+                .frame(maxWidth: .infinity)
         }
+        .buttonStyle(.bordered)
+        .controlSize(.small)
     }
 
     // MARK: - Stereogram Preview

@@ -110,6 +110,14 @@ struct IOSContentView: View {
                     if appState.currentDepthMap != nil {
                         DepthAdjustmentView(depthMap: $appState.currentDepthMap)
                     }
+                case .depthSource:
+                    DepthSourceScreen(
+                        depthMap: $appState.currentDepthMap,
+                        path: $path,
+                        photoDepthVM: photoDepthVM,
+                        lidarAvailable: ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth),
+                        guidedCaptureSupported: guidedCaptureSupported
+                    )
                 }
             }
             .overlay {
@@ -180,6 +188,7 @@ enum NavigationDestination: Hashable {
     case guidedCapture
     case stereogramResult(PlatformImage)
     case depthAdjustment
+    case depthSource
 
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -188,6 +197,7 @@ enum NavigationDestination: Hashable {
         case .guidedCapture: hasher.combine(4)
         case .stereogramResult: hasher.combine(2)
         case .depthAdjustment: hasher.combine(3)
+        case .depthSource: hasher.combine(5)
         }
     }
 
@@ -198,6 +208,7 @@ enum NavigationDestination: Hashable {
         case (.guidedCapture, .guidedCapture): true
         case (.stereogramResult, .stereogramResult): true
         case (.depthAdjustment, .depthAdjustment): true
+        case (.depthSource, .depthSource): true
         default: false
         }
     }

@@ -12,6 +12,9 @@ final class PhotoDepthViewModel: ObservableObject {
     @Published var isProcessing = false
     @Published var showError = false
     @Published var errorMessage = ""
+    /// How long the last successful estimate took, surfaced as the
+    /// "ESTIMATED IN 1.2s" badge on the depth-source screen.
+    @Published private(set) var lastEstimateDuration: TimeInterval?
 
     func processImage(data: Data) async {
         isProcessing = true
@@ -58,7 +61,9 @@ final class PhotoDepthViewModel: ObservableObject {
             let exif = Self.exifOrientation(from: source)
             let ciImage = CIImage(cgImage: cgImage)
                 .oriented(forExifOrientation: Int32(exif))
+            let started = Date()
             depthMap = try DepthAnythingService.shared.estimateDepth(from: ciImage)
+            lastEstimateDuration = Date().timeIntervalSince(started)
         } catch {
             showError(message: error.localizedDescription)
         }
