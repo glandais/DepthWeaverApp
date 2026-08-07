@@ -12,7 +12,8 @@ struct DepthToolView: View {
             if let depthMap {
                 DepthPointCloudView(depthMap: depthMap, adjustment: depthMap.adjustment)
                     .aspectRatio(CGFloat(depthMap.width) / CGFloat(depthMap.height), contentMode: .fit)
-                    .frame(maxHeight: 200)
+                    .frame(height: 180)
+                    .frame(maxWidth: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: DWRadius.lg, style: .continuous))
                     .onTapGesture {
                         path.append(NavigationDestination.depthAdjustment)

@@ -12,105 +12,30 @@ struct DepthAdjustmentView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: DWSpace.xl) {
                 if let dm = depthMap {
                     DepthPointCloudView(depthMap: dm, adjustment: adjustment)
                         .aspectRatio(CGFloat(dm.width) / CGFloat(dm.height), contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(maxWidth: .infinity)
+                        .clipShape(RoundedRectangle(cornerRadius: DWRadius.lg, style: .continuous))
                 }
 
                 if depthMap?.source == .imported {
-                    GroupBox(String(localized: "depth_adjustment.denoising", comment: "Depth adjustment section")) {
-                        VStack(spacing: 16) {
-                            HStack {
-                                Toggle(String(localized: "depth_adjustment.denoising.enable", comment: "Denoising toggle"), isOn: $denoising.enabled)
-                                if isDenoising {
-                                    ProgressView().controlSize(.small)
-                                }
-                            }
-
-                            if denoising.enabled {
-                                VStack(alignment: .leading) {
-                                    Text("depth_adjustment.denoising.bilateral \(denoising.bilateralIntensity, specifier: "%.2f")")
-                                        .font(.subheadline)
-                                    Slider(value: $denoising.bilateralIntensity, in: 0...1)
-                                }
-
-                                VStack(alignment: .leading) {
-                                    Text("depth_adjustment.denoising.morphology \(denoising.morphologyRadius, specifier: "%.0f")")
-                                        .font(.subheadline)
-                                    Slider(value: $denoising.morphologyRadius, in: 0...8, step: 1)
-                                }
-
-                                VStack(alignment: .leading) {
-                                    Text("depth_adjustment.denoising.background \(denoising.backgroundThreshold, specifier: "%.3f")")
-                                        .font(.subheadline)
-                                    Slider(value: $denoising.backgroundThreshold, in: 0...0.5)
-                                }
-                            }
-                        }
-                        .padding(.vertical, 4)
-                    }
+                    denoisingSection
                 }
 
-                // Input range
-                GroupBox(String(localized: "depth_adjustment.input_range", comment: "Depth adjustment section")) {
-                    VStack(spacing: 16) {
-                        VStack(alignment: .leading) {
-                            Text("depth_adjustment.min_value \(adjustment.min, specifier: "%.3f")")
-                                .font(.subheadline)
-                            Slider(
-                                value: $adjustment.min,
-                                in: rawRange
-                            )
-                        }
-
-                        VStack(alignment: .leading) {
-                            Text("depth_adjustment.max_value \(adjustment.max, specifier: "%.3f")")
-                                .font(.subheadline)
-                            Slider(
-                                value: $adjustment.max,
-                                in: rawRange
-                            )
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
-
-                // Output range
-                // For LiDAR, start/end are inverted internally (start=1, end=0).
-                // Display "Start" editing `end` and "End" editing `start` so labels match user expectation.
-                GroupBox(String(localized: "depth_adjustment.output_range", comment: "Depth adjustment section")) {
-                    VStack(spacing: 16) {
-                        VStack(alignment: .leading) {
-                            Text("depth_adjustment.start_value \(adjustment.start, specifier: "%.2f")")
-                                .font(.subheadline)
-                            Slider(
-                                value: $adjustment.end,
-                                in: 0...1
-                            )
-                        }
-
-                        VStack(alignment: .leading) {
-                            Text("depth_adjustment.end_value \(adjustment.end, specifier: "%.2f")")
-                                .font(.subheadline)
-                            Slider(
-                                value: $adjustment.start,
-                                in: 0...1
-                            )
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
+                inputRange
+                outputRange
 
                 Button("depth_adjustment.reset") {
                     guard let dm = depthMap else { return }
                     adjustment = DepthMap.initialAdjustment(rawDepth: dm.originalDepth)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(DWGlassButtonStyle())
             }
-            .padding()
+            .padding(DWSpace.l)
         }
+        .background(DWColor.ground)
         .navigationTitle(String(localized: "depth.adjust_depth", comment: "Navigation title"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
@@ -136,6 +61,88 @@ struct DepthAdjustmentView: View {
         }
         .onDisappear {
             denoiseTask?.cancel()
+        }
+    }
+
+    // MARK: - Sections
+
+    private var denoisingSection: some View {
+        VStack(alignment: .leading, spacing: DWSpace.l) {
+            HStack(spacing: DWSpace.s) {
+                DWSectionLabel("depth_adjustment.denoising")
+                if isDenoising {
+                    ProgressView().controlSize(.small).tint(DWColor.cyan)
+                }
+            }
+
+            Toggle(
+                String(localized: "depth_adjustment.denoising.enable", comment: "Denoising toggle"),
+                isOn: $denoising.enabled
+            )
+            .font(DWFont.label)
+            .foregroundStyle(DWColor.text)
+            .tint(DWColor.cyan)
+
+            if denoising.enabled {
+                DWSliderRow(
+                    title: "depth_adjustment.denoising.bilateral_label",
+                    valueText: String(format: "%.2f", denoising.bilateralIntensity),
+                    value: $denoising.bilateralIntensity,
+                    range: 0...1
+                )
+                DWSliderRow(
+                    title: "depth_adjustment.denoising.morphology_label",
+                    valueText: String(format: "%.0f", denoising.morphologyRadius),
+                    value: $denoising.morphologyRadius,
+                    range: 0...8,
+                    step: 1
+                )
+                DWSliderRow(
+                    title: "depth_adjustment.denoising.background_label",
+                    valueText: String(format: "%.3f", denoising.backgroundThreshold),
+                    value: $denoising.backgroundThreshold,
+                    range: 0...0.5
+                )
+            }
+        }
+    }
+
+    private var inputRange: some View {
+        VStack(alignment: .leading, spacing: DWSpace.l) {
+            DWSectionLabel("depth_adjustment.input_range")
+            DWSliderRow(
+                title: "depth_adjustment.min_label",
+                valueText: String(format: "%.3f", adjustment.min),
+                value: $adjustment.min,
+                range: rawRange
+            )
+            DWSliderRow(
+                title: "depth_adjustment.max_label",
+                valueText: String(format: "%.3f", adjustment.max),
+                value: $adjustment.max,
+                range: rawRange
+            )
+        }
+    }
+
+    // For LiDAR, start/end are inverted internally (start=1, end=0).
+    // Display "Start" editing `end` and "End" editing `start` so labels match
+    // user expectation.
+    private var outputRange: some View {
+        VStack(alignment: .leading, spacing: DWSpace.l) {
+            DWSectionLabel("depth_adjustment.output_range")
+            DWSliderRow(
+                title: "depth_adjustment.start_label",
+                valueText: String(format: "%.2f", adjustment.start),
+                value: $adjustment.end,
+                range: 0...1
+            )
+            DWSliderRow(
+                title: "depth_adjustment.end_label",
+                valueText: String(format: "%.2f", adjustment.end),
+                value: $adjustment.start,
+                range: 0...1
+            )
         }
     }
 

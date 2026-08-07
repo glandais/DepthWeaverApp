@@ -20,9 +20,15 @@ struct ToolDrawer: View {
     let onSave: () -> Void
 
     @State private var dragOffset: CGFloat = 0
+    @State private var contentHeight: CGFloat = 0
 
     var body: some View {
         GeometryReader { proxy in
+            // A ScrollView's ideal height is unbounded, so left alone it would
+            // stretch the drawer to its cap even for the short Depth tab.
+            // Measure the content and let the drawer hug it up to that cap.
+            let maxContent = proxy.size.height * 0.72 - 190
+
             VStack(spacing: DWSpace.l) {
                 grabHandle
                 chipRow
@@ -30,9 +36,19 @@ struct ToolDrawer: View {
                 ScrollView {
                     tabContent
                         .padding(.bottom, DWSpace.s)
+                        .background {
+                            GeometryReader { inner in
+                                Color.clear.preference(
+                                    key: DrawerContentHeightKey.self,
+                                    value: inner.size.height
+                                )
+                            }
+                        }
                 }
                 .scrollIndicators(.hidden)
                 .scrollBounceBehavior(.basedOnSize)
+                .frame(height: min(max(contentHeight, 1), max(maxContent, 1)))
+                .onPreferenceChange(DrawerContentHeightKey.self) { contentHeight = $0 }
 
                 saveRow
             }
@@ -40,7 +56,6 @@ struct ToolDrawer: View {
             .padding(.top, DWSpace.m)
             .padding(.bottom, DWSpace.section)
             .frame(maxWidth: .infinity)
-            .frame(maxHeight: proxy.size.height * 0.72, alignment: .top)
             .background {
                 UnevenRoundedRectangle(
                     topLeadingRadius: DWRadius.hero,
@@ -75,6 +90,13 @@ struct ToolDrawer: View {
                         if shouldClose { drawer = .closed }
                     }
             )
+        }
+    }
+
+    private struct DrawerContentHeightKey: PreferenceKey {
+        static let defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
         }
     }
 

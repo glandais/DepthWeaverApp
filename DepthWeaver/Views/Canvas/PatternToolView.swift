@@ -18,6 +18,7 @@ struct PatternToolView: View {
         VStack(alignment: .leading, spacing: DWSpace.l) {
             VStack(alignment: .leading, spacing: DWSpace.s) {
                 DWSectionLabel("pattern.textures_section")
+                ScrollViewReader { scroll in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: DWSpace.m) {
                         ForEach(StereogramPattern.allCases) { pattern in
@@ -32,6 +33,7 @@ struct PatternToolView: View {
                             } action: {
                                 settings.patternSource = source
                             }
+                            .id(pattern)
                             .accessibilityLabel(pattern.displayName)
                             .accessibilityAddTraits(settings.patternSource == source ? .isSelected : [])
                         }
@@ -54,6 +56,13 @@ struct PatternToolView: View {
                         .accessibilityLabel(String(localized: "pattern.import_accessibility", comment: "Accessibility label"))
                     }
                     .padding(.vertical, 2)
+                }
+                // The default pattern (giraffe) is 13th of 14; without this the
+                // strip opens on what looks like an unselected row.
+                .onAppear {
+                    guard case .asset(let pattern) = settings.patternSource else { return }
+                    scroll.scrollTo(pattern, anchor: .center)
+                }
                 }
             }
 
