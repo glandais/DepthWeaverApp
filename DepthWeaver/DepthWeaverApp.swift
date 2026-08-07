@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct DepthWeaverApp: App {
     init() {
+        DWFontRegistrar.registerBundledFonts()
         Task.detached(priority: .utility) {
             try? DepthAnythingService.shared.loadModel()
         }

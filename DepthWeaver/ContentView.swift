@@ -169,6 +169,8 @@ struct IOSContentView: View {
             }
             .task { appState.capturedLibrary.load() }
         }
+        .preferredColorScheme(.dark)
+        .tint(DWColor.cyan)
     }
 }
 
