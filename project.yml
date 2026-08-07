@@ -60,7 +60,10 @@ targets:
         "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": DepthWeaver/DepthWeaver.macOS.entitlements
         "EXCLUDED_ARCHS[sdk=macosx*]": x86_64
         "CODE_SIGN_IDENTITY[sdk=iphoneos*]": "iPhone Developer"
-        "INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]": YES
+        # Unconditional: scoped to iphoneos this was missing on the simulator,
+        # which letterboxed the app and made the full-bleed canvas impossible
+        # to evaluate there.
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
         "INFOPLIST_KEY_UIRequiresFullScreen[sdk=iphoneos*]": NO
         "INFOPLIST_KEY_UISupportedInterfaceOrientations[sdk=iphoneos*]": "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown"
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO

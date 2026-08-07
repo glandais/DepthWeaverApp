@@ -57,7 +57,6 @@ struct ContentView: View {
 struct IOSContentView: View {
     @ObservedObject var appState: AppState
     @State private var path = NavigationPath()
-    @State private var selectedPhoto: PhotosPickerItem?
     @StateObject private var photoDepthVM = PhotoDepthViewModel()
 
     private var guidedCaptureSupported: Bool {
@@ -69,12 +68,9 @@ struct IOSContentView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            GenerationView(
+            CanvasScreen(
                 depthMap: $appState.currentDepthMap,
-                path: $path,
-                selectedPhoto: $selectedPhoto,
-                lidarAvailable: ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth),
-                guidedCaptureSupported: guidedCaptureSupported
+                path: $path
             )
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
@@ -132,16 +128,6 @@ struct IOSContentView: View {
                 }
             }
             .animation(.smooth(duration: 0.3), value: photoDepthVM.isProcessing)
-            .onChange(of: selectedPhoto) { _, newValue in
-                guard let item = newValue else { return }
-                Task {
-                    await photoDepthVM.processPhoto(item: item)
-                    selectedPhoto = nil
-                    if let depthMap = photoDepthVM.depthMap {
-                        appState.currentDepthMap = depthMap
-                    }
-                }
-            }
             .alert("general.error", isPresented: $photoDepthVM.showError) {
                 Button("general.ok") {}
             } message: {

@@ -30,7 +30,9 @@ enum DWFontRegistrar {
             logger.error("Failed to register \(url.lastPathComponent, privacy: .public): \(code)")
         }
 
-        if !DWFont.customFontsAvailable {
+        if DWFont.customFontsAvailable {
+            logger.info("Registered \(urls.count) bundled fonts")
+        } else {
             logger.error("Custom fonts registered but not resolvable — using system fallback")
         }
     }
