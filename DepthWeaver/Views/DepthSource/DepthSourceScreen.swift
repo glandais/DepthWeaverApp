@@ -132,10 +132,12 @@ struct DepthSourceScreen: View {
     @ViewBuilder
     private var heroPreview: some View {
         ZStack(alignment: .bottomLeading) {
-            if let depthMap, let preview = depthMap.previewImage() {
-                Image(uiImage: preview)
-                    .resizable()
-                    .scaledToFill()
+            if let depthMap {
+                // Same interactive point cloud as the Depth drawer, so the
+                // current depth map reads the same wherever it is shown.
+                DepthPointCloudView(depthMap: depthMap, adjustment: depthMap.adjustment)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(DWColor.surface)
             } else {
                 DWColor.surface
                     .overlay {
