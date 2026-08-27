@@ -206,6 +206,22 @@
         }
       }
     },
+    "canvas.pinch_hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pinch to zoom · tap to hide"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pincez pour zoomer · touchez pour masquer"
+          }
+        }
+      }
+    },
     "canvas.save" : {
       "localizations" : {
         "en" : {
@@ -238,7 +254,24 @@
         }
       }
     },
+    "canvas.share" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager"
+          }
+        }
+      }
+    },
     "canvas.tap_fullscreen_hint" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -298,6 +331,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réglages"
+          }
+        }
+      }
+    },
+    "canvas.zoom_accessibility_hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pinch to zoom. Double tap to zoom in. Tap to show or hide the controls."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pincez pour zoomer. Touchez deux fois pour agrandir. Touchez pour afficher ou masquer les commandes."
           }
         }
       }

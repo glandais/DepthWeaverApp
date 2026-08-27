@@ -100,8 +100,6 @@ struct IOSContentView: View {
                             appState.pendingCapture = PendingCapture(url: capturedURL)
                         })
                     }
-                case .stereogramResult(let image):
-                    StereogramResultView(image: image)
                 case .depthAdjustment:
                     if appState.currentDepthMap != nil {
                         DepthAdjustmentView(depthMap: $appState.currentDepthMap)
@@ -172,7 +170,6 @@ enum NavigationDestination: Hashable {
     case lidarCapture
     case model3DCapture
     case guidedCapture
-    case stereogramResult(PlatformImage)
     case depthAdjustment
     case depthSource
 
@@ -181,7 +178,6 @@ enum NavigationDestination: Hashable {
         case .lidarCapture: hasher.combine(0)
         case .model3DCapture: hasher.combine(1)
         case .guidedCapture: hasher.combine(4)
-        case .stereogramResult: hasher.combine(2)
         case .depthAdjustment: hasher.combine(3)
         case .depthSource: hasher.combine(5)
         }
@@ -192,7 +188,6 @@ enum NavigationDestination: Hashable {
         case (.lidarCapture, .lidarCapture): true
         case (.model3DCapture, .model3DCapture): true
         case (.guidedCapture, .guidedCapture): true
-        case (.stereogramResult, .stereogramResult): true
         case (.depthAdjustment, .depthAdjustment): true
         case (.depthSource, .depthSource): true
         default: false

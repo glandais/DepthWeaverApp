@@ -16,6 +16,11 @@ struct CanvasScreen: View {
     @State private var showHelp = false
     @State private var selectedPatternPhoto: PhotosPickerItem?
     @State private var savedToPhotos = false
+    @State private var zoom: CGFloat = 1
+    @State private var lastZoom: CGFloat = 1
+    @State private var offset: CGSize = .zero
+    @State private var lastOffset: CGSize = .zero
+    @State private var chromeVisible = true
     @AppStorage("canvas.hintDismissed") private var hintDismissed = false
     @AppStorage("trainer.hasSeen") private var trainerSeen = false
     @StateObject private var stereogramVM = StereogramViewModel()
@@ -27,6 +32,8 @@ struct CanvasScreen: View {
         ZStack(alignment: .bottom) {
             canvas
             floatingChrome
+                .opacity(chromeVisible ? 1 : 0)
+                .allowsHitTesting(chromeVisible)
             if drawer.isOpen {
                 ToolDrawer(
                     drawer: $drawer,
@@ -45,6 +52,7 @@ struct CanvasScreen: View {
         .background(DWColor.ground)
         .ignoresSafeArea(edges: .bottom)
         .toolbar(.hidden, for: .navigationBar)
+        .statusBarHidden(!chromeVisible)
         .animation(drawerAnimation, value: drawer)
         .fullScreenCover(isPresented: $showHelp) {
             LearnToSeeItView()
@@ -92,15 +100,15 @@ struct CanvasScreen: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
+                        // This frame *is* zoom 1 — the full-bleed, cropped
+                        // framing. Nothing clips here: the clip belongs to the
+                        // container, so pinching back out reveals the cropped
+                        // edges instead of empty ground.
                         .frame(width: proxy.size.width, height: proxy.size.height)
-                        .clipped()
-                        .onTapGesture {
-                            guard !stereogramVM.isGenerating else { return }
-                            if !hintDismissed { hintDismissed = true }
-                            path.append(NavigationDestination.stereogramResult(image))
-                        }
+                        .scaleEffect(zoom)
+                        .offset(offset)
                         .accessibilityLabel("result.preview")
-                        .accessibilityHint("result.tap_fullscreen")
+                        .accessibilityHint("canvas.zoom_accessibility_hint")
                 } else {
                     DWColor.ground
                 }
@@ -112,7 +120,25 @@ struct CanvasScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(DWColor.ground.opacity(stereogramVM.resultImage == nil ? 1 : 0.45))
                         .transition(.opacity)
+                        // Its background covers the canvas, so left hit-testable
+                        // it swallows every gesture during a re-render.
+                        .allowsHitTesting(false)
                 }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+            .clipped()
+            .contentShape(Rectangle())
+            .gesture(
+                zoomAndPan(container: proxy.size),
+                including: canvasGesturesEnabled ? .all : .subviews
+            )
+            .onTapGesture(count: 2) { handleDoubleTap() }
+            .onTapGesture { handleSingleTap() }
+            .onChange(of: stereogramVM.resultImage) { old, new in
+                reconcileZoom(old: old, new: new, container: proxy.size)
+            }
+            .onChange(of: proxy.size) { _, size in
+                clampZoomAndOffset(container: size)
             }
             .animation(.smooth(duration: 0.25), value: stereogramVM.isGenerating)
         }
@@ -127,7 +153,7 @@ struct CanvasScreen: View {
             Spacer(minLength: 0)
             if !drawer.isOpen {
                 if !hintDismissed && stereogramVM.resultImage != nil {
-                    DWHintPill(text: "canvas.tap_fullscreen_hint")
+                    DWHintPill(text: "canvas.pinch_hint")
                         .padding(.bottom, DWSpace.l)
                         .transition(.opacity)
                 }
@@ -198,22 +224,69 @@ struct CanvasScreen: View {
             .padding(6)
             .dwGlass(radius: DWRadius.xxl)
 
-            Button(action: saveToPhotos) {
-                VStack(spacing: DWSpace.xs) {
-                    Image(systemName: savedToPhotos ? "checkmark" : "square.and.arrow.down")
-                        .font(.system(size: 15, weight: .semibold))
-                        .contentTransition(.symbolEffect(.replace))
-                    Text("canvas.save")
-                        .font(DWFont.ui(9.5, .semibold))
-                }
-                .foregroundStyle(DWColor.ground)
-                .frame(width: 62, height: 64)
-                .background(DWColor.text, in: RoundedRectangle(cornerRadius: DWRadius.xxl, style: .continuous))
+            // Secondary before primary, and narrower, so the pair reads as one
+            // block and the chips keep enough room for the French labels.
+            HStack(spacing: DWSpace.xs) {
+                shareTile
+                saveTile
+            }
+        }
+    }
+
+    private var saveTile: some View {
+        Button(action: saveToPhotos) {
+            actionTile(
+                systemImage: savedToPhotos ? "checkmark" : "square.and.arrow.down",
+                title: "canvas.save",
+                width: 62
+            )
+            .foregroundStyle(DWColor.ground)
+            .background(DWColor.text, in: RoundedRectangle(cornerRadius: DWRadius.xxl, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .disabled(stereogramVM.resultImage == nil)
+        .accessibilityLabel(savedToPhotos ? "result.saved_to_photos" : "result.save_to_photos")
+    }
+
+    /// `ShareLink` needs a non-optional item, so the empty state is a dimmed
+    /// stand-in of the same size rather than nothing — letting the tile appear
+    /// with the first render would shove the chips sideways.
+    @ViewBuilder
+    private var shareTile: some View {
+        let label = actionTile(systemImage: "square.and.arrow.up", title: "canvas.share", width: 52)
+            .foregroundStyle(DWColor.text)
+
+        if let image = stereogramVM.resultImage {
+            ShareLink(
+                item: Image(platformImage: image),
+                preview: SharePreview(
+                    String(localized: "result.title"),
+                    image: Image(platformImage: image)
+                )
+            ) {
+                label.dwGlass(radius: DWRadius.xxl)
             }
             .buttonStyle(.plain)
-            .disabled(stereogramVM.resultImage == nil)
-            .accessibilityLabel(savedToPhotos ? "result.saved_to_photos" : "result.save_to_photos")
+            .accessibilityLabel("result.share")
+        } else {
+            label
+                .dwGlass(radius: DWRadius.xxl)
+                .opacity(0.4)
+                .accessibilityHidden(true)
         }
+    }
+
+    private func actionTile(systemImage: String, title: LocalizedStringKey, width: CGFloat) -> some View {
+        VStack(spacing: DWSpace.xs) {
+            Image(systemName: systemImage)
+                .font(.system(size: 15, weight: .semibold))
+                .contentTransition(.symbolEffect(.replace))
+            Text(title)
+                .font(DWFont.ui(9.5, .semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .frame(width: width, height: 64)
     }
 
     // MARK: - Data
@@ -231,6 +304,141 @@ struct CanvasScreen: View {
     private var depthSubtitle: String? {
         guard let depthMap else { return nil }
         return String(localized: "canvas.depth_subtitle \(depthMap.width) \(depthMap.height)")
+    }
+
+    // MARK: - Zoom geometry
+
+    private static let maxZoom: CGFloat = 3
+
+    /// Pinch and pan belong to the image; while the drawer is up it owns the
+    /// screen (and runs its own drag-to-dismiss), so the canvas lets go.
+    private var canvasGesturesEnabled: Bool {
+        !drawer.isOpen && stereogramVM.resultImage != nil
+    }
+
+    /// The factor `.scaledToFill()` applies to this image in this container.
+    private func fillScale(_ image: PlatformImage, _ container: CGSize) -> CGFloat {
+        guard image.size.width > 0, image.size.height > 0 else { return 1 }
+        return max(container.width / image.size.width, container.height / image.size.height)
+    }
+
+    /// The zoom at which the whole image fits on screen — the floor of the zoom
+    /// range, and always ≤ 1, since 1 is the cropped full-bleed framing.
+    private func fitRatio(_ image: PlatformImage, _ container: CGSize) -> CGFloat {
+        guard image.size.width > 0, image.size.height > 0,
+              container.width > 0, container.height > 0 else { return 1 }
+        let fit = min(container.width / image.size.width, container.height / image.size.height)
+        return fit / fillScale(image, container)
+    }
+
+    /// Holds the image's edges inside the container, and re-centres it on an
+    /// axis where it no longer covers.
+    private func clampOffset(
+        _ raw: CGSize,
+        image: PlatformImage,
+        container: CGSize,
+        zoom: CGFloat
+    ) -> CGSize {
+        guard image.size.width > 0, image.size.height > 0 else { return .zero }
+        let scale = fillScale(image, container) * zoom
+        let maxX = max(0, (image.size.width * scale - container.width) / 2)
+        let maxY = max(0, (image.size.height * scale - container.height) / 2)
+        return CGSize(
+            width: min(max(raw.width, -maxX), maxX),
+            height: min(max(raw.height, -maxY), maxY)
+        )
+    }
+
+    private func zoomAndPan(container: CGSize) -> some Gesture {
+        MagnifyGesture()
+            .onChanged { value in
+                guard let image = stereogramVM.resultImage else { return }
+                zoom = min(
+                    max(lastZoom * value.magnification, fitRatio(image, container)),
+                    Self.maxZoom
+                )
+                offset = clampOffset(offset, image: image, container: container, zoom: zoom)
+                if !hintDismissed { hintDismissed = true }
+            }
+            .onEnded { _ in
+                lastZoom = zoom
+                lastOffset = offset
+            }
+            // Panning matters at zoom 1 too: the resting framing already crops.
+            .simultaneously(with:
+                DragGesture()
+                    .onChanged { value in
+                        guard let image = stereogramVM.resultImage else { return }
+                        let raw = CGSize(
+                            width: lastOffset.width + value.translation.width,
+                            height: lastOffset.height + value.translation.height
+                        )
+                        offset = clampOffset(raw, image: image, container: container, zoom: zoom)
+                    }
+                    .onEnded { _ in lastOffset = offset }
+            )
+    }
+
+    private func handleSingleTap() {
+        if drawer.isOpen {
+            drawer = .closed
+            return
+        }
+        guard stereogramVM.resultImage != nil else { return }
+        if !hintDismissed { hintDismissed = true }
+        withAnimation(.smooth(duration: 0.25)) { chromeVisible.toggle() }
+    }
+
+    private func handleDoubleTap() {
+        guard canvasGesturesEnabled else { return }
+        withAnimation(.smooth(duration: 0.3)) {
+            zoom = zoom == 1 ? Self.maxZoom : 1
+            offset = .zero
+            lastZoom = zoom
+            lastOffset = offset
+        }
+    }
+
+    /// A new render lands on every slider tick, and pulling the user out of a
+    /// zoomed inspection mid-drag is exactly the wrong moment — so the zoom
+    /// survives a re-render of the same shape, and only resets when the aspect
+    /// ratio changes under it.
+    private func reconcileZoom(old: PlatformImage?, new: PlatformImage?, container: CGSize) {
+        guard let new, new.size.width > 0, new.size.height > 0 else {
+            resetZoom(animated: false)
+            return
+        }
+        let oldAspect: CGFloat? = {
+            guard let old, old.size.height > 0 else { return nil }
+            return old.size.width / old.size.height
+        }()
+        if let oldAspect, abs(oldAspect - new.size.width / new.size.height) < 0.001 {
+            clampZoomAndOffset(container: container)
+        } else {
+            resetZoom(animated: old != nil)
+        }
+    }
+
+    private func clampZoomAndOffset(container: CGSize) {
+        guard let image = stereogramVM.resultImage else { return }
+        zoom = min(max(zoom, fitRatio(image, container)), Self.maxZoom)
+        lastZoom = zoom
+        offset = clampOffset(offset, image: image, container: container, zoom: zoom)
+        lastOffset = offset
+    }
+
+    private func resetZoom(animated: Bool) {
+        let apply = {
+            zoom = 1
+            lastZoom = 1
+            offset = .zero
+            lastOffset = .zero
+        }
+        if animated {
+            withAnimation(.smooth(duration: 0.3), apply)
+        } else {
+            apply()
+        }
     }
 
     // MARK: - Actions
