@@ -45,9 +45,8 @@ enum DWColor {
     static let hairline = white(0.10)
     static let hairlineStrong = white(0.14)
 
-    // Scrims over the canvas
+    // Deep ink used behind small badges over imagery
     static let scrim = srgb(0x0F1130, 0.85)
-    static let scrimClear = srgb(0x0F1130, 0)
 }
 
 enum DWRadius {

@@ -116,11 +116,6 @@ struct CanvasScreen: View {
             }
             .animation(.smooth(duration: 0.25), value: stereogramVM.isGenerating)
         }
-        // The scrims go on before .ignoresSafeArea(), otherwise the overlays
-        // are laid out inside the safe area and the top one starts below the
-        // status bar instead of at the top of the screen.
-        .dwScrim(edge: .top, height: 190)
-        .dwScrim(edge: .bottom, height: 240)
         .ignoresSafeArea()
     }
 

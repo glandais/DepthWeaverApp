@@ -39,22 +39,6 @@ extension View {
     func dwGlassCircle(raised: Bool = false) -> some View {
         modifier(DWGlassBackground(shape: Circle(), raised: raised))
     }
-
-    /// A non-interactive gradient that keeps floating controls legible over the
-    /// stereogram canvas.
-    func dwScrim(edge: VerticalEdge, height: CGFloat) -> some View {
-        overlay(alignment: edge == .top ? .top : .bottom) {
-            LinearGradient(
-                colors: edge == .top
-                    ? [DWColor.scrim, DWColor.scrimClear]
-                    : [DWColor.scrimClear, DWColor.scrim],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: height)
-            .allowsHitTesting(false)
-        }
-    }
 }
 
 /// Hairline separator for grouped lists, inset to clear the leading icon tile.
