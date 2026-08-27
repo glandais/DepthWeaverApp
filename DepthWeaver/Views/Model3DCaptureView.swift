@@ -14,6 +14,7 @@ struct Model3DCaptureView: View {
     @ObservedObject var library: CapturedModelLibrary
     @Binding var pendingAutoLoadID: UUID?
 
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = Model3DCaptureViewModel()
     @State private var sceneViewHolder = SceneViewHolder()
     @State private var showFileImporter = false
@@ -22,12 +23,15 @@ struct Model3DCaptureView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            header
             sceneArea
-            Divider()
+            Rectangle()
+                .fill(DWColor.hairline)
+                .frame(height: 1)
             controls
         }
-        .navigationTitle("model3d.capture_title")
-        .navigationBarTitleDisplayMode(.inline)
+        .background(DWColor.ground)
+        .toolbar(.hidden, for: .navigationBar)
         .task {
             // If we were navigated here right after a fresh scan was saved,
             // auto-load that capture so the user lands on the depth-capture
@@ -35,31 +39,6 @@ struct Model3DCaptureView: View {
             if let id = pendingAutoLoadID {
                 pendingAutoLoadID = nil
                 await viewModel.loadCapturedModel(id: id, library: library)
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    if guidedCaptureSupported {
-                        Button {
-                            onRequestCapture()
-                        } label: {
-                            Label("model3d.menu.capture_new", systemImage: "camera.viewfinder")
-                        }
-                    }
-                    Button {
-                        showFileImporter = true
-                    } label: {
-                        Label("model3d.open_file", systemImage: "folder")
-                    }
-                    Button {
-                        showPresetSheet = true
-                    } label: {
-                        Label("model3d.presets", systemImage: "square.grid.2x2")
-                    }
-                } label: {
-                    Image(systemName: "plus.circle")
-                }
             }
         }
         .sheet(isPresented: $showPresetSheet) {
@@ -127,10 +106,11 @@ struct Model3DCaptureView: View {
         .overlay {
             if viewModel.isLoading {
                 ZStack {
-                    Color.black.opacity(0.3).ignoresSafeArea()
+                    DWColor.ground.opacity(0.55).ignoresSafeArea()
                     ProgressView()
-                        .padding(24)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+                        .tint(DWColor.cyan)
+                        .padding(DWSpace.xxl)
+                        .dwGlass(radius: DWRadius.xl)
                 }
             }
         }
@@ -146,12 +126,58 @@ struct Model3DCaptureView: View {
         return types
     }
 
+    private var header: some View {
+        HStack(spacing: DWSpace.m) {
+            Button { dismiss() } label: {
+                Image(systemName: "chevron.left")
+            }
+            .buttonStyle(DWCircleGlassButtonStyle(size: 34))
+            .accessibilityLabel("general.back")
+
+            Text("model3d.capture_title")
+                .font(DWFont.screenTitle)
+                .foregroundStyle(DWColor.text)
+
+            Spacer(minLength: 0)
+
+            Menu {
+                if guidedCaptureSupported {
+                    Button {
+                        onRequestCapture()
+                    } label: {
+                        Label("model3d.menu.capture_new", systemImage: "camera.viewfinder")
+                    }
+                }
+                Button {
+                    showFileImporter = true
+                } label: {
+                    Label("model3d.open_file", systemImage: "folder")
+                }
+                Button {
+                    showPresetSheet = true
+                } label: {
+                    Label("model3d.presets", systemImage: "square.grid.2x2")
+                }
+            } label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(DWColor.text)
+                    .frame(width: 34, height: 34)
+                    .dwGlassCircle()
+            }
+            .accessibilityLabel("model3d.menu.add_model")
+        }
+        .padding(.horizontal, DWSpace.l)
+        .padding(.top, DWSpace.s)
+        .padding(.bottom, DWSpace.m)
+    }
+
     @ViewBuilder
     private var sceneArea: some View {
         ZStack {
             if let scene = viewModel.scene {
                 Model3DSceneView(scene: scene, holder: sceneViewHolder)
-                    .background(Color.black)
+                    .background(DWColor.ground)
             } else {
                 emptyState
             }
@@ -159,82 +185,87 @@ struct Model3DCaptureView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
+    /// Three side-by-side buttons shattered into four lines each in French, so
+    /// the actions are stacked rows — the same grouped list the depth-source
+    /// screen offers its capture flows in.
     private var emptyState: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "cube.transparent")
-                .font(.system(size: 60))
-                .foregroundStyle(.secondary)
+        VStack(spacing: DWSpace.l) {
+            Spacer(minLength: 0)
 
-            Text("model3d.empty_state_title")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
+            DWIconTile(systemImage: "cube.transparent", tint: DWColor.periwinkle, size: 64)
 
-            Text("model3d.empty_state_message")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 32)
+            VStack(spacing: DWSpace.s) {
+                Text("model3d.empty_state_title")
+                    .font(DWFont.heroTitle)
+                    .foregroundStyle(DWColor.text)
 
-            HStack(spacing: 12) {
-                if guidedCaptureSupported {
-                    Button {
-                        onRequestCapture()
-                    } label: {
-                        Label("model3d.menu.capture_new", systemImage: "camera.viewfinder")
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-
-                Group {
-                    if guidedCaptureSupported {
-                        Button {
-                            showFileImporter = true
-                        } label: {
-                            Label("model3d.open_file", systemImage: "folder")
-                        }
-                        .buttonStyle(.bordered)
-                    } else {
-                        Button {
-                            showFileImporter = true
-                        } label: {
-                            Label("model3d.open_file", systemImage: "folder")
-                        }
-                        .buttonStyle(.borderedProminent)
-                    }
-                }
-
-                Button {
-                    showPresetSheet = true
-                } label: {
-                    Label("model3d.presets", systemImage: "square.grid.2x2")
-                }
-                .buttonStyle(.bordered)
+                Text("model3d.empty_state_message")
+                    .font(DWFont.body)
+                    .foregroundStyle(DWColor.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: 320)
+
+            DWGroupedList {
+                if guidedCaptureSupported {
+                    DWListRow(
+                        title: "model3d.menu.capture_new",
+                        systemImage: "camera.viewfinder"
+                    ) {
+                        onRequestCapture()
+                    }
+                    DWSeparator(leadingInset: 60)
+                }
+
+                DWListRow(
+                    title: "model3d.open_file",
+                    systemImage: "folder",
+                    tint: DWColor.text
+                ) {
+                    showFileImporter = true
+                }
+                DWSeparator(leadingInset: 60)
+
+                DWListRow(
+                    title: "model3d.presets",
+                    systemImage: "square.grid.2x2",
+                    tint: DWColor.periwinkle
+                ) {
+                    showPresetSheet = true
+                }
+            }
+
+            Spacer(minLength: 0)
         }
-        .padding()
+        .padding(.horizontal, DWSpace.l)
+        .padding(.vertical, DWSpace.xl)
     }
 
     private var controls: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: DWSpace.s) {
             if let label = viewModel.sourceLabel {
                 Text(label)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(DWFont.valueMono)
+                    .foregroundStyle(DWColor.textSecondary)
                     .lineLimit(1)
             }
             Button {
                 captureDepth()
             } label: {
                 Label("model3d.capture_depth", systemImage: "camera.viewfinder")
-                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+            .buttonStyle(DWPrimaryButtonStyle(height: 52))
             .disabled(viewModel.scene == nil)
+            // Desaturated rather than faded: a translucent cyan over the bar
+            // reads as a washed-out slab instead of an unavailable action.
+            .saturation(viewModel.scene == nil ? 0 : 1)
+            .opacity(viewModel.scene == nil ? 0.45 : 1)
         }
-        .padding()
-        .background(.regularMaterial)
+        .padding(.horizontal, DWSpace.l)
+        .padding(.top, DWSpace.m)
+        .padding(.bottom, DWSpace.l)
+        .background(DWColor.surface)
     }
 
     private func captureDepth() {
@@ -271,7 +302,7 @@ struct Model3DSceneView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(DWColor.ground)
         view.allowsCameraControl = true
         view.autoenablesDefaultLighting = true
         view.antialiasingMode = .multisampling4X
@@ -304,18 +335,19 @@ struct Model3DPresetSheet: View {
     let onDelete: (UUID) -> Void
 
     private let columns = [
-        GridItem(.adaptive(minimum: 110), spacing: 12)
+        GridItem(.adaptive(minimum: 100), spacing: DWSpace.m)
     ]
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: DWSpace.xl) {
                     capturesSection
                     bundledSection
                 }
-                .padding()
+                .padding(DWSpace.l)
             }
+            .background(DWColor.ground)
             .navigationTitle("model3d.presets_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -328,52 +360,32 @@ struct Model3DPresetSheet: View {
 
     @ViewBuilder
     private var capturesSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("model3d.section.my_captures")
-                .font(.headline)
+        VStack(alignment: .leading, spacing: DWSpace.s) {
+            DWSectionLabel("model3d.section.my_captures")
 
             if library.entries.isEmpty {
-                HStack {
-                    Spacer()
-                    VStack(spacing: 8) {
-                        Image(systemName: "cube.transparent")
-                            .font(.system(size: 32))
-                            .foregroundStyle(.secondary)
-                        Text("model3d.captures.empty")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.vertical, 12)
-                    Spacer()
+                VStack(spacing: DWSpace.s) {
+                    Image(systemName: "cube.transparent")
+                        .font(.system(size: 30))
+                        .foregroundStyle(DWColor.textTertiary)
+                    Text("model3d.captures.empty")
+                        .font(DWFont.ui(12))
+                        .foregroundStyle(DWColor.textSecondary)
                 }
                 .frame(maxWidth: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.1))
-                )
+                .padding(.vertical, DWSpace.xl)
+                .dwGlass(radius: DWRadius.lg)
             } else {
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: columns, spacing: DWSpace.l) {
                     ForEach(library.entries) { entry in
                         Button {
                             onSelectCaptured(entry.id)
                         } label: {
-                            VStack(spacing: 6) {
-                                Image(systemName: "cube.transparent")
-                                    .font(.system(size: 36))
-                                    .frame(width: 90, height: 90)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color.gray.opacity(0.2))
-                                    )
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(selectedCapturedID == entry.id ? Color.accentColor : .clear, lineWidth: 2)
-                                    )
-
-                                Text(entry.displayName)
-                                    .font(.caption)
-                                    .lineLimit(1)
-                            }
+                            modelTile(
+                                systemImage: "cube.transparent",
+                                title: entry.displayName,
+                                isSelected: selectedCapturedID == entry.id
+                            )
                         }
                         .buttonStyle(.plain)
                         .contextMenu {
@@ -396,36 +408,44 @@ struct Model3DPresetSheet: View {
 
     @ViewBuilder
     private var bundledSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("model3d.section.bundled")
-                .font(.headline)
+        VStack(alignment: .leading, spacing: DWSpace.s) {
+            DWSectionLabel("model3d.section.bundled")
 
-            LazyVGrid(columns: columns, spacing: 16) {
+            LazyVGrid(columns: columns, spacing: DWSpace.l) {
                 ForEach(Model3DPreset.allCases) { preset in
                     Button {
                         onSelectPreset(preset)
                     } label: {
-                        VStack(spacing: 6) {
-                            Image(systemName: preset.systemImageName)
-                                .font(.system(size: 36))
-                                .frame(width: 90, height: 90)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.gray.opacity(0.2))
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedPresetID == preset.id ? Color.accentColor : .clear, lineWidth: 2)
-                                )
-
-                            Text(preset.displayName)
-                                .font(.caption)
-                                .lineLimit(1)
-                        }
+                        modelTile(
+                            systemImage: preset.systemImageName,
+                            title: preset.displayName,
+                            isSelected: selectedPresetID == preset.id
+                        )
                     }
                     .buttonStyle(.plain)
                 }
             }
+        }
+    }
+
+    private func modelTile(systemImage: String, title: String, isSelected: Bool) -> some View {
+        VStack(spacing: DWSpace.s) {
+            Image(systemName: systemImage)
+                .font(.system(size: 32, weight: .light))
+                .foregroundStyle(isSelected ? DWColor.cyan : DWColor.text)
+                .frame(maxWidth: .infinity)
+                .frame(height: 74)
+
+            Text(title)
+                .font(DWFont.caption)
+                .foregroundStyle(DWColor.textSecondary)
+                .lineLimit(1)
+        }
+        .padding(DWSpace.s)
+        .dwGlass(radius: DWRadius.lg)
+        .overlay {
+            RoundedRectangle(cornerRadius: DWRadius.lg, style: .continuous)
+                .stroke(isSelected ? DWColor.cyan : .clear, lineWidth: 1.5)
         }
     }
 }

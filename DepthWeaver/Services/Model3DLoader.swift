@@ -35,7 +35,12 @@ enum Model3DLoader {
             throw Model3DLoaderError.loadFailed(error.localizedDescription)
         }
 
-        scene.background.contents = CGColor(gray: 0, alpha: 1)
+        // The app's ground rather than pure black, so the viewport sits in the
+        // same room as the chrome around it. Depth capture reads the depth
+        // buffer, so the background colour never reaches the depth map.
+        scene.background.contents = CGColor(
+            srgbRed: 0x0F / 255, green: 0x11 / 255, blue: 0x30 / 255, alpha: 1
+        )
         frameScene(scene)
         return scene
     }
