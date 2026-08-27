@@ -77,6 +77,10 @@ struct ToolDrawer: View {
                 .ignoresSafeArea(edges: .bottom)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
+            // The drawer runs to the bottom edge and hosts custom drag controls
+            // (sliders, the grab handle), so the home-indicator swipe would
+            // otherwise steal their first gesture.
+            .defersSystemGestures(on: .bottom)
             .offset(y: dragOffset)
             .gesture(
                 DragGesture(minimumDistance: 8)

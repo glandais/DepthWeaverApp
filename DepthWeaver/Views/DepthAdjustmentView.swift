@@ -34,8 +34,12 @@ struct DepthAdjustmentView: View {
                 .buttonStyle(DWGlassButtonStyle())
             }
             .padding(DWSpace.l)
+            .padding(.bottom, DWSpace.section)
         }
         .background(DWColor.ground)
+        // The sliders are custom drag controls, so one sitting over the home
+        // indicator would hand its first swipe to the app switcher instead.
+        .defersSystemGestures(on: .bottom)
         .navigationTitle(String(localized: "depth.adjust_depth", comment: "Navigation title"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
