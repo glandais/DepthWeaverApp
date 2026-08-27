@@ -51,25 +51,34 @@ final class PhotoDepthViewModel: ObservableObject {
 
     private func runImageProcessing(data: Data) async {
         do {
-            guard let source = CGImageSourceCreateWithData(data as CFData, nil),
-                  let cgImage = CGImageSourceCreateImageAtIndex(source, 0, nil)
-            else {
+            let started = Date()
+            // Decoding + CoreML inference stay off the main actor: the first
+            // estimate can also block on the startup model preload.
+            let estimated = try await Task.detached(priority: .userInitiated) { () -> DepthMap? in
+                guard let source = CGImageSourceCreateWithData(data as CFData, nil),
+                      let cgImage = CGImageSourceCreateImageAtIndex(source, 0, nil)
+                else {
+                    return nil
+                }
+
+                let exif = Self.exifOrientation(from: source)
+                let ciImage = CIImage(cgImage: cgImage)
+                    .oriented(forExifOrientation: Int32(exif))
+                return try DepthAnythingService.shared.estimateDepth(from: ciImage)
+            }.value
+
+            guard let estimated else {
                 showError(message: String(localized: "error.photo_load_failed"))
                 return
             }
-
-            let exif = Self.exifOrientation(from: source)
-            let ciImage = CIImage(cgImage: cgImage)
-                .oriented(forExifOrientation: Int32(exif))
-            let started = Date()
-            depthMap = try DepthAnythingService.shared.estimateDepth(from: ciImage)
+            depthMap = estimated
             lastEstimateDuration = Date().timeIntervalSince(started)
         } catch {
             showError(message: error.localizedDescription)
         }
     }
 
-    private static func exifOrientation(from source: CGImageSource) -> Int {
+    nonisolated private static func exifOrientation(from source: CGImageSource) -> Int {
         guard let props = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
               let raw = props[kCGImagePropertyOrientation] as? Int
         else {
