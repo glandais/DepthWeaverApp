@@ -92,6 +92,7 @@ targets:
       - DepthWeaver/Models/StereogramSettings.swift
       - DepthWeaver/Services/DepthMapDenoiser.swift
       - DepthWeaver/Services/StereogramGenerator.swift
+      - DepthWeaver/Services/StereogramGeometry.swift
       - DepthWeaver/Services/MetalStereogramRenderer.swift
       - DepthWeaver/Services/StereogramKernels.metal
       - DepthWeaver/Services/Generators/PatternGenerator.swift

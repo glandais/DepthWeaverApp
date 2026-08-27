@@ -7,32 +7,25 @@ final class StereogramGenerator {
     /// Thimbleby–Inglis–Witten random-dot algorithm with link-based hidden-surface
     /// removal, bitmapped patterns, oversampling, and centre-outwards application.
     func generate(depthMap: DepthMap, settings: StereogramSettings, useMetal: Bool = true) -> PlatformImage {
-        // Output size: keep input aspect, ensure min dimension >= 960.
-        let minDimTarget = 960
-        let rawWidth = depthMap.width > 0 ? depthMap.width : 1024
-        let rawHeight = depthMap.height > 0 ? depthMap.height : 768
-        let minDim = min(rawWidth, rawHeight)
-        let scale = minDim < minDimTarget ? Int((Float(minDimTarget) / Float(minDim)).rounded(.up)) : 1
-        let width = rawWidth * scale
-        let height = rawHeight * scale
+        let (width, height) = Self.outputSize(for: depthMap)
 
         // Geometry constants (PDF). All in pixels.
-        let xdpi = max(30, settings.dpi)
+        let geometry = Geometry(dpi: settings.dpi, depthStrength: settings.depthStrength)
+        let xdpi = geometry.dpi
         let ydpi = xdpi
         let oversam = max(1, settings.oversampling)
-        let obsDist = xdpi * 12
-        let eyeSep = (xdpi * 5) / 2          // 2.5 inches
+        let obsDist = geometry.obsDist
+        let eyeSep = geometry.eyeSep
         let veyeSep = eyeSep * oversam
 
-        let depthStrength = max(0.1, settings.depthStrength)
         let sepFactor = min(0.95, max(0.05, settings.sepFactor))
 
-        let maxdepth = max(1, Int((Float(obsDist) * depthStrength).rounded()))
+        let maxdepth = geometry.maxdepth
         let mindepthF = (sepFactor * Float(maxdepth) * Float(obsDist)) /
                        ((1.0 - sepFactor) * Float(maxdepth) + Float(obsDist))
         let mindepth = max(0, Int(mindepthF.rounded()))
 
-        let maxsep = max(1, (eyeSep * maxdepth) / (maxdepth + obsDist))
+        let maxsep = geometry.maxsep
         let vmaxsep = oversam * maxsep
         let yShift = ydpi / 16
         let vwidth = width * oversam

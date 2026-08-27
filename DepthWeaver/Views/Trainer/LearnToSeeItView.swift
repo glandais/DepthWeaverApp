@@ -10,6 +10,7 @@ struct LearnToSeeItView: View {
     @AppStorage("trainer.completedRound") private var completedRound = 0
     @State private var step: TrainerStep = .armsLength
     @State private var round = TrainerRound(index: 0)
+    @State private var screen: CGSize = .zero
     @StateObject private var stereogramVM = StereogramViewModel()
 
     var body: some View {
@@ -25,7 +26,17 @@ struct LearnToSeeItView: View {
         .padding(.bottom, DWSpace.xl)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(DWColor.ground)
-        .task(id: round.index) { await render() }
+        // Measured outside the safe area, because the main canvas the trainer
+        // has to match runs to the edges of the screen.
+        .background {
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear { screen = proxy.size }
+                    .onChange(of: proxy.size) { _, size in screen = size }
+            }
+            .ignoresSafeArea()
+        }
+        .task(id: RenderKey(round: round.index, screen: screen)) { await render() }
     }
 
     // MARK: - Header
@@ -144,7 +155,16 @@ struct LearnToSeeItView: View {
     }
 
     private func render() async {
-        await stereogramVM.generate(depthMap: round.depthMap, settings: round.settings)
+        guard screen != .zero else { return }
+        let settings = round.settings(canvasSide: DWMetric.trainerCanvas, screen: screen)
+        await stereogramVM.generate(depthMap: round.depthMap, settings: settings)
+    }
+
+    /// The render depends on the screen as well as the round: the band width is
+    /// matched to the main canvas, which is the size of the device.
+    private struct RenderKey: Equatable {
+        let round: Int
+        let screen: CGSize
     }
 }
 #endif
