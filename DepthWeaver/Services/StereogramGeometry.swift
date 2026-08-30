@@ -34,9 +34,13 @@ extension StereogramGenerator {
     }
 
     /// Output pixel size for a depth map: the aspect ratio is kept and the image
-    /// upscaled by an integer factor until its min dimension reaches 960.
-    static func outputSize(for depthMap: DepthMap) -> (width: Int, height: Int) {
-        let minDimTarget = 960
+    /// upscaled by an integer factor until its min dimension reaches the target
+    /// (960 by default — see `StereogramQuality`).
+    static func outputSize(
+        for depthMap: DepthMap,
+        quality: StereogramQuality = .full
+    ) -> (width: Int, height: Int) {
+        let minDimTarget = quality.minDimension
         let rawWidth = depthMap.width > 0 ? depthMap.width : 1024
         let rawHeight = depthMap.height > 0 ? depthMap.height : 768
         let minDim = min(rawWidth, rawHeight)
@@ -49,5 +53,22 @@ extension StereogramGenerator {
     static func fillScale(imageSize: (width: Int, height: Int), in target: CGSize) -> CGFloat {
         guard imageSize.width > 0, imageSize.height > 0 else { return 0 }
         return max(target.width / CGFloat(imageSize.width), target.height / CGFloat(imageSize.height))
+    }
+}
+
+/// How much resolution a render is allowed to spend.
+///
+/// Live mode regenerates the whole stereogram on every gesture frame, which is
+/// only affordable at a coarser output size; the moment the finger lifts the
+/// canvas re-renders at `.full` and the two are indistinguishable again.
+enum StereogramQuality {
+    case preview
+    case full
+
+    var minDimension: Int {
+        switch self {
+        case .preview: return 480
+        case .full: return 960
+        }
     }
 }

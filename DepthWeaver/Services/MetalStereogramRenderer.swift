@@ -34,6 +34,9 @@ final class MetalStereogramRenderer {
         var adjSafeRange: Float
         var adjStart: Float
         var adjEnd: Float
+        var tScale: Float
+        var tOffsetX: Float
+        var tOffsetY: Float
         var invert: Int32
     }
 
@@ -85,6 +88,7 @@ final class MetalStereogramRenderer {
         adjSafeRange: Float,
         adjStart: Float,
         adjEnd: Float,
+        transform: DepthTransform,
         params p: StereogramKernelParams
     ) -> [UInt8]? {
         let vCount = p.vwidth * p.height
@@ -130,6 +134,9 @@ final class MetalStereogramRenderer {
             adjSafeRange: adjSafeRange,
             adjStart: adjStart,
             adjEnd: adjEnd,
+            tScale: transform.scale,
+            tOffsetX: transform.offsetX,
+            tOffsetY: transform.offsetY,
             invert: p.invert ? 1 : 0
         )
 

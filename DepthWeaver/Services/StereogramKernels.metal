@@ -22,6 +22,9 @@ struct StereogramParams {
     float adjSafeRange;
     float adjStart;
     float adjEnd;
+    float tScale;
+    float tOffsetX;
+    float tOffsetY;
     int invert;
 };
 
@@ -103,17 +106,27 @@ kernel void stereogram_row(
         R[x] = x;
     }
 
-    // Source row index, computed once per row.
-    float fy = (float)y * (float)max(1, srcH - 1) / (float)max(1, params.height - 1);
-    int srcY = (int)fy;
+    // Source row index, computed once per row. The live framing (pan / zoom of
+    // the depth map itself) folds into the resample; `DepthTransform.sourceU/V`
+    // runs the same two lines on the CPU path — keep them aligned.
+    const float invScale = 1.0f / max(1.0f, params.tScale);
+    const float spanX    = (float)max(0, srcW - 1);
+    const float spanY    = (float)max(0, srcH - 1);
+    const float denomX   = (float)max(1, width - 1);
+    const float denomY   = (float)max(1, params.height - 1);
+
+    float v0 = (float)y / denomY;
+    float sv = clamp(0.5f + (v0 - 0.5f) * invScale - params.tOffsetY, 0.0f, 1.0f);
+    int srcY = clamp((int)(sv * spanY), 0, srcH - 1);
     int srcRowBase = srcY * srcW;
-    float xRatio = (float)max(1, srcW - 1) / (float)max(1, width - 1);
 
     int sep = 0;
     for (int x = 0; x < vwidth; ++x) {
         if (x % oversam == 0) {
             int xr = x / oversam;
-            int srcX = (int)((float)xr * xRatio);
+            float u0 = (float)xr / denomX;
+            float su = clamp(0.5f + (u0 - 0.5f) * invScale - params.tOffsetX, 0.0f, 1.0f);
+            int srcX = clamp((int)(su * spanX), 0, srcW - 1);
             float v = depths[srcRowBase + srcX];
             float clamped = clamp((v - params.adjMin) / params.adjSafeRange, 0.0f, 1.0f);
             float h = params.adjStart + clamped * (params.adjEnd - params.adjStart);

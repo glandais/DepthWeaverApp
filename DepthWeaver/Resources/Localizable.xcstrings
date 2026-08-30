@@ -206,6 +206,70 @@
         }
       }
     },
+    "canvas.live_hint_flat" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to move · pinch to zoom"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez pour déplacer · pincez pour zoomer"
+          }
+        }
+      }
+    },
+    "canvas.live_hint_model" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to turn · 2 fingers to move · pinch to zoom"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez pour tourner · 2 doigts pour déplacer · pincez pour zoomer"
+          }
+        }
+      }
+    },
+    "canvas.mode_live" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live — move the depth source"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live — déplacer la source de profondeur"
+          }
+        }
+      }
+    },
+    "canvas.mode_view" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View — move the rendered image"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image — déplacer l’image rendue"
+          }
+        }
+      }
+    },
     "canvas.pinch_hint" : {
       "localizations" : {
         "en" : {
@@ -218,6 +282,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pincez pour zoomer · touchez pour masquer"
+          }
+        }
+      }
+    },
+    "canvas.reset_framing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset framing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser le cadrage"
           }
         }
       }
