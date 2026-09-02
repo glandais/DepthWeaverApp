@@ -1,1 +1,5 @@
-{"name":"DepthWeaver","subtitle":"Autostéréogrammes Magic Eye","privacyPolicyUrl":"https://glandais.github.io/DepthWeaver/privacy/"}
+{
+  "name": "DepthWeaver : Stéréogrammes 3D",
+  "subtitle": "Illusions d'optique en 3D",
+  "privacyPolicyUrl": "https://glandais.github.io/DepthWeaver/privacy/"
+}
