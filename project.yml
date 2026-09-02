@@ -86,6 +86,7 @@ targets:
       - DepthWeaver/Models/DepthDenoising.swift
       - DepthWeaver/Models/DepthMap.swift
       - DepthWeaver/Models/DepthMapPreset.swift
+      - DepthWeaver/Models/DepthTransform.swift
       - DepthWeaver/Models/PatternSource.swift
       - DepthWeaver/Models/ProceduralPatternType.swift
       - DepthWeaver/Models/StereogramPattern.swift

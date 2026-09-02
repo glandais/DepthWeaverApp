@@ -5,6 +5,7 @@ import SwiftUI
 import ARKit
 import PhotosUI
 import RealityKit
+import SceneKit
 #endif
 
 private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "ContentView")
@@ -18,6 +19,9 @@ final class AppState: ObservableObject {
 
     #if os(iOS)
     @Published var pendingCapture: PendingCapture?
+    /// The scene the current `.model3D` depth map was captured from, kept so
+    /// the canvas' live mode can keep orbiting it. Nil until a model is loaded.
+    @Published var liveScene: SCNScene?
     /// Set after a fresh scan is saved into the library; consumed by
     /// `Model3DCaptureView` on first appearance to auto-load the new model.
     @Published var pendingModel3DLoadID: UUID?
@@ -28,6 +32,9 @@ final class AppState: ObservableObject {
     func reset() {
         currentDepthMap = DepthMapPreset.dog.toDepthMap()
         resultImage = nil
+        #if os(iOS)
+        liveScene = nil
+        #endif
     }
 }
 
@@ -70,7 +77,8 @@ struct IOSContentView: View {
         NavigationStack(path: $path) {
             CanvasScreen(
                 depthMap: $appState.currentDepthMap,
-                path: $path
+                path: $path,
+                scene3D: appState.liveScene
             )
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
@@ -82,9 +90,13 @@ struct IOSContentView: View {
                     })
                 case .model3DCapture:
                     Model3DCaptureView(
-                        onCapture: { depthMap in
+                        onCapture: { depthMap, scene in
                             logger.info("onCapture (3D) called, depthMap \(depthMap.width)x\(depthMap.height)")
                             appState.currentDepthMap = depthMap
+                            // Keeping the scene is what lets the canvas keep
+                            // turning the model instead of only panning the
+                            // still it just captured.
+                            appState.liveScene = scene
                             path.removeLast()
                         },
                         onRequestCapture: {
