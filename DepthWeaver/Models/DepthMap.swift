@@ -92,7 +92,9 @@ struct DepthMap: Identifiable {
             minVal = 0
             maxVal = 1
         }
-        logger.info("Raw depth range: \(minVal)...\(maxVal)")
+        // `.debug`, not `.info`: live 3D builds a DepthMap on every gesture
+        // frame and this would otherwise log dozens of times a second.
+        logger.debug("Raw depth range: \(minVal)...\(maxVal)")
 
         return DepthAdjustment(min: minVal, max: maxVal, start: 0, end: 1)
     }

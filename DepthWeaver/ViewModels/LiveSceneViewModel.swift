@@ -37,7 +37,7 @@ final class LiveSceneViewModel: ObservableObject {
     /// capture screen was left at instead of snapping back to the front.
     func attach(scene newScene: SCNScene?) {
         guard newScene !== scene else { return }
-        removeCameraNode()
+        removeCameraNode(from: scene)
         scene = newScene
         hasScene = newScene != nil
 
@@ -46,6 +46,11 @@ final class LiveSceneViewModel: ObservableObject {
             isHome = true
             return
         }
+
+        // The incoming scene may still carry a node a previous view model left
+        // behind; strip it *before* framing, so the angle is read from the
+        // model's own camera rather than a stale live one.
+        removeCameraNode(from: newScene)
 
         orbit = OrbitCamera.framing(scene: newScene)
         home = orbit
@@ -105,13 +110,15 @@ final class LiveSceneViewModel: ObservableObject {
         orbit.apply(to: cameraNode)
     }
 
-    private func removeCameraNode() {
+    /// Drops our camera node and any namesake a previous view model left in
+    /// `target` — the scene outlives us in `AppState`, so a leftover camera
+    /// would be picked up as the model's own framing on the next attach.
+    private func removeCameraNode(from target: SCNScene?) {
         cameraNode?.removeFromParentNode()
         cameraNode = nil
-        // A previous session may have left its node behind if the scene was
-        // handed to a second view model.
-        scene?.rootNode.childNode(withName: Self.cameraNodeName, recursively: true)?
-            .removeFromParentNode()
+        while let stale = target?.rootNode.childNode(withName: Self.cameraNodeName, recursively: true) {
+            stale.removeFromParentNode()
+        }
     }
 }
 #endif

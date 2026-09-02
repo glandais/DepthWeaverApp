@@ -101,6 +101,10 @@ struct CanvasScreen: View {
             triggerGeneration()
         }
         .onChange(of: depthMap?.denoising) { _, _ in
+            // Denoising rewrites `workingDepth`, which the swatch is drawn
+            // from — it has to be recomputed here too, or the pill keeps
+            // showing the noisy version.
+            refreshDepthThumbnail()
             triggerGeneration()
         }
         .onChange(of: settings) { _, _ in
@@ -133,6 +137,15 @@ struct CanvasScreen: View {
                         // container, so pinching back out reveals the cropped
                         // edges instead of empty ground.
                         .frame(width: proxy.size.width, height: proxy.size.height)
+                        // A new result must appear, never cross-fade. The veil
+                        // below animates on `isGenerating`, and that animation
+                        // reached this image too: SwiftUI dissolved the outgoing
+                        // render into the incoming one, and two images at
+                        // partial opacity let the ground show through — so every
+                        // render, and with it every live gesture, ended in a
+                        // dark flash. Scoped *under* the zoom so the double-tap
+                        // and the reset keep animating.
+                        .transaction { $0.animation = nil }
                         .scaleEffect(zoom)
                         .offset(offset)
                         .accessibilityLabel("result.preview")
@@ -144,7 +157,7 @@ struct CanvasScreen: View {
                 // Live mode never shows the spinner: it re-renders on every
                 // frame of a gesture, and a veil blinking in and out under the
                 // finger is worse than a slightly stale image.
-                if (stereogramVM.isGenerating && mode == .view) || stereogramVM.resultImage == nil {
+                if veilVisible {
                     ProgressView()
                         .controlSize(.large)
                         .tint(DWColor.cyan)
@@ -414,6 +427,12 @@ struct CanvasScreen: View {
     /// Pinch and pan belong to the image; while the drawer is up it owns the
     /// screen (and runs its own drag-to-dismiss), so the canvas lets go — and
     /// live mode takes them over entirely.
+    /// The spinner and its veil: shown while a `.view`-mode render is running,
+    /// and until the very first result exists.
+    private var veilVisible: Bool {
+        (stereogramVM.isGenerating && mode == .view) || stereogramVM.resultImage == nil
+    }
+
     private var canvasGesturesEnabled: Bool {
         mode == .view && !drawer.isOpen && stereogramVM.resultImage != nil
     }
@@ -497,7 +516,10 @@ struct CanvasScreen: View {
 
     private func handleDoubleTap() {
         if mode == .live {
-            resetLiveFraming()
+            // Same rule as the view branch below: the drawer owns the screen
+            // while it is up, so a double-tap on the sliver of canvas above it
+            // must not re-frame and re-capture behind the user's back.
+            if liveGesturesEnabled { resetLiveFraming() }
             return
         }
         guard canvasGesturesEnabled else { return }
@@ -692,7 +714,13 @@ struct CanvasScreen: View {
         // stream can afford, so mid-gesture frames are captured only when the
         // generator is ready for one — the final frame always is.
         guard phase == .ended || !stereogramVM.hasPendingLiveFrame else { return }
-        guard let captured = liveScene.captureDepth(size: liveCaptureSize(container: container)) else { return }
+        guard let captured = liveScene.captureDepth(size: liveCaptureSize(container: container)) else {
+            // The gesture is over and we have nothing new to show: re-render
+            // what is committed, so the canvas doesn't rest on a coarse
+            // preview frame forever.
+            if phase == .ended { triggerGeneration() }
+            return
+        }
         var next = captured
         next.adoptRemap(from: base.adjustment)
         if phase == .ended {

@@ -14,8 +14,13 @@ final class StereogramGenerator {
     ) -> PlatformImage {
         let (width, height) = Self.outputSize(for: depthMap, quality: quality)
 
-        // Geometry constants (PDF). All in pixels.
-        let geometry = Geometry(dpi: settings.dpi, depthStrength: settings.depthStrength)
+        // Geometry constants (PDF). All in pixels — so a render that spends
+        // fewer pixels than `.full` has to scale the DPI down with them, or the
+        // pattern band keeps its width while the image around it shrinks and the
+        // stereogram comes out looking zoomed in.
+        let renderScale = Self.renderScale(for: depthMap, quality: quality)
+        let renderDpi = max(1, Int((Float(settings.dpi) * renderScale).rounded()))
+        let geometry = Geometry(dpi: renderDpi, depthStrength: settings.depthStrength)
         let xdpi = geometry.dpi
         let ydpi = xdpi
         let oversam = max(1, settings.oversampling)

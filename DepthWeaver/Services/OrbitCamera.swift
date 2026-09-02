@@ -86,6 +86,11 @@ struct OrbitCamera: Equatable {
             localFront: SIMD3<Float>(0, 0, -1)
         )
         let camera = node.camera ?? SCNCamera()
+        // `pan` converts points to world units through the *vertical* FOV, so
+        // pin the projection down instead of leaving it `.automatic`, which
+        // would switch to the horizontal axis on a landscape canvas and make
+        // the model drift away from the finger.
+        camera.projectionDirection = .vertical
         camera.fieldOfView = CGFloat(fieldOfView)
         camera.zNear = Double(zNear)
         camera.zFar = Double(zFar)
