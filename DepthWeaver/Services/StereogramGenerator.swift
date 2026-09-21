@@ -6,11 +6,21 @@ final class StereogramGenerator {
     /// Implements the algorithm of W.A. Steer (techmind.org), an extension of the
     /// Thimbleby–Inglis–Witten random-dot algorithm with link-based hidden-surface
     /// removal, bitmapped patterns, oversampling, and centre-outwards application.
-    func generate(depthMap: DepthMap, settings: StereogramSettings, useMetal: Bool = true) -> PlatformImage {
-        let (width, height) = Self.outputSize(for: depthMap)
+    func generate(
+        depthMap: DepthMap,
+        settings: StereogramSettings,
+        useMetal: Bool = true,
+        quality: StereogramQuality = .full
+    ) -> PlatformImage {
+        let (width, height) = Self.outputSize(for: depthMap, quality: quality)
 
-        // Geometry constants (PDF). All in pixels.
-        let geometry = Geometry(dpi: settings.dpi, depthStrength: settings.depthStrength)
+        // Geometry constants (PDF). All in pixels — so a render that spends
+        // fewer pixels than `.full` has to scale the DPI down with them, or the
+        // pattern band keeps its width while the image around it shrinks and the
+        // stereogram comes out looking zoomed in.
+        let renderScale = Self.renderScale(for: depthMap, quality: quality)
+        let renderDpi = max(1, Int((Float(settings.dpi) * renderScale).rounded()))
+        let geometry = Geometry(dpi: renderDpi, depthStrength: settings.depthStrength)
         let xdpi = geometry.dpi
         let ydpi = xdpi
         let oversam = max(1, settings.oversampling)
@@ -70,6 +80,7 @@ final class StereogramGenerator {
                 adjSafeRange: adjSafeRange,
                 adjStart: adjStart,
                 adjEnd: adjEnd,
+                transform: depthMap.transform,
                 params: StereogramKernelParams(
                     width: width,
                     height: height,

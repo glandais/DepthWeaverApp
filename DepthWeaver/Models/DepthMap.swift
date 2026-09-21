@@ -29,6 +29,10 @@ struct DepthMap: Identifiable {
 
     var adjustment: DepthAdjustment
     var denoising: DepthDenoising
+    /// Pan / zoom framing applied while resampling. Driven by the canvas' live
+    /// mode; `.identity` means "the whole map", which is how every capture
+    /// path starts out.
+    var transform: DepthTransform = .identity
     /// Cached denoised version of `originalDepth` at sourceWidth × sourceHeight.
     /// Populated only when `denoising.enabled && source == .imported`.
     private(set) var denoisedDepth: [Float]?
@@ -88,9 +92,21 @@ struct DepthMap: Identifiable {
             minVal = 0
             maxVal = 1
         }
-        logger.info("Raw depth range: \(minVal)...\(maxVal)")
+        // `.debug`, not `.info`: live 3D builds a DepthMap on every gesture
+        // frame and this would otherwise log dozens of times a second.
+        logger.debug("Raw depth range: \(minVal)...\(maxVal)")
 
         return DepthAdjustment(min: minVal, max: maxVal, start: 0, end: 1)
+    }
+
+    /// Keeps the auto-computed input range of a freshly captured map but
+    /// restores the output remap the user had dialled in. Live 3D capture
+    /// produces a new map on every frame, and re-running the auto range is what
+    /// keeps the subject expressive as it moves — reusing the *whole* previous
+    /// adjustment would clip it as soon as the camera dollies.
+    mutating func adoptRemap(from previous: DepthAdjustment) {
+        adjustment.start = previous.start
+        adjustment.end = previous.end
     }
 
     /// The absolute min/max of raw depth values, for slider bounds.
@@ -106,10 +122,19 @@ struct DepthMap: Identifiable {
     }
 
     /// Returns a hue-mapped image for preview display.
-    /// - Parameter highlightClamped: When true, clamped pixels (0 or 1) are drawn in red.
-    func previewImage(highlightClamped: Bool = false) -> PlatformImage? {
-        let w = width
-        let h = height
+    /// - Parameters:
+    ///   - highlightClamped: When true, clamped pixels (0 or 1) are drawn in red.
+    ///   - maxDimension: Longest side of the returned image. Thumbnail callers
+    ///     pass one: the hue ramp is per-pixel work, and live mode asks for a
+    ///     fresh preview every time the framing settles.
+    func previewImage(highlightClamped: Bool = false, maxDimension: Int? = nil) -> PlatformImage? {
+        var w = width
+        var h = height
+        if let maxDimension, maxDimension > 0, Swift.max(w, h) > maxDimension {
+            let scale = Double(maxDimension) / Double(Swift.max(w, h))
+            w = Swift.max(1, Int((Double(w) * scale).rounded()))
+            h = Swift.max(1, Int((Double(h) * scale).rounded()))
+        }
         let adjusted = adjustedDepthValues(width: w, height: h)
 
         // RGBA pixels: map depth to hue wheel, clamped pixels optionally highlighted
@@ -166,16 +191,27 @@ struct DepthMap: Identifiable {
         let safeRange = adjRange > 0 ? adjRange : 1.0
         let depthSource = workingDepth
 
+        // Nearest-neighbour resample through the live framing. The GPU kernel
+        // runs the same three lines per pixel — keep them aligned.
+        let spanX = Float(Swift.max(0, sourceWidth - 1))
+        let spanY = Float(Swift.max(0, sourceHeight - 1))
+        let denomX = Float(Swift.max(1, targetWidth - 1))
+        let denomY = Float(Swift.max(1, targetHeight - 1))
+        let invScale = transform.inverseScale
+        let offsetX = transform.offsetX
+        let offsetY = transform.offsetY
+
         var result = [Float](repeating: 0, count: targetWidth * targetHeight)
         for y in 0..<targetHeight {
-            let srcY = Float(y) * Float(sourceHeight - 1) / Float(Swift.max(1, targetHeight - 1))
-            let y0 = Int(srcY)
+            let sv = DepthTransform.source(Float(y) / denomY, inverseScale: invScale, offset: offsetY)
+            let y0 = Swift.min(sourceHeight - 1, Swift.max(0, Int(sv * spanY)))
+            let rowBase = y0 * sourceWidth
 
             for x in 0..<targetWidth {
-                let srcX = Float(x) * Float(sourceWidth - 1) / Float(Swift.max(1, targetWidth - 1))
-                let x0 = Int(srcX)
+                let su = DepthTransform.source(Float(x) / denomX, inverseScale: invScale, offset: offsetX)
+                let x0 = Swift.min(sourceWidth - 1, Swift.max(0, Int(su * spanX)))
 
-                let v00 = depthSource[y0 * sourceWidth + x0]
+                let v00 = depthSource[rowBase + x0]
 
                 // Clamp to [min, max], normalize to [0..1], remap to [start, end]
                 let clamped = Swift.min(1, Swift.max(0, (v00 - adjMin) / safeRange))

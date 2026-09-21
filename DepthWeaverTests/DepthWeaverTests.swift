@@ -66,33 +66,105 @@ struct StereogramGeneratorTests {
         let cpuPixels = try #require(samplePixels(cgImage: cpuCG), "failed to read CPU pixels")
         #expect(metalPixels.count == cpuPixels.count)
 
-        // Per-channel byte difference statistics over RGB (skip alpha).
+        let diff = channelDifference(metalPixels, cpuPixels)
+        print("Metal vs CPU — meanAbsDiff=\(diff.mean), maxAbsDiff=\(diff.max), matchRatio(±2)=\(diff.matchRatio)")
+        expectPathsAgree(diff)
+    }
+
+    @Test("the live framing resamples identically on the Metal and CPU paths")
+    func transformedMetalAndCpuOutputsAreClose() throws {
+        try #require(MetalStereogramRenderer.shared != nil,
+                     "Metal renderer unavailable on this host — skipping comparison")
+
+        // A framing a live-mode gesture could plausibly land on: zoomed in on
+        // the dog and dragged off-centre on both axes.
+        var depthMap = DepthMapPreset.dog.toDepthMap()
+        depthMap.transform.zoom(by: 2.5)
+        depthMap.transform.pan(dx: 0.18, dy: -0.11)
+        #expect(depthMap.transform.offsetX != 0)
+        #expect(depthMap.transform.offsetY != 0)
+
+        let settings = StereogramSettings()
+        let generator = StereogramGenerator()
+        let metalCG = try #require(
+            generator.generate(depthMap: depthMap, settings: settings, useMetal: true).cgImage,
+            "Metal path returned an empty image"
+        )
+        let cpuCG = try #require(
+            generator.generate(depthMap: depthMap, settings: settings, useMetal: false).cgImage,
+            "CPU path returned an empty image"
+        )
+
+        let metalPixels = try #require(samplePixels(cgImage: metalCG), "failed to read Metal pixels")
+        let cpuPixels = try #require(samplePixels(cgImage: cpuCG), "failed to read CPU pixels")
+        #expect(metalPixels.count == cpuPixels.count)
+
+        let diff = channelDifference(metalPixels, cpuPixels)
+        print("Transformed Metal vs CPU — meanAbsDiff=\(diff.mean), maxAbsDiff=\(diff.max), matchRatio(±2)=\(diff.matchRatio)")
+        expectPathsAgree(diff)
+    }
+
+    @Test("zooming the depth map changes the rendered stereogram")
+    func transformChangesTheRender() throws {
+        let settings = StereogramSettings()
+        let generator = StereogramGenerator()
+
+        let base = DepthMapPreset.dog.toDepthMap()
+        var zoomed = base
+        zoomed.transform.zoom(by: 3)
+
+        let baseCG = try #require(generator.generate(depthMap: base, settings: settings).cgImage)
+        let zoomedCG = try #require(generator.generate(depthMap: zoomed, settings: settings).cgImage)
+
+        // Same map, same settings: only the framing moved, so the output keeps
+        // its size and the pattern has to be laid out differently.
+        #expect(baseCG.width == zoomedCG.width)
+        #expect(baseCG.height == zoomedCG.height)
+
+        let basePixels = try #require(samplePixels(cgImage: baseCG))
+        let zoomedPixels = try #require(samplePixels(cgImage: zoomedCG))
+        let diff = channelDifference(basePixels, zoomedPixels)
+        #expect(diff.matchRatio < 0.9,
+                "zoomed render is suspiciously close to the unzoomed one (matchRatio=\(diff.matchRatio))")
+    }
+
+    // MARK: - Helpers
+
+    private func expectPathsAgree(_ diff: (mean: Double, max: Int, matchRatio: Double)) {
+        // Both paths use fp32 with the same OKLab math; small rounding differences are
+        // expected at gap-fill boundaries. Tight but not pixel-identical thresholds.
+        #expect(diff.mean < 1.0,
+                "average per-channel byte difference too large: \(diff.mean)")
+        #expect(diff.matchRatio > 0.99,
+                "fraction of channels matching within ±2 too low: \(diff.matchRatio)")
+        #expect(diff.max <= 16,
+                "max per-channel byte difference too large: \(diff.max)")
+    }
+
+    /// Per-channel byte difference statistics over RGB (skip alpha).
+    private func channelDifference(
+        _ lhs: [UInt8],
+        _ rhs: [UInt8]
+    ) -> (mean: Double, max: Int, matchRatio: Double) {
         var sumAbsDiff: Double = 0
-        var maxAbsDiff: Int = 0
-        var matchingChannels: Int = 0
-        var totalChannels: Int = 0
-        for i in stride(from: 0, to: metalPixels.count, by: 4) {
+        var maxAbsDiff = 0
+        var matchingChannels = 0
+        var totalChannels = 0
+        for i in stride(from: 0, to: Swift.min(lhs.count, rhs.count), by: 4) {
             for c in 0..<3 {
-                let d = abs(Int(metalPixels[i + c]) - Int(cpuPixels[i + c]))
+                let d = abs(Int(lhs[i + c]) - Int(rhs[i + c]))
                 sumAbsDiff += Double(d)
                 if d > maxAbsDiff { maxAbsDiff = d }
                 if d <= 2 { matchingChannels += 1 }
                 totalChannels += 1
             }
         }
-        let meanAbsDiff = sumAbsDiff / Double(totalChannels)
-        let matchRatio = Double(matchingChannels) / Double(totalChannels)
-
-        print("Metal vs CPU — meanAbsDiff=\(meanAbsDiff), maxAbsDiff=\(maxAbsDiff), matchRatio(±2)=\(matchRatio)")
-
-        // Both paths use fp32 with the same OKLab math; small rounding differences are
-        // expected at gap-fill boundaries. Tight but not pixel-identical thresholds.
-        #expect(meanAbsDiff < 1.0,
-                "average per-channel byte difference too large: \(meanAbsDiff)")
-        #expect(matchRatio > 0.99,
-                "fraction of channels matching within ±2 too low: \(matchRatio)")
-        #expect(maxAbsDiff <= 16,
-                "max per-channel byte difference too large: \(maxAbsDiff)")
+        guard totalChannels > 0 else { return (0, 0, 1) }
+        return (
+            sumAbsDiff / Double(totalChannels),
+            maxAbsDiff,
+            Double(matchingChannels) / Double(totalChannels)
+        )
     }
 
     private func samplePixels(cgImage: CGImage) -> [UInt8]? {
@@ -111,5 +183,51 @@ struct StereogramGeneratorTests {
         ) else { return nil }
         ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
         return pixels
+    }
+}
+
+@Suite("DepthTransform")
+struct DepthTransformTests {
+
+    @Test("the identity transform frames the whole map")
+    func identityFramesEverything() {
+        let transform = DepthTransform.identity
+        #expect(transform.isIdentity)
+        #expect(transform.sourceU(0) == 0)
+        #expect(transform.sourceU(1) == 1)
+        #expect(abs(transform.sourceV(0.5) - 0.5) < 1e-6)
+    }
+
+    @Test("panning cannot push the window off the map")
+    func panIsClampedToTheMap() {
+        var transform = DepthTransform()
+        transform.zoom(by: 2)
+        // Far past the edge on both axes.
+        transform.pan(dx: 10, dy: -10)
+
+        #expect(abs(transform.offsetX - 0.25) < 1e-6)
+        #expect(abs(transform.offsetY + 0.25) < 1e-6)
+        // The visible window sits flush against the left / bottom edge.
+        #expect(transform.sourceU(0) == 0)
+        #expect(abs(transform.sourceU(1) - 0.5) < 1e-6)
+        #expect(abs(transform.sourceV(0) - 0.5) < 1e-6)
+        #expect(transform.sourceV(1) == 1)
+    }
+
+    @Test("zoom stays in range and re-clamps the offsets on the way out")
+    func zoomIsClampedAndResetsPan() {
+        var transform = DepthTransform()
+        transform.zoom(by: 1000)
+        #expect(transform.scale == DepthTransform.maxScale)
+
+        transform.pan(dx: 1, dy: 1)
+        #expect(transform.offsetX > 0)
+
+        transform.zoom(by: 0.0001)
+        #expect(transform.scale == DepthTransform.minScale)
+        // Nothing to pan towards once the whole map is framed again.
+        #expect(transform.offsetX == 0)
+        #expect(transform.offsetY == 0)
+        #expect(transform.isIdentity)
     }
 }

@@ -7,7 +7,9 @@ import UniformTypeIdentifiers
 private let logger = Logger(subsystem: "io.github.glandais.depthweaver", category: "Model3DCaptureView")
 
 struct Model3DCaptureView: View {
-    let onCapture: (DepthMap) -> Void
+    /// Hands back the captured depth *and* the scene it came from — the canvas
+    /// keeps the scene so live mode can go on turning the model.
+    let onCapture: (DepthMap, SCNScene?) -> Void
     let onRequestCapture: () -> Void
     let guidedCaptureSupported: Bool
 
@@ -282,7 +284,7 @@ struct Model3DCaptureView: View {
             logger.error("captureDepth: renderer returned nil")
             return
         }
-        onCapture(depthMap)
+        onCapture(depthMap, viewModel.scene)
     }
 }
 
