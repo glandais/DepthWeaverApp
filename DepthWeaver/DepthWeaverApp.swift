@@ -40,6 +40,17 @@ struct DepthWeaverApp: App {
                 }
                 .keyboardShortcut("i", modifiers: [.command, .option])
             }
+            // The stock "DepthWeaver Help" item has no help book behind it;
+            // the Help menu carries the same links as the iOS About sheet.
+            CommandGroup(replacing: .help) {
+                Link("about.website", destination: AppLinks.website)
+                Link("about.support", destination: AppLinks.support)
+                Link("about.privacy", destination: AppLinks.privacy)
+                Link("about.source_code", destination: AppLinks.sourceCode)
+                Divider()
+                Link("about.rate", destination: AppLinks.writeReview)
+                Link("about.more_apps", destination: AppLinks.developerApps)
+            }
         }
         #endif
     }

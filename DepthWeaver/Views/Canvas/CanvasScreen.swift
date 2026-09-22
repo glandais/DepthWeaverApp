@@ -5,7 +5,7 @@ import SwiftUI
 /// The main screen: the stereogram *is* the interface.
 ///
 /// Everything that used to sit above the result in a scrolling stack now floats
-/// over it — an info pill, a help button, and a bar whose three chips expand
+/// over it — an info pill, about and help buttons, and a bar whose three chips expand
 /// into ``ToolDrawer``.
 struct CanvasScreen: View {
     @Binding var depthMap: DepthMap?
@@ -14,6 +14,7 @@ struct CanvasScreen: View {
     @State private var settings = StereogramSettings()
     @State private var drawer: DrawerState = .closed
     @State private var showHelp = false
+    @State private var showAbout = false
     @State private var selectedPatternPhoto: PhotosPickerItem?
     @State private var savedToPhotos = false
     @State private var zoom: CGFloat = 1
@@ -56,6 +57,9 @@ struct CanvasScreen: View {
         .animation(drawerAnimation, value: drawer)
         .fullScreenCover(isPresented: $showHelp) {
             LearnToSeeItView()
+        }
+        .sheet(isPresented: $showAbout) {
+            AboutView()
         }
         .onAppear {
             triggerGeneration()
@@ -179,11 +183,19 @@ struct CanvasScreen: View {
 
             Spacer(minLength: 0)
 
-            Button { showHelp = true } label: {
-                Image(systemName: "questionmark")
+            HStack(spacing: DWSpace.s) {
+                Button { showAbout = true } label: {
+                    Image(systemName: "info")
+                }
+                .buttonStyle(DWCircleGlassButtonStyle())
+                .accessibilityLabel("about.title")
+
+                Button { showHelp = true } label: {
+                    Image(systemName: "questionmark")
+                }
+                .buttonStyle(DWCircleGlassButtonStyle())
+                .accessibilityLabel("trainer.header")
             }
-            .buttonStyle(DWCircleGlassButtonStyle())
-            .accessibilityLabel("trainer.header")
         }
     }
 

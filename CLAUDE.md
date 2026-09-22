@@ -26,7 +26,7 @@ ContentView (AppState)
 
 iOS-only: `NavigationDestination` enumerates the five pushable destinations. `GuidedCapture` is a port of Apple's WWDC `ScanningObjectsUsingObjectCapture` sample (under `Features/GuidedCapture/`), gated on `ObjectCaptureSession.isSupported && PhotogrammetrySession.isSupported`. Its `onCompleted(URL)` callback hands the finished scan to `AppState.pendingCapture`, which presents `NameCaptureSheet` and stores the model via `CapturedModelLibrary` for later use as a `.model3D` depth source.
 
-macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, Copy ⌘⇧C, Toggle Inspector ⌘⌥I) wired through `NotificationCenter` to `MacGenerationView`. LiDAR / live AR captures and the `GuidedCapture` Object-Capture flow are iOS-only and gated with `#if os(iOS)`; on macOS the user opens 3D models from disk via `SceneCaptureSheet`. Save uses a `FileDocument` (`StereogramPNGDocument`) through `.fileExporter`.
+macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, Copy ⌘⇧C, Toggle Inspector ⌘⌥I, plus a Help menu of outbound links) wired through `NotificationCenter` to `MacGenerationView`. LiDAR / live AR captures and the `GuidedCapture` Object-Capture flow are iOS-only and gated with `#if os(iOS)`; on macOS the user opens 3D models from disk via `SceneCaptureSheet`. Save uses a `FileDocument` (`StereogramPNGDocument`) through `.fileExporter`.
 
 ## Key components
 
@@ -55,6 +55,7 @@ macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, 
 
 ### Views
 - **iOS** — `Views/GenerationView.swift` is the hub: depth-source section (with `DepthPointCloudView` 3D preview), pattern picker (assets + photo import + procedural with `ProceduralParamsView`), settings sliders, and live stereogram preview. The help sheet (`HowToUseSheet`) is defined in the same file.
+- **About / outbound links** — every external URL (website, support, privacy, GitHub source, App Store review, developer page) lives in `Models/AppLinks.swift`. iOS shows them in `Views/About/AboutView.swift` (sheet behind the ⓘ button on `CanvasScreen`); macOS puts them in the Help menu (`DepthWeaverApp`). They open via `Link` — the app itself still makes no network request. Never add a donation/tip link in the app (App Review 3.1.1); Ko-fi stays on the website and README.
 - **macOS** — `Views/Mac/` contains `MacGenerationView` (HSplitView with canvas + inspector), `InspectorPanel` (collapsible source/pattern/depth/settings sections persisted via `@AppStorage`), `SceneCaptureSheet` (modal for loading 3D models and capturing depth from an orbit camera), and `StereogramPNGDocument` (`FileDocument` for `.fileExporter`-based PNG save).
 
 ### Cross-platform plumbing

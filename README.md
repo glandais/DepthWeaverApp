@@ -2,6 +2,8 @@
 
 A native iOS and macOS app that generates autostereograms (Magic Eye images) from depth maps.
 
+[App Store](https://apps.apple.com/app/id6764146054) · [Website](https://glandais.github.io/DepthWeaver/) · [Support](https://glandais.github.io/DepthWeaver/support/) · [Privacy](https://glandais.github.io/DepthWeaver/privacy/) · [Website source](https://github.com/glandais/DepthWeaver) · [Other apps](https://apps.apple.com/developer/id1891310404) · [Buy me a coffee](https://ko-fi.com/gabylandais)
+
 ## Features
 
 - **Multiple depth sources**
@@ -16,6 +18,7 @@ A native iOS and macOS app that generates autostereograms (Magic Eye images) fro
 - **Stereogram engine** — W.A. Steer's extension of the Thimbleby–Inglis–Witten algorithm with link-based hidden-surface removal, bitmapped patterns, oversampling, and centre-outwards application. The full pipeline runs as a Metal compute kernel (one thread per row) with an OKLab gap-fill / oversampling downscale, and a CPU fallback when Metal is unavailable.
 - **Tunable rendering** — DPI, depth strength, depth range, smoothness (oversampling), and depth inversion
 - **Native on iOS and macOS** — the same code base ships an iPhone / iPad app and a Mac app with HSplitView + collapsible inspector, standard menus, and `.fileExporter`-based PNG save
+- **About** — links to the website, support, privacy policy, source code and the App Store (ⓘ button on the iPhone canvas; *Help* menu on Mac)
 - **Localization** — English and French (String Catalogs)
 - **Share & Save** — export to Photos / Files, copy to the pasteboard, or share via any app
 
