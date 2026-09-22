@@ -4,7 +4,8 @@ import Foundation
 ///
 /// These only ever open in the browser / App Store app (`Link`); DepthWeaver
 /// itself makes no network request. No donation or tip link belongs here
-/// (App Review guideline 3.1.1).
+/// (App Review guideline 3.1.1): tips go through in-app purchase instead
+/// (`Views/Tips/`).
 enum AppLinks {
     static let appStoreID = "6764146054"
 

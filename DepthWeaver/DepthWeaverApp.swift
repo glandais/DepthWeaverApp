@@ -2,7 +2,14 @@ import SwiftUI
 
 @main
 struct DepthWeaverApp: App {
+    /// Listens to transactions from launch: a tip approved later (Ask to Buy)
+    /// or interrupted must be finished, whether the tip screen is open or not.
+    @State private var tipJar: TipJar
+
     init() {
+        let tipJar = TipJar()
+        tipJar.start()
+        _tipJar = State(initialValue: tipJar)
         DWFontRegistrar.registerBundledFonts()
         Task.detached(priority: .utility) {
             try? DepthAnythingService.shared.loadModel()
@@ -12,6 +19,7 @@ struct DepthWeaverApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(tipJar)
         }
         #if os(macOS)
         .windowResizability(.contentSize)
@@ -50,8 +58,36 @@ struct DepthWeaverApp: App {
                 Divider()
                 Link("about.rate", destination: AppLinks.writeReview)
                 Link("about.more_apps", destination: AppLinks.developerApps)
+                Divider()
+                TipMenuItem()
             }
         }
         #endif
+
+        #if os(macOS)
+        // The tip screen, as its own small window: the Mac counterpart of the
+        // row pushed from the iOS About sheet.
+        Window(Text("tip.title"), id: TipMenuItem.windowID) {
+            TipJarView(tipJar: tipJar)
+                .frame(width: 420, height: 380)
+        }
+        .windowResizability(.contentSize)
+        #endif
     }
 }
+
+#if os(macOS)
+/// "Support DepthWeaver…" in the Help menu. A view of its own because
+/// `openWindow` is read from the environment.
+private struct TipMenuItem: View {
+    static let windowID = "tips"
+
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        Button("menu.tip") {
+            openWindow(id: Self.windowID)
+        }
+    }
+}
+#endif

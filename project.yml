@@ -130,6 +130,8 @@ schemes:
         DepthWeaver: all
     run:
       config: Debug
+      # Tips: local purchases from Xcode, no sandbox account needed.
+      storeKitConfiguration: Tips.storekit
     test:
       config: Debug
       targets:

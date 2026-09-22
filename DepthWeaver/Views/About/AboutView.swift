@@ -2,19 +2,33 @@
 import SwiftUI
 
 /// Discreet "About" sheet, opened from the ⓘ button on the canvas: version,
-/// plus links to the website, support, privacy policy, source code, a review
-/// prompt and the developer's other apps. Every row opens outside the app.
+/// the tip screen, plus links to the website, support, privacy policy, source
+/// code, a review prompt and the developer's other apps. Every link row opens
+/// outside the app; the tip row stays inside it.
 ///
-/// The Mac app exposes the same links from its Help menu instead
-/// (`DepthWeaverApp.commands`).
+/// The Mac app exposes the same links, and the tip window, from its Help menu
+/// instead (`DepthWeaverApp.commands`).
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(TipJar.self) private var tipJar
+    @State private var showsTips = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: DWSpace.xl) {
                     header
+
+                    // Tips go through in-app purchase and stay in the app
+                    // (guideline 3.1.1): a pushed screen, not an outbound link.
+                    VStack(alignment: .leading, spacing: DWSpace.s) {
+                        DWSectionLabel("about.section_support")
+                        DWGroupedList {
+                            DWListRow(title: "about.tip", systemImage: "cup.and.saucer") {
+                                showsTips = true
+                            }
+                        }
+                    }
 
                     VStack(alignment: .leading, spacing: DWSpace.s) {
                         DWSectionLabel("about.section_info")
@@ -56,6 +70,9 @@ struct AboutView: View {
                 .padding(.bottom, DWSpace.section)
             }
             .background(DWColor.ground)
+            .navigationDestination(isPresented: $showsTips) {
+                TipJarView(tipJar: tipJar)
+            }
             .navigationTitle(Text("about.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
