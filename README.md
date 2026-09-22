@@ -52,6 +52,10 @@ The Depth Anything V2 CoreML model (~48 MB) and the bundled depth-map / 3D-model
 - **Core Image** — depth denoising, image processing, and format conversion
 - **Swift Testing** — unit tests in `DepthWeaverTests/`
 
+## Support
+
+If you enjoy DepthWeaver, you can [buy me a coffee on Ko-fi](https://ko-fi.com/gabylandais).
+
 ## License
 
 MIT
