@@ -51,8 +51,8 @@ targets:
       base:
         SWIFT_VERSION: "5.9"
         PRODUCT_BUNDLE_IDENTIFIER: io.github.glandais.depthweaver
-        MARKETING_VERSION: "1.2.0"
-        CURRENT_PROJECT_VERSION: 7
+        MARKETING_VERSION: "1.2.1"
+        CURRENT_PROJECT_VERSION: 8
         VERSIONING_SYSTEM: apple-generic
         TARGETED_DEVICE_FAMILY: "1,2"
         GENERATE_INFOPLIST_FILE: YES
