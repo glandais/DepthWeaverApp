@@ -40,7 +40,17 @@ struct Model3DCaptureView: View {
                 pendingAutoLoadID = nil
                 await viewModel.loadCapturedModel(id: id, library: library)
             }
+            #if SCREENSHOTS
+            if ScreenshotMode.isActive && ScreenshotMode.screen == .model {
+                await viewModel.loadPreset(.toyBiplace)
+                try? await Task.sleep(for: .milliseconds(500))
+                ScreenshotMode.orbitModel(in: sceneViewHolder.scnView)
+            }
+            #endif
         }
+        #if SCREENSHOTS
+        .screenshotReady(on: [.model], when: viewModel.scene != nil && !viewModel.isLoading, settle: .seconds(4))
+        #endif
         .sheet(isPresented: $showPresetSheet) {
             Model3DPresetSheet(
                 selectedPresetID: viewModel.selectedPresetID,

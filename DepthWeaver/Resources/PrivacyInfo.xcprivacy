@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- No tracking: the app makes no network request, has no analytics and
+	     embeds no third-party SDK, so nothing can be linked with other apps. -->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+
+	<!-- Nothing is collected: photos, depth maps, 3D scans and stereograms stay
+	     on the device. Tips go through StoreKit (Apple), not the developer.
+	     Same declaration as metadata/app-privacy.json. -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<!-- UserDefaults, through @AppStorage, keeps UI state read and
+			     written by this app only: the trainer already shown and its
+			     completed round (CanvasScreen, LearnToSeeItView), the dismissed
+			     canvas hint (CanvasScreen) and the Mac inspector's expanded
+			     sections (InspectorPanel). Revisit this list if another
+			     required-reason API appears (file timestamps, system boot
+			     time, disk space, active keyboards). -->
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

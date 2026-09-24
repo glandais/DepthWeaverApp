@@ -11,8 +11,8 @@ struct CanvasScreen: View {
     @Binding var depthMap: DepthMap?
     @Binding var path: NavigationPath
 
-    @State private var settings = StereogramSettings()
-    @State private var drawer: DrawerState = .closed
+    @State private var settings = StereogramSettings.launch
+    @State private var drawer: DrawerState = .launch
     @State private var showHelp = false
     @State private var showAbout = false
     @State private var selectedPatternPhoto: PhotosPickerItem?
@@ -63,6 +63,10 @@ struct CanvasScreen: View {
         }
         .onAppear {
             triggerGeneration()
+            #if SCREENSHOTS
+            // Launch settings never go through `onChange(of: settings)`.
+            updatePatternPreview()
+            #endif
             // Nobody opens a help sheet before they have failed once; offer the
             // trainer up front instead, exactly once.
             if !trainerSeen {
@@ -70,6 +74,13 @@ struct CanvasScreen: View {
                 showHelp = true
             }
         }
+        #if SCREENSHOTS
+        .screenshotReady(
+            on: [.hero, .depth3d, .pattern, .tune],
+            when: stereogramVM.resultImage != nil && !stereogramVM.isGenerating
+                && (ScreenshotMode.screen != .pattern || patternPreviewVM.previewImage != nil)
+        )
+        #endif
         .onChange(of: depthMap?.id) { _, _ in
             triggerGeneration()
         }

@@ -58,23 +58,6 @@
           }
         }
       }
-    },
-    "NSPhotoLibraryUsageDescription" : {
-      "comment" : "Privacy - Photo Library Usage Description",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DepthWeaver needs access to your photos to generate depth maps"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DepthWeaver a besoin d'accéder à vos photos pour générer des cartes de profondeur"
-          }
-        }
-      }
     }
   },
   "version" : "1.0"

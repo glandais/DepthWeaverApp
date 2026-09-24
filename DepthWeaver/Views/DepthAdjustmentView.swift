@@ -40,6 +40,9 @@ struct DepthAdjustmentView: View {
         // The sliders are custom drag controls, so one sitting over the home
         // indicator would hand its first swipe to the app switcher instead.
         .defersSystemGestures(on: .bottom)
+        #if SCREENSHOTS
+        .screenshotReady(on: [.adjust], when: depthMap != nil, settle: .seconds(4))
+        #endif
         .navigationTitle(String(localized: "depth.adjust_depth", comment: "Navigation title"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

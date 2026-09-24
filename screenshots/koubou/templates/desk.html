@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  DESK — the Mac card: the text in a column on the left, the app's window on the right.
+  Canvas 2880 x 1800 (AppDesktop_2880). No device frame (`frame: false`): the capture is
+  the window itself, 1440 x 900 on a 1x display, drawn here 1.26x larger with its
+  corners rounded again (the capture flattened them on black) and a window shadow.
+-->
+<style>
+  /* The app's palette (DepthWeaver/DesignSystem/DWTheme.swift): the deep-navy ground,
+     the raised surface, and the two accents — cyan and periwinkle — the depth point
+     cloud and the controls are drawn in. Space Grotesk is the app's display face. */
+  @font-face { font-family: "Space Grotesk"; font-weight: 700;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Bold.ttf"); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 400;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Regular.ttf"); }
+  :root {
+    --bg: #0F1130; --surface: #171A40; --cyan: #8FD9E8; --peri: #9B8CF0;
+    --text: #F2F3F5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 100vw; height: 100vh; overflow: hidden; position: relative;
+    background: var(--bg);
+    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-weight: 700; color: #FFFFFF; line-height: 1.04; letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  p {
+    font-weight: 400; color: rgba(242,243,245,0.72); line-height: 1.3; text-wrap: balance;
+  }
+  /* The rule under each headline: a depth profile, a shape rising out of flat
+     ground — what a stereogram hides. Periwinkle far, cyan near, as in the app's
+     point cloud. */
+  .depth { display: flex; align-items: flex-end; gap: 0.9vw; height: 3.6vw; }
+  .depth i { display: block; width: 2.6vw; border-radius: 0.6vw; }
+  .depth i:nth-child(1), .depth i:nth-child(9) { height: 22%; background: #3A3F86; }
+  .depth i:nth-child(2), .depth i:nth-child(8) { height: 34%; background: #5B5BC0; }
+  .depth i:nth-child(3), .depth i:nth-child(7) { height: 55%; background: var(--peri); }
+  .depth i:nth-child(4), .depth i:nth-child(6) { height: 82%; background: #A9C4F0; }
+  .depth i:nth-child(5) { height: 100%; background: var(--cyan); }
+  @media (min-aspect-ratio: 3/5) {
+    .depth { gap: 0.6vw; height: 2.3vw; }
+    .depth i { width: 1.7vw; border-radius: 0.4vw; }
+  }
+
+  .field {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 80% at 75% 55%, rgba(143,217,232,0.16), rgba(143,217,232,0) 70%),
+      radial-gradient(40% 50% at 8% 10%, rgba(155,140,240,0.22), rgba(155,140,240,0) 70%);
+  }
+  .copy { position: absolute; top: 50%; transform: translateY(-50%); left: 5vw; width: 26vw; z-index: 3; }
+  .copy .depth { margin: 3.2vh 0 3vh; }
+  .window { position: absolute; top: 50%; right: 4vw; transform: translateY(-50%); width: 63vw; z-index: 2; }
+  .window img {
+    display: block; width: 100%; height: auto; border-radius: 0.75vw;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 50px 120px rgba(0,0,0,0.7);
+  }
+</style>
+</head>
+<body>
+  <div class="field"></div>
+  <div class="copy" data-fit-budget="80" data-fit-budget-ipad="80"
+       data-fit-start="4.6" data-fit-min="3.6" data-fit-sub="1.9" data-fit-sub-min="1.6"
+       data-fit-start-ipad="4.6" data-fit-min-ipad="3.6" data-fit-sub-ipad="1.9" data-fit-sub-min-ipad="1.6">
+    <h1 data-kou-id="headline" data-kou-role="headline">{{headline}}</h1>
+    <div class="depth"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p data-kou-id="subtitle" data-kou-role="supporting">{{subtitle}}</p>
+  </div>
+  <div class="window"><img data-kou-id="device" data-kou-role="device" src="{{app_screenshot}}" alt=""></div>
+<script>
+/* Text fitting. One template serves two languages, and French runs 15 to 30 %
+   longer than the English it comes from: the text block declares the share of
+   the canvas it owns (data-fit-budget, in % of the height), and this script
+   shrinks the headline, then the subtitle, until it fits. English does not
+   move. Width counts too: a word too long for the line overflows without the
+   height noticing. Start and floor sizes are in vw; the iPad declares its own
+   (data-fit-*-ipad). */
+(function () {
+  var box = document.querySelector('[data-fit-budget]');
+  if (!box) return;
+  var ipad = window.innerWidth / window.innerHeight > 0.6;
+  var d = function (k) { return parseFloat(box.dataset[ipad ? k + 'Ipad' : k] || box.dataset[k]); };
+  var budget = d('fitBudget') / 100 * window.innerHeight;
+  var h1 = box.querySelector('h1'), p = box.querySelector('p');
+  var size = d('fitStart'), min = d('fitMin'), sub = d('fitSub'), subMin = d('fitSubMin');
+  h1.style.fontSize = size + 'vw';
+  if (p) p.style.fontSize = sub + 'vw';
+  var over = function () {
+    return box.getBoundingClientRect().height > budget ||
+           h1.scrollWidth > h1.clientWidth ||
+           (p && p.scrollWidth > p.clientWidth);
+  };
+  while (over() && size > min) { size -= 0.15; h1.style.fontSize = size.toFixed(2) + 'vw'; }
+  if (p) { while (over() && sub > subMin) { sub -= 0.1; p.style.fontSize = sub.toFixed(2) + 'vw'; } }
+})();
+</script>
+</body>
+</html>

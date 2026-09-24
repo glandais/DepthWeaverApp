@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  RISE — the device at the top, leaving through the upper edge; the text at the bottom.
+  The reverse of the hero, so that two neighbouring cards never look alike: the screen
+  reads from the middle up, and the text closes the card on a periwinkle band.
+  One template for both canvases: iPhone 1242 x 2688 (iPhone6_5) and iPad 2048 x 2732
+  (iPadPro12_9). The second, almost square, is caught by `min-aspect-ratio` and gets its
+  own sizes: in vw, an iPhone headline would be twice too big on the iPad.
+-->
+<style>
+  /* The app's palette (DepthWeaver/DesignSystem/DWTheme.swift): the deep-navy ground,
+     the raised surface, and the two accents — cyan and periwinkle — the depth point
+     cloud and the controls are drawn in. Space Grotesk is the app's display face. */
+  @font-face { font-family: "Space Grotesk"; font-weight: 700;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Bold.ttf"); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 400;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Regular.ttf"); }
+  :root {
+    --bg: #0F1130; --surface: #171A40; --cyan: #8FD9E8; --peri: #9B8CF0;
+    --text: #F2F3F5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 100vw; height: 100vh; overflow: hidden; position: relative;
+    background: var(--bg);
+    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-weight: 700; color: #FFFFFF; line-height: 1.04; letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  p {
+    font-weight: 400; color: rgba(242,243,245,0.72); line-height: 1.3; text-wrap: balance;
+  }
+  /* The rule under each headline: a depth profile, a shape rising out of flat
+     ground — what a stereogram hides. Periwinkle far, cyan near, as in the app's
+     point cloud. */
+  .depth { display: flex; align-items: flex-end; gap: 0.9vw; height: 3.6vw; }
+  .depth i { display: block; width: 2.6vw; border-radius: 0.6vw; }
+  .depth i:nth-child(1), .depth i:nth-child(9) { height: 22%; background: #3A3F86; }
+  .depth i:nth-child(2), .depth i:nth-child(8) { height: 34%; background: #5B5BC0; }
+  .depth i:nth-child(3), .depth i:nth-child(7) { height: 55%; background: var(--peri); }
+  .depth i:nth-child(4), .depth i:nth-child(6) { height: 82%; background: #A9C4F0; }
+  .depth i:nth-child(5) { height: 100%; background: var(--cyan); }
+  @media (min-aspect-ratio: 3/5) {
+    .depth { gap: 0.6vw; height: 2.3vw; }
+    .depth i { width: 1.7vw; border-radius: 0.4vw; }
+  }
+
+  .band {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 36%;
+    background: linear-gradient(170deg, #26215E 0%, #1A1846 55%, var(--bg) 100%);
+    clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
+  }
+  .band::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(80% 90% at 85% 10%, rgba(155,140,240,0.34), rgba(155,140,240,0) 65%);
+  }
+  .device { position: absolute; top: -14%; left: 50%; transform: translateX(-50%); z-index: 2; }
+  .device img { display: block; width: 84vw; height: auto; filter: drop-shadow(0 40px 90px rgba(0,0,0,0.8)); }
+  .copy { position: absolute; bottom: 5.5%; left: 7%; right: 7%; z-index: 3; }
+  .copy .depth { margin: 2.4vh 0 2.2vh; }
+  @media (min-aspect-ratio: 3/5) {
+    .device { top: -17%; }
+    .device img { width: auto; height: 82vh; }
+    .copy { left: 9%; right: 9%; bottom: 5%; }
+    .copy .depth { margin: 1.8vh 0 1.6vh; }
+  }
+</style>
+</head>
+<body>
+  <div class="band"></div>
+  <div class="device"><img data-kou-id="device" data-kou-role="device" src="{{app_screenshot}}" alt=""></div>
+  <div class="copy" data-fit-budget="26" data-fit-budget-ipad="25"
+       data-fit-start="11" data-fit-min="9.2" data-fit-sub="4.9" data-fit-sub-min="4.3"
+       data-fit-start-ipad="8.2" data-fit-min-ipad="6.8" data-fit-sub-ipad="3.6" data-fit-sub-min-ipad="3.1">
+    <h1 data-kou-id="headline" data-kou-role="headline">{{headline}}</h1>
+    <div class="depth"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p data-kou-id="subtitle" data-kou-role="supporting">{{subtitle}}</p>
+  </div>
+<script>
+/* Text fitting. One template serves two languages, and French runs 15 to 30 %
+   longer than the English it comes from: the text block declares the share of
+   the canvas it owns (data-fit-budget, in % of the height), and this script
+   shrinks the headline, then the subtitle, until it fits. English does not
+   move. Width counts too: a word too long for the line overflows without the
+   height noticing. Start and floor sizes are in vw; the iPad declares its own
+   (data-fit-*-ipad). */
+(function () {
+  var box = document.querySelector('[data-fit-budget]');
+  if (!box) return;
+  var ipad = window.innerWidth / window.innerHeight > 0.6;
+  var d = function (k) { return parseFloat(box.dataset[ipad ? k + 'Ipad' : k] || box.dataset[k]); };
+  var budget = d('fitBudget') / 100 * window.innerHeight;
+  var h1 = box.querySelector('h1'), p = box.querySelector('p');
+  var size = d('fitStart'), min = d('fitMin'), sub = d('fitSub'), subMin = d('fitSubMin');
+  h1.style.fontSize = size + 'vw';
+  if (p) p.style.fontSize = sub + 'vw';
+  var over = function () {
+    return box.getBoundingClientRect().height > budget ||
+           h1.scrollWidth > h1.clientWidth ||
+           (p && p.scrollWidth > p.clientWidth);
+  };
+  while (over() && size > min) { size -= 0.15; h1.style.fontSize = size.toFixed(2) + 'vw'; }
+  if (p) { while (over() && sub > subMin) { sub -= 0.1; p.style.fontSize = sub.toFixed(2) + 'vw'; } }
+})();
+</script>
+</body>
+</html>

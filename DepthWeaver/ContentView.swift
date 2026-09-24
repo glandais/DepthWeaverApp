@@ -12,7 +12,7 @@ private let logger = Logger(subsystem: "io.github.glandais.depthweaver", categor
 /// Shared state that persists across navigation destinations.
 @MainActor
 final class AppState: ObservableObject {
-    @Published var currentDepthMap: DepthMap? = DepthMapPreset.dog.toDepthMap()
+    @Published var currentDepthMap: DepthMap? = DepthMapPreset.launch.toDepthMap()
     @Published var resultImage: PlatformImage?
     @Published var showHelp = false
 
@@ -56,10 +56,20 @@ struct ContentView: View {
 #if os(iOS)
 struct IOSContentView: View {
     @ObservedObject var appState: AppState
-    @State private var path = NavigationPath()
+    @State private var path = NavigationPath.launch
     @StateObject private var photoDepthVM = PhotoDepthViewModel()
 
+    private var lidarAvailable: Bool {
+        #if SCREENSHOTS
+        if ScreenshotMode.showsCaptureHardware { return true }
+        #endif
+        return ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth)
+    }
+
     private var guidedCaptureSupported: Bool {
+        #if SCREENSHOTS
+        if ScreenshotMode.showsCaptureHardware { return true }
+        #endif
         if #available(iOS 17.0, *) {
             return ObjectCaptureSession.isSupported && PhotogrammetrySession.isSupported
         }
@@ -109,7 +119,7 @@ struct IOSContentView: View {
                         depthMap: $appState.currentDepthMap,
                         path: $path,
                         photoDepthVM: photoDepthVM,
-                        lidarAvailable: ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth),
+                        lidarAvailable: lidarAvailable,
                         guidedCaptureSupported: guidedCaptureSupported
                     )
                 }

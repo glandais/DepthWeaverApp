@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  WINDOW — no device frame: a window cut into the capture, larger than life.
+  Used for the Tune drawer: in a device frame its slider labels would no longer read.
+  The window shows the bottom of the capture (the drawer, where the controls are),
+  edge to edge, at nine tenths of the canvas width. On the iPad the app keeps
+  iPhone-sized controls on a screen twice as wide: the window enlarges the capture
+  by a quarter there and keeps its left edge (`align: left`), or, for content in the
+  middle of the screen, shows it whole at the window's width (`align: center`). `frame: false` in the
+  configuration; every card on this template sets `align`.
+  One template for both canvases: iPhone 1242 x 2688 (iPhone6_5) and iPad 2048 x 2732
+  (iPadPro12_9). The second, almost square, is caught by `min-aspect-ratio` and gets its
+  own sizes: in vw, an iPhone headline would be twice too big on the iPad.
+-->
+<style>
+  /* The app's palette (DepthWeaver/DesignSystem/DWTheme.swift): the deep-navy ground,
+     the raised surface, and the two accents — cyan and periwinkle — the depth point
+     cloud and the controls are drawn in. Space Grotesk is the app's display face. */
+  @font-face { font-family: "Space Grotesk"; font-weight: 700;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Bold.ttf"); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 400;
+    src: url("../../../DepthWeaver/Resources/Fonts/SpaceGrotesk-Regular.ttf"); }
+  :root {
+    --bg: #0F1130; --surface: #171A40; --cyan: #8FD9E8; --peri: #9B8CF0;
+    --text: #F2F3F5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 100vw; height: 100vh; overflow: hidden; position: relative;
+    background: var(--bg);
+    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-weight: 700; color: #FFFFFF; line-height: 1.04; letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  p {
+    font-weight: 400; color: rgba(242,243,245,0.72); line-height: 1.3; text-wrap: balance;
+  }
+  /* The rule under each headline: a depth profile, a shape rising out of flat
+     ground — what a stereogram hides. Periwinkle far, cyan near, as in the app's
+     point cloud. */
+  .depth { display: flex; align-items: flex-end; gap: 0.9vw; height: 3.6vw; }
+  .depth i { display: block; width: 2.6vw; border-radius: 0.6vw; }
+  .depth i:nth-child(1), .depth i:nth-child(9) { height: 22%; background: #3A3F86; }
+  .depth i:nth-child(2), .depth i:nth-child(8) { height: 34%; background: #5B5BC0; }
+  .depth i:nth-child(3), .depth i:nth-child(7) { height: 55%; background: var(--peri); }
+  .depth i:nth-child(4), .depth i:nth-child(6) { height: 82%; background: #A9C4F0; }
+  .depth i:nth-child(5) { height: 100%; background: var(--cyan); }
+  @media (min-aspect-ratio: 3/5) {
+    .depth { gap: 0.6vw; height: 2.3vw; }
+    .depth i { width: 1.7vw; border-radius: 0.4vw; }
+  }
+
+  .field {
+    position: absolute; inset: 0;
+    background: radial-gradient(80% 50% at 50% 100%, rgba(143,217,232,0.22), rgba(143,217,232,0) 70%);
+  }
+  .copy { position: absolute; top: 6%; left: 7%; right: 7%; z-index: 3; }
+  .copy .depth { margin: 2.6vh 0 2.4vh; }
+  .window {
+    position: absolute; top: 33%; left: 5vw; right: 5vw; bottom: -3%;
+    overflow: hidden; z-index: 2;
+    border-top-left-radius: 5vw; border-top-right-radius: 5vw;
+    border: 0.35vw solid rgba(143,217,232,0.55); border-bottom: none;
+    box-shadow: 0 -20px 120px rgba(0,0,0,0.7);
+    background: var(--bg);
+  }
+  .window img { position: absolute; left: 0; bottom: 3vh; display: block; width: 100%; }
+  @media (min-aspect-ratio: 3/5) {
+    .copy { top: 5.5%; left: 9%; right: 9%; }
+    .copy .depth { margin: 2vh 0 1.8vh; }
+    .window { top: 33%; left: 7vw; right: 7vw; border-radius: 3vw 3vw 0 0; border-width: 0.25vw; }
+    .window img { width: 125%; left: -1%; }
+    /* `align: center`: the Depth drawer, whose point cloud sits in the middle of
+       the screen. Not enlarged: any zoom centred on it cuts the drawer's row
+       labels at the window's edges. */
+    .window.center img { width: 100%; left: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="field"></div>
+  <div class="copy" data-fit-budget="27" data-fit-budget-ipad="27"
+       data-fit-start="11" data-fit-min="9.2" data-fit-sub="4.9" data-fit-sub-min="4.3"
+       data-fit-start-ipad="8.2" data-fit-min-ipad="6.8" data-fit-sub-ipad="3.6" data-fit-sub-min-ipad="3.1">
+    <h1 data-kou-id="headline" data-kou-role="headline">{{headline}}</h1>
+    <div class="depth"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p data-kou-id="subtitle" data-kou-role="supporting">{{subtitle}}</p>
+  </div>
+  <div class="window {{align}}"><img data-kou-id="device" data-kou-role="device" src="{{app_screenshot}}" alt=""></div>
+<script>
+/* Text fitting. One template serves two languages, and French runs 15 to 30 %
+   longer than the English it comes from: the text block declares the share of
+   the canvas it owns (data-fit-budget, in % of the height), and this script
+   shrinks the headline, then the subtitle, until it fits. English does not
+   move. Width counts too: a word too long for the line overflows without the
+   height noticing. Start and floor sizes are in vw; the iPad declares its own
+   (data-fit-*-ipad). */
+(function () {
+  var box = document.querySelector('[data-fit-budget]');
+  if (!box) return;
+  var ipad = window.innerWidth / window.innerHeight > 0.6;
+  var d = function (k) { return parseFloat(box.dataset[ipad ? k + 'Ipad' : k] || box.dataset[k]); };
+  var budget = d('fitBudget') / 100 * window.innerHeight;
+  var h1 = box.querySelector('h1'), p = box.querySelector('p');
+  var size = d('fitStart'), min = d('fitMin'), sub = d('fitSub'), subMin = d('fitSubMin');
+  h1.style.fontSize = size + 'vw';
+  if (p) p.style.fontSize = sub + 'vw';
+  var over = function () {
+    return box.getBoundingClientRect().height > budget ||
+           h1.scrollWidth > h1.clientWidth ||
+           (p && p.scrollWidth > p.clientWidth);
+  };
+  while (over() && size > min) { size -= 0.15; h1.style.fontSize = size.toFixed(2) + 'vw'; }
+  if (p) { while (over() && sub > subMin) { sub -= 0.1; p.style.fontSize = sub.toFixed(2) + 'vw'; } }
+})();
+</script>
+</body>
+</html>

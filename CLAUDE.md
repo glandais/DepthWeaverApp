@@ -2,7 +2,7 @@
 
 ## Project overview
 
-Cross-platform Apple app (SwiftUI, iOS 17+ / macOS 14+) that generates autostereograms (Magic Eye images) from depth maps. Localized in English and French.
+Cross-platform Apple app (SwiftUI, iOS 18+ / macOS 15+ on Apple silicon) that generates autostereograms (Magic Eye images) from depth maps. Localized in English and French.
 
 ## Architecture
 
@@ -59,11 +59,14 @@ macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, 
 - **Tips** — `Views/Tips/`: three consumable in-app purchases that unlock nothing. `TipJar` is copied from the reference shared by the developer's apps (the `donations` repo, outside this one) and started at launch in `DepthWeaverApp` (finishes Ask to Buy / interrupted transactions). iOS pushes `TipJarView` from the About sheet ("Support DepthWeaver"); macOS opens it in its own `Window` from Help → "Support DepthWeaver…". Names and prices come from the store (`displayName`, `displayPrice`), never the catalog. App Store Connect products: `io.github.glandais.depthweaver.tip.small` (€0.99, `6814831087`), `.medium` (€2.99, `6814830911`), `.large` (€4.99, `6814831029`), base territory France, 175 territories, en/fr names. The first in-app purchase ships **with an app version** (iOS 1.2.1). `Tips.storekit` (repo root) is the scheme's `storeKitConfiguration` and only applies when run from Xcode; installed through `simctl`, the app queries the real store and shows "unavailable" until the products are approved.
 - **macOS** — `Views/Mac/` contains `MacGenerationView` (HSplitView with canvas + inspector), `InspectorPanel` (collapsible source/pattern/depth/settings sections persisted via `@AppStorage`), `SceneCaptureSheet` (modal for loading 3D models and capturing depth from an orbit camera), and `StereogramPNGDocument` (`FileDocument` for `.fileExporter`-based PNG save).
 
+### Screenshot mode
+`Screenshots/ScreenshotMode.swift` plus a few `#if SCREENSHOTS` hooks (in `ContentView`, `DepthWeaverApp`, `CanvasScreen`, `DepthSourceScreen`, `DepthAdjustmentView`, `Model3DCaptureView`, `MacGenerationView`) put the app on one App Store screen at launch, with no tap. It compiles only in the `Screenshots` build configuration (see Publishing → Screenshots); Release does not define `SCREENSHOTS`, so none of it reaches the archive.
+
 ### Cross-platform plumbing
 - `Extensions/PlatformImage.swift` typealiases `PlatformImage = UIImage` on iOS and `PlatformImage = NSImage` on macOS, with parity helpers (`pngData()`, `jpegData(compressionQuality:)`, `cgImage`, `loadFromAssets`, `loadFromBundle`, `pixelSize`) and `Image.init(platformImage:)`. All code that used `UIImage` directly was migrated to `PlatformImage` so models, services, generators and tests are platform-agnostic.
 
 ### Tests
-`DepthWeaverTests/DepthWeaverTests.swift` uses Swift Testing (`@Suite` / `@Test`). The current suite renders the bundled `dog` height map with default settings and asserts on output dimensions, render time, and pixel-statistics (mean / std-dev) to catch regressions that produce a uniform or empty image. Run via the `DepthWeaverTests` scheme.
+`DepthWeaverTests/DepthWeaverTests.swift` uses Swift Testing (`@Suite` / `@Test`). The current suite renders the bundled `dog` height map with default settings and asserts on output dimensions, render time, and pixel-statistics (mean / std-dev) to catch regressions that produce a uniform or empty image, and checks that the Metal and CPU paths agree. Run with `./scripts/xcb.sh test` (pinned simulator) and `./scripts/xcb.sh test-mac` (this Mac).
 
 ## Resources
 
@@ -72,27 +75,149 @@ macOS-only: `DepthWeaverApp` adds standard menu commands (Open ⌘O, Save ⌘S, 
 - `Resources/Models3D/` — bundled `.usdz` samples
 - `Resources/DepthAnythingV2SmallF16.mlpackage` — CoreML model (~48 MB)
 - `Resources/Localizable.xcstrings` — String Catalog (en, fr)
+- `Resources/InfoPlist.xcstrings` — localized `INFOPLIST_KEY_*` strings (display name, camera and add-only Photos prompts)
+- `Resources/PrivacyInfo.xcprivacy` — privacy manifest (see Publishing → Privacy)
 
 ## Build
 
-Open `DepthWeaver.xcodeproj` in Xcode, set your Development Team in Signing & Capabilities, then build and run. The single `DepthWeaver` target ships both the iOS and the native macOS app (no Mac Catalyst); run the `DepthWeaverTests` scheme for unit tests. macOS uses its own entitlements file (`DepthWeaver/DepthWeaver.macOS.entitlements`).
+```bash
+./scripts/xcb.sh gen              # (re)generate DepthWeaver.xcodeproj from project.yml
+./scripts/xcb.sh build            # DepthWeaver scheme, Debug, iOS simulator
+./scripts/xcb.sh run              # build, install and launch on the pinned simulator
+./scripts/xcb.sh test             # DepthWeaverTests on the pinned simulator
+./scripts/xcb.sh test-mac         # DepthWeaverTests on this Mac (arm64)
+./scripts/xcb.sh mac              # DepthWeaver scheme, Debug, macOS (arm64)
+./scripts/xcb.sh strings          # build iOS + macOS, then sync Localizable.xcstrings
+./scripts/xcb.sh archive-ios      # Release archive + export → build/export-ios/*.ipa
+./scripts/xcb.sh archive-mac      # strip quarantine, Release archive + export → build/export-mac/*.pkg
+./scripts/xcb.sh -- <args...>     # raw xcodebuild, destination still pinned
+```
+
+Prerequisites: Xcode 26 or later (the app icon is an Icon Composer `AppIcon.icon`), `brew install xcodegen`, and Git LFS (`.usdz`, `.mp4`, the Core ML weights, the App Store cards under `screenshots/` and other binaries are LFS objects; without `git lfs pull` they are pointer files). The single `DepthWeaver` target ships both the iOS/iPadOS app and the native macOS app (no Mac Catalyst); macOS uses its own entitlements file (`DepthWeaver/DepthWeaver.macOS.entitlements`). Arguments after the subcommand go to `xcodebuild`. `DEPTHWEAVER_ALLOW_PROVISIONING_UPDATES=1` adds `-allowProvisioningUpdates` to archive and export.
+
+### Simulator
+
+`./scripts/xcb.sh` is the **only** way to run `xcodebuild` here. It pins `-destination` by UDID (iOS) or to `platform=macOS,arch=arm64`, and `-derivedDataPath` to `.build/DerivedData`. Never write a `-destination` by hand, never use `generic/platform=iOS Simulator` (it builds without booting anything, so the next command that needs a device picks one on its own), and never `simctl … booted`.
+
+The device is **`iPhone 17 Pro Max` on iOS 26.5**, declared once in `scripts/sim-config.sh` (`sim_udid`, `sim_boot`, `sim_dest`). `sim_boot` shuts down every other booted simulator first: one simulator at a time. An `iPhone 18 Pro Max` (iOS 27.0) also exists on this Mac but runs badly (`simctl install` of the app hangs there): **do not use it**. `DEPTHWEAVER_SIM_DEVICE` / `DEPTHWEAVER_SIM_RUNTIME` switch device for a whole session (export them; a prefix on one command escapes the hook), `DEPTHWEAVER_DERIVED_DATA` moves the build folder. The `iPad Pro 13-inch (M4)` (`IPAD_DEVICE`, same file) exists only for App Store screenshots: only `scripts/screenshots.sh` boots it, and it shuts it down again.
+
+`scripts/guard-simulator.py` is a `PreToolUse` hook on Bash, registered in `.claude/settings.json` (versioned; the rest of `.claude/` is ignored). It reads the device from `sim-config.sh` and blocks `xcodebuild` without `-destination`, `generic/platform=iOS Simulator`, any simulator other than the pinned iPhone or the screenshots iPad, and any `simctl … booted`. It lets through `xcb.sh`, archives to `generic/platform=iOS|macOS`, `-exportArchive`, read-only queries and heredoc bodies. Its cases live in `./scripts/test-guard-simulator.sh` — run it after touching the hook or `sim-config.sh`.
+
+**Never run two `xcodebuild`s on the same `.build/DerivedData` at once**: the second fails with `build.db: database is locked`, which is not a code error.
+
+`xcb.sh run` installs the **Debug** product by its explicit path (`Debug-iphonesimulator/DepthWeaver.app`), never a `find … | head -1` that could pick up a stale `Release-iphonesimulator/`.
 
 ### Project generation (XcodeGen)
 
-`DepthWeaver.xcodeproj` is **generated** from `project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen) — treat `project.yml` as the source of truth, not the `.pbxproj`. After adding/removing/moving files or changing build settings, regenerate with:
-
-```bash
-xcodegen generate      # reads project.yml, rewrites DepthWeaver.xcodeproj
-```
+`DepthWeaver.xcodeproj` is **generated** from `project.yml` via [XcodeGen](https://github.com/yonaskolb/XcodeGen) and is not versioned — treat `project.yml` as the source of truth. After adding/removing/moving files or changing build settings, run `./scripts/xcb.sh gen` (`xcb.sh` also generates on its own when the project is missing). A "cannot find X in scope" right after adding a file means the project is stale, not that the code is wrong.
 
 Notes:
 - The `DepthWeaver` app target sources the whole `DepthWeaver/` folder (files are auto-classified into Sources/Resources by extension), so **new files are picked up automatically** on regenerate — no manual project edits. `.DS_Store` and the stray root `DepthWeaver/SportsCar.usdz` duplicate are excluded.
-- `DepthWeaverTests` is a **host-less logic test**: it re-lists the generation-core subset of app sources explicitly (no UI/capture) and bundles `dog.png` + `pattern-giraffe.png`. If a test starts needing another app source file, add it to that target's `sources` list in `project.yml`.
-- Both targets are multiplatform (`supportedDestinations: [iOS, macOS]`). The app has no `Info.plist` on disk — it uses `GENERATE_INFOPLIST_FILE=YES` with `INFOPLIST_KEY_*` settings in `project.yml`. macOS is Apple-Silicon-only (`EXCLUDED_ARCHS[sdk=macosx*] = x86_64`).
+- `DepthWeaverTests` is a **host-less logic test**: it re-lists the generation-core subset of app sources explicitly (no UI/capture) and bundles `dog.png` + `pattern-giraffe.png`. If a test starts needing another app source file, add it to that target's `sources` list in `project.yml`. Its deployment targets match the app's (iOS 18.0 / macOS 15.0).
+- Both targets are multiplatform (`supportedDestinations: [iOS, macOS]`). The app has no `Info.plist` on disk — it uses `GENERATE_INFOPLIST_FILE=YES` with `INFOPLIST_KEY_*` settings in `project.yml`, translated in `Resources/InfoPlist.xcstrings`. Photos access is **add-only** (`NSPhotoLibraryAddUsageDescription`, for Save): picking goes through `PhotosPicker`, which needs no permission, so do not add `NSPhotoLibraryUsageDescription` back unless the code starts reading the library (`PHPhotoLibrary`, `PHAsset`…).
+- macOS is Apple-Silicon-only (`EXCLUDED_ARCHS[sdk=macosx*] = x86_64`): the code uses `Float16`, which does not exist on x86_64.
+- Build configurations: `Debug`, `Release`, and `Screenshots` (a Debug clone that adds `SCREENSHOTS` to `SWIFT_ACTIVE_COMPILATION_CONDITIONS`). Schemes: `DepthWeaver` (archives in Release), `DepthWeaver-Screenshots` (only for `scripts/screenshots.sh`; never archive with it) and `DepthWeaverTests`.
+- `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` in `project.yml` are the only place a version is bumped.
 
-## App Store metadata
+## Translation
 
-Use the `asc` CLI to sync app metadata (descriptions, keywords, what's new, screenshots, localizations) with App Store Connect. Canonical metadata lives under `./metadata/`. App Store Connect app ID: `6764146054` (bundle `io.github.glandais.depthweaver`).
+`i18n/translations.json` (versioned) is the **single source of translations**. It covers `Resources/Localizable.xcstrings`, `Resources/InfoPlist.xcstrings`, `screenshots/koubou/koubou-strings.xcstrings`, `metadata/app-info/<locale>.json` and `metadata/version/<latest version>/<locale>.json`, in English and French. The app catalogs use `en`/`fr`; the Koubou catalog and `metadata/` use `en-US`/`fr-FR` (`localeMap`).
+
+```bash
+./scripts/i18n.py export     # sources → JSON
+./scripts/i18n.py import     # JSON → sources
+./scripts/i18n.py check      # byte-exact round trip, Koubou variables, JSON in sync (needs PyYAML)
+```
+
+Cycle for a new key: write the code, `./scripts/xcb.sh strings`, `./scripts/i18n.py export`, fill in the `en` and `fr` units in the JSON (a bare string means `translated`; `{"value": …, "state": "new"}` otherwise), `./scripts/i18n.py import`, `./scripts/i18n.py check`. For a Koubou card: add the English sentence as a key of `tables.Koubou`, fill in `fr-FR`, import, then `kou generate`.
+
+- **Never edit a generated file by hand** (catalog or metadata): the next `import` erases it; `check` reports it as `OUT OF SYNC` (run `export` if the edit is intentional).
+- `import` is authoritative over the set of keys: a key removed from the JSON disappears from the catalog. That is how to drop a stale key — and how to destroy a live one by mistake.
+- Run `export` after every `./scripts/xcb.sh strings` and every `asc metadata pull`, otherwise the next `import` cancels them; run `import` before `asc metadata validate/plan` reads a wording change.
+- `i18n.py` keeps the catalog's `strings` table in the order it finds it; `xcstringstool sync` (so `xcb.sh strings`) writes it sorted. Each metadata file keeps its JSON formatting.
+- `xcb.sh strings` syncs `Localizable.xcstrings` only, from the iOS **and** macOS stringsdata (a one-platform sync marks the other platform's keys stale). It puts back any key the sync drops while the code still uses it: the compiler extracts nothing from an `NSLocalizedString` whose `bundle:` is a variable (the Object Capture strings). `InfoPlist.xcstrings` is never synced (its keys come from `INFOPLIST_KEY_*`, not Swift; a sync would mark them all stale): edit it through the JSON.
+- Only the **latest** `metadata/version/<x.y.z>` (numeric sort) is covered; older released versions stay on disk and `import` never touches them.
+- In the Koubou yaml files, `align` (`left`/`center`) is also looked up in the catalog: `left` and `center` must stay catalog keys.
+- Reports at the top of the JSON: `missingFrench`, `needsReview`, `stale`. Dotted keys and English-sentence keys live side by side; no convention is imposed.
+- Out of scope: `metadata/review-notes.md` and `metadata/app-privacy.json`.
+
+## Publishing
+
+App Store Connect app **`6764146054`**, bundle `io.github.glandais.depthweaver`, team `7Q49262697`, primary language `en-US`, also `fr-FR`. One app record, two platforms: iOS (iPhone + iPad, `TARGETED_DEVICE_FAMILY: "1,2"`) and macOS, each with its own version train — iOS `1.2.0` (build 7) and macOS `1.1.0` (build 6) are live, and `project.yml` still says `1.2.0` / `7`, so **bump both before the next archive**. Build numbers have so far run in one sequence across both platforms (5 iOS, 6 Mac, 7 iOS); `asc builds next-build-number --app 6764146054 --platform IOS` (or `MAC_OS`) gives the next one (a rejected upload still consumes its number). Name and subtitle fit in 30 characters each, keywords in 100.
+
+### Metadata
+
+Canonical metadata lives under `./metadata/` (`app-info/<locale>.json`, `version/<version>/<locale>.json`), generated from `i18n/translations.json` (see Translation). Never `apply` without reading the plan. Pass `--platform` (`IOS` or `MAC_OS`): the two platforms share version strings (`1.1.0` exists for both).
+
+```bash
+V=1.2.1   # the version being prepared
+asc metadata pull     --app 6764146054 --version "$V" --platform IOS --dir ./metadata --force  # refuses to overwrite metadata/app-info/ without --force
+./scripts/i18n.py export                     # the pull rewrote metadata/
+asc metadata validate --dir ./metadata
+asc metadata plan     --app 6764146054 --version "$V" --platform IOS --dir ./metadata
+asc metadata approve  --review-dir .asc/metadata/review --all
+asc metadata apply    --app 6764146054 --version "$V" --platform IOS --dir ./metadata \
+                      --review-dir .asc/metadata/review --confirm
+```
+
+A version must exist in App Store Connect before it can be pulled (`asc versions create --app 6764146054 --version "$V" --platform IOS`). A released version (`READY_FOR_DISTRIBUTION`) can no longer be edited. `.asc/` keeps `asc`'s local state and is not versioned.
+
+`asc metadata` does **not** manage review details: `metadata/review-notes.md` is the canonical App Review → Notes text, pushed by hand (its header has the exact commands):
+
+```bash
+asc review details-for-version --version-id "<VERSION_ID>"      # note the detail id
+asc review details-update --id "<DETAIL_ID>" \
+  --notes "$(sed -n '/^---$/,$p' metadata/review-notes.md | tail -n +2)"
+```
+
+Keep it true: a person reads it with the app open (how to test without LiDAR, why the camera and add-only Photos permissions, the tips, the Apple-silicon-only Mac app).
+
+### Privacy
+
+- `Resources/PrivacyInfo.xcprivacy`: no tracking, no tracking domains, no collected data, one required-reason API — `UserDefaults` `CA92.1` (the `@AppStorage` keys `trainer.completedRound`, `canvas.hintDismissed`, `trainer.hasSeen`, `inspector.*.expanded`). Without a manifest Apple returns ITMS-91053 on upload. **Re-read it whenever another required-reason API enters the code**: file timestamps (`creationDate`, `modificationDate`, `attributesOfItem`, `resourceValues`), boot time (`systemUptime`, `mach_absolute_time`), disk space (`volumeAvailableCapacity`), active keyboards. Directory listings pass `includingPropertiesForKeys: nil/[]` on purpose.
+- `metadata/app-privacy.json` (`dataUsages: []`) is the nutrition label, "Data Not Collected", consistent with the manifest (no network, no analytics, no third-party SDK; tips are handled by Apple). Push it with `asc web privacy plan --app 6764146054 --file metadata/app-privacy.json`, then `apply` and `publish --confirm` after reading the plan; `asc web` uses a web session that may ask for a 2FA code.
+- The website's privacy page (separate `website` repository) must follow both: a new permission, stored datum or network access changes it too.
+
+### Archive and upload
+
+```bash
+./scripts/xcb.sh test && ./scripts/xcb.sh test-mac
+./scripts/xcb.sh archive-ios      # → build/export-ios/DepthWeaver.ipa
+./scripts/xcb.sh archive-mac      # → build/export-mac/DepthWeaver.pkg
+asc builds upload --app 6764146054 --ipa build/export-ios/DepthWeaver.ipa --wait
+asc builds upload --app 6764146054 --pkg build/export-mac/DepthWeaver.pkg --wait
+```
+
+Both archive with the `DepthWeaver` scheme in Release (`generic/platform=iOS|macOS`, which boots nothing) and export with `ExportOptions.plist` / `ExportOptions-macOS.plist` (`app-store-connect`). They never upload; they print the `asc builds upload` command. macOS pitfalls, both handled by `archive-mac` and the project:
+- **Quarantine (ITMS-91109)**: Apple rejects a Mac bundle carrying `com.apple.quarantine`, which some downloaded resources keep. `archive-mac` runs `xattr -rd com.apple.quarantine DepthWeaver` and fails if any file still has it.
+- **Apple silicon only**: x86_64 is excluded (`Float16`); the `.pkg` is arm64 only, and the listing must not promise Intel Macs.
+
+### Screenshots
+
+Three scripted steps, described in `screenshots/README.md`:
+
+```bash
+./scripts/screenshots.sh                     # raw captures, iPhone then iPad, en-US and fr-FR
+kou generate screenshots/koubou/iphone.yaml  # Koubou cards (frame, headline)
+kou generate screenshots/koubou/ipad.yaml
+./screenshots/assemble.sh                    # → screenshots/IPHONE_65/, IPAD_PRO_3GEN_129/, APP_DESKTOP/
+```
+
+- `screenshots.sh` builds the **`Screenshots`** configuration (scheme `DepthWeaver-Screenshots`) and launches the app once per screen with `-screenshotMode YES -screenshotScreen <hero|source|depth3d|model|pattern|adjust|tune>`, no tap; a `tmp/screenshot-ready` marker says the screen is ready. It boots the iPad only after shutting every other simulator down, shuts it down at the end and boots the iPhone again. **Drive nothing else on the simulator meanwhile**: `xcb.sh run` would install the Debug app, which has no capture mode, over it.
+- The Mac set is opt-in: `./scripts/screenshots.sh --mac` then `kou generate screenshots/koubou/mac.yaml`. It brings the window to the front and needs the Screen Recording permission for the terminal.
+- `assemble.sh` checks sizes (`IPHONE_65` 1242×2688, `IPAD_PRO_3GEN_129` 2048×2732, `APP_DESKTOP` 2880×1800), alpha, weight (10 MB ceiling), runs `asc screenshots validate`, and removes stale files. Seven cards on iPhone and iPad, three on the Mac, in `en-US` and `fr-FR`.
+- Card headlines are translated through `i18n/translations.json` (table `Koubou`). `crop.html` cards set `align` (`left` for Tune; `center` for the iPad `03-depth-3d`, no frame and no zoom so the labels are not cut).
+- Upload with `asc screenshots upload --version-localization <ID> --path screenshots/IPHONE_65/en-US --device-type IPHONE_65` (IDs from `asc localizations list --version <VERSION_ID>`); `--replace --confirm` empties the set first, `--skip-existing` resumes after an error.
+
+## Known gaps
+
+- **Nothing of the new tooling has been pushed to App Store Connect yet**: privacy label, review notes, the new screenshot set and the new metadata are local only.
+- The live screenshots use the old naming (`01_hero_stereogram`…): delete them (or upload with `--replace --confirm`) before uploading the new set, or both show.
+- `metadata/version/1.2.0` now says iOS 18+ / macOS 15+ (Apple silicon), iPhone, iPad and Mac, but 1.2.0 is already released and frozen. When the next version is created and pulled, the pull brings back the store's old text ("iPhone, iOS 17+"): carry the corrected description over in `i18n/translations.json`, then `import`.
+- The Mac app on sale (1.1.0, build 6) was built for macOS 14; the next Mac build requires macOS 15.
+- The APP_DESKTOP cards come from 1440×900 (1×) Mac captures upscaled to 2880×1800.
+- 87 Localizable keys have no French: the Object Capture strings ported from Apple's sample, and strings that only appear in `DesignSystem/` `#Preview`s ("Soft", "Tune", "Scan the room"…, never shown in the app); plus 2 InfoPlist keys (`CFBundleDisplayName`, `CFBundleName`). 33 Localizable keys are stale (see the reports in `i18n/translations.json`).
+- `metadata/app-privacy.json` → `asc web privacy` and `asc review details-update` have only been checked with `--help`, never run from this repository.
 
 ## Known constraints
 

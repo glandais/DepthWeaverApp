@@ -1,0 +1,58 @@
+# App Store cards (mac) — Koubou sources.
+#
+# From the repository root:
+#   kou generate screenshots/koubou/mac.yaml --output json
+#
+# Every path below is relative to THIS file.
+#
+# Input:  screenshots/flat/mac/<locale>/NN-*.png  (./scripts/screenshots.sh --mac, not versioned)
+# Output: screenshots/koubou/out/mac/<locale>/<frame>/NN-*.png  (not versioned)
+#         ./screenshots/assemble.sh files them under screenshots/APP_DESKTOP/<locale>/.
+#
+# The capture is the app's window (1440×900 on this 1x display), without a device frame:
+# `frame: false` on every card, the template draws the window. `device` only names the
+# output folder. Canvas 2880×1800, the largest size App Store Connect accepts for APP_DESKTOP.
+# Headlines share koubou-strings.xcstrings with the iPhone and iPad.
+
+project:
+  name: "DepthWeaver"
+  output_dir: "out/mac"
+  device: "MacBook Pro M4 16-inch Silver"
+  output_size: "AppDesktop_2880"
+
+localization:
+  base_language: "en-US"
+  languages: ["en-US", "fr-FR"]
+  xcstrings_path: "koubou-strings.xcstrings"
+
+screenshots:
+
+  # 1 — the canvas and its inspector: source and pattern open.
+  01-hero:
+    template: "templates/desk.html"
+    frame: false
+    variables:
+      headline: "Stereograms, right on your Mac"
+      subtitle: "Open a photo, a height map or a 3D model and watch it weave."
+    assets:
+      app_screenshot: "../flat/mac/01-hero.png"
+
+  # 2 — the pattern section on a seeded procedural generator.
+  02-pattern:
+    template: "templates/desk.html"
+    frame: false
+    variables:
+      headline: "Textures or generated patterns"
+      subtitle: "Stars, noise, Voronoi, reaction-diffusion, or your own photo."
+    assets:
+      app_screenshot: "../flat/mac/02-pattern.png"
+
+  # 3 — depth ranges and generator settings open, on the Punchy preset values.
+  03-tune:
+    template: "templates/desk.html"
+    frame: false
+    variables:
+      headline: "Every setting, redrawn live"
+      subtitle: "Depth ranges, strength and spread update as you slide."
+    assets:
+      app_screenshot: "../flat/mac/03-tune.png"

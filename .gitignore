@@ -11,7 +11,24 @@ DepthWeaver.xcodeproj/
 # macOS
 .DS_Store
 
+# Python bytecode (scripts/i18n.py, scripts/guard-simulator.py)
+__pycache__/
+
 # HuggingFace
 .huggingface/
-.claude
+# Claude Code: only the shared project settings (simulator guard hook) are
+# versioned; settings.local.json, vendored skills, agents and worktrees stay local.
+.claude/*
+!.claude/settings.json
 .asc
+
+# Repo-local build products (xcodebuild -derivedDataPath .build/DerivedData)
+.build/
+
+# App Store captures (scripts/screenshots.sh): the raw captures are Koubou's
+# input, redone on every pass; screenshots/IPHONE_65/, IPAD_PRO_3GEN_129/ and
+# APP_DESKTOP/ keep the uploaded cards and are versioned. screenshots/koubou/
+# (configurations, templates, catalog) is the source; only its renders are not.
+screenshots/flat/
+screenshots/koubou/out/
+screenshots/koubou/*.local.*

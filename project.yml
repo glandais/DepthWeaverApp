@@ -9,6 +9,16 @@ options:
     iOS: "18.0"
     macOS: "15.0"
 
+# `Screenshots` is a Debug clone that also defines the SCREENSHOTS condition:
+# only it compiles the App Store capture mode (DepthWeaver/Screenshots/ and a
+# few `#if SCREENSHOTS` hooks), so none of it reaches the archived binary.
+# Debug and Release must be named too: declaring `configs` replaces XcodeGen's
+# implicit Debug/Release pair.
+configs:
+  Debug: debug
+  Screenshots: debug
+  Release: release
+
 # Applied to every target (matches the project-level build config in the
 # hand-maintained .xcodeproj). XcodeGen's default settingPresets add the
 # standard Xcode template warnings / DEBUG flags on top of these.
@@ -16,6 +26,9 @@ settings:
   base:
     DEVELOPMENT_TEAM: 7Q49262697
     STRING_CATALOG_GENERATE_SYMBOLS: YES
+  configs:
+    Screenshots:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: "DEBUG SCREENSHOTS"
 
 targets:
 
@@ -43,6 +56,9 @@ targets:
         VERSIONING_SYSTEM: apple-generic
         TARGETED_DEVICE_FAMILY: "1,2"
         GENERATE_INFOPLIST_FILE: YES
+        # Emits .stringsdata so `./scripts/xcb.sh strings` can sync the
+        # Localizable / InfoPlist string catalogs from the command line.
+        SWIFT_EMIT_LOC_STRINGS: YES
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/Frameworks"
@@ -54,8 +70,10 @@ targets:
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.graphics-design"
         INFOPLIST_KEY_NSCameraUsageDescription: "DepthWeaver uses the camera with LiDAR to capture 3D depth"
+        # Add-only: Save writes through UIImageWriteToSavedPhotosAlbum. Picking
+        # goes through PhotosPicker, which runs out of process and needs no
+        # library permission, so there is no NSPhotoLibraryUsageDescription.
         INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: "DepthWeaver saves generated stereograms to your photo library"
-        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "DepthWeaver needs access to your photos to generate depth maps"
         # Platform-conditional settings (preserved verbatim from the .xcodeproj)
         "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": DepthWeaver/DepthWeaver.macOS.entitlements
         "EXCLUDED_ARCHS[sdk=macosx*]": x86_64
@@ -72,9 +90,10 @@ targets:
   DepthWeaverTests:
     type: bundle.unit-test
     supportedDestinations: [iOS, macOS]
+    # Same floor as the app: the tests use nothing newer than Swift Testing.
     deploymentTarget:
-      iOS: "26.4"
-      macOS: "26.4"
+      iOS: "18.0"
+      macOS: "15.0"
     # Host-less logic test: recompiles the generation-core subset of the app
     # sources directly (no UI/capture code) and bundles the two fixtures it
     # loads via Bundle.allBundles. It does NOT link or host the app target.
@@ -142,6 +161,20 @@ schemes:
       config: Debug
     archive:
       config: Release
+
+  # For scripts/screenshots.sh only; never archive with this one.
+  DepthWeaver-Screenshots:
+    build:
+      targets:
+        DepthWeaver: [run, build]
+    run:
+      config: Screenshots
+    profile:
+      config: Screenshots
+    analyze:
+      config: Screenshots
+    archive:
+      config: Screenshots
 
   DepthWeaverTests:
     build:

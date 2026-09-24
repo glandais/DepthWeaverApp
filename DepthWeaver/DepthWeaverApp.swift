@@ -7,6 +7,9 @@ struct DepthWeaverApp: App {
     @State private var tipJar: TipJar
 
     init() {
+        #if SCREENSHOTS
+        ScreenshotMode.applyDefaults()
+        #endif
         let tipJar = TipJar()
         tipJar.start()
         _tipJar = State(initialValue: tipJar)

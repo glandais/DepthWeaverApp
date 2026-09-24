@@ -1,0 +1,3075 @@
+{
+  "generatedBy": "scripts/i18n.py export",
+  "languages": {
+    "catalog": [
+      "en",
+      "fr"
+    ],
+    "appStoreConnect": [
+      "en-US",
+      "fr-FR"
+    ]
+  },
+  "localeMap": {
+    "en": "en-US",
+    "fr": "fr-FR"
+  },
+  "missingFrench": {
+    "Localizable": [
+      "",
+      "%@",
+      "%@: %@",
+      "%d/%d (Format, # of Images)",
+      "?",
+      "Aim at your object (Object Capture)",
+      "Aligning Images (Reconstruction)",
+      "All segments complete. (Review, Object Capture)",
+      "Calculating… (Estimated time, Object Capture)",
+      "Can't flip your object? (Object Capture, Point Cloud)",
+      "Cancel (Object Capture)",
+      "Cancel (Object Capture, Point Cloud)",
+      "Cancel (Object Reconstruction)",
+      "Can‘t find your object. It should be larger than 3in (8cm) in each dimension.",
+      "Capture Help",
+      "Capture your object again from a higher angle. (Review, Object Capture)",
+      "Capture your object again from a lower angle. (Review, Object Capture)",
+      "Choose a photo",
+      "Continue (Object Capture, Capture)",
+      "Continue (Object Capture, Point Cloud)",
+      "Custom",
+      "Depth",
+      "DepthWeaver",
+      "Estimated time remaining: %@ (Object Capture)",
+      "Finish (Object Capture, Point Cloud)",
+      "First segment complete. (Review, Object Capture)",
+      "Flip object anyway (Object Capture, Point Cloud)",
+      "Flip object on its side and capture again. (Review, Object Capture)",
+      "Flip object on its side and move around. (Object Capture, Segment, Feedback)",
+      "Flip object on the opposite side and capture again. (Review, Object Capture)",
+      "Flipping this object is not recommended. (Review, Object Capture)",
+      "For best quality, capture three segments.\nTap Skip if you can't make it all the way around but your final model may have missing areas. (Review, Object Capture, 2nd Segment)",
+      "For best quality, capture three segments.\nTap Skip if you can't make it all the way around, but your final model may have missing areas. (Review, Object Capture, 1st Segment)",
+      "For best quality, capture three segments. (Review, Object Capture, 1st Segment)",
+      "For best quality, capture three segments. (Review, Object Capture, 2nd segment)",
+      "For best quality, capture three segments. When you're done, tap Finish to complete your object. (Review, Object Capture)",
+      "From a photo",
+      "Generating Mesh (Reconstruction)",
+      "Generating Point Cloud (Reconstruction)",
+      "HIDDEN SPACER",
+      "Help (Object Capture)",
+      "Keep app running while processing. (Object Capture)",
+      "Keep going to complete the final segment. (Review, Object Capture)",
+      "Keep going to complete the first segment. (Review, Object Capture)",
+      "Keep going to complete the second segment. (Review, Object Capture)",
+      "Keep moving around your object. (Review, Object Capture)",
+      "Make sure that areas you captured previously can still be seen. (Review, Object Capture)",
+      "Mapping Texture (Reconstruction)",
+      "More Light Required (Object Capture)",
+      "Move Closer (Object Capture)",
+      "Move Farther Away (Object Capture)",
+      "Move above your object and capture again. (Object Capture, Segment, Feedback)",
+      "Move above your object and make sure that areas you captured previously can still be seen. (Review, Object Capture)",
+      "Move around to ensure that the whole object is inside the box. Drag handles to manually resize. (Object Capture, State)",
+      "Move close and center the dot on your object, then tap Continue. (Object Capture, State)",
+      "Move down to be level with the base of your object and capture again. (Review, Object Capture)",
+      "Move low and capture again. (Object Capture, Segment, Feedback)",
+      "Move slower (Object Capture)",
+      "Move slowly around your object. (Object Capture, Segment, Feedback)",
+      "Next (Object Capture)",
+      "OK",
+      "Open a 3D model",
+      "Optimizing (Reconstruction)",
+      "Pattern",
+      "Point and hold — live depth",
+      "Pre-Processing (Reconstruction)",
+      "Processing (Object Capture)",
+      "Processing title (Object Capture)",
+      "Punchy",
+      "Reset Box (Object Capture)",
+      "Save to Photos",
+      "Scan the room",
+      "Scanning Info",
+      "Second segment complete. (Review, Object Capture)",
+      "Skip (Object Capture, Point Cloud)",
+      "Skip the trainer",
+      "Soft",
+      "Standard",
+      "Start Capture (Object Capture)",
+      "Tap Finish to process your object. (Review, Object Capture)",
+      "Tune",
+      "USDZ, OBJ or SCN",
+      "Your object may have single color surfaces or be too reflective to add more segments.\nTap Continue to capture more detail without flipping, or Flip Object Anyway. (Review, Object Capture)",
+      "capture it yourself",
+      "depth strength",
+      "start here",
+      "tap to view full screen"
+    ],
+    "InfoPlist": [
+      "CFBundleDisplayName",
+      "CFBundleName"
+    ]
+  },
+  "needsReview": {
+    "Localizable": [
+      "%@: %@ [en]",
+      "%d/%d (Format, # of Images) [en]",
+      "Aim at your object (Object Capture) [en]",
+      "Aligning Images (Reconstruction) [en]",
+      "All segments complete. (Review, Object Capture) [en]",
+      "Calculating… (Estimated time, Object Capture) [en]",
+      "Can't flip your object? (Object Capture, Point Cloud) [en]",
+      "Cancel (Object Capture) [en]",
+      "Cancel (Object Capture, Point Cloud) [en]",
+      "Cancel (Object Reconstruction) [en]",
+      "Capture your object again from a higher angle. (Review, Object Capture) [en]",
+      "Capture your object again from a lower angle. (Review, Object Capture) [en]",
+      "Continue (Object Capture, Capture) [en]",
+      "Continue (Object Capture, Point Cloud) [en]",
+      "Estimated time remaining: %@ (Object Capture) [en]",
+      "Finish (Object Capture, Point Cloud) [en]",
+      "First segment complete. (Review, Object Capture) [en]",
+      "Flip object anyway (Object Capture, Point Cloud) [en]",
+      "Flip object on its side and capture again. (Review, Object Capture) [en]",
+      "Flip object on its side and move around. (Object Capture, Segment, Feedback) [en]",
+      "Flip object on the opposite side and capture again. (Review, Object Capture) [en]",
+      "Flipping this object is not recommended. (Review, Object Capture) [en]",
+      "For best quality, capture three segments.\nTap Skip if you can't make it all the way around but your final model may have missing areas. (Review, Object Capture, 2nd Segment) [en]",
+      "For best quality, capture three segments.\nTap Skip if you can't make it all the way around, but your final model may have missing areas. (Review, Object Capture, 1st Segment) [en]",
+      "For best quality, capture three segments. (Review, Object Capture, 1st Segment) [en]",
+      "For best quality, capture three segments. (Review, Object Capture, 2nd segment) [en]",
+      "For best quality, capture three segments. When you're done, tap Finish to complete your object. (Review, Object Capture) [en]",
+      "Generating Mesh (Reconstruction) [en]",
+      "Generating Point Cloud (Reconstruction) [en]",
+      "Help (Object Capture) [en]",
+      "Keep app running while processing. (Object Capture) [en]",
+      "Keep going to complete the final segment. (Review, Object Capture) [en]",
+      "Keep going to complete the first segment. (Review, Object Capture) [en]",
+      "Keep going to complete the second segment. (Review, Object Capture) [en]",
+      "Keep moving around your object. (Review, Object Capture) [en]",
+      "Make sure that areas you captured previously can still be seen. (Review, Object Capture) [en]",
+      "Mapping Texture (Reconstruction) [en]",
+      "More Light Required (Object Capture) [en]",
+      "Move Closer (Object Capture) [en]",
+      "Move Farther Away (Object Capture) [en]",
+      "Move above your object and capture again. (Object Capture, Segment, Feedback) [en]",
+      "Move above your object and make sure that areas you captured previously can still be seen. (Review, Object Capture) [en]",
+      "Move around to ensure that the whole object is inside the box. Drag handles to manually resize. (Object Capture, State) [en]",
+      "Move close and center the dot on your object, then tap Continue. (Object Capture, State) [en]",
+      "Move down to be level with the base of your object and capture again. (Review, Object Capture) [en]",
+      "Move low and capture again. (Object Capture, Segment, Feedback) [en]",
+      "Move slower (Object Capture) [en]",
+      "Move slowly around your object. (Object Capture, Segment, Feedback) [en]",
+      "Next (Object Capture) [en]",
+      "Optimizing (Reconstruction) [en]",
+      "Pre-Processing (Reconstruction) [en]",
+      "Processing (Object Capture) [en]",
+      "Processing title (Object Capture) [en]",
+      "Reset Box (Object Capture) [en]",
+      "Second segment complete. (Review, Object Capture) [en]",
+      "Skip (Object Capture, Point Cloud) [en]",
+      "Start Capture (Object Capture) [en]",
+      "Tap Finish to process your object. (Review, Object Capture) [en]",
+      "Your object may have single color surfaces or be too reflective to add more segments.\nTap Continue to capture more detail without flipping, or Flip Object Anyway. (Review, Object Capture) [en]"
+    ],
+    "InfoPlist": [
+      "CFBundleDisplayName [en]",
+      "CFBundleName [en]"
+    ]
+  },
+  "stale": {
+    "Localizable": [
+      "canvas.tap_fullscreen_hint",
+      "depth.import_depth_map",
+      "depth_adjustment.denoising.background %.3f",
+      "depth_adjustment.denoising.bilateral %.2f",
+      "depth_adjustment.denoising.morphology %.0f",
+      "depth_adjustment.end_value %.2f",
+      "depth_adjustment.max_value %.3f",
+      "depth_adjustment.min_value %.3f",
+      "depth_adjustment.start_value %.2f",
+      "generation.depth_factor_label",
+      "generation.depth_label %.2f",
+      "generation.depth_range_accessibility",
+      "generation.depth_range_label %.2f",
+      "generation.depth_strength_accessibility",
+      "generation.depth_strength_label %.2f",
+      "generation.dpi_accessibility",
+      "generation.dpi_label %lld",
+      "generation.main_stripe",
+      "generation.settings",
+      "generation.smoothness_accessibility",
+      "generation.smoothness_label %lld",
+      "generation.stripe_left",
+      "generation.stripe_middle",
+      "generation.stripes_count_label",
+      "generation.stripes_label %@ %@",
+      "generation.stripes_label %lld %@",
+      "help.how_to_see_3d",
+      "help.how_to_view_button",
+      "help.tip_device_close",
+      "help.view_step_adjust",
+      "help.view_step_overlap_alt",
+      "result.accessibility_label",
+      "result.tap_fullscreen"
+    ]
+  },
+  "tables": {
+    "Localizable": {
+      "path": "DepthWeaver/Resources/Localizable.xcstrings",
+      "sourceLanguage": "en",
+      "version": "1.1",
+      "keys": {
+        "": {
+          "translations": {}
+        },
+        "%@": {
+          "comment": "A circle with a number inside. The argument is the step number.",
+          "translations": {}
+        },
+        "%@: %@": {
+          "comment": "A label and slider pair. The label shows the parameter name and its current value. The slider allows the user to adjust the parameter value. The argument is the string “Density”, the string “Dot Size”, the string “Frequency”, the string “Octaves”, the string “Persistence”, the string “Hue”, the string “Cell Size”, the string “Cell Count”, the string “Jitter”, the string “Edge Width”, the string “Feed Rate (F)”, the string “Kill Rate (k)” or the string “Iterations”.",
+          "translations": {
+            "en": {
+              "value": "%1$@: %2$@",
+              "state": "new"
+            }
+          }
+        },
+        "%d/%d (Format, # of Images)": {
+          "comment": "Images taken over maximum number of images.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "%1$d/%2$d",
+              "state": "new"
+            }
+          }
+        },
+        "?": {
+          "translations": {}
+        },
+        "Aim at your object (Object Capture)": {
+          "comment": "Feedback message to aim at your object for object capture",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Aim at your object",
+              "state": "new"
+            }
+          }
+        },
+        "Aligning Images (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Aligning Images…",
+              "state": "new"
+            }
+          }
+        },
+        "All segments complete. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has finished capturing final segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "All segments complete.",
+              "state": "new"
+            }
+          }
+        },
+        "Calculating… (Estimated time, Object Capture)": {
+          "comment": "When estimated processing time isn't available yet.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Calculating…",
+              "state": "new"
+            }
+          }
+        },
+        "Can't flip your object? (Object Capture, Point Cloud)": {
+          "comment": "Title for button on the object capture screen that lets users indicate that their object cannot be flipped.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Can't flip your object?",
+              "state": "new"
+            }
+          }
+        },
+        "Cancel (Object Capture)": {
+          "comment": "Title for cancel button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Cancel",
+              "state": "new"
+            }
+          }
+        },
+        "Cancel (Object Capture, Point Cloud)": {
+          "comment": "Title of button to close review page.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Cancel",
+              "state": "new"
+            }
+          }
+        },
+        "Cancel (Object Reconstruction)": {
+          "comment": "Button title to cancel reconstruction",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Cancel",
+              "state": "new"
+            }
+          }
+        },
+        "Can‘t find your object. It should be larger than 3in (8cm) in each dimension.": {
+          "comment": "Feedback message when detection has failed.",
+          "translations": {}
+        },
+        "Capture Help": {
+          "comment": "The title of the help page.",
+          "isCommentAutoGenerated": true,
+          "translations": {}
+        },
+        "Capture your object again from a higher angle. (Review, Object Capture)": {
+          "comment": "Feedback title for when user should capture again from a higher angle given flipping isn't recommended.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Capture your object again from a higher angle.",
+              "state": "new"
+            }
+          }
+        },
+        "Capture your object again from a lower angle. (Review, Object Capture)": {
+          "comment": "Feedback title for when user should capture again from a lower angle given flipping isn't recommended.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Capture your object again from a lower angle.",
+              "state": "new"
+            }
+          }
+        },
+        "Choose a photo": {
+          "translations": {}
+        },
+        "Continue (Object Capture, Capture)": {
+          "comment": "Title for continue button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Continue",
+              "state": "new"
+            }
+          }
+        },
+        "Continue (Object Capture, Point Cloud)": {
+          "comment": "Title of button to continue to flip the object and capture more.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Continue",
+              "state": "new"
+            }
+          }
+        },
+        "Custom": {
+          "translations": {}
+        },
+        "Depth": {
+          "translations": {}
+        },
+        "DepthWeaver": {
+          "translations": {}
+        },
+        "Estimated time remaining: %@ (Object Capture)": {
+          "comment": "Estimated processing time to reconstruct object.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Estimated time remaining: %@",
+              "state": "new"
+            }
+          }
+        },
+        "Finish (Object Capture, Point Cloud)": {
+          "comment": "Title for finish button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Finish",
+              "state": "new"
+            }
+          }
+        },
+        "First segment complete. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has finished capturing first segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "First segment complete.",
+              "state": "new"
+            }
+          }
+        },
+        "Flip object anyway (Object Capture, Point Cloud)": {
+          "comment": "Title for button on the object capture screen that lets users indicate they want to flip their object.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Flip object anyway",
+              "state": "new"
+            }
+          }
+        },
+        "Flip object on its side and capture again. (Review, Object Capture)": {
+          "comment": "Feedback title for when user should flip the object and capture again.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Flip object on its side and capture again.",
+              "state": "new"
+            }
+          }
+        },
+        "Flip object on its side and move around. (Object Capture, Segment, Feedback)": {
+          "comment": "Guided feedback message for user to move around object again after flipping.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Flip object on its side and move around.",
+              "state": "new"
+            }
+          }
+        },
+        "Flip object on the opposite side and capture again. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has not flipped object on the opposite side.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Flip object on the opposite side and capture again",
+              "state": "new"
+            }
+          }
+        },
+        "Flipping this object is not recommended. (Review, Object Capture)": {
+          "comment": "Feedback title that this object is likely to fail if flipped.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Flipping this object is not recommended.",
+              "state": "new"
+            }
+          }
+        },
+        "For best quality, capture three segments.\nTap Skip if you can't make it all the way around but your final model may have missing areas. (Review, Object Capture, 2nd Segment)": {
+          "comment": "Feedback title for when user has not finished capturing second segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "For best quality, capture three segments.\nTap Skip if you can't make it all the way around but your final model may have missing areas.",
+              "state": "new"
+            }
+          }
+        },
+        "For best quality, capture three segments.\nTap Skip if you can't make it all the way around, but your final model may have missing areas. (Review, Object Capture, 1st Segment)": {
+          "comment": "Feedback for when user still has work to do to complete the first segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "For best quality, capture three segments.\nTap Skip if you can't make it all the way around, but your final model may have missing areas.",
+              "state": "new"
+            }
+          }
+        },
+        "For best quality, capture three segments. (Review, Object Capture, 1st Segment)": {
+          "comment": "Feedback for when user has finished capturing first segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "For best quality, caputure three segments.",
+              "state": "new"
+            }
+          }
+        },
+        "For best quality, capture three segments. (Review, Object Capture, 2nd segment)": {
+          "comment": "Feedback title for when user has finished capturing second segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "For best quality, capture three segments.",
+              "state": "new"
+            }
+          }
+        },
+        "For best quality, capture three segments. When you're done, tap Finish to complete your object. (Review, Object Capture)": {
+          "comment": "Feedback for when user still has work to do to complete the final segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "For best quality, capture three segments. When you're done, tap Finish to complete your object.",
+              "state": "new"
+            }
+          }
+        },
+        "From a photo": {
+          "translations": {}
+        },
+        "Generating Mesh (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Generating Mesh…",
+              "state": "new"
+            }
+          }
+        },
+        "Generating Point Cloud (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Generating Point Cloud…",
+              "state": "new"
+            }
+          }
+        },
+        "HIDDEN SPACER": {
+          "comment": "A hidden spacer that is used to ensure that the divider is placed correctly.",
+          "isCommentAutoGenerated": true,
+          "translations": {}
+        },
+        "Help (Object Capture)": {
+          "comment": "Title for help button on the object capture screen to show the tutorial pages.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Help",
+              "state": "new"
+            }
+          }
+        },
+        "Keep app running while processing. (Object Capture)": {
+          "comment": "Description displayed while processing models.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Keep app running while processing.",
+              "state": "new"
+            }
+          }
+        },
+        "Keep going to complete the final segment. (Review, Object Capture)": {
+          "comment": "Feedback title for when user still has work to do to complete the final segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Keep going to complete the final segment.",
+              "state": "new"
+            }
+          }
+        },
+        "Keep going to complete the first segment. (Review, Object Capture)": {
+          "comment": "Feedback title for when user still has work to do to complete the first segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Keep going to complete the first segment.",
+              "state": "new"
+            }
+          }
+        },
+        "Keep going to complete the second segment. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has not finished capturing second segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Keep going to complete the second segment.",
+              "state": "new"
+            }
+          }
+        },
+        "Keep moving around your object. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has less than the minimum images required.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Keep moving around your object.",
+              "state": "new"
+            }
+          }
+        },
+        "Make sure that areas you captured previously can still be seen. (Review, Object Capture)": {
+          "comment": "Feedback for when user has not flipped object on the opposite side.\nFeedback for when user should flip the object and capture again",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Make sure that areas you captured previously can still be seen. Avoid flipping your object if it changes the shape.",
+              "state": "new"
+            }
+          }
+        },
+        "Mapping Texture (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Mapping Texture…",
+              "state": "new"
+            }
+          }
+        },
+        "More Light Required (Object Capture)": {
+          "comment": "Feedback message to increase lighting for object capture",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "More Light Required",
+              "state": "new"
+            }
+          }
+        },
+        "Move Closer (Object Capture)": {
+          "comment": "Feedback message to move closer for object capture",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move Closer",
+              "state": "new"
+            }
+          }
+        },
+        "Move Farther Away (Object Capture)": {
+          "comment": "Feedback message to move back for object capture",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move Farther Away",
+              "state": "new"
+            }
+          }
+        },
+        "Move above your object and capture again. (Object Capture, Segment, Feedback)": {
+          "comment": "Guided feedback message for user to move around object again from a higher angle without flipping",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move above your object and capture again.",
+              "state": "new"
+            }
+          }
+        },
+        "Move above your object and make sure that areas you captured previously can still be seen. (Review, Object Capture)": {
+          "comment": "Feedback for when user should capture again from above given flipping isn't recommended.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move above your object and make sure that areas you captured previously can still be seen.",
+              "state": "new"
+            }
+          }
+        },
+        "Move around to ensure that the whole object is inside the box. Drag handles to manually resize. (Object Capture, State)": {
+          "comment": "Feedback message to size box to object.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move around to ensure that the whole object is inside the box. Drag handles to manually resize.",
+              "state": "new"
+            }
+          }
+        },
+        "Move close and center the dot on your object, then tap Continue. (Object Capture, State)": {
+          "comment": "Feedback message to fill camera feed with object.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move close and center the dot on your object, then tap Continue.",
+              "state": "new"
+            }
+          }
+        },
+        "Move down to be level with the base of your object and capture again. (Review, Object Capture)": {
+          "comment": "Feedback for when user should capture again from a lower angle given flipping isn't recommended.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move down to be level with the base of your object and capture again.",
+              "state": "new"
+            }
+          }
+        },
+        "Move low and capture again. (Object Capture, Segment, Feedback)": {
+          "comment": "Guided feedback message for user to move around object again from a lower angle without flipping",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move low and capture again.",
+              "state": "new"
+            }
+          }
+        },
+        "Move slower (Object Capture)": {
+          "comment": "Feedback message to slow down for object capture",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move slower",
+              "state": "new"
+            }
+          }
+        },
+        "Move slowly around your object. (Object Capture, Segment, Feedback)": {
+          "comment": "Guided feedback message to move slowly around object to start capturing.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Move slowly around your object.",
+              "state": "new"
+            }
+          }
+        },
+        "Next (Object Capture)": {
+          "comment": "Title for next button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Next",
+              "state": "new"
+            }
+          }
+        },
+        "OK": {
+          "translations": {}
+        },
+        "Open a 3D model": {
+          "translations": {}
+        },
+        "Optimizing (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Optimizing…",
+              "state": "new"
+            }
+          }
+        },
+        "Pattern": {
+          "translations": {}
+        },
+        "Point and hold — live depth": {
+          "translations": {}
+        },
+        "Pre-Processing (Reconstruction)": {
+          "comment": "Feedback message during the object reconstruction phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Pre-Processing…",
+              "state": "new"
+            }
+          }
+        },
+        "Processing (Object Capture)": {
+          "comment": "Processing title for object reconstruction.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Processing…",
+              "state": "new"
+            }
+          }
+        },
+        "Processing title (Object Capture)": {
+          "comment": "Title of processing view during processing phase.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Processing",
+              "state": "new"
+            }
+          }
+        },
+        "Punchy": {
+          "translations": {}
+        },
+        "Reset Box (Object Capture)": {
+          "comment": "Title for resetting bounding box on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Reset Box",
+              "state": "new"
+            }
+          }
+        },
+        "Save to Photos": {
+          "translations": {}
+        },
+        "Scan the room": {
+          "translations": {}
+        },
+        "Scanning Info": {
+          "translations": {}
+        },
+        "Second segment complete. (Review, Object Capture)": {
+          "comment": "Feedback title for when user has finished capturing second segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Second segment complete.",
+              "state": "new"
+            }
+          }
+        },
+        "Skip (Object Capture, Point Cloud)": {
+          "comment": "Title for skip button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Skip",
+              "state": "new"
+            }
+          }
+        },
+        "Skip the trainer": {
+          "translations": {}
+        },
+        "Soft": {
+          "translations": {}
+        },
+        "Standard": {
+          "translations": {}
+        },
+        "Start Capture (Object Capture)": {
+          "comment": "Title for start capture button on the object capture screen.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Start Capture",
+              "state": "new"
+            }
+          }
+        },
+        "Tap Finish to process your object. (Review, Object Capture)": {
+          "comment": "Feedback for when user has finished capturing final segment.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Tap Finish to process your object.",
+              "state": "new"
+            }
+          }
+        },
+        "Tune": {
+          "translations": {}
+        },
+        "USDZ, OBJ or SCN": {
+          "translations": {}
+        },
+        "Your object may have single color surfaces or be too reflective to add more segments.\nTap Continue to capture more detail without flipping, or Flip Object Anyway. (Review, Object Capture)": {
+          "comment": "Feedback that this object is likely to fail if flipped.",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "Your object may have single color surfaces or be too reflective to add more segments.\nTap Continue to capture more detail without flipping, or Flip Object Anyway.",
+              "state": "new"
+            }
+          }
+        },
+        "about.more_apps": {
+          "translations": {
+            "en": "More Apps by the Developer",
+            "fr": "Autres apps du développeur"
+          }
+        },
+        "about.opens_externally": {
+          "translations": {
+            "en": "Opens outside the app",
+            "fr": "S’ouvre en dehors de l’app"
+          }
+        },
+        "about.privacy": {
+          "translations": {
+            "en": "Privacy Policy",
+            "fr": "Politique de confidentialité"
+          }
+        },
+        "about.rate": {
+          "translations": {
+            "en": "Rate on the App Store",
+            "fr": "Noter sur l’App Store"
+          }
+        },
+        "about.section_app_store": {
+          "translations": {
+            "en": "App Store",
+            "fr": "App Store"
+          }
+        },
+        "about.section_info": {
+          "translations": {
+            "en": "Information",
+            "fr": "Informations"
+          }
+        },
+        "about.section_support": {
+          "translations": {
+            "en": "Support",
+            "fr": "Soutenir"
+          }
+        },
+        "about.source_code": {
+          "translations": {
+            "en": "Source Code on GitHub",
+            "fr": "Code source sur GitHub"
+          }
+        },
+        "about.support": {
+          "translations": {
+            "en": "Support",
+            "fr": "Assistance"
+          }
+        },
+        "about.tip": {
+          "translations": {
+            "en": "Support DepthWeaver",
+            "fr": "Soutenir DepthWeaver"
+          }
+        },
+        "about.title": {
+          "translations": {
+            "en": "About",
+            "fr": "À propos"
+          }
+        },
+        "about.version %@ %@": {
+          "comment": "About sheet: app version and build number.",
+          "translations": {
+            "en": "Version %1$@ (%2$@)",
+            "fr": "Version %1$@ (%2$@)"
+          }
+        },
+        "about.website": {
+          "translations": {
+            "en": "Website",
+            "fr": "Site web"
+          }
+        },
+        "canvas.adjust_depth_subtitle": {
+          "translations": {
+            "en": "Reshape what's near and what's far",
+            "fr": "Ajuster ce qui est proche et lointain"
+          }
+        },
+        "canvas.change_depth_source": {
+          "translations": {
+            "en": "Change depth source",
+            "fr": "Changer de source"
+          }
+        },
+        "canvas.change_depth_source_subtitle": {
+          "translations": {
+            "en": "Photo, example, scan or 3D model",
+            "fr": "Photo, exemple, scan ou modèle 3D"
+          }
+        },
+        "canvas.depth_subtitle %lld %lld": {
+          "translations": {
+            "en": "depth · %lld×%lld",
+            "fr": "profondeur · %lld×%lld"
+          }
+        },
+        "canvas.drawer_handle_accessibility": {
+          "translations": {
+            "en": "Close the controls",
+            "fr": "Fermer les réglages"
+          }
+        },
+        "canvas.pinch_hint": {
+          "translations": {
+            "en": "Pinch to zoom · tap to hide",
+            "fr": "Pincez pour zoomer · touchez pour masquer"
+          }
+        },
+        "canvas.save": {
+          "translations": {
+            "en": "Save",
+            "fr": "Enreg."
+          }
+        },
+        "canvas.save_to_photos": {
+          "translations": {
+            "en": "Save to Photos",
+            "fr": "Enregistrer dans Photos"
+          }
+        },
+        "canvas.share": {
+          "translations": {
+            "en": "Share",
+            "fr": "Partager"
+          }
+        },
+        "canvas.tap_fullscreen_hint": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Tap to view full screen",
+            "fr": "Touchez pour le plein écran"
+          }
+        },
+        "canvas.tool_depth": {
+          "translations": {
+            "en": "Depth",
+            "fr": "Profondeur"
+          }
+        },
+        "canvas.tool_pattern": {
+          "translations": {
+            "en": "Pattern",
+            "fr": "Motif"
+          }
+        },
+        "canvas.tool_tune": {
+          "translations": {
+            "en": "Tune",
+            "fr": "Réglages"
+          }
+        },
+        "canvas.zoom_accessibility_hint": {
+          "translations": {
+            "en": "Pinch to zoom. Double tap to zoom in. Tap to show or hide the controls.",
+            "fr": "Pincez pour zoomer. Touchez deux fois pour agrandir. Touchez pour afficher ou masquer les commandes."
+          }
+        },
+        "capture it yourself": {
+          "translations": {}
+        },
+        "color_mode.bw": {
+          "comment": "Color mode",
+          "translations": {
+            "en": "B&W",
+            "fr": "N&B"
+          }
+        },
+        "color_mode.color": {
+          "comment": "Color mode",
+          "translations": {
+            "en": "Color",
+            "fr": "Couleur"
+          }
+        },
+        "color_mode.grayscale": {
+          "comment": "Color mode",
+          "translations": {
+            "en": "Grayscale",
+            "fr": "Niveaux de gris"
+          }
+        },
+        "color_mode.rgb": {
+          "comment": "Color mode",
+          "translations": {
+            "en": "RGB",
+            "fr": "RVB"
+          }
+        },
+        "color_mode.single_hue": {
+          "comment": "Color mode",
+          "translations": {
+            "en": "Single Hue",
+            "fr": "Teinte unique"
+          }
+        },
+        "color_scheme.monochrome": {
+          "comment": "Color scheme",
+          "translations": {
+            "en": "Monochrome",
+            "fr": "Monochrome"
+          }
+        },
+        "color_scheme.pastel": {
+          "comment": "Color scheme",
+          "translations": {
+            "en": "Pastel",
+            "fr": "Pastel"
+          }
+        },
+        "color_scheme.random": {
+          "comment": "Color scheme",
+          "translations": {
+            "en": "Random",
+            "fr": "Aléatoire"
+          }
+        },
+        "color_scheme.vivid": {
+          "comment": "Color scheme",
+          "translations": {
+            "en": "Vivid",
+            "fr": "Vif"
+          }
+        },
+        "depth strength": {
+          "translations": {}
+        },
+        "depth.acquire_prompt": {
+          "translations": {
+            "en": "Acquire a depth map to generate stereograms",
+            "fr": "Acquérir une carte de profondeur pour générer des stéréogrammes"
+          }
+        },
+        "depth.adjust_depth": {
+          "comment": "Navigation title",
+          "translations": {
+            "en": "Adjust Depth",
+            "fr": "Ajuster la profondeur"
+          }
+        },
+        "depth.estimating": {
+          "translations": {
+            "en": "Estimating depth...",
+            "fr": "Estimation de la profondeur…"
+          }
+        },
+        "depth.from_3d_model": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "From 3D Model",
+            "fr": "Depuis un modèle 3D"
+          }
+        },
+        "depth.from_photo": {
+          "translations": {
+            "en": "From Photo",
+            "fr": "Depuis une photo"
+          }
+        },
+        "depth.guided_capture": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Capture 3D",
+            "fr": "Capturer en 3D"
+          }
+        },
+        "depth.import_depth_map": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Import Depth",
+            "fr": "Importer profondeur"
+          }
+        },
+        "depth.lidar_scan": {
+          "translations": {
+            "en": "LiDAR Scan",
+            "fr": "Scan LiDAR"
+          }
+        },
+        "depth.presets": {
+          "translations": {
+            "en": "Presets",
+            "fr": "Exemples"
+          }
+        },
+        "depth.presets_title": {
+          "comment": "Sheet title",
+          "translations": {
+            "en": "Depth Map Presets",
+            "fr": "Cartes de profondeur"
+          }
+        },
+        "depth.section_title": {
+          "translations": {
+            "en": "Depth Map",
+            "fr": "Carte de profondeur"
+          }
+        },
+        "depth.source_3d_model": {
+          "comment": "Depth map source label",
+          "translations": {
+            "en": "3D Model",
+            "fr": "Modèle 3D"
+          }
+        },
+        "depth.source_ai": {
+          "translations": {
+            "en": "AI",
+            "fr": "IA"
+          }
+        },
+        "depth.source_imported": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Imported",
+            "fr": "Importée"
+          }
+        },
+        "depth.tap_to_adjust": {
+          "translations": {
+            "en": "Tap to adjust depth",
+            "fr": "Touchez pour ajuster la profondeur"
+          }
+        },
+        "depth_adjustment.denoising": {
+          "comment": "Depth adjustment section",
+          "translations": {
+            "en": "Denoising",
+            "fr": "Débruitage"
+          }
+        },
+        "depth_adjustment.denoising.background %.3f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Background threshold: %.3f",
+            "fr": "Seuil d'arrière-plan : %.3f"
+          }
+        },
+        "depth_adjustment.denoising.background_label": {
+          "translations": {
+            "en": "Background threshold",
+            "fr": "Seuil d’arrière-plan"
+          }
+        },
+        "depth_adjustment.denoising.bilateral %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Bilateral intensity: %.2f",
+            "fr": "Intensité bilatérale : %.2f"
+          }
+        },
+        "depth_adjustment.denoising.bilateral_label": {
+          "translations": {
+            "en": "Bilateral intensity",
+            "fr": "Intensité bilatérale"
+          }
+        },
+        "depth_adjustment.denoising.enable": {
+          "comment": "Denoising toggle",
+          "translations": {
+            "en": "Enable denoising",
+            "fr": "Activer le débruitage"
+          }
+        },
+        "depth_adjustment.denoising.morphology %.0f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Morphology radius: %.0f",
+            "fr": "Rayon morphologique : %.0f"
+          }
+        },
+        "depth_adjustment.denoising.morphology_label": {
+          "translations": {
+            "en": "Morphology radius",
+            "fr": "Rayon morphologique"
+          }
+        },
+        "depth_adjustment.end_label": {
+          "translations": {
+            "en": "End",
+            "fr": "Fin"
+          }
+        },
+        "depth_adjustment.end_value %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "End: %.2f",
+            "fr": "Fin : %.2f"
+          }
+        },
+        "depth_adjustment.input_range": {
+          "comment": "Depth adjustment section",
+          "translations": {
+            "en": "Input Range",
+            "fr": "Plage d'entrée"
+          }
+        },
+        "depth_adjustment.max_label": {
+          "translations": {
+            "en": "Max",
+            "fr": "Max"
+          }
+        },
+        "depth_adjustment.max_value %.3f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Max: %.3f",
+            "fr": "Max : %.3f"
+          }
+        },
+        "depth_adjustment.min_label": {
+          "translations": {
+            "en": "Min",
+            "fr": "Min"
+          }
+        },
+        "depth_adjustment.min_value %.3f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Min: %.3f",
+            "fr": "Min : %.3f"
+          }
+        },
+        "depth_adjustment.output_range": {
+          "comment": "Depth adjustment section",
+          "translations": {
+            "en": "Output Range",
+            "fr": "Plage de sortie"
+          }
+        },
+        "depth_adjustment.reset": {
+          "translations": {
+            "en": "Reset",
+            "fr": "Réinitialiser"
+          }
+        },
+        "depth_adjustment.start_label": {
+          "translations": {
+            "en": "Start",
+            "fr": "Début"
+          }
+        },
+        "depth_adjustment.start_value %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Start: %.2f",
+            "fr": "Début : %.2f"
+          }
+        },
+        "depth_source.badge_estimated %.1f": {
+          "translations": {
+            "en": "Estimated in %.1fs",
+            "fr": "Estimé en %.1f s"
+          }
+        },
+        "depth_source.capture_yourself": {
+          "translations": {
+            "en": "Capture it yourself",
+            "fr": "Capturez la vôtre"
+          }
+        },
+        "depth_source.choose_photo": {
+          "translations": {
+            "en": "Choose a photo",
+            "fr": "Choisir une photo"
+          }
+        },
+        "depth_source.examples": {
+          "translations": {
+            "en": "Examples",
+            "fr": "Exemples"
+          }
+        },
+        "depth_source.examples_subtitle": {
+          "translations": {
+            "en": "Ready-made depth maps",
+            "fr": "Cartes de profondeur prêtes"
+          }
+        },
+        "depth_source.hero_body": {
+          "translations": {
+            "en": "Pick any picture — DepthWeaver works out what's near and what's far. Best place to start.",
+            "fr": "Choisissez une image — DepthWeaver devine ce qui est proche et ce qui est loin. Le meilleur point de départ."
+          }
+        },
+        "depth_source.hero_title": {
+          "translations": {
+            "en": "From a photo",
+            "fr": "À partir d’une photo"
+          }
+        },
+        "depth_source.import_map": {
+          "translations": {
+            "en": "Import a map",
+            "fr": "Importer une carte"
+          }
+        },
+        "depth_source.import_map_subtitle": {
+          "translations": {
+            "en": "Greyscale image",
+            "fr": "Image en niveaux de gris"
+          }
+        },
+        "depth_source.open_3d_model": {
+          "translations": {
+            "en": "Open a 3D model",
+            "fr": "Ouvrir un modèle 3D"
+          }
+        },
+        "depth_source.open_3d_model_subtitle": {
+          "translations": {
+            "en": "USDZ, OBJ or SCN",
+            "fr": "USDZ, OBJ ou SCN"
+          }
+        },
+        "depth_source.pro_lidar_tag": {
+          "translations": {
+            "en": "Pro · LiDAR",
+            "fr": "Pro · LiDAR"
+          }
+        },
+        "depth_source.scan_object": {
+          "translations": {
+            "en": "Scan an object",
+            "fr": "Scanner un objet"
+          }
+        },
+        "depth_source.scan_object_subtitle": {
+          "translations": {
+            "en": "Orbit it, then pick an angle",
+            "fr": "Tournez autour, puis choisissez un angle"
+          }
+        },
+        "depth_source.scan_room": {
+          "translations": {
+            "en": "Scan the room",
+            "fr": "Scanner la pièce"
+          }
+        },
+        "depth_source.scan_room_subtitle": {
+          "translations": {
+            "en": "Point and hold — live depth",
+            "fr": "Visez et maintenez — profondeur en direct"
+          }
+        },
+        "depth_source.start_here": {
+          "translations": {
+            "en": "Start here",
+            "fr": "Commencez ici"
+          }
+        },
+        "depth_source.title": {
+          "translations": {
+            "en": "Depth source",
+            "fr": "Source de profondeur"
+          }
+        },
+        "distance.chebyshev": {
+          "comment": "Distance function",
+          "translations": {
+            "en": "Chebyshev",
+            "fr": "Tchebychev"
+          }
+        },
+        "distance.euclidean": {
+          "comment": "Distance function",
+          "translations": {
+            "en": "Euclidean",
+            "fr": "Euclidienne"
+          }
+        },
+        "distance.manhattan": {
+          "comment": "Distance function",
+          "translations": {
+            "en": "Manhattan",
+            "fr": "Manhattan"
+          }
+        },
+        "error.buffer_copy_failed": {
+          "translations": {
+            "en": "Failed to copy depth buffer",
+            "fr": "Échec de la copie du tampon de profondeur"
+          }
+        },
+        "error.model_not_loaded": {
+          "translations": {
+            "en": "Failed to load depth estimation model",
+            "fr": "Échec du chargement du modèle d'estimation de profondeur"
+          }
+        },
+        "error.photo_load_failed": {
+          "translations": {
+            "en": "Could not load selected photo",
+            "fr": "Impossible de charger la photo sélectionnée"
+          }
+        },
+        "general.back": {
+          "translations": {
+            "en": "Back",
+            "fr": "Retour"
+          }
+        },
+        "general.cancel": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Cancel",
+            "fr": "Annuler"
+          }
+        },
+        "general.done": {
+          "translations": {
+            "en": "Done",
+            "fr": "Terminé"
+          }
+        },
+        "general.error": {
+          "translations": {
+            "en": "Error",
+            "fr": "Erreur"
+          }
+        },
+        "general.ok": {
+          "translations": {
+            "en": "OK",
+            "fr": "OK"
+          }
+        },
+        "general.save": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Save",
+            "fr": "Enregistrer"
+          }
+        },
+        "generation.depth_factor_label": {
+          "comment": "Accessibility label for depth slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth factor",
+            "fr": "Facteur de profondeur"
+          }
+        },
+        "generation.depth_label %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth: %.2f",
+            "fr": "Profondeur : %.2f"
+          }
+        },
+        "generation.depth_range_accessibility": {
+          "comment": "Accessibility label for depth range slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth range",
+            "fr": "Plage de profondeur"
+          }
+        },
+        "generation.depth_range_label %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth range: %.2f",
+            "fr": "Plage de profondeur : %.2f"
+          }
+        },
+        "generation.depth_strength_accessibility": {
+          "comment": "Accessibility label for depth strength slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth strength",
+            "fr": "Intensité de la profondeur"
+          }
+        },
+        "generation.depth_strength_label %.2f": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Depth strength: %.2f",
+            "fr": "Intensité : %.2f"
+          }
+        },
+        "generation.dpi_accessibility": {
+          "comment": "Accessibility label for DPI slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Resolution in DPI",
+            "fr": "Résolution en DPI"
+          }
+        },
+        "generation.dpi_label %lld": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "DPI: %lld",
+            "fr": "DPI : %lld"
+          }
+        },
+        "generation.generating": {
+          "translations": {
+            "en": "Generating...",
+            "fr": "Génération…"
+          }
+        },
+        "generation.invert_depth": {
+          "translations": {
+            "en": "Invert Depth",
+            "fr": "Inverser la profondeur"
+          }
+        },
+        "generation.main_stripe": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Main Stripe",
+            "fr": "Bande principale"
+          }
+        },
+        "generation.settings": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Settings",
+            "fr": "Réglages"
+          }
+        },
+        "generation.smoothness_accessibility": {
+          "comment": "Accessibility label for smoothness/oversampling slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Smoothness",
+            "fr": "Lissage"
+          }
+        },
+        "generation.smoothness_label %lld": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Smoothness: %lld×",
+            "fr": "Lissage : %lld×"
+          }
+        },
+        "generation.stripe_left": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Left",
+            "fr": "Gauche"
+          }
+        },
+        "generation.stripe_middle": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Middle",
+            "fr": "Milieu"
+          }
+        },
+        "generation.stripes_count_label": {
+          "comment": "Accessibility label for stripes slider",
+          "extractionState": "stale",
+          "translations": {
+            "en": "Stripes count",
+            "fr": "Nombre de bandes"
+          }
+        },
+        "generation.stripes_label %@ %@": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Stripes: %1$@ (%2$@)",
+            "fr": "Bandes : %1$@ (%2$@)"
+          }
+        },
+        "generation.stripes_label %lld %@": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Stripes: %1$lld (%2$@)",
+            "fr": "Bandes : %1$lld (%2$@)"
+          }
+        },
+        "help.how_to_see_3d": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "How to See the 3D Image",
+            "fr": "Comment voir l'image 3D"
+          }
+        },
+        "help.how_to_use_button": {
+          "translations": {
+            "en": "How to use",
+            "fr": "Mode d'emploi"
+          }
+        },
+        "help.how_to_use_title": {
+          "translations": {
+            "en": "How to Use DepthWeaver",
+            "fr": "Comment utiliser DepthWeaver"
+          }
+        },
+        "help.how_to_view_button": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "How to view",
+            "fr": "Comment voir"
+          }
+        },
+        "help.step_acquire_full": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Pick a depth source: LiDAR Scan (Pro devices), From Photo (AI estimation), 3D Model, Capture 3D (scan a real object, Pro devices), Depth Map Presets, or Import a grayscale depth map (white = close, black = far).",
+            "fr": "Choisissez une source de profondeur : Scan LiDAR (appareils Pro), Depuis une photo (estimation IA), Modèle 3D, Capturer en 3D (scan d'un objet réel, appareils Pro), Exemples, ou Importer une carte en niveaux de gris (blanc = proche, noir = loin)."
+          }
+        },
+        "help.step_adjust_depth": {
+          "translations": {
+            "en": "Tap the 3D preview to refine the depth: crop the input range, remap the output, or enable Denoising to clean up noisy depth maps.",
+            "fr": "Touchez l'aperçu 3D pour affiner la profondeur : recadrez la plage d'entrée, remappez la sortie, ou activez le débruitage pour nettoyer les cartes bruitées."
+          }
+        },
+        "help.step_adjust_settings": {
+          "translations": {
+            "en": "Tune DPI (resolution), Depth strength (3D intensity), Depth range (separation), and Smoothness (sampling quality). Toggle Invert if needed.",
+            "fr": "Réglez le DPI (résolution), l'intensité de profondeur (intensité 3D), la plage de profondeur (séparation) et le lissage (qualité d'échantillonnage). Activez l'inversion si nécessaire."
+          }
+        },
+        "help.step_choose_pattern": {
+          "translations": {
+            "en": "Pick a built-in texture, import your own photo, or generate a procedural pattern (stars, etc.) with adjustable parameters.",
+            "fr": "Choisissez une texture intégrée, importez votre propre photo, ou générez un motif procédural (étoiles, etc.) avec des paramètres ajustables."
+          }
+        },
+        "help.step_share": {
+          "translations": {
+            "en": "Tap the stereogram preview to view it full screen, then share or save it.",
+            "fr": "Touchez l'aperçu du stéréogramme pour le voir en plein écran, puis partagez-le ou enregistrez-le."
+          }
+        },
+        "help.tip_device_close": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Tip: It helps to start with the device close to your face, then slowly move it away while keeping your eyes relaxed.",
+            "fr": "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
+          }
+        },
+        "help.tip_device_close_alt": {
+          "translations": {
+            "en": "Tip: Start with the device close to your face, then slowly move it away while keeping your eyes relaxed.",
+            "fr": "Conseil : commencez avec l'appareil près de votre visage, puis éloignez-le lentement en gardant les yeux détendus."
+          }
+        },
+        "help.view_step_adjust": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Once you see the 3D image, you can slowly adjust your distance to sharpen it",
+            "fr": "Une fois l'image 3D visible, vous pouvez ajuster lentement la distance pour la rendre plus nette"
+          }
+        },
+        "help.view_step_hold": {
+          "translations": {
+            "en": "Hold your device at arm's length",
+            "fr": "Tenez votre appareil à bout de bras"
+          }
+        },
+        "help.view_step_overlap": {
+          "translations": {
+            "en": "The repeating pattern will overlap. Keep your gaze relaxed until a 3D shape emerges",
+            "fr": "Le motif répété va se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
+          }
+        },
+        "help.view_step_overlap_alt": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "The repeating pattern will start to overlap. Keep your gaze relaxed until a 3D shape emerges",
+            "fr": "Le motif répété va commencer à se superposer. Gardez le regard détendu jusqu'à ce qu'une forme 3D apparaisse"
+          }
+        },
+        "help.view_step_relax": {
+          "translations": {
+            "en": "Relax your eyes and look \"through\" the screen, as if focusing on something far behind it",
+            "fr": "Détendez vos yeux et regardez « à travers » l'écran, comme si vous fixiez quelque chose loin derrière"
+          }
+        },
+        "help.viewing_3d": {
+          "translations": {
+            "en": "Viewing the 3D Image",
+            "fr": "Voir l'image 3D"
+          }
+        },
+        "inspector.pattern.kind": {
+          "comment": "Inspector picker label for choosing the pattern source",
+          "translations": {
+            "en": "Pattern source",
+            "fr": "Source du motif"
+          }
+        },
+        "inspector.pattern.kind.asset": {
+          "translations": {
+            "en": "Textures",
+            "fr": "Textures"
+          }
+        },
+        "inspector.pattern.kind.imported": {
+          "translations": {
+            "en": "Import",
+            "fr": "Importer"
+          }
+        },
+        "inspector.pattern.kind.procedural": {
+          "translations": {
+            "en": "Generated",
+            "fr": "Générés"
+          }
+        },
+        "inspector.section.depth": {
+          "comment": "Inspector section header for depth-map adjustments",
+          "translations": {
+            "en": "Depth Map",
+            "fr": "Carte de profondeur"
+          }
+        },
+        "inspector.section.pattern": {
+          "comment": "Inspector section header for the pattern picker",
+          "translations": {
+            "en": "Pattern",
+            "fr": "Motif"
+          }
+        },
+        "inspector.section.settings": {
+          "comment": "Inspector section header for stereogram settings",
+          "translations": {
+            "en": "Settings",
+            "fr": "Réglages"
+          }
+        },
+        "inspector.section.source": {
+          "comment": "Inspector section header for the depth source (photo, LiDAR, 3D model)",
+          "translations": {
+            "en": "Source",
+            "fr": "Source"
+          }
+        },
+        "lidar.camera_denied": {
+          "translations": {
+            "en": "Camera Access Denied",
+            "fr": "Accès à la caméra refusé"
+          }
+        },
+        "lidar.camera_description": {
+          "translations": {
+            "en": "DepthWeaver uses your camera and LiDAR sensor to capture 3D depth information of your surroundings.",
+            "fr": "DepthWeaver utilise votre caméra et le capteur LiDAR pour capturer les informations de profondeur 3D de votre environnement."
+          }
+        },
+        "lidar.camera_required": {
+          "translations": {
+            "en": "Camera Access Required",
+            "fr": "Accès à la caméra requis"
+          }
+        },
+        "lidar.capture_depth": {
+          "translations": {
+            "en": "Capture depth",
+            "fr": "Capturer la profondeur"
+          }
+        },
+        "lidar.capture_hint": {
+          "translations": {
+            "en": "Takes a depth snapshot of the current scene",
+            "fr": "Prend un instantané de profondeur de la scène actuelle"
+          }
+        },
+        "lidar.enable_camera": {
+          "translations": {
+            "en": "Please enable camera access in Settings to use LiDAR scanning.",
+            "fr": "Veuillez activer l'accès à la caméra dans Réglages pour utiliser le scan LiDAR."
+          }
+        },
+        "lidar.open_settings": {
+          "translations": {
+            "en": "Open Settings",
+            "fr": "Ouvrir les Réglages"
+          }
+        },
+        "lidar.start_scanning": {
+          "translations": {
+            "en": "Start Scanning",
+            "fr": "Commencer le scan"
+          }
+        },
+        "lidar.waiting_for_depth": {
+          "translations": {
+            "en": "Waiting for depth data...",
+            "fr": "En attente des données de profondeur…"
+          }
+        },
+        "mac.canvas.placeholder": {
+          "comment": "A placeholder text displayed when the user has not yet selected a photo.",
+          "isCommentAutoGenerated": true,
+          "translations": {
+            "en": "Open a photo, height map, or 3D model to begin",
+            "fr": "Ouvrez une photo, une carte de profondeur ou un modèle 3D pour commencer"
+          }
+        },
+        "menu.copy_image": {
+          "translations": {
+            "en": "Copy Image",
+            "fr": "Copier l’image"
+          }
+        },
+        "menu.open": {
+          "translations": {
+            "en": "Open…",
+            "fr": "Ouvrir…"
+          }
+        },
+        "menu.save_image": {
+          "translations": {
+            "en": "Save Image…",
+            "fr": "Enregistrer l’image…"
+          }
+        },
+        "menu.tip": {
+          "translations": {
+            "en": "Support DepthWeaver…",
+            "fr": "Soutenir DepthWeaver…"
+          }
+        },
+        "menu.toggle_inspector": {
+          "translations": {
+            "en": "Show/Hide Inspector",
+            "fr": "Afficher/masquer l’inspecteur"
+          }
+        },
+        "model3d.capture_depth": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Capture Depth",
+            "fr": "Capturer la profondeur"
+          }
+        },
+        "model3d.capture_title": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "3D Model",
+            "fr": "Modèle 3D"
+          }
+        },
+        "model3d.captured.default_name_format": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Capture %@",
+            "fr": "Capture %@"
+          }
+        },
+        "model3d.captured.delete": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Delete",
+            "fr": "Supprimer"
+          }
+        },
+        "model3d.captured.name_field_label": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Model name",
+            "fr": "Nom du modèle"
+          }
+        },
+        "model3d.captured.name_prompt_title": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Name your model",
+            "fr": "Nommer votre modèle"
+          }
+        },
+        "model3d.captured.rename": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Rename",
+            "fr": "Renommer"
+          }
+        },
+        "model3d.captures.empty": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "No captures yet",
+            "fr": "Aucune capture pour l’instant"
+          }
+        },
+        "model3d.empty_state_message": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Open a USDZ, USD, OBJ, or SCN file or choose a preset, then orbit the camera and capture.",
+            "fr": "Ouvrez un fichier USDZ, USD, OBJ ou SCN ou choisissez un exemple, puis orbitez la caméra et capturez."
+          }
+        },
+        "model3d.empty_state_title": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Pick a 3D model to start",
+            "fr": "Choisissez un modèle 3D pour commencer"
+          }
+        },
+        "model3d.load_failed": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Couldn't load the 3D file.",
+            "fr": "Impossible de charger le fichier 3D."
+          }
+        },
+        "model3d.menu.add_model": {
+          "translations": {
+            "en": "Add a model",
+            "fr": "Ajouter un modèle"
+          }
+        },
+        "model3d.menu.capture_new": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Capture new model",
+            "fr": "Capturer un nouveau modèle"
+          }
+        },
+        "model3d.open_file": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Open File…",
+            "fr": "Ouvrir un fichier…"
+          }
+        },
+        "model3d.preset.chameleon": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Chameleon",
+            "fr": "Caméléon"
+          }
+        },
+        "model3d.preset.slide": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Slide",
+            "fr": "Toboggan"
+          }
+        },
+        "model3d.preset.sports_car": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Sports Car",
+            "fr": "Voiture de sport"
+          }
+        },
+        "model3d.preset.toilet": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Toilet",
+            "fr": "Toilettes"
+          }
+        },
+        "model3d.preset.toy_biplace": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Toy Biplane",
+            "fr": "Avion jouet"
+          }
+        },
+        "model3d.preset.toy_car": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Toy Car",
+            "fr": "Voiture jouet"
+          }
+        },
+        "model3d.presets": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Presets",
+            "fr": "Exemples"
+          }
+        },
+        "model3d.presets_title": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "3D Presets",
+            "fr": "Exemples 3D"
+          }
+        },
+        "model3d.section.bundled": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "Bundled samples",
+            "fr": "Modèles inclus"
+          }
+        },
+        "model3d.section.my_captures": {
+          "extractionState": "manual",
+          "translations": {
+            "en": "My captures",
+            "fr": "Mes captures"
+          }
+        },
+        "param.background": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Background",
+            "fr": "Arrière-plan"
+          }
+        },
+        "param.cell_count": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Cell Count",
+            "fr": "Nombre de cellules"
+          }
+        },
+        "param.cell_size": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Cell Size",
+            "fr": "Taille des cellules"
+          }
+        },
+        "param.color_a": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Color A",
+            "fr": "Couleur A"
+          }
+        },
+        "param.color_b": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Color B",
+            "fr": "Couleur B"
+          }
+        },
+        "param.color_scheme": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Color Scheme",
+            "fr": "Palette de couleurs"
+          }
+        },
+        "param.colors": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Colors",
+            "fr": "Couleurs"
+          }
+        },
+        "param.density": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Density",
+            "fr": "Densité"
+          }
+        },
+        "param.distance": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Distance",
+            "fr": "Distance"
+          }
+        },
+        "param.dot_size": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Dot Size",
+            "fr": "Taille des points"
+          }
+        },
+        "param.edge_width": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Edge Width",
+            "fr": "Épaisseur des bords"
+          }
+        },
+        "param.feed_rate": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Feed Rate (F)",
+            "fr": "Taux d'alimentation (F)"
+          }
+        },
+        "param.frequency": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Frequency",
+            "fr": "Fréquence"
+          }
+        },
+        "param.hue": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Hue",
+            "fr": "Teinte"
+          }
+        },
+        "param.invert": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Invert",
+            "fr": "Inverser"
+          }
+        },
+        "param.iterations": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Iterations",
+            "fr": "Itérations"
+          }
+        },
+        "param.jitter": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Jitter",
+            "fr": "Variation"
+          }
+        },
+        "param.kill_rate": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Kill Rate (k)",
+            "fr": "Taux de destruction (k)"
+          }
+        },
+        "param.max_radius": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Max Radius",
+            "fr": "Rayon max"
+          }
+        },
+        "param.mode": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Mode",
+            "fr": "Mode"
+          }
+        },
+        "param.octaves": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Octaves",
+            "fr": "Octaves"
+          }
+        },
+        "param.persistence": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Persistence",
+            "fr": "Persistance"
+          }
+        },
+        "param.randomize": {
+          "comment": "Button",
+          "translations": {
+            "en": "Randomize",
+            "fr": "Aléatoire"
+          }
+        },
+        "param.star_count": {
+          "comment": "Parameter",
+          "translations": {
+            "en": "Star Count",
+            "fr": "Nombre d'étoiles"
+          }
+        },
+        "pattern.circles": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Circles",
+            "fr": "Cercles"
+          }
+        },
+        "pattern.clouds": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Clouds",
+            "fr": "Nuages"
+          }
+        },
+        "pattern.dots": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Dots",
+            "fr": "Points"
+          }
+        },
+        "pattern.foliage": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Foliage",
+            "fr": "Feuillage"
+          }
+        },
+        "pattern.generated_section": {
+          "comment": "Section header",
+          "translations": {
+            "en": "Generated",
+            "fr": "Générés"
+          }
+        },
+        "pattern.giraffe": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Giraffe",
+            "fr": "Girafe"
+          }
+        },
+        "pattern.hexagons": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Hexagons",
+            "fr": "Hexagones"
+          }
+        },
+        "pattern.import": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Import",
+            "fr": "Importer"
+          }
+        },
+        "pattern.import_accessibility": {
+          "comment": "Accessibility label",
+          "translations": {
+            "en": "Import pattern",
+            "fr": "Importer un motif"
+          }
+        },
+        "pattern.leaves": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Leaves",
+            "fr": "Feuilles"
+          }
+        },
+        "pattern.mosaic": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Mosaic",
+            "fr": "Mosaïque"
+          }
+        },
+        "pattern.noise": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Noise",
+            "fr": "Bruit"
+          }
+        },
+        "pattern.perlin_noise": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Perlin Noise",
+            "fr": "Bruit de Perlin"
+          }
+        },
+        "pattern.random_dot": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Random Dot",
+            "fr": "Points aléatoires"
+          }
+        },
+        "pattern.reaction_diffusion": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Reaction-Diffusion",
+            "fr": "Réaction-Diffusion"
+          }
+        },
+        "pattern.space": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Space",
+            "fr": "Espace"
+          }
+        },
+        "pattern.stars": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Stars",
+            "fr": "Étoiles"
+          }
+        },
+        "pattern.stones": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Stones",
+            "fr": "Pierres"
+          }
+        },
+        "pattern.textures_section": {
+          "comment": "Section header",
+          "translations": {
+            "en": "Textures",
+            "fr": "Textures"
+          }
+        },
+        "pattern.triangles": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Triangles",
+            "fr": "Triangles"
+          }
+        },
+        "pattern.voronoi": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Voronoi",
+            "fr": "Voronoï"
+          }
+        },
+        "pattern.wallpaper": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Wallpaper",
+            "fr": "Papier peint"
+          }
+        },
+        "pattern.worley_noise": {
+          "comment": "Pattern name",
+          "translations": {
+            "en": "Worley Noise",
+            "fr": "Bruit de Worley"
+          }
+        },
+        "preset.atomium": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Atomium",
+            "fr": "Atomium"
+          }
+        },
+        "preset.car": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Car",
+            "fr": "Voiture"
+          }
+        },
+        "preset.dog": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Dog",
+            "fr": "Chien"
+          }
+        },
+        "preset.dolphin": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Dolphin",
+            "fr": "Dauphin"
+          }
+        },
+        "preset.hand": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Hand",
+            "fr": "Main"
+          }
+        },
+        "preset.head": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Head",
+            "fr": "Tête"
+          }
+        },
+        "preset.island": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Island",
+            "fr": "Île"
+          }
+        },
+        "preset.planet": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Planet",
+            "fr": "Planète"
+          }
+        },
+        "preset.ship": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Ship",
+            "fr": "Navire"
+          }
+        },
+        "preset.sphinx": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Sphinx",
+            "fr": "Sphinx"
+          }
+        },
+        "preset.thumbs_up": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Thumbs Up",
+            "fr": "Pouce levé"
+          }
+        },
+        "preset.tree": {
+          "comment": "Depth map preset",
+          "translations": {
+            "en": "Tree",
+            "fr": "Arbre"
+          }
+        },
+        "result.accessibility_label": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Generated autostereogram image",
+            "fr": "Image d'autostéréogramme générée"
+          }
+        },
+        "result.preview": {
+          "translations": {
+            "en": "Stereogram preview",
+            "fr": "Aperçu du stéréogramme"
+          }
+        },
+        "result.save_to_photos": {
+          "translations": {
+            "en": "Save to photos",
+            "fr": "Enregistrer dans les photos"
+          }
+        },
+        "result.saved_to_photos": {
+          "translations": {
+            "en": "Saved to photos",
+            "fr": "Enregistré dans les photos"
+          }
+        },
+        "result.share": {
+          "translations": {
+            "en": "Share stereogram",
+            "fr": "Partager le stéréogramme"
+          }
+        },
+        "result.tap_fullscreen": {
+          "extractionState": "stale",
+          "translations": {
+            "en": "Tap to view full screen",
+            "fr": "Touchez pour voir en plein écran"
+          }
+        },
+        "result.title": {
+          "translations": {
+            "en": "Stereogram",
+            "fr": "Stéréogramme"
+          }
+        },
+        "start here": {
+          "translations": {}
+        },
+        "tap to view full screen": {
+          "translations": {}
+        },
+        "tip.failed": {
+          "translations": {
+            "en": "The purchase didn’t go through.",
+            "fr": "L’achat n’a pas abouti."
+          }
+        },
+        "tip.header": {
+          "translations": {
+            "en": "DepthWeaver is free and open source. A tip unlocks nothing: it just says thank you.",
+            "fr": "DepthWeaver est gratuit et open source. Un pourboire ne débloque rien : il dit simplement merci."
+          }
+        },
+        "tip.pending": {
+          "translations": {
+            "en": "Waiting for approval. The tip will go through once it is approved.",
+            "fr": "En attente d’approbation. Le pourboire passera une fois approuvé."
+          }
+        },
+        "tip.retry": {
+          "translations": {
+            "en": "Try Again",
+            "fr": "Réessayer"
+          }
+        },
+        "tip.thanks": {
+          "translations": {
+            "en": "Thank you!",
+            "fr": "Merci !"
+          }
+        },
+        "tip.title": {
+          "translations": {
+            "en": "Leave a Tip",
+            "fr": "Laisser un pourboire"
+          }
+        },
+        "tip.unavailable": {
+          "translations": {
+            "en": "Tips are unavailable right now.",
+            "fr": "Les pourboires sont indisponibles pour le moment."
+          }
+        },
+        "toolbar.inspector": {
+          "translations": {
+            "en": "Inspector",
+            "fr": "Inspecteur"
+          }
+        },
+        "toolbar.inspector.help": {
+          "comment": "A description of the help text for the \"Show Inspector\" button.",
+          "isCommentAutoGenerated": true,
+          "translations": {
+            "en": "Show or hide the inspector",
+            "fr": "Afficher ou masquer l’inspecteur"
+          }
+        },
+        "toolbar.open": {
+          "translations": {
+            "en": "Open",
+            "fr": "Ouvrir"
+          }
+        },
+        "toolbar.open.help": {
+          "comment": "A description of the help text for the open button.",
+          "isCommentAutoGenerated": true,
+          "translations": {
+            "en": "Open a photo, height map, or 3D model",
+            "fr": "Ouvrir une photo, une carte de profondeur ou un modèle 3D"
+          }
+        },
+        "toolbar.save": {
+          "translations": {
+            "en": "Save",
+            "fr": "Enregistrer"
+          }
+        },
+        "toolbar.save.help": {
+          "comment": "A help message for the save toolbar item.",
+          "isCommentAutoGenerated": true,
+          "translations": {
+            "en": "Save the stereogram",
+            "fr": "Enregistrer le stéréogramme"
+          }
+        },
+        "toolbar.share": {
+          "translations": {
+            "en": "Share",
+            "fr": "Partager"
+          }
+        },
+        "toolbar.share.help": {
+          "comment": "A help message for the share button.",
+          "isCommentAutoGenerated": true,
+          "translations": {
+            "en": "Share the stereogram",
+            "fr": "Partager le stéréogramme"
+          }
+        },
+        "trainer.header": {
+          "translations": {
+            "en": "Learn to see it",
+            "fr": "Apprendre à le voir"
+          }
+        },
+        "trainer.progress_accessibility %lld %lld": {
+          "translations": {
+            "en": "Training stereogram, step %1$lld of %2$lld",
+            "fr": "Stéréogramme d’entraînement, étape %1$lld sur %2$lld"
+          }
+        },
+        "trainer.step %lld %lld": {
+          "translations": {
+            "en": "Step %1$lld / %2$lld",
+            "fr": "Étape %1$lld / %2$lld"
+          }
+        },
+        "trainer.step1_body": {
+          "translations": {
+            "en": "Rest your elbow. Keep the screen flat and straight in front of you — no tilt.",
+            "fr": "Posez votre coude. Gardez l’écran bien à plat face à vous, sans l’incliner."
+          }
+        },
+        "trainer.step1_primary": {
+          "translations": {
+            "en": "Ready",
+            "fr": "Je suis prêt"
+          }
+        },
+        "trainer.step1_secondary": {
+          "translations": {
+            "en": "Skip the trainer",
+            "fr": "Passer l’entraînement"
+          }
+        },
+        "trainer.step1_title": {
+          "translations": {
+            "en": "Hold it at arm's length",
+            "fr": "Tenez-le à bout de bras"
+          }
+        },
+        "trainer.step2_body": {
+          "translations": {
+            "en": "Let your eyes go lazy, as if something far behind the phone had your attention.",
+            "fr": "Laissez vos yeux se relâcher, comme si quelque chose loin derrière le téléphone vous intéressait."
+          }
+        },
+        "trainer.step2_primary": {
+          "translations": {
+            "en": "My eyes are relaxed",
+            "fr": "Mes yeux sont détendus"
+          }
+        },
+        "trainer.step2_secondary": {
+          "translations": {
+            "en": "Back",
+            "fr": "Retour"
+          }
+        },
+        "trainer.step2_title": {
+          "translations": {
+            "en": "Look through the screen",
+            "fr": "Regardez à travers l’écran"
+          }
+        },
+        "trainer.step3_body": {
+          "translations": {
+            "en": "The pattern will split into two overlapping copies. Hold it there — don't chase it.",
+            "fr": "Le motif va se dédoubler en deux copies superposées. Tenez bon — ne le poursuivez pas."
+          }
+        },
+        "trainer.step3_primary": {
+          "translations": {
+            "en": "I see doubles",
+            "fr": "Je vois double"
+          }
+        },
+        "trainer.step3_title": {
+          "translations": {
+            "en": "Let the dots double up",
+            "fr": "Laissez le motif se dédoubler"
+          }
+        },
+        "trainer.step4_body": {
+          "translations": {
+            "en": "Once depth appears, blink slowly to keep it. Each round gets a little harder.",
+            "fr": "Dès que le relief apparaît, clignez lentement pour le garder. Chaque tour est un peu plus dur."
+          }
+        },
+        "trainer.step4_primary": {
+          "translations": {
+            "en": "I see it — next round",
+            "fr": "Je le vois — tour suivant"
+          }
+        },
+        "trainer.step4_secondary": {
+          "translations": {
+            "en": "Still nothing",
+            "fr": "Toujours rien"
+          }
+        },
+        "trainer.step4_title": {
+          "translations": {
+            "en": "A sphere should lift out",
+            "fr": "Une sphère doit surgir"
+          }
+        },
+        "tune.advanced": {
+          "translations": {
+            "en": "Advanced",
+            "fr": "Avancé"
+          }
+        },
+        "tune.advanced_subtitle": {
+          "translations": {
+            "en": "DPI · ranges · denoising",
+            "fr": "DPI · plages · débruitage"
+          }
+        },
+        "tune.depth": {
+          "translations": {
+            "en": "Depth",
+            "fr": "Profondeur"
+          }
+        },
+        "tune.depth_hint": {
+          "translations": {
+            "en": "how far it pops",
+            "fr": "relief"
+          }
+        },
+        "tune.depth_ranges": {
+          "translations": {
+            "en": "Depth ranges & denoising",
+            "fr": "Plages et débruitage"
+          }
+        },
+        "tune.depth_ranges_subtitle": {
+          "translations": {
+            "en": "Input crop, output remap, noise",
+            "fr": "Recadrage, remappage, bruit"
+          }
+        },
+        "tune.dpi": {
+          "translations": {
+            "en": "Resolution",
+            "fr": "Résolution"
+          }
+        },
+        "tune.dpi_hint": {
+          "translations": {
+            "en": "dpi",
+            "fr": "ppp"
+          }
+        },
+        "tune.invert": {
+          "translations": {
+            "en": "Invert depth",
+            "fr": "Inverser la profondeur"
+          }
+        },
+        "tune.preset.custom": {
+          "translations": {
+            "en": "Custom",
+            "fr": "Perso"
+          }
+        },
+        "tune.preset.punchy": {
+          "translations": {
+            "en": "Punchy",
+            "fr": "Marqué"
+          }
+        },
+        "tune.preset.soft": {
+          "translations": {
+            "en": "Soft",
+            "fr": "Doux"
+          }
+        },
+        "tune.preset.standard": {
+          "translations": {
+            "en": "Standard",
+            "fr": "Standard"
+          }
+        },
+        "tune.preset_label": {
+          "translations": {
+            "en": "Preset",
+            "fr": "Préréglage"
+          }
+        },
+        "tune.smoothness": {
+          "translations": {
+            "en": "Smoothness",
+            "fr": "Lissage"
+          }
+        },
+        "tune.smoothness_hint": {
+          "translations": {
+            "en": "oversampling",
+            "fr": "suréchantillonnage"
+          }
+        },
+        "tune.spread": {
+          "translations": {
+            "en": "Spread",
+            "fr": "Écartement"
+          }
+        },
+        "tune.spread_hint": {
+          "translations": {
+            "en": "eye separation",
+            "fr": "écart des yeux"
+          }
+        }
+      }
+    },
+    "InfoPlist": {
+      "path": "DepthWeaver/Resources/InfoPlist.xcstrings",
+      "sourceLanguage": "en",
+      "version": "1.0",
+      "keys": {
+        "CFBundleDisplayName": {
+          "comment": "Bundle display name",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "DepthWeaver",
+              "state": "new"
+            }
+          }
+        },
+        "CFBundleName": {
+          "comment": "Bundle name",
+          "extractionState": "extracted_with_value",
+          "translations": {
+            "en": {
+              "value": "DepthWeaver",
+              "state": "new"
+            }
+          }
+        },
+        "NSCameraUsageDescription": {
+          "comment": "Privacy - Camera Usage Description",
+          "translations": {
+            "en": "DepthWeaver uses the camera with LiDAR to capture 3D depth and 3D objects",
+            "fr": "DepthWeaver utilise la caméra avec le LiDAR pour capturer la profondeur 3D et des objets 3D"
+          }
+        },
+        "NSPhotoLibraryAddUsageDescription": {
+          "comment": "Privacy - Photo Library Additions Usage Description",
+          "translations": {
+            "en": "DepthWeaver saves generated stereograms to your photo library",
+            "fr": "DepthWeaver enregistre les stéréogrammes générés dans votre photothèque"
+          }
+        }
+      }
+    },
+    "Koubou": {
+      "path": "screenshots/koubou/koubou-strings.xcstrings",
+      "sourceLanguage": "en-US",
+      "version": "1.0",
+      "keys": {
+        "Depth from any photo": {
+          "translations": {
+            "en-US": "Depth from any photo",
+            "fr-FR": "Le relief de n'importe quelle photo"
+          }
+        },
+        "Depth ranges, strength and spread update as you slide.": {
+          "translations": {
+            "en-US": "Depth ranges, strength and spread update as you slide.",
+            "fr-FR": "Plages, intensité et écartement se redessinent à chaque geste."
+          }
+        },
+        "Every depth map becomes a point cloud you can turn.": {
+          "translations": {
+            "en-US": "Every depth map becomes a point cloud you can turn.",
+            "fr-FR": "Chaque carte de profondeur devient un nuage de points à faire pivoter."
+          }
+        },
+        "Every setting, redrawn live": {
+          "translations": {
+            "en-US": "Every setting, redrawn live",
+            "fr-FR": "Chaque réglage, en direct"
+          }
+        },
+        "Frame any 3D model": {
+          "translations": {
+            "en-US": "Frame any 3D model",
+            "fr-FR": "Cadrez n'importe quel modèle 3D"
+          }
+        },
+        "Hidden 3D, woven into a pattern": {
+          "translations": {
+            "en-US": "Hidden 3D, woven into a pattern",
+            "fr-FR": "Une image 3D cachée dans un motif"
+          }
+        },
+        "Look through it, and a shape rises out of the texture.": {
+          "translations": {
+            "en-US": "Look through it, and a shape rises out of the texture.",
+            "fr-FR": "Regardez au travers : une forme surgit de la texture."
+          }
+        },
+        "On-device AI, a 3D model, or a LiDAR scan on Pro devices.": {
+          "translations": {
+            "en-US": "On-device AI, a 3D model, or a LiDAR scan on Pro devices.",
+            "fr-FR": "IA sur l'appareil, modèle 3D, ou scan LiDAR sur les modèles Pro."
+          }
+        },
+        "Open a USDZ, OBJ or SCN, orbit it, capture its depth.": {
+          "translations": {
+            "en-US": "Open a USDZ, OBJ or SCN, orbit it, capture its depth.",
+            "fr-FR": "Ouvrez un USDZ, OBJ ou SCN, tournez autour, capturez sa profondeur."
+          }
+        },
+        "Open a photo, a height map or a 3D model and watch it weave.": {
+          "translations": {
+            "en-US": "Open a photo, a height map or a 3D model and watch it weave.",
+            "fr-FR": "Ouvrez une photo, une carte de hauteur ou un modèle 3D : le motif se tisse."
+          }
+        },
+        "Pop in one tap": {
+          "translations": {
+            "en-US": "Pop in one tap",
+            "fr-FR": "Du relief en un geste"
+          }
+        },
+        "Push the subject forward": {
+          "translations": {
+            "en-US": "Push the subject forward",
+            "fr-FR": "Avancez le sujet"
+          }
+        },
+        "Remap depth ranges and clean up 8-bit imports.": {
+          "translations": {
+            "en-US": "Remap depth ranges and clean up 8-bit imports.",
+            "fr-FR": "Réglez les plages de profondeur, nettoyez les imports 8 bits."
+          }
+        },
+        "See your depth in 3D": {
+          "translations": {
+            "en-US": "See your depth in 3D",
+            "fr-FR": "Votre profondeur en 3D"
+          }
+        },
+        "Soft, Standard or Punchy, then fine-tune every slider.": {
+          "translations": {
+            "en-US": "Soft, Standard or Punchy, then fine-tune every slider.",
+            "fr-FR": "Doux, Standard ou Marqué, puis affinez chaque réglage."
+          }
+        },
+        "Stars, noise, Voronoi, reaction-diffusion, or your own photo.": {
+          "translations": {
+            "en-US": "Stars, noise, Voronoi, reaction-diffusion, or your own photo.",
+            "fr-FR": "Étoiles, bruit, Voronoï, réaction-diffusion, ou votre propre photo."
+          }
+        },
+        "Stereograms, right on your Mac": {
+          "translations": {
+            "en-US": "Stereograms, right on your Mac",
+            "fr-FR": "Des stéréogrammes, sur votre Mac"
+          }
+        },
+        "Textures or generated patterns": {
+          "translations": {
+            "en-US": "Textures or generated patterns",
+            "fr-FR": "Textures ou motifs générés"
+          }
+        },
+        "center": {
+          "translations": {
+            "en-US": "center",
+            "fr-FR": {
+              "value": "",
+              "state": "needs_translation"
+            }
+          }
+        },
+        "left": {
+          "translations": {
+            "en-US": "left",
+            "fr-FR": {
+              "value": "",
+              "state": "needs_translation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "metadata": {
+    "path": "metadata",
+    "scopes": {
+      "app-info": {
+        "en-US": {
+          "name": "DepthWeaver: 3D Hidden Images",
+          "subtitle": "Optical illusions from photos",
+          "privacyPolicyUrl": "https://glandais.github.io/DepthWeaver/privacy/"
+        },
+        "fr-FR": {
+          "name": "DepthWeaver : Stéréogrammes 3D",
+          "subtitle": "Illusions d'optique en 3D",
+          "privacyPolicyUrl": "https://glandais.github.io/DepthWeaver/privacy/"
+        }
+      },
+      "version/1.2.0": {
+        "en-US": {
+          "description": "DepthWeaver turns real-world depth into Magic Eye stereograms. Capture a scene with the LiDAR scanner, generate depth from any photo with on-device AI, scan a real object with Apple's Object Capture, or load a 3D model — then watch a hidden image rise out of the noise as you cross your eyes.\n\nCAPTURE DEPTH FIVE WAYS\n• LiDAR live capture on iPhone Pro and iPad Pro — point, freeze, done\n• On-device AI depth from any photo (Depth Anything V2)\n• Scan real objects with Apple's Object Capture (Pro devices) — guided orbits turn a real object into a .usdz you can orbit and frame\n• 3D model import — .usdz, .usd, .obj, .scn with an orbit camera so you choose the angle\n• Bundled height map and 3D model presets to play with right away\n\nPICK A PATTERN\n• Six procedural generators: random dot, stars, Perlin noise, Worley noise, Voronoi cells, reaction-diffusion\n• Import any image from your photo library as a custom tile\n• Built-in texture library\n\nTUNE EVERY KNOB\n• DPI, depth strength, separation, oversampling\n• Remap input and output depth ranges to push the subject forward or back\n• Denoise quantized 8-bit imports for clean, banding-free output\n• Invert depth in one tap\n• Live preview redraws as you slide\n\nPRIVATE BY DESIGN\nEverything runs on device. No account, no upload, no tracking, no ads. Your photos and 3D scans never leave your device.\n\nUNDER THE HOOD\nParallelized implementation of the Thimbleby–Inglis–Witten autostereogram algorithm with W. A. Steer's link-based hidden-surface refinement. Powered by ARKit, Object Capture, Core ML, SceneKit, Metal, and Core Image. Output is upscaled so the minimum dimension is at least 960 px — print-ready or share-ready.\n\nSHARE\nExport high-resolution PNGs to Photos, Messages, AirDrop, or any app with a share sheet.\n\nAvailable in English and French. For iPhone and iPad (iOS 18 or later) and Mac with Apple silicon (macOS 15 or later). LiDAR capture and Object Capture scans are iPhone and iPad only.\n\nCapture a scene. Pick a pattern. Stare into it.",
+          "keywords": "stereogram,eye,trick,depth,map,dot,art,brain,vision,wallpaper,puzzle,optic,visual,see,lidar",
+          "promotionalText": "Turn any scene into a Magic Eye illusion: LiDAR depth, AI from a photo, a scanned real object, or any 3D model — six procedural patterns, real-time preview, share-ready.",
+          "marketingUrl": "https://glandais.github.io/DepthWeaver/",
+          "supportUrl": "https://glandais.github.io/DepthWeaver/support/",
+          "whatsNew": "What's new in 1.2:\n\n• A brand-new look. The main screen is now built around the stereogram itself — a full-bleed canvas with a frosted-glass tool drawer that slides out of the way when you want to look.\n• Learn to see it. A built-in trainer walks you through the cross-eye technique, step by step, until the hidden image snaps into focus.\n• Depth presets. Soft, Standard and Punchy give you a good-looking result in one tap — fine-tune from there if you want.\n• See your depth in 3D. The depth-source screen now shows a live 3D point cloud of what you captured, so you know what you're working with before you weave it.\n• Faster photo depth. AI depth estimation no longer blocks the interface — the app stays responsive while it thinks.\n• The 3D model screen, the result view and the depth adjustment controls have all been rebuilt to match, plus a pile of fixes.\n\nCapture a scene. Pick a pattern. Stare into it."
+        },
+        "fr-FR": {
+          "description": "DepthWeaver transforme la profondeur du monde réel en stéréogrammes Magic Eye. Capturez une scène avec le scanner LiDAR, générez une carte de profondeur depuis n'importe quelle photo grâce à l'IA embarquée, scannez un objet réel avec Object Capture d'Apple, ou chargez un modèle 3D — puis regardez une image cachée émerger du bruit en croisant les yeux.\n\nCINQ FAÇONS DE CAPTURER LA PROFONDEUR\n• Capture LiDAR en direct sur iPhone Pro et iPad Pro — visez, figez, c'est fait\n• Profondeur par IA embarquée depuis n'importe quelle photo (Depth Anything V2)\n• Scannez des objets réels avec Object Capture d'Apple (appareils Pro) — orbites guidées qui transforment un objet en .usdz, prêt à être tourné et cadré\n• Import de modèles 3D — .usdz, .usd, .obj, .scn avec caméra orbitale pour choisir l'angle\n• Cartes de hauteur et modèles 3D fournis pour démarrer immédiatement\n\nCHOISISSEZ UN MOTIF\n• Six générateurs procéduraux : points aléatoires, étoiles, bruit de Perlin, bruit de Worley, cellules de Voronoï, réaction-diffusion\n• Importez n'importe quelle image de votre photothèque comme tuile personnalisée\n• Bibliothèque de textures intégrée\n\nRÉGLEZ CHAQUE PARAMÈTRE\n• DPI, intensité de profondeur, séparation, suréchantillonnage\n• Remappage des plages d'entrée et de sortie pour avancer ou reculer le sujet\n• Débruitage des imports 8 bits quantifiés pour un rendu propre, sans bandes\n• Inversez la profondeur en un geste\n• L'aperçu se redessine en direct quand vous bougez les curseurs\n\nCONÇU POUR LA VIE PRIVÉE\nTout fonctionne sur l'appareil. Pas de compte, pas d'envoi, pas de pistage, pas de publicité. Vos photos et scans 3D ne quittent jamais votre appareil.\n\nSOUS LE CAPOT\nImplémentation parallélisée de l'algorithme d'autostéréogramme Thimbleby–Inglis–Witten avec l'optimisation par liens et masquage de surfaces de W. A. Steer. Propulsé par ARKit, Object Capture, Core ML, SceneKit, Metal et Core Image. La sortie est suréchantillonnée pour que la dimension la plus courte atteigne au moins 960 px — prêt à imprimer ou à partager.\n\nPARTAGEZ\nExportez des PNG haute résolution vers Photos, Messages, AirDrop ou toute app dotée d'une feuille de partage.\n\nDisponible en français et en anglais. Pour iPhone et iPad (iOS 18 ou ultérieur) et Mac avec puce Apple (macOS 15 ou ultérieur). La capture LiDAR et les scans Object Capture sont réservés à l'iPhone et à l'iPad.\n\nCapturez une scène. Choisissez un motif. Plongez le regard.",
+          "keywords": "stereogramme,stéréogramme,oeil,truc,profondeur,relief,points,art,cerveau,vision,cachée,image",
+          "promotionalText": "Transformez toute scène en illusion Magic Eye : profondeur LiDAR, IA depuis une photo, scan d'objet réel ou modèle 3D — six motifs, aperçu en direct, prêt à partager.",
+          "marketingUrl": "https://glandais.github.io/DepthWeaver/",
+          "supportUrl": "https://glandais.github.io/DepthWeaver/support/",
+          "whatsNew": "Nouveautés de la version 1.2 :\n\n• Une toute nouvelle interface. L'écran principal s'organise désormais autour du stéréogramme lui-même — un canvas plein écran et un tiroir d'outils en verre dépoli qui s'efface quand vous voulez regarder.\n• Apprenez à voir. Un entraîneur intégré vous guide pas à pas dans la technique du regard croisé, jusqu'à ce que l'image cachée apparaisse.\n• Préréglages de profondeur. Doux, Standard et Marqué donnent un beau résultat en un geste — affinez ensuite si vous le souhaitez.\n• Votre profondeur en 3D. L'écran de source affiche maintenant un nuage de points 3D en direct de ce que vous avez capturé, pour savoir ce que vous tissez avant de le tisser.\n• Profondeur photo plus rapide. L'estimation par IA ne bloque plus l'interface — l'app reste réactive pendant le calcul.\n• L'écran de modèle 3D, la vue de résultat et les réglages de profondeur ont été refaits dans le même esprit, avec de nombreuses corrections.\n\nCapturez une scène. Choisissez un motif. Plongez le regard."
+        }
+      }
+    }
+  }
+}

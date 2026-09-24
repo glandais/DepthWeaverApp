@@ -1,0 +1,97 @@
+# App Store cards (iphone) — Koubou sources.
+#
+# From the repository root:
+#   kou generate screenshots/koubou/iphone.yaml --output json
+#
+# Every path below is relative to THIS file.
+#
+# Input:  screenshots/flat/iphone/<locale>/NN-*.png  (./scripts/screenshots.sh, not versioned)
+# Output: screenshots/koubou/out/iphone/<locale>/<frame>/NN-*.png  (not versioned)
+#         ./screenshots/assemble.sh files them under screenshots/IPHONE_65/<locale>/.
+#
+# The iPhone 17 Pro Max simulator's screen is 1320×2868:
+# its frame is the newest Koubou has for that shape. Deep Blue, the dark finish closest to the app's navy.
+# Canvas 1242×2688, the one App Store Connect accepts for IPHONE_65. The templates and the
+# catalog are shared with the other device: a headline is translated once.
+
+project:
+  name: "DepthWeaver"
+  output_dir: "out/iphone"
+  device: "iPhone 17 Pro Max - Deep Blue - Portrait"
+  output_size: "iPhone6_5"
+
+localization:
+  base_language: "en-US"
+  languages: ["en-US", "fr-FR"]
+  xcstrings_path: "koubou-strings.xcstrings"
+
+screenshots:
+
+  # 1 — the hook: a finished stereogram, full bleed. The first three cards are the ones search results
+  # show: they must tell the app on their own.
+  01-hero:
+    template: "templates/hero.html"
+    variables:
+      headline: "Hidden 3D, woven into a pattern"
+      subtitle: "Look through it, and a shape rises out of the texture."
+    assets:
+      app_screenshot: "../flat/iphone/01-hero.png"
+
+  # 2 — where depth comes from. The capture rows are the ones a LiDAR iPhone or iPad shows, under the
+  # app's own "Pro · LiDAR" tag (the simulator has no LiDAR: ScreenshotMode.showsCaptureHardware).
+  02-source:
+    template: "templates/rise.html"
+    variables:
+      headline: "Depth from any photo"
+      subtitle: "On-device AI, a 3D model, or a LiDAR scan on Pro devices."
+    assets:
+      app_screenshot: "../flat/iphone/02-source.png"
+
+  # 3 — the Depth drawer: the current map as a 3D point cloud. It stands in for the old live LiDAR card,
+  # which a simulator cannot produce honestly.
+  03-depth-3d:
+    template: "templates/offset.html"
+    variables:
+      headline: "See your depth in 3D"
+      subtitle: "Every depth map becomes a point cloud you can turn."
+    assets:
+      app_screenshot: "../flat/iphone/03-depth-3d.png"
+
+  # 4 — a bundled model (Toy Biplane), loaded the way the preset sheet loads it.
+  04-model:
+    template: "templates/hero.html"
+    variables:
+      headline: "Frame any 3D model"
+      subtitle: "Open a USDZ, OBJ or SCN, orbit it, capture its depth."
+    assets:
+      app_screenshot: "../flat/iphone/04-model.png"
+
+  # 5 — the Pattern drawer on a seeded procedural generator.
+  05-pattern:
+    template: "templates/rise.html"
+    variables:
+      headline: "Textures or generated patterns"
+      subtitle: "Stars, noise, Voronoi, reaction-diffusion, or your own photo."
+    assets:
+      app_screenshot: "../flat/iphone/05-pattern.png"
+
+  # 6 — depth adjustment: point cloud, denoising and range sliders.
+  06-adjust:
+    template: "templates/offset.html"
+    variables:
+      headline: "Push the subject forward"
+      subtitle: "Remap depth ranges and clean up 8-bit imports."
+    assets:
+      app_screenshot: "../flat/iphone/06-adjust.png"
+
+  # 7 — Tune, without a frame: in a device its slider labels would no longer read. The window
+  # shows the bottom of the capture, where the drawer is.
+  07-tune:
+    template: "templates/crop.html"
+    frame: false
+    variables:
+      headline: "Pop in one tap"
+      subtitle: "Soft, Standard or Punchy, then fine-tune every slider."
+      align: "left"
+    assets:
+      app_screenshot: "../flat/iphone/07-tune.png"

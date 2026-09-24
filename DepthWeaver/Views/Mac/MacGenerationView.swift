@@ -14,7 +14,7 @@ struct MacGenerationView: View {
     @StateObject private var photoDepthVM = PhotoDepthViewModel()
     @StateObject private var sceneVM = Model3DCaptureViewModel()
 
-    @State private var settings = StereogramSettings()
+    @State private var settings = StereogramSettings.launch
     @State private var inspectorVisible = true
     @State private var showImporter = false
     @State private var showSaveExporter = false
@@ -83,7 +83,17 @@ struct MacGenerationView: View {
         }
         .onAppear {
             triggerGeneration()
+            #if SCREENSHOTS
+            updatePatternPreview()
+            #endif
         }
+        #if SCREENSHOTS
+        .screenshotReady(
+            on: [.hero, .pattern, .tune],
+            when: stereogramVM.resultImage != nil && !stereogramVM.isGenerating
+                && (ScreenshotMode.screen != .pattern || patternPreviewVM.previewImage != nil)
+        )
+        #endif
         .onChange(of: appState.currentDepthMap?.id) { _, _ in triggerGeneration() }
         .onChange(of: appState.currentDepthMap?.adjustment) { _, _ in triggerGeneration() }
         .onChange(of: settings) { _, _ in

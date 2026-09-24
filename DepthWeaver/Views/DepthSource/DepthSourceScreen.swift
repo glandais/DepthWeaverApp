@@ -35,6 +35,9 @@ struct DepthSourceScreen: View {
         }
         .background(DWColor.ground)
         .toolbar(.hidden, for: .navigationBar)
+        #if SCREENSHOTS
+        .screenshotReady(on: [.source], when: depthMap != nil, settle: .seconds(6))
+        #endif
         .sheet(isPresented: $showPresets) {
             DepthPresetGrid { preset in
                 depthMap = preset.toDepthMap()

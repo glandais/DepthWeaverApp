@@ -1,0 +1,101 @@
+# App Store cards (ipad) — Koubou sources.
+#
+# From the repository root:
+#   kou generate screenshots/koubou/ipad.yaml --output json
+#
+# Every path below is relative to THIS file.
+#
+# Input:  screenshots/flat/ipad/<locale>/NN-*.png  (./scripts/screenshots.sh, not versioned)
+# Output: screenshots/koubou/out/ipad/<locale>/<frame>/NN-*.png  (not versioned)
+#         ./screenshots/assemble.sh files them under screenshots/IPAD_PRO_3GEN_129/<locale>/.
+#
+# The frame of the capture simulator (iPad Pro 13-inch (M4), 2064×2752). Space Gray: a dark frame
+# on a dark card.
+# Canvas 2048×2732, the one App Store Connect accepts for IPAD_PRO_3GEN_129. The templates and the
+# catalog are shared with the other device: a headline is translated once.
+
+project:
+  name: "DepthWeaver"
+  output_dir: "out/ipad"
+  device: "iPad Pro 13 - M4 - Space Gray - Portrait"
+  output_size: "iPadPro12_9"
+
+localization:
+  base_language: "en-US"
+  languages: ["en-US", "fr-FR"]
+  xcstrings_path: "koubou-strings.xcstrings"
+
+screenshots:
+
+  # 1 — the hook: a finished stereogram, full bleed. The first three cards are the ones search results
+  # show: they must tell the app on their own.
+  01-hero:
+    template: "templates/hero.html"
+    variables:
+      headline: "Hidden 3D, woven into a pattern"
+      subtitle: "Look through it, and a shape rises out of the texture."
+    assets:
+      app_screenshot: "../flat/ipad/01-hero.png"
+
+  # 2 — where depth comes from. The capture rows are the ones a LiDAR iPhone or iPad shows, under the
+  # app's own "Pro · LiDAR" tag (the simulator has no LiDAR: ScreenshotMode.showsCaptureHardware).
+  02-source:
+    template: "templates/rise.html"
+    variables:
+      headline: "Depth from any photo"
+      subtitle: "On-device AI, a 3D model, or a LiDAR scan on Pro devices."
+    assets:
+      app_screenshot: "../flat/ipad/02-source.png"
+
+  # 3 — the Depth drawer: the current map as a 3D point cloud. It stands in for the old live LiDAR card,
+  # which a simulator cannot produce honestly. Not in a frame, unlike the iPhone: on the iPad the drawer
+  # keeps its point cloud small, low on a large screen, and a whole device would leave it a speck. The
+  # window shows the bottom of the capture at its full width, the point cloud in the middle.
+  03-depth-3d:
+    template: "templates/crop.html"
+    frame: false
+    variables:
+      align: "center"
+      headline: "See your depth in 3D"
+      subtitle: "Every depth map becomes a point cloud you can turn."
+    assets:
+      app_screenshot: "../flat/ipad/03-depth-3d.png"
+
+  # 4 — a bundled model (Toy Biplane), loaded the way the preset sheet loads it.
+  04-model:
+    template: "templates/hero.html"
+    variables:
+      headline: "Frame any 3D model"
+      subtitle: "Open a USDZ, OBJ or SCN, orbit it, capture its depth."
+    assets:
+      app_screenshot: "../flat/ipad/04-model.png"
+
+  # 5 — the Pattern drawer on a seeded procedural generator.
+  05-pattern:
+    template: "templates/rise.html"
+    variables:
+      headline: "Textures or generated patterns"
+      subtitle: "Stars, noise, Voronoi, reaction-diffusion, or your own photo."
+    assets:
+      app_screenshot: "../flat/ipad/05-pattern.png"
+
+  # 6 — depth adjustment: point cloud, denoising and range sliders.
+  06-adjust:
+    template: "templates/offset.html"
+    variables:
+      headline: "Push the subject forward"
+      subtitle: "Remap depth ranges and clean up 8-bit imports."
+    assets:
+      app_screenshot: "../flat/ipad/06-adjust.png"
+
+  # 7 — Tune, without a frame: in a device its slider labels would no longer read. The window
+  # shows the bottom of the capture, where the drawer is.
+  07-tune:
+    template: "templates/crop.html"
+    frame: false
+    variables:
+      headline: "Pop in one tap"
+      subtitle: "Soft, Standard or Punchy, then fine-tune every slider."
+      align: "left"
+    assets:
+      app_screenshot: "../flat/ipad/07-tune.png"

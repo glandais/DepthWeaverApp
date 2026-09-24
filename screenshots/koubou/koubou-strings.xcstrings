@@ -1,0 +1,326 @@
+{
+  "sourceLanguage": "en-US",
+  "strings": {
+    "Depth from any photo": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth from any photo"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le relief de n'importe quelle photo"
+          }
+        }
+      }
+    },
+    "Depth ranges, strength and spread update as you slide.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depth ranges, strength and spread update as you slide."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plages, intensité et écartement se redessinent à chaque geste."
+          }
+        }
+      }
+    },
+    "Every depth map becomes a point cloud you can turn.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every depth map becomes a point cloud you can turn."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque carte de profondeur devient un nuage de points à faire pivoter."
+          }
+        }
+      }
+    },
+    "Every setting, redrawn live": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every setting, redrawn live"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque réglage, en direct"
+          }
+        }
+      }
+    },
+    "Frame any 3D model": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frame any 3D model"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cadrez n'importe quel modèle 3D"
+          }
+        }
+      }
+    },
+    "Hidden 3D, woven into a pattern": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hidden 3D, woven into a pattern"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une image 3D cachée dans un motif"
+          }
+        }
+      }
+    },
+    "Look through it, and a shape rises out of the texture.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look through it, and a shape rises out of the texture."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regardez au travers : une forme surgit de la texture."
+          }
+        }
+      }
+    },
+    "On-device AI, a 3D model, or a LiDAR scan on Pro devices.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-device AI, a 3D model, or a LiDAR scan on Pro devices."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA sur l'appareil, modèle 3D, ou scan LiDAR sur les modèles Pro."
+          }
+        }
+      }
+    },
+    "Open a USDZ, OBJ or SCN, orbit it, capture its depth.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a USDZ, OBJ or SCN, orbit it, capture its depth."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez un USDZ, OBJ ou SCN, tournez autour, capturez sa profondeur."
+          }
+        }
+      }
+    },
+    "Open a photo, a height map or a 3D model and watch it weave.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a photo, a height map or a 3D model and watch it weave."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez une photo, une carte de hauteur ou un modèle 3D : le motif se tisse."
+          }
+        }
+      }
+    },
+    "Pop in one tap": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pop in one tap"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du relief en un geste"
+          }
+        }
+      }
+    },
+    "Push the subject forward": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Push the subject forward"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avancez le sujet"
+          }
+        }
+      }
+    },
+    "Remap depth ranges and clean up 8-bit imports.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remap depth ranges and clean up 8-bit imports."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglez les plages de profondeur, nettoyez les imports 8 bits."
+          }
+        }
+      }
+    },
+    "See your depth in 3D": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See your depth in 3D"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre profondeur en 3D"
+          }
+        }
+      }
+    },
+    "Soft, Standard or Punchy, then fine-tune every slider.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soft, Standard or Punchy, then fine-tune every slider."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doux, Standard ou Marqué, puis affinez chaque réglage."
+          }
+        }
+      }
+    },
+    "Stars, noise, Voronoi, reaction-diffusion, or your own photo.": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stars, noise, Voronoi, reaction-diffusion, or your own photo."
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étoiles, bruit, Voronoï, réaction-diffusion, ou votre propre photo."
+          }
+        }
+      }
+    },
+    "Stereograms, right on your Mac": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stereograms, right on your Mac"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des stéréogrammes, sur votre Mac"
+          }
+        }
+      }
+    },
+    "Textures or generated patterns": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textures or generated patterns"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textures ou motifs générés"
+          }
+        }
+      }
+    },
+    "center": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "center"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "needs_translation",
+            "value": ""
+          }
+        }
+      }
+    },
+    "left": {
+      "localizations": {
+        "en-US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "left"
+          }
+        },
+        "fr-FR": {
+          "stringUnit": {
+            "state": "needs_translation",
+            "value": ""
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

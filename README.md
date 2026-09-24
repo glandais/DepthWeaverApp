@@ -24,18 +24,29 @@ A native iOS and macOS app that generates autostereograms (Magic Eye images) fro
 
 ## Requirements
 
-- iOS 17.0+ / macOS 14.0+
-- Xcode 16+
+- iOS 18.0+ / iPadOS 18.0+, macOS 15.0+ on Apple silicon (the Mac app excludes Intel: it relies on `Float16`)
+- Xcode 26 or later (the app icon is an Icon Composer `.icon`), [XcodeGen](https://github.com/yonaskolb/XcodeGen) and [Git LFS](https://git-lfs.com)
 - LiDAR scanning and Object Capture scans require an iPhone 12 Pro or later / iPad Pro with LiDAR (iOS only)
 
 ## Getting Started
 
-1. Clone the repository
-2. Open `DepthWeaver.xcodeproj` in Xcode
-3. Set your Development Team in Signing & Capabilities
-4. Build and run from Xcode (pick the iOS or macOS scheme; `DepthWeaverTests` runs the unit tests)
+The bundled 3D models, videos and binary model weights are stored with Git LFS, and the Xcode project is generated from `project.yml` (it is not in the repository):
 
-The Depth Anything V2 CoreML model (~48 MB) and the bundled depth-map / 3D-model samples are included in the repository.
+```bash
+brew install xcodegen git-lfs
+git lfs install
+git clone https://github.com/glandais/DepthWeaverApp.git   # or `git lfs pull` in an existing clone
+cd DepthWeaverApp
+./scripts/xcb.sh gen        # generate DepthWeaver.xcodeproj
+./scripts/xcb.sh build      # iOS simulator build (Debug)
+./scripts/xcb.sh run        # build, install and launch on the simulator
+./scripts/xcb.sh test       # unit tests on the simulator
+./scripts/xcb.sh mac        # macOS build (Apple silicon)
+```
+
+`scripts/xcb.sh` pins the simulator declared in `scripts/sim-config.sh` and builds into `.build/DerivedData`; `./scripts/xcb.sh --help` lists every command. To run from Xcode instead, open the generated `DepthWeaver.xcodeproj` and set your Development Team in Signing & Capabilities.
+
+The Depth Anything V2 CoreML model (~48 MB, its weights through Git LFS) and the bundled depth-map / 3D-model samples are included in the repository.
 
 ## How to View Stereograms
 
