@@ -175,7 +175,7 @@ Keep it true: a person reads it with the app open (how to test without LiDAR, wh
 ### Privacy
 
 - `Resources/PrivacyInfo.xcprivacy`: no tracking, no tracking domains, no collected data, one required-reason API — `UserDefaults` `CA92.1` (the `@AppStorage` keys `trainer.completedRound`, `canvas.hintDismissed`, `trainer.hasSeen`, `inspector.*.expanded`). Without a manifest Apple returns ITMS-91053 on upload. **Re-read it whenever another required-reason API enters the code**: file timestamps (`creationDate`, `modificationDate`, `attributesOfItem`, `resourceValues`), boot time (`systemUptime`, `mach_absolute_time`), disk space (`volumeAvailableCapacity`), active keyboards. Directory listings pass `includingPropertiesForKeys: nil/[]` on purpose.
-- `metadata/app-privacy.json` (`dataUsages: []`) is the nutrition label, "Data Not Collected", consistent with the manifest (no network, no analytics, no third-party SDK; tips are handled by Apple). Push it with `asc web privacy plan --app 6764146054 --file metadata/app-privacy.json`, then `apply` and `publish --confirm` after reading the plan; `asc web` uses a web session that may ask for a 2FA code.
+- `metadata/app-privacy.json` (a single `DATA_NOT_COLLECTED` entry: `asc web privacy plan` rejects an empty `dataUsages`) is the nutrition label, "Data Not Collected", consistent with the manifest (no network, no analytics, no third-party SDK; tips are handled by Apple). Push it with `asc web privacy plan --app 6764146054 --file metadata/app-privacy.json`, then `apply` and `publish --confirm` after reading the plan; `asc web` uses a web session that may ask for a 2FA code.
 - The website's privacy page (separate `website` repository) must follow both: a new permission, stored datum or network access changes it too.
 
 ### Archive and upload
@@ -185,7 +185,7 @@ Keep it true: a person reads it with the app open (how to test without LiDAR, wh
 ./scripts/xcb.sh archive-ios      # → build/export-ios/DepthWeaver.ipa
 ./scripts/xcb.sh archive-mac      # → build/export-mac/DepthWeaver.pkg
 asc builds upload --app 6764146054 --ipa build/export-ios/DepthWeaver.ipa --wait
-asc builds upload --app 6764146054 --pkg build/export-mac/DepthWeaver.pkg --wait
+asc builds upload --app 6764146054 --pkg build/export-mac/DepthWeaver.pkg --version <x.y.z> --build-number <n> --wait  # a .pkg needs both; archive-mac prints them
 ```
 
 Both archive with the `DepthWeaver` scheme in Release (`generic/platform=iOS|macOS`, which boots nothing) and export with `ExportOptions.plist` / `ExportOptions-macOS.plist` (`app-store-connect`). They never upload; they print the `asc builds upload` command. macOS pitfalls, both handled by `archive-mac` and the project:
@@ -209,15 +209,22 @@ kou generate screenshots/koubou/ipad.yaml
 - Card headlines are translated through `i18n/translations.json` (table `Koubou`). `crop.html` cards set `align` (`left` for Tune; `center` for the iPad `03-depth-3d`, no frame and no zoom so the labels are not cut).
 - Upload with `asc screenshots upload --version-localization <ID> --path screenshots/IPHONE_65/en-US --device-type IPHONE_65` (IDs from `asc localizations list --version <VERSION_ID>`); `--replace --confirm` empties the set first, `--skip-existing` resumes after an error.
 
+### Submitting (1.2.1, 2026-09-24)
+
+iOS and macOS 1.2.1 (build 8) went to review on 2026-09-24 with the three tips: iOS submission `f5a775bd-83cc-4bb7-9b55-6106b70055e4` (the version + the three IAP versions), macOS `6eb589a3-e39f-46b8-8a6d-165238cb7d79` (the version only; the tips are app-wide and ride with iOS). What it took:
+
+- **In-app purchases go in a review submission, version-scoped**: `asc review submissions-create --platform IOS`, `asc review items-add --item-type appStoreVersions --item-id <version>`, then `asc iap versions submit --version-id <iap version> --submission <id> --confirm` for each tip (IAP version ids from `asc iap versions list --iap-id`), then `asc review submissions-submit --id <id> --confirm`. The older `inAppPurchaseSubmissions` / `submitWithNextAppStoreVersion` route (skill `asc-iap-attach`) is refused with `FIRST_CONSUMABLE_MUST_BE_SUBMITTED_ON_VERSION`.
+- **The IAP review note** (`reviewNote`) cannot be set with `asc iap`; it was written through the web session (`PATCH /iris/v2/inAppPurchases/<id>`). The web API reports the tips as `MISSING_METADATA` while the public API says `READY_TO_SUBMIT`; the submission went through anyway.
+- `asc builds upload --pkg` needs `--version` and `--build-number` (`archive-mac` prints them).
+- `asc web …` needs a web session with 2FA: `asc web auth login --apple-id <email>`, typed by the user.
+- After the iOS `metadata apply`, the macOS plan drifts (the app info is shared): re-plan and re-approve before the macOS `apply`.
+
 ## Known gaps
 
-- **Nothing of the new tooling has been pushed to App Store Connect yet**: privacy label, review notes, the new screenshot set and the new metadata are local only.
-- The live screenshots use the old naming (`01_hero_stereogram`…): delete them (or upload with `--replace --confirm`) before uploading the new set, or both show.
 - `metadata/version/1.2.1` (local only, not yet in App Store Connect) carries the corrected description (iOS 18+ / macOS 15+ on Apple silicon, iPhone, iPad and Mac, no "Magic Eye"), the 1.2.1 What's New (About, tips) and a second ASO pass on name, subtitle and keywords (no word repeated across the three fields, which Apple indexes together). `asc metadata pull` of the new version would bring back the store's old text ("iPhone, iOS 17+"): do not pull it over `metadata/`, or run `./scripts/i18n.py import` right after to restore the local text.
 - The Mac app on sale (1.1.0, build 6) was built for macOS 14; the next Mac build requires macOS 15.
 - The APP_DESKTOP cards come from 1440×900 (1×) Mac captures upscaled to 2880×1800.
 - 87 Localizable keys have no French: the Object Capture strings ported from Apple's sample, and strings that only appear in `DesignSystem/` `#Preview`s ("Soft", "Tune", "Scan the room"…, never shown in the app); plus 2 InfoPlist keys (`CFBundleDisplayName`, `CFBundleName`). 33 Localizable keys are stale (see the reports in `i18n/translations.json`).
-- `metadata/app-privacy.json` → `asc web privacy` and `asc review details-update` have only been checked with `--help`, never run from this repository.
 
 ## Known constraints
 

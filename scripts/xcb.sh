@@ -242,8 +242,13 @@ PY
       ExportOptions-macOS.plist "${ARCHIVE_DIR}/export-mac" "$@"
     pkg=$(ls "${ARCHIVE_DIR}"/export-mac/*.pkg 2>/dev/null | head -1 || true)
     [ -n "$pkg" ] || { echo "xcb: no .pkg in ${ARCHIVE_DIR}/export-mac" >&2; exit 1; }
+    # A .pkg upload needs the version and build number spelled out (an .ipa
+    # carries them): read them from the archived app.
+    app_plist="${ARCHIVE_DIR}/DepthWeaver-macOS.xcarchive/Products/Applications/DepthWeaver.app/Contents/Info.plist"
+    mac_version=$(plutil -extract CFBundleShortVersionString raw "$app_plist")
+    mac_build=$(plutil -extract CFBundleVersion raw "$app_plist")
     echo "▸ exported ${pkg}. Nothing was uploaded. To upload:"
-    echo "  asc builds upload --app ${ASC_APP_ID} --pkg \"${pkg}\" --wait"
+    echo "  asc builds upload --app ${ASC_APP_ID} --pkg \"${pkg}\" --version ${mac_version} --build-number ${mac_build} --wait"
     ;;
 
   --)
